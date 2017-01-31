@@ -26,7 +26,7 @@ from PyQt5.QtCore import QThread, pyqtSignal, QUrl
 from PyQt5.QtGui import QDesktopServices, QTextCursor
 
 import socialreaper
-from uipy.mainwindow import Ui_MainWindow
+from mainwindow import Ui_MainWindow
 
 
 class GenerateData(QThread):
@@ -97,6 +97,8 @@ class Reaper(Ui_MainWindow):
         self.setupUi(MainWindow)
         self.load_auth_keys()
         self.add_actions()
+
+        MainWindow.resize(MainWindow.minimumSizeHint())
 
         MainWindow.show()
 

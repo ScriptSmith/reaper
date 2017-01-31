@@ -3,3 +3,5 @@
 dist/
 build/
 *__pychache__*
+*.zip
+*.tar.gz
