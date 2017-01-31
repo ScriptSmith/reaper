@@ -1,0 +1,5 @@
+.idea
+*.p
+dist/
+build/
+*__pychache__*
