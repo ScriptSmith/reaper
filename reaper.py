@@ -80,7 +80,7 @@ class GenerateData(QThread):
 
 
 class Reaper(Ui_MainWindow):
-    def __init__(self):
+    def __init__(self, window, show=True):
         super().__init__()
 
         self.auth_keys = {}
@@ -94,13 +94,14 @@ class Reaper(Ui_MainWindow):
         self.generator_thread = GenerateData((), 0)
         self.generator_thread.start()
 
-        self.setupUi(MainWindow)
+        self.setupUi(window)
         self.load_auth_keys()
         self.add_actions()
 
-        MainWindow.resize(MainWindow.minimumSizeHint())
+        window.resize(window.minimumSizeHint())
 
-        MainWindow.show()
+        if show:
+            window.show()
 
     def stack_jump(self, index):
         self.stackedWidget.setCurrentIndex(index)
@@ -783,7 +784,6 @@ class Reaper(Ui_MainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ProgressWindow = QtWidgets.QMainWindow()
-    ui = Reaper()
+    main_window = QtWidgets.QMainWindow()
+    ui = Reaper(main_window)
     sys.exit(app.exec_())

@@ -1624,6 +1624,8 @@ class Ui_MainWindow(object):
         self.gridLayout_8.addLayout(self.horizontalLayout, 7, 0, 1, 1)
         self.textOut = QtWidgets.QTextEdit(self.progress)
         self.textOut.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.textOut.setReadOnly(True)
+        self.textOut.setAcceptRichText(True)
         self.textOut.setObjectName("textOut")
         self.gridLayout_8.addWidget(self.textOut, 0, 0, 1, 1)
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout()

@@ -7,7 +7,7 @@ Reaper
 ======
 
 Reaper is a PyQt5 GUI that scrapes Facebook, Twitter, Reddit and Youtube apis
-using the ``socialreaper`` Python package.
+using the Python package ``socialreaper`` .
 
 To use Reaper, install ``socialreaper`` and ``PyQt5``, then run ``reaper.py``
 
@@ -24,7 +24,7 @@ Navigate to https://developers.facebook.com/tools/explorer
 
 From the `My Apps` menu select `Add a New App`.
 
-Fill in the details and make the category `Apps for Pages`.
+Fill in the details and choose the category `Apps for Pages`.
 
 Navigate to https://developers.facebook.com/tools/explorer and change the
 application to the name of your new app.
@@ -36,7 +36,7 @@ Click `Get Access Token`.
 Test the new token by making an example query in the `GET` field like
 ``wikipedia/posts``.
 
-Extend the access token expiry by clicking the blue `i` icon next to the
+Extend the access token expiry time by clicking the blue `i` icon next to the
 `Access Token` field.
 
 Click `Open in Access Token Tool`.
@@ -68,7 +68,7 @@ Click `create another app`.
 
 Fill in the details and select `script` as the application type.
 
-Copy the app id (the string underneath the application's name and type), and
+Copy the app id (the string underneath the application's name), and
 secret into their respective fields in Reaper's authentication.
 
 Youtube
