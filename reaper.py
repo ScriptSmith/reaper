@@ -89,7 +89,7 @@ class Reaper(Ui_MainWindow):
         self.data = []
         self.existing_field_names = []
         self.table_thread = None
-        self.table_max_rows = 30
+        self.table_max_cols = 30
 
         self.generator_thread = GenerateData((), 0)
         self.generator_thread.start()
@@ -214,7 +214,7 @@ class Reaper(Ui_MainWindow):
         self.data.append(item)
         item = socialreaper.tools.flatten(item)
 
-        if len(item) > self.table_max_rows and force:
+        if len(item) > self.table_max_cols and force:
             self.tableWidget.setRowCount(1)
             self.tableWidget.setColumnCount(1)
             err_text = "Too many table fields to display"
@@ -259,8 +259,13 @@ class Reaper(Ui_MainWindow):
                                          QtWidgets.QTableWidgetItem(
                                              value))
 
-        if self.tableWidget.rowCount() > 50:
-            self.tableWidget.removeRow(0)
+        num_rows = 5
+        max = self.tableWidget.rowCount() - num_rows if \
+            self.tableWidget.rowCount() - num_rows > 0 else 0
+
+        for i in range(max):
+            self.tableWidget.removeRow(i)
+
         self.existing_field_names = field_names
         self.tableWidget.setHorizontalHeaderLabels(field_names)
         vertical_labels = (
