@@ -247,6 +247,7 @@ class Reaper(Ui_MainWindow):
         self.table_fill(data, field_names)
 
         self.tableWidget.setHorizontalHeaderLabels(field_names)
+        self.tableWidget.horizontalHeader().show()
 
     def table_append(self, item, force=False):
         self.data.append(item)
