@@ -3285,7 +3285,7 @@
            <bool>false</bool>
           </attribute>
           <attribute name="verticalHeaderStretchLastSection">
-           <bool>false</bool>
+           <bool>true</bool>
           </attribute>
           <row>
            <property name="text">
@@ -3402,6 +3402,16 @@
            <widget class="QPushButton" name="progressDone">
             <property name="text">
              <string>Done</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="displayResultsButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Display Results</string>
             </property>
            </widget>
           </item>

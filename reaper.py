@@ -135,6 +135,7 @@ class Reaper(Ui_MainWindow):
         self.textOut.clear()
         self.exit_generator()
         self.tableWidget.clear()
+        self.disable_display_results()
         self.stack_input()
 
     def load_auth_keys(self):
@@ -197,6 +198,11 @@ class Reaper(Ui_MainWindow):
         url = QUrl('https://github.com/ScriptSmith/reaper')
         QDesktopServices.openUrl(url)
 
+    @staticmethod
+    def help_url():
+        url = QUrl('https://reaper.readthedocs.io')
+        QDesktopServices.openUrl(url)
+
     def write_console(self, text):
         self.textOut.append(str(text))
         self.textOut.moveCursor(QTextCursor.End)
@@ -210,11 +216,43 @@ class Reaper(Ui_MainWindow):
         self.pauseButton.setText(text)
         self.generator_thread.toggle_pause()
 
-    def fill_table(self, item, force=False):
+    def enable_display_results(self):
+        self.displayResultsButton.setEnabled(True)
+
+    def disable_display_results(self):
+        self.displayResultsButton.setEnabled(False)
+
+    def table_fill(self, table_data, field_names):
+        for row_count, row in enumerate(table_data):
+            for col_count, col in enumerate(field_names):
+                value = row[col]
+                if isinstance(value, list):
+                    value = str(value)
+
+                self.tableWidget.setItem(row_count, col_count,
+                                         QtWidgets.QTableWidgetItem(
+                                             value))
+
+    def display_results(self):
+        self.disable_display_results()
+        self.tableWidget.clear()
+
+        data = self.data
+        data = [socialreaper.tools.flatten(datum) for datum in data]
+        field_names, data = socialreaper.tools.fill_gaps(data)
+
+        self.tableWidget.setRowCount(len(data))
+        self.tableWidget.setColumnCount(len(data[0]))
+
+        self.table_fill(data, field_names)
+
+        self.tableWidget.setHorizontalHeaderLabels(field_names)
+
+    def table_append(self, item, force=False):
         self.data.append(item)
         item = socialreaper.tools.flatten(item)
 
-        if len(item) > self.table_max_cols and force:
+        if len(item) > self.table_max_cols and not force:
             self.tableWidget.setRowCount(1)
             self.tableWidget.setColumnCount(1)
             err_text = "Too many table fields to display"
@@ -237,15 +275,7 @@ class Reaper(Ui_MainWindow):
             self.tableWidget.setRowCount(len(table_data))
             self.tableWidget.setColumnCount(len(field_names))
 
-            for row_count, row in enumerate(table_data):
-                for col_count, col in enumerate(field_names):
-                    value = row[col]
-                    if isinstance(value, list):
-                        value = str(value)
-
-                    self.tableWidget.setItem(row_count, col_count,
-                                             QtWidgets.QTableWidgetItem(
-                                                 value))
+            self.table_fill(table_data, field_names)
         else:
             row_count = self.tableWidget.rowCount()+1
             self.tableWidget.setRowCount(row_count)
@@ -259,7 +289,10 @@ class Reaper(Ui_MainWindow):
                                          QtWidgets.QTableWidgetItem(
                                              value))
 
-        num_rows = 5
+        row_height = self.tableWidget.rowHeight(0)
+        table_height = self.tableWidget.height()
+
+        num_rows = int(table_height / row_height) - 1
         max = self.tableWidget.rowCount() - num_rows if \
             self.tableWidget.rowCount() - num_rows > 0 else 0
 
@@ -269,9 +302,9 @@ class Reaper(Ui_MainWindow):
         self.existing_field_names = field_names
         self.tableWidget.setHorizontalHeaderLabels(field_names)
         vertical_labels = (
-            str(label) for label in range(len(self.data) -
-                                          self.tableWidget.rowCount(),
-                                          len(self.data)))
+            str(label + 1) for label in range(len(self.data) -
+                                              self.tableWidget.rowCount(),
+                                              len(self.data)))
 
         self.tableWidget.setVerticalHeaderLabels(vertical_labels)
         self.tableWidget.horizontalHeader().show()
@@ -486,13 +519,14 @@ class Reaper(Ui_MainWindow):
                 num_comments = self.r6_numComments.value()
 
                 generator = source.subreddit_thread_comments(subreddit,
-                                                             count=num_threads,
+                                                             thread_count=
+                                                             num_threads,
                                                              order=thread_order,
                                                              time_period=
                                                              time_period,
                                                              comment_order=
                                                              comment_order,
-                                                             num_comments=
+                                                             comment_count=
                                                              num_comments)
                 count = num_threads * num_comments
 
@@ -559,7 +593,7 @@ class Reaper(Ui_MainWindow):
                 region_code = region_code if region_code else None
                 region_code = region_code if region_code else None
                 relevance_language = self.y3_relevanceLanguage.text()
-                relevance_language = relevance_language if relevance_language\
+                relevance_language = relevance_language if relevance_language \
                     else None
                 safe_search = self.y3_safeSearch.currentItem().text()
                 topic_id = self.y3_topicId.text()
@@ -623,7 +657,7 @@ class Reaper(Ui_MainWindow):
                 region_code = region_code if region_code else None
                 region_code = region_code if region_code else None
                 relevance_language = self.y4_relevanceLanguage.text()
-                relevance_language = relevance_language if relevance_language\
+                relevance_language = relevance_language if relevance_language \
                     else None
                 safe_search = self.y4_safeSearch.currentItem().text()
                 topic_id = self.y4_topicId.text()
@@ -731,12 +765,15 @@ class Reaper(Ui_MainWindow):
         if generator and count:
             self.generator_thread = GenerateData(generator, count)
             self.generator_thread.start()
-            self.generator_thread.item_generated.connect(self.fill_table)
+            self.generator_thread.item_generated.connect(self.table_append)
             self.generator_thread.progress_changed.connect(
                 self.progressBar.setValue)
             self.generator_thread.api_error.connect(self.error_message)
             self.generator_thread.write_console.connect(self.write_console)
             self.generator_thread.show_status.connect(self.set_status)
+
+            self.generator_thread.finished.connect(self.enable_display_results)
+            self.displayResultsButton.clicked.connect(self.display_results)
 
     def save(self, file_type="csv"):
         options = QtWidgets.QFileDialog.Options()
@@ -769,7 +806,7 @@ class Reaper(Ui_MainWindow):
         self.actionCheck_for_Updates.triggered.connect(self.stack_updates)
         self.actionPreferences.triggered.connect(self.stack_preferences)
 
-        self.actionHelp.triggered.connect(self.project_url)
+        self.actionHelp.triggered.connect(self.help_url)
         self.actionAbout.triggered.connect(self.project_url)
 
         self.authenticationDone.clicked.connect(self.save_auth_keys)

@@ -1613,6 +1613,10 @@ class Ui_MainWindow(object):
         self.progressDone = QtWidgets.QPushButton(self.progress)
         self.progressDone.setObjectName("progressDone")
         self.horizontalLayout.addWidget(self.progressDone)
+        self.displayResultsButton = QtWidgets.QPushButton(self.progress)
+        self.displayResultsButton.setEnabled(False)
+        self.displayResultsButton.setObjectName("displayResultsButton")
+        self.horizontalLayout.addWidget(self.displayResultsButton)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.saveCSV = QtWidgets.QPushButton(self.progress)
@@ -2575,6 +2579,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setSortingEnabled(__sortingEnabled)
         self.progressLabel.setText(_translate("MainWindow", "Progress"))
         self.progressDone.setText(_translate("MainWindow", "Done"))
+        self.displayResultsButton.setText(_translate("MainWindow", "Display Results"))
         self.saveCSV.setText(_translate("MainWindow", "Save as CSV"))
         self.saveJSON.setText(_translate("MainWindow", "Save as JSON"))
         self.textOut.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
