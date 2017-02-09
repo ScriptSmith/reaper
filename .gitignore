@@ -2,6 +2,8 @@
 *.p
 dist/
 build/
+build_packages/
 __pycache__/
+*.spec
 *.zip
 *.tar.gz
