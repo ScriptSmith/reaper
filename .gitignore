@@ -6,4 +6,5 @@ build_packages/
 __pycache__/
 *.spec
 *.zip
+*.bak
 *.tar.gz

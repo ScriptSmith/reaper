@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1316</width>
-    <height>1421</height>
+    <width>1333</width>
+    <height>859</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -19,45 +19,330 @@
   <property name="windowTitle">
    <string>Reaper</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="leftMargin">
-     <number>10</number>
-    </property>
-    <property name="topMargin">
-     <number>10</number>
-    </property>
-    <property name="rightMargin">
-     <number>10</number>
-    </property>
-    <property name="bottomMargin">
-     <number>10</number>
-    </property>
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="authentication">
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="1" column="0">
-         <widget class="QLabel" name="authenticationLabel">
+      <widget class="QWidget" name="introduction">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_121">
+            <property name="font">
+             <font>
+              <pointsize>32</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Welcome to Reaper</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_123">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
+            <pointsize>12</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>Authentication</string>
+           <string>
+Reaper is a graphical tool that interacts with social media APIs using the socialreaper python package. 
+
+Reaper currently supports scraping Facebook, Twitter, Reddit and Youtube. By using this software, you are agreeing to these platform's privacy policies and terms of use 
+
+To get started, you must provide Reaper with authentication </string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_11">
+            <item>
+             <widget class="QLabel" name="label_124">
+              <property name="text">
+               <string>Reaper is licensed under the GPL 3.0 
+
+© Adam Smith, 2017
+</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_125">
+              <property name="text">
+               <string>&lt;a href=&quot;https://github.com/scriptsmith/reaper&quot;&gt;https://github.com/scriptsmith/reaper&lt;/a&gt;</string>
+              </property>
+              <property name="openExternalLinks">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="introductionContinue">
+          <property name="text">
+           <string>Continue</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="authentication">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
         <item row="3" column="0">
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="facebookAuthTab">
+           <attribute name="title">
+            <string>Facebook</string>
+           </attribute>
+           <layout class="QFormLayout" name="formLayout">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>API key</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="facebookApiKeyInput"/>
+            </item>
+            <item row="0" column="1">
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="twitterAuthTab">
+           <attribute name="title">
+            <string>Twitter</string>
+           </attribute>
+           <layout class="QFormLayout" name="formLayout_3">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>App key</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="twitterAppKeyInput"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>App secret</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="twitterAppSecretInput"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>OAuth token</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="twitterOauthTokenInput"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>OAuth token secret</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="twitterOauthTokenSecretInput"/>
+            </item>
+            <item row="0" column="1">
+             <spacer name="verticalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="redditAuthTab">
+           <attribute name="title">
+            <string>Reddit</string>
+           </attribute>
+           <layout class="QFormLayout" name="formLayout_4">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Application id</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="redditApplicationIdInput"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Application Secret</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="redditApplicationSecretInput"/>
+            </item>
+            <item row="0" column="1">
+             <spacer name="verticalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="youtubeAuthTab">
+           <attribute name="title">
+            <string>Youtube</string>
+           </attribute>
+           <layout class="QFormLayout" name="formLayout_2">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>API Key</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="youtubeApiKeyInput"/>
+            </item>
+            <item row="0" column="1">
+             <spacer name="verticalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item row="4" column="0">
          <widget class="QPushButton" name="authenticationDone">
           <property name="text">
            <string>Done</string>
@@ -68,143 +353,32 @@
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QTabWidget" name="tabWidget">
-          <property name="currentIndex">
-           <number>0</number>
+         <widget class="QLabel" name="label_122">
+          <property name="text">
+           <string>&lt;a href=&quot;https://reaper.readthedocs.io&quot;&gt;Help&lt;/a&gt;</string>
           </property>
-          <widget class="QWidget" name="facebookAuthTab">
-           <attribute name="title">
-            <string>Facebook</string>
-           </attribute>
-           <layout class="QFormLayout" name="formLayout">
-            <item row="0" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>API key</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="facebookApiKeyInput"/>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="twitterAuthTab">
-           <attribute name="title">
-            <string>Twitter</string>
-           </attribute>
-           <layout class="QFormLayout" name="formLayout_3">
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string>App key</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="twitterAppKeyInput"/>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>App secret</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="twitterAppSecretInput"/>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>OAuth token</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="twitterOauthTokenInput"/>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_8">
-              <property name="text">
-               <string>OAuth token secret</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLineEdit" name="twitterOauthTokenSecretInput"/>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="redditAuthTab">
-           <attribute name="title">
-            <string>Reddit</string>
-           </attribute>
-           <layout class="QFormLayout" name="formLayout_4">
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_9">
-              <property name="text">
-               <string>Application id</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="redditApplicationIdInput"/>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_10">
-              <property name="text">
-               <string>Application Secret</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="redditApplicationSecretInput"/>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="youtubeAuthTab">
-           <attribute name="title">
-            <string>Youtube</string>
-           </attribute>
-           <layout class="QFormLayout" name="formLayout_2">
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_11">
-              <property name="text">
-               <string>API Key</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="youtubeApiKeyInput"/>
-            </item>
-           </layout>
-          </widget>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_127">
+          <property name="text">
+           <string>Authentication</string>
+          </property>
          </widget>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="input">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="2" column="0">
-         <widget class="QPushButton" name="inputDownload">
-          <property name="text">
-           <string>Download</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="inputLabel">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Input</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QTabWidget" name="inputTab">
           <property name="toolTip">
@@ -3245,10 +3419,108 @@
           </widget>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="inputDownload">
+          <property name="text">
+           <string>Download</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="inputLabel">
+          <property name="text">
+           <string>Input</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="progress">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <layout class="QGridLayout" name="gridLayout_8">
+        <item row="7" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="progressDone">
+            <property name="text">
+             <string>Done</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="displayResultsButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Display Results</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveCSV">
+            <property name="text">
+             <string>Save as CSV</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveJSON">
+            <property name="text">
+             <string>Save as JSON</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="progressLabel">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Progress</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QProgressBar" name="progressBar">
+            <property name="value">
+             <number>24</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pauseButton">
+            <property name="text">
+             <string>Pause</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
         <item row="6" column="0">
          <widget class="QTableWidget" name="tableWidget">
           <property name="dragEnabled">
@@ -3384,66 +3656,6 @@
           </item>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="progressLabel">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Progress</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QPushButton" name="progressDone">
-            <property name="text">
-             <string>Done</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="displayResultsButton">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Display Results</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="saveCSV">
-            <property name="text">
-             <string>Save as CSV</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="saveJSON">
-            <property name="text">
-             <string>Save as JSON</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
         <item row="0" column="0">
          <widget class="QTextEdit" name="textOut">
           <property name="maximumSize">
@@ -3467,47 +3679,16 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
-          <item>
-           <widget class="QProgressBar" name="progressBar">
-            <property name="value">
-             <number>24</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pauseButton">
-            <property name="text">
-             <string>Pause</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="preferences">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <layout class="QFormLayout" name="formLayout_35">
-        <item row="0" column="0">
-         <widget class="QLabel" name="preferencesLabel">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Preferences</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QPushButton" name="preferencesDone">
-          <property name="text">
-           <string>Done</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QCheckBox" name="checkBox">
           <property name="text">
@@ -3531,22 +3712,30 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="updates">
-       <layout class="QFormLayout" name="formLayout_34">
-        <item row="0" column="0">
-         <widget class="QLabel" name="updatesLabel">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="preferencesDone">
           <property name="text">
-           <string>Updates</string>
+           <string>Done</string>
           </property>
          </widget>
         </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="preferencesLabel">
+          <property name="text">
+           <string>Preferences</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="updates">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <layout class="QFormLayout" name="formLayout_34">
         <item row="1" column="0">
          <widget class="QPushButton" name="checkUpdatesButton">
           <property name="text">
@@ -3568,17 +3757,25 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="updatesLabel">
+          <property name="text">
+           <string>Updates</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="licenses">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_9">
         <item>
          <widget class="QLabel" name="licensesLabel">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
           <property name="text">
            <string>Licenses</string>
           </property>
@@ -5037,7 +5234,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1316</width>
+     <width>1333</width>
      <height>33</height>
     </rect>
    </property>
@@ -5141,50 +5338,34 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>t_functions</sender>
-   <signal>currentRowChanged(int)</signal>
-   <receiver>stackedWidget_3</receiver>
-   <slot>setCurrentIndex(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>208</x>
-     <y>376</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>295</x>
-     <y>772</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>r_functions</sender>
    <signal>currentRowChanged(int)</signal>
    <receiver>stackedWidget_4</receiver>
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>264</x>
-     <y>292</y>
+     <x>119</x>
+     <y>184</y>
     </hint>
     <hint type="destinationlabel">
-     <x>303</x>
-     <y>753</y>
+     <x>119</x>
+     <y>188</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>y3_pubBeforeCheck</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>y3_pubBefore</receiver>
-   <slot>setEnabled(bool)</slot>
+   <sender>t_functions</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>stackedWidget_3</receiver>
+   <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>507</x>
-     <y>506</y>
+     <x>119</x>
+     <y>184</y>
     </hint>
     <hint type="destinationlabel">
-     <x>528</x>
-     <y>561</y>
+     <x>119</x>
+     <y>188</y>
     </hint>
    </hints>
   </connection>
@@ -5195,44 +5376,12 @@ p, li { white-space: pre-wrap; }
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>184</x>
-     <y>261</y>
+     <x>119</x>
+     <y>184</y>
     </hint>
     <hint type="destinationlabel">
-     <x>177</x>
-     <y>540</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>y3_pubAfterCheck</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>y3_pubAfter</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>504</x>
-     <y>405</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>512</x>
-     <y>453</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>y4_pubAfterCheck</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>y4_pubAfter</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>147</x>
-     <y>391</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>147</x>
-     <y>391</y>
+     <x>119</x>
+     <y>188</y>
     </hint>
    </hints>
   </connection>
@@ -5243,12 +5392,60 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>147</x>
-     <y>391</y>
+     <x>155</x>
+     <y>218</y>
     </hint>
     <hint type="destinationlabel">
-     <x>147</x>
-     <y>391</y>
+     <x>155</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>y3_pubAfterCheck</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>y3_pubAfter</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>y4_pubAfterCheck</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>y4_pubAfter</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>y3_pubBeforeCheck</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>y3_pubBefore</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>218</y>
     </hint>
    </hints>
   </connection>
@@ -5259,12 +5456,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>147</x>
-     <y>391</y>
+     <x>155</x>
+     <y>218</y>
     </hint>
     <hint type="destinationlabel">
-     <x>147</x>
-     <y>391</y>
+     <x>155</x>
+     <y>218</y>
     </hint>
    </hints>
   </connection>
@@ -5275,12 +5472,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>138</x>
-     <y>820</y>
+     <x>155</x>
+     <y>218</y>
     </hint>
     <hint type="destinationlabel">
-     <x>173</x>
-     <y>946</y>
+     <x>155</x>
+     <y>218</y>
     </hint>
    </hints>
   </connection>

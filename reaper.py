@@ -19,9 +19,10 @@
 
 import pickle
 import sys
+import os
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QSizePolicy, QDesktopWidget
 from PyQt5.QtCore import QThread, pyqtSignal, QUrl
 from PyQt5.QtGui import QDesktopServices, QTextCursor
 
@@ -94,11 +95,13 @@ class Reaper(Ui_MainWindow):
         self.generator_thread = GenerateData((), 0)
         self.generator_thread.start()
 
+        # window.resize(window.minimumSizeHint())
+        self.window = window
+
         self.setupUi(window)
+        self.stack_introduction()
         self.load_auth_keys()
         self.add_actions()
-
-        window.resize(window.minimumSizeHint())
 
         if show:
             window.show()
@@ -106,23 +109,54 @@ class Reaper(Ui_MainWindow):
     def stack_jump(self, index):
         self.stackedWidget.setCurrentIndex(index)
 
-    def stack_auth(self):
+    def change_priority(self, page):
+        page.setSizePolicy(QSizePolicy(
+            QSizePolicy.Preferred, QSizePolicy.Preferred))
+        self.window.resize(self.window.minimumSizeHint())
+
+        pages = [
+            self.introduction,
+            self.authentication,
+            self.input,
+            self.progress,
+            self.preferences,
+            self.updates,
+            self.licenses
+        ]
+
+        pages.remove(page)
+
+        for page in pages:
+            page.setSizePolicy(QSizePolicy(
+                QSizePolicy.Ignored, QSizePolicy.Ignored))
+
+    def stack_introduction(self):
         self.stack_jump(0)
+        self.change_priority(self.introduction)
+
+    def stack_auth(self):
+        self.stack_jump(1)
+        self.change_priority(self.authentication)
 
     def stack_input(self):
-        self.stack_jump(1)
+        self.stack_jump(2)
+        self.change_priority(self.input)
 
     def stack_progress(self):
-        self.stack_jump(2)
+        self.stack_jump(3)
+        self.change_priority(self.progress)
 
     def stack_preferences(self):
-        self.stack_jump(3)
+        self.stack_jump(4)
+        self.change_priority(self.preferences)
 
     def stack_updates(self):
-        self.stack_jump(4)
-
-    def stack_licences(self):
         self.stack_jump(5)
+        self.change_priority(self.updates)
+
+    def stack_licenses(self):
+        self.stack_jump(6)
+        self.change_priority(self.licenses)
 
     def exit_generator(self):
         self.generator_thread.paused = False
@@ -138,7 +172,20 @@ class Reaper(Ui_MainWindow):
         self.disable_display_results()
         self.stack_input()
 
+    def choose_save_dir(self):
+        try:
+            if os.name == 'posix' and not os.environ.get('developing'):
+                directory = os.path.expanduser("~") + "/.config/reaper"
+            else:
+                directory = "."
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            os.chdir(directory)
+        except Exception as e:
+            self.error_message(e)
+
     def load_auth_keys(self):
+        self.choose_save_dir()
         try:
             self.auth_keys = pickle.load(open('reaper_keys.p', 'rb'))
 
@@ -166,6 +213,7 @@ class Reaper(Ui_MainWindow):
             pass
 
     def save_auth_keys(self):
+        self.choose_save_dir()
         self.auth_keys['facebook_api_key'] = self.facebookApiKeyInput.text()
         self.auth_keys['twitter_app_key'] = self.twitterAppKeyInput.text()
         self.auth_keys['twitter_app_secret'] = self.twitterAppSecretInput.text()
@@ -802,8 +850,9 @@ class Reaper(Ui_MainWindow):
 
     def add_actions(self):
         self.actionQuit.triggered.connect(QtWidgets.qApp.quit)
+        self.introductionContinue.clicked.connect(self.stack_auth)
         self.actionAuthentication.triggered.connect(self.stack_auth)
-        self.actionLicences.triggered.connect(self.stack_licences)
+        self.actionLicences.triggered.connect(self.stack_licenses)
         self.actionCheck_for_Updates.triggered.connect(self.stack_updates)
         self.actionPreferences.triggered.connect(self.stack_preferences)
 
