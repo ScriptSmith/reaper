@@ -1087,17 +1087,17 @@ To get started, you must provide Reaper with authentication </string>
               </item>
               <item>
                <property name="text">
-                <string>Search's thread's comments</string>
+                <string>Search's threads' comments</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Subreddit's thread's</string>
+                <string>Subreddit's threads</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Subreddit's thread's comments</string>
+                <string>Subreddit's threads' comments</string>
                </property>
               </item>
               <item>
@@ -2013,7 +2013,7 @@ To get started, you must provide Reaper with authentication </string>
               </item>
               <item>
                <property name="text">
-                <string>Search's video's comments</string>
+                <string>Search's videos' comments</string>
                </property>
               </item>
               <item>
@@ -2023,7 +2023,7 @@ To get started, you must provide Reaper with authentication </string>
               </item>
               <item>
                <property name="text">
-                <string>Channel's video's comments</string>
+                <string>Channel's videos' comments</string>
                </property>
               </item>
               <item>
