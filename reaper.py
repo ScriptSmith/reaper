@@ -22,7 +22,7 @@ import sys
 import os
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMessageBox, QSizePolicy, QDesktopWidget
+from PyQt5.QtWidgets import QMessageBox, QSizePolicy
 from PyQt5.QtCore import QThread, pyqtSignal, QUrl
 from PyQt5.QtGui import QDesktopServices, QTextCursor
 

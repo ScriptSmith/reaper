@@ -1,4 +1,6 @@
 # Reaper
+![Input screenshot](img/both.png)
+
 [Documentation](https://reaper.readthedocs.io)
 
 Reaper is a PyQt5 GUI that scrapes Facebook, Twitter, Reddit and Youtube apis 
