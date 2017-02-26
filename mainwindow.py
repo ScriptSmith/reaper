@@ -1829,6 +1829,8 @@ class Ui_MainWindow(object):
         self.actionLicences.setObjectName("actionLicences")
         self.actionCheck_for_Updates = QtWidgets.QAction(MainWindow)
         self.actionCheck_for_Updates.setObjectName("actionCheck_for_Updates")
+        self.actionReport_a_bug = QtWidgets.QAction(MainWindow)
+        self.actionReport_a_bug.setObjectName("actionReport_a_bug")
         self.menuFile.addAction(self.actionQuit)
         self.menuSettings.addAction(self.actionPreferences)
         self.menuSettings.addAction(self.actionAuthentication)
@@ -1836,6 +1838,7 @@ class Ui_MainWindow(object):
         self.menuHelp.addAction(self.actionAbout)
         self.menuHelp.addAction(self.actionLicences)
         self.menuHelp.addAction(self.actionCheck_for_Updates)
+        self.menuHelp.addAction(self.actionReport_a_bug)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuSettings.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
@@ -4144,6 +4147,7 @@ class Ui_MainWindow(object):
         self.actionLicences.setText(_translate("MainWindow", "Licences"))
         self.actionCheck_for_Updates.setText(_translate("MainWindow", "Check for updates"))
         self.actionCheck_for_Updates.setShortcut(_translate("MainWindow", "Ctrl+U"))
+        self.actionReport_a_bug.setText(_translate("MainWindow", "Report a bug"))
 
 
 if __name__ == "__main__":

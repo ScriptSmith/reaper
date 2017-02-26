@@ -272,6 +272,11 @@ class Reaper(Ui_MainWindow):
         url = QUrl('https://reaper.readthedocs.io')
         QDesktopServices.openUrl(url)
 
+    @staticmethod
+    def bug_url():
+        url = QUrl('https://gitreports.com/issue/ScriptSmith/reaper')
+        QDesktopServices.openUrl(url)
+
     def write_console(self, text):
         self.textOut.append(str(text))
         self.textOut.moveCursor(QTextCursor.End)
@@ -878,6 +883,7 @@ class Reaper(Ui_MainWindow):
         self.actionAuthentication.triggered.connect(self.stack_auth)
         self.actionLicences.triggered.connect(self.stack_licenses)
         self.actionCheck_for_Updates.triggered.connect(self.stack_updates)
+        self.actionReport_a_bug.triggered.connect(self.bug_url)
         self.actionPreferences.triggered.connect(self.stack_preferences)
 
         self.actionHelp.triggered.connect(self.help_url)
