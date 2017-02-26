@@ -52,7 +52,7 @@ class GenerateData(QThread):
 
         for item in self.generator:
             if self.quit_bool:
-                break
+                return
 
             while self.paused:
                 self.msleep(500)
