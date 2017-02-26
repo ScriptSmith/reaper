@@ -27,6 +27,7 @@ from PyQt5.QtCore import QThread, pyqtSignal, QUrl
 from PyQt5.QtGui import QDesktopServices, QTextCursor
 
 import socialreaper
+import requests
 from mainwindow import Ui_MainWindow
 
 
@@ -87,6 +88,8 @@ class Reaper(Ui_MainWindow):
     def __init__(self, window, show=True):
         super().__init__()
 
+        self.version = "v0.1.0"
+
         self.auth_keys = {}
         self.download_details = {}
 
@@ -101,6 +104,8 @@ class Reaper(Ui_MainWindow):
         self.window = window
 
         self.setupUi(window)
+        self.updateStatusLabel.setText("Reaper {} is up to date".format(
+            self.version))
         self.stack_introduction()
         self.load_auth_keys()
         self.add_actions()
@@ -863,6 +868,8 @@ class Reaper(Ui_MainWindow):
         self.actionHelp.triggered.connect(self.help_url)
         self.actionAbout.triggered.connect(self.project_url)
 
+        self.checkUpdatesButton.clicked.connect(self.check_updates)
+
         self.authenticationDone.clicked.connect(self.save_auth_keys)
         self.progressDone.clicked.connect(self.new_input)
         self.licencesDone.clicked.connect(self.new_input)
@@ -874,8 +881,26 @@ class Reaper(Ui_MainWindow):
 
         self.pauseButton.clicked.connect(self.pause_thread)
 
-    def connect_library(self):
-        pass
+    def check_updates(self):
+        self.checkUpdatesButton.setEnabled(False)
+        try:
+            req = requests.get(
+                "https://api.github.com/repos/scriptsmith/reaper/releases")
+        except requests.RequestException as e:
+            self.error_message(e)
+
+        self.checkUpdatesButton.setEnabled(True)
+        req = req.json()
+
+        if isinstance(req, dict) and req.get('message'):
+            self.error_message(Exception("Could not get updates:" + req[
+                'message']))
+            return
+
+        if req[0]['tag_name'] != self.version:
+            new_text = "<a href='{}'>Download latest version</a>".format(
+                "http://github.com/ScriptSmith/reaper/releases")
+            self.updateStatusLabel.setText(new_text)
 
 
 if __name__ == "__main__":

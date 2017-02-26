@@ -1770,6 +1770,7 @@ class Ui_MainWindow(object):
         self.checkUpdatesButton.setObjectName("checkUpdatesButton")
         self.formLayout_34.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.checkUpdatesButton)
         self.updateStatusLabel = QtWidgets.QLabel(self.updates)
+        self.updateStatusLabel.setOpenExternalLinks(True)
         self.updateStatusLabel.setObjectName("updateStatusLabel")
         self.formLayout_34.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.updateStatusLabel)
         self.updatesDone = QtWidgets.QPushButton(self.updates)
