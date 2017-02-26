@@ -98,7 +98,6 @@ class Reaper(Ui_MainWindow):
         self.generator_thread = GenerateData({}, (), 0)
         self.generator_thread.start()
 
-        # window.resize(window.minimumSizeHint())
         self.window = window
 
         self.setupUi(window)

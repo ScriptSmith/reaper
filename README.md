@@ -10,4 +10,4 @@ using the `socialreaper` [package](https://github.com/ScriptSmith/socialreaper).
 To download the latest builds for your platform, check out the [releases](https://github.com/ScriptSmith/reaper/releases)
 
 ## Usage
-To use Reaper, install `socialreaper` and `PyQt5`, then run `reaper.py`
+To use Reaper, `pip install socialreaper pyqt5`, then run `reaper.py`
