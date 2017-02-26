@@ -458,13 +458,13 @@ class Reaper(Ui_MainWindow):
             function_id = self.t_functions.currentIndex().row() + 1
 
             if function_id == 1:
-                hashtag = self.t1_searchQuery.text()
+                search_term = self.t1_searchQuery.text()
                 result_type = self.t1_resultType.currentItem().text()
                 include_entities = self.t1_includeEntities.isChecked()
                 max_id = self.t1_maxId.text()
                 num_tweets = self.t1_numTweets.value()
 
-                generator = source.search(hashtag, count=num_tweets,
+                generator = source.search(search_term, count=num_tweets,
                                           result_type=result_type,
                                           include_entities=include_entities,
                                           max_id=max_id)
@@ -485,6 +485,8 @@ class Reaper(Ui_MainWindow):
 
             elif function_id == 3:
                 username = self.t3_username.text()
+                if isinstance(username, str) and username[0] == '@':
+                    username = username[1:]
                 exclude_replies = self.t3_excludeReplies.isChecked()
                 include_retweets = self.t3_includeRetweets.isChecked()
                 num_tweets = self.t3_numTweets.value()
