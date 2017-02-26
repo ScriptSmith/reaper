@@ -19,16 +19,28 @@
 
 import pickle
 import sys
+import logging
+import tempfile
 import os
 
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QSizePolicy
 from PyQt5.QtCore import QThread, pyqtSignal, QUrl
-from PyQt5.QtGui import QDesktopServices, QTextCursor
+from PyQt5.QtGui import QDesktopServices, QTextCursor, QIcon
 
 import socialreaper
 import requests
 from mainwindow import Ui_MainWindow
+
+logfile = tempfile.gettempdir() + os.sep + 'reaper.log'
+logging.basicConfig(filename=logfile, level=logging.DEBUG)
+logger = logging.getLogger("reaper")
+
+
+def log_handler(ex_type, value, traceback):
+    logger.debug(traceback)
+    logger.exception("Uncaught exception", exc_info=(ex_type, value, traceback))
+    sys.exit()
 
 
 class GenerateData(QThread):
@@ -102,6 +114,7 @@ class Reaper(Ui_MainWindow):
         self.generator_thread.start()
 
         self.window = window
+        self.window.setWindowIcon(QIcon('ui/icon.png'))
 
         self.setupUi(window)
         self.updateStatusLabel.setText("Reaper {} is up to date".format(
@@ -906,6 +919,7 @@ class Reaper(Ui_MainWindow):
 
 
 if __name__ == "__main__":
+    sys.excepthook = log_handler
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
     ui = Reaper(main_window)

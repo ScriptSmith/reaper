@@ -3503,18 +3503,6 @@ To get started, you must provide Reaper with authentication </string>
           </item>
          </layout>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="progressLabel">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Progress</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
@@ -3695,6 +3683,13 @@ p, li { white-space: pre-wrap; }
          <widget class="QLabel" name="label_126">
           <property name="text">
            <string>Error Log</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_128">
+          <property name="text">
+           <string>Progress</string>
           </property>
          </widget>
         </item>
