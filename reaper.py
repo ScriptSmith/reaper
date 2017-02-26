@@ -37,8 +37,9 @@ class GenerateData(QThread):
     write_console = pyqtSignal(str)
     show_status = pyqtSignal(str, int)
 
-    def __init__(self, generator, count):
+    def __init__(self, source, generator, count):
         super().__init__()
+        self.source = source
         self.generator = generator
         self.count = count
         self.quit_bool = False
@@ -52,6 +53,8 @@ class GenerateData(QThread):
 
         for item in self.generator:
             if self.quit_bool:
+                self.source.force_stop = True
+                self.quit_bool = False
                 return
 
             while self.paused:
@@ -92,7 +95,7 @@ class Reaper(Ui_MainWindow):
         self.table_thread = None
         self.table_max_cols = 30
 
-        self.generator_thread = GenerateData((), 0)
+        self.generator_thread = GenerateData({}, (), 0)
         self.generator_thread.start()
 
         # window.resize(window.minimumSizeHint())
@@ -166,6 +169,7 @@ class Reaper(Ui_MainWindow):
     def new_input(self):
         self.data = []
         self.existing_field_names = []
+        self.inputDownload.setEnabled(True)
         self.textOut.clear()
         self.exit_generator()
         self.tableWidget.clear()
@@ -361,6 +365,7 @@ class Reaper(Ui_MainWindow):
     def initiate_download(self):
         index = self.inputTab.currentIndex()
         self.exit_generator()
+        self.inputDownload.setEnabled(False)
         if not self.generator_thread.isFinished():
             self.generator_thread.finished.connect(self.stack_progress)
         else:
@@ -812,7 +817,7 @@ class Reaper(Ui_MainWindow):
                 count = 1
 
         if generator and count:
-            self.generator_thread = GenerateData(generator, count)
+            self.generator_thread = GenerateData(source, generator, count)
             self.generator_thread.start()
             self.generator_thread.item_generated.connect(self.table_append)
             self.generator_thread.progress_changed.connect(
