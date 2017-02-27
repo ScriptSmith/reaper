@@ -227,6 +227,8 @@ class Reaper(Ui_MainWindow):
             self.redditApplicationSecretInput.setText(self.auth_keys.get(
                 'reddit_application_secret', ''))
 
+            self.enable_tabs()
+
             if self.auth_keys != {}:
                 self.stack_input()
 
@@ -250,7 +252,25 @@ class Reaper(Ui_MainWindow):
 
         pickle.dump(self.auth_keys, open('reaper_keys.p', 'wb'))
 
+        self.enable_tabs()
         self.stack_input()
+
+    def enable_tabs(self):
+        facebook = self.auth_keys.get('facebook_api_key') != ""
+        self.facebookTab.setEnabled(facebook)
+
+        twitter = self.auth_keys.get('twitter_app_key') != "" and \
+            self.auth_keys.get('twitter_app_secret') != "" and \
+            self.auth_keys.get('twitter_oauth_token') != "" and \
+            self.auth_keys.get('twitter_oauth_token_secret') != ""
+        self.twitterTab.setEnabled(twitter)
+
+        youtube = self.auth_keys.get('youtube_api_key') != ""
+        self.youtubeTab.setEnabled(youtube)
+
+        reddit = self.auth_keys.get('reddit_application_id') != "" and \
+            self.auth_keys.get('reddit_application_secret') != ""
+        self.redditTab.setEnabled(reddit)
 
     @staticmethod
     def error_message(exception):
