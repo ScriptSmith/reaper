@@ -25,7 +25,7 @@ import os
 
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QSizePolicy
-from PyQt5.QtCore import QThread, pyqtSignal, QUrl
+from PyQt5.QtCore import QThread, pyqtSignal, QUrl, Qt
 from PyQt5.QtGui import QDesktopServices, QTextCursor, QIcon
 
 import socialreaper
@@ -107,6 +107,7 @@ class Reaper(Ui_MainWindow):
 
         self.data = []
         self.existing_field_names = []
+        self.display_table = True
         self.table_thread = None
         self.table_max_cols = 30
 
@@ -132,7 +133,9 @@ class Reaper(Ui_MainWindow):
     def change_priority(self, page):
         page.setSizePolicy(QSizePolicy(
             QSizePolicy.Preferred, QSizePolicy.Preferred))
-        self.window.resize(self.window.minimumSizeHint())
+        if self.window.windowState() not in [Qt.WindowMaximized,
+                                             Qt.WindowFullScreen]:
+            self.window.resize(self.window.minimumSizeHint())
 
         pages = [
             self.introduction,
@@ -181,17 +184,21 @@ class Reaper(Ui_MainWindow):
     def exit_generator(self):
         self.generator_thread.paused = False
         self.generator_thread.quit_bool = True
+        self.generator_thread.source.force_stop = True
         self.generator_thread.quit()
 
     def new_input(self):
+        self.exit_generator()
+        if not self.generator_thread.isFinished():
+            self.generator_thread.terminate()
+        self.stack_input()
         self.data = []
         self.existing_field_names = []
         self.inputDownload.setEnabled(True)
         self.textOut.clear()
-        self.exit_generator()
         self.tableWidget.clear()
+        self.display_table = True
         self.disable_display_results()
-        self.stack_input()
 
     def choose_save_dir(self):
         try:
@@ -345,13 +352,19 @@ class Reaper(Ui_MainWindow):
 
     def table_append(self, item, force=False):
         self.data.append(item)
+
+        if not self.display_table:
+            return
+
         item = socialreaper.tools.flatten(item)
 
-        if len(item) > self.table_max_cols and not force:
+        if len(item) > self.table_max_cols or self.tableWidget.columnCount() > \
+                self.table_max_cols and not force:
             self.tableWidget.setRowCount(1)
             self.tableWidget.setColumnCount(1)
             err_text = "Too many table fields to display"
             self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem(err_text))
+            self.display_table = False
             return
 
         field_names, item = socialreaper.tools.fill_gaps(
@@ -377,7 +390,7 @@ class Reaper(Ui_MainWindow):
 
             for col_count, col in enumerate(field_names):
                 value = item[col]
-                if isinstance(value, list):
+                if isinstance(value, list) or isinstance(value, int):
                     value = str(value)
 
                 self.tableWidget.setItem(row_count-1, col_count,
@@ -406,12 +419,9 @@ class Reaper(Ui_MainWindow):
 
     def initiate_download(self):
         index = self.inputTab.currentIndex()
-        self.exit_generator()
+        # self.exit_generator()
         self.inputDownload.setEnabled(False)
-        if not self.generator_thread.isFinished():
-            self.generator_thread.finished.connect(self.stack_progress)
-        else:
-            self.stack_progress()
+        self.stack_progress()
 
         self.progressBar.setValue(0)
         self.tableWidget.clear()
@@ -446,9 +456,17 @@ class Reaper(Ui_MainWindow):
                 comment_order = self.f2_commentOrder.currentItem().text()
                 num_comments = self.f2_numComments.value()
 
+                fields = []
+                ck = Qt.Checked
+
+                for index in range(self.f2_commentFields.count()):
+                    if self.f2_commentFields.item(index).checkState() == ck:
+                        fields.append(self.f2_commentFields.item(index).text())
+
                 generator = source.post_comments(post_id, count=num_comments,
                                                  category=comment_type,
-                                                 order=comment_order)
+                                                 order=comment_order,
+                                                 fields=fields)
                 count = num_comments
 
             elif function_id == 3:
@@ -471,6 +489,13 @@ class Reaper(Ui_MainWindow):
                 comment_order = self.f4_commentOrder.currentItem().text()
                 num_comments = self.f4_numComments.value()
 
+                fields = []
+                ck = Qt.Checked
+
+                for index in range(self.f4_commentFields.count()):
+                    if self.f4_commentFields.item(index).checkState() == ck:
+                        fields.append(self.f4_commentFields.item(index).text())
+
                 generator = source.page_posts_comments(page_id,
                                                        post_count=num_posts,
                                                        post_type=post_type,
@@ -481,7 +506,8 @@ class Reaper(Ui_MainWindow):
                                                        comment_category=
                                                        comment_type,
                                                        comment_order=
-                                                       comment_order
+                                                       comment_order,
+                                                       comment_fields=fields
                                                        )
                 count = num_posts * num_comments
 

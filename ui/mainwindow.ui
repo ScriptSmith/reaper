@@ -454,87 +454,269 @@ To get started, you must provide Reaper with authentication </string>
               </widget>
               <widget class="QWidget" name="page_2">
                <layout class="QFormLayout" name="formLayout_6">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_4">
-                  <property name="text">
-                   <string>Post id</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_13">
-                  <property name="text">
-                   <string>Comment type</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0" colspan="2">
-                 <widget class="QListWidget" name="f2_commentType">
-                  <property name="currentRow">
-                   <number>0</number>
-                  </property>
+                <item row="0" column="1">
+                 <layout class="QHBoxLayout" name="horizontalLayout_10">
                   <item>
-                   <property name="text">
-                    <string>stream</string>
-                   </property>
+                   <layout class="QFormLayout" name="formLayout_22">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_4">
+                      <property name="text">
+                       <string>Post id</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_13">
+                      <property name="text">
+                       <string>Comment type</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="label_14">
+                      <property name="text">
+                       <string>Comment order</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="10" column="0">
+                     <widget class="QLabel" name="label_12">
+                      <property name="text">
+                       <string>Number of comments</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="11" column="0">
+                     <widget class="QSpinBox" name="f2_numComments">
+                      <property name="minimum">
+                       <number>0</number>
+                      </property>
+                      <property name="maximum">
+                       <number>999999999</number>
+                      </property>
+                      <property name="value">
+                       <number>50</number>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="0" colspan="2">
+                     <widget class="QListWidget" name="f2_commentType">
+                      <property name="currentRow">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>stream</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>toplevel</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item row="1" column="0" colspan="2">
+                     <widget class="QLineEdit" name="f2_postId">
+                      <property name="placeholderText">
+                       <string>179866158722992_1312328855476711</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="0" colspan="2">
+                     <widget class="QListWidget" name="f2_commentOrder">
+                      <property name="currentRow">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>chronological</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>reverse_chronological</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                   </layout>
                   </item>
                   <item>
-                   <property name="text">
-                    <string>toplevel</string>
-                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_12">
+                    <item>
+                     <widget class="QLabel" name="label_129">
+                      <property name="text">
+                       <string>Comment fields</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QListWidget" name="f2_commentFields">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="selectionMode">
+                       <enum>QAbstractItemView::ExtendedSelection</enum>
+                      </property>
+                      <property name="currentRow">
+                       <number>-1</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>id</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Checked</enum>
+                       </property>
+                       <property name="flags">
+                        <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>application</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>attachment</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>can_comment</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>can_remove</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>can_like</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>comments</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>comment_count</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Checked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>created_time</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Checked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>from</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Checked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>likes</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>like_count</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Checked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>live_broadcast_timestamp</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>message</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Checked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>message_tags</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>object</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>parent</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>user_likes</string>
+                       </property>
+                       <property name="checkState">
+                        <enum>Unchecked</enum>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                   </layout>
                   </item>
-                 </widget>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="label_14">
-                  <property name="text">
-                   <string>Comment order</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="6" column="0" colspan="2">
-                 <widget class="QListWidget" name="f2_commentOrder">
-                  <property name="currentRow">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <property name="text">
-                    <string>chronological</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>reverse_chronological</string>
-                   </property>
-                  </item>
-                 </widget>
-                </item>
-                <item row="7" column="0">
-                 <widget class="QLabel" name="label_12">
-                  <property name="text">
-                   <string>Number of comments</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="0">
-                 <widget class="QSpinBox" name="f2_numComments">
-                  <property name="minimum">
-                   <number>0</number>
-                  </property>
-                  <property name="maximum">
-                   <number>999999999</number>
-                  </property>
-                  <property name="value">
-                   <number>50</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0" colspan="2">
-                 <widget class="QLineEdit" name="f2_postId">
-                  <property name="placeholderText">
-                   <string>179866158722992_1312328855476711</string>
-                  </property>
-                 </widget>
+                 </layout>
                 </item>
                </layout>
               </widget>
@@ -700,19 +882,6 @@ To get started, you must provide Reaper with authentication </string>
                 </item>
                 <item>
                  <layout class="QFormLayout" name="formLayout_9">
-                  <item row="7" column="0">
-                   <widget class="QSpinBox" name="f4_numComments">
-                    <property name="minimum">
-                     <number>0</number>
-                    </property>
-                    <property name="maximum">
-                     <number>999999999</number>
-                    </property>
-                    <property name="value">
-                     <number>50</number>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="0" column="0">
                    <widget class="QLabel" name="label_21">
                     <property name="text">
@@ -720,17 +889,27 @@ To get started, you must provide Reaper with authentication </string>
                     </property>
                    </widget>
                   </item>
+                  <item row="1" column="0" colspan="2">
+                   <widget class="QListWidget" name="f4_commentType">
+                    <property name="currentRow">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>stream</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>toplevel</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
                   <item row="4" column="0">
                    <widget class="QLabel" name="label_23">
                     <property name="text">
                      <string>Comment order</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="6" column="0">
-                   <widget class="QLabel" name="label_22">
-                    <property name="text">
-                     <string>Number of comments per post</string>
                     </property>
                    </widget>
                   </item>
@@ -751,19 +930,192 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                    </widget>
                   </item>
-                  <item row="1" column="0" colspan="2">
-                   <widget class="QListWidget" name="f4_commentType">
-                    <property name="currentRow">
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_130">
+                    <property name="text">
+                     <string>Comment fields</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="0">
+                   <widget class="QLabel" name="label_22">
+                    <property name="text">
+                     <string>Number of comments per post</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="10" column="0">
+                   <widget class="QSpinBox" name="f4_numComments">
+                    <property name="minimum">
                      <number>0</number>
+                    </property>
+                    <property name="maximum">
+                     <number>999999999</number>
+                    </property>
+                    <property name="value">
+                     <number>50</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="0" colspan="2">
+                   <widget class="QListWidget" name="f4_commentFields">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="selectionMode">
+                     <enum>QAbstractItemView::ExtendedSelection</enum>
+                    </property>
+                    <property name="currentRow">
+                     <number>-1</number>
                     </property>
                     <item>
                      <property name="text">
-                      <string>stream</string>
+                      <string>id</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                     <property name="flags">
+                      <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>toplevel</string>
+                      <string>application</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>attachment</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>can_comment</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>can_remove</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>can_like</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>comments</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>comment_count</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>created_time</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>from</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>like_count</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>live_broadcast_timestamp</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>message</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>message_tags</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>object</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>parent</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>user_likes</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
                      </property>
                     </item>
                    </widget>
