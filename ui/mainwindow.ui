@@ -4108,24 +4108,14 @@ p, li { white-space: pre-wrap; }
         </sizepolicy>
        </property>
        <layout class="QFormLayout" name="formLayout_34">
-        <item row="1" column="0">
+        <item row="2" column="0">
          <widget class="QPushButton" name="checkUpdatesButton">
           <property name="text">
            <string>Check for updates</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="updateStatusLabel">
-          <property name="text">
-           <string>Reaper is up to date</string>
-          </property>
-          <property name="openExternalLinks">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
+        <item row="4" column="0">
          <widget class="QPushButton" name="updatesDone">
           <property name="text">
            <string>Done</string>
@@ -4136,6 +4126,16 @@ p, li { white-space: pre-wrap; }
          <widget class="QLabel" name="updatesLabel">
           <property name="text">
            <string>Updates</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="updateStatusLabel">
+          <property name="text">
+           <string>Status: Unknown</string>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

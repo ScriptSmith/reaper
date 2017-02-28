@@ -100,7 +100,7 @@ class Reaper(Ui_MainWindow):
     def __init__(self, window, show=True):
         super().__init__()
 
-        self.version = "v0.1.0"
+        self.version = "v0.1.1"
 
         self.auth_keys = {}
         self.download_details = {}
