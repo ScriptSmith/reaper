@@ -118,8 +118,7 @@ class Reaper(Ui_MainWindow):
         self.window.setWindowIcon(QIcon('ui/icon.png'))
 
         self.setupUi(window)
-        self.updateStatusLabel.setText("Reaper {} is up to date".format(
-            self.version))
+
         self.stack_introduction()
         self.load_auth_keys()
         self.add_actions()
@@ -964,7 +963,10 @@ class Reaper(Ui_MainWindow):
                 'message']))
             return
 
-        if req[0]['tag_name'] != self.version:
+        if req[0]['tag_name'] == self.version:
+            self.updateStatusLabel.setText("Reaper {} is up to date".format(
+                self.version))
+        else:
             new_text = "<a href='{}'>Download latest version</a>".format(
                 "http://github.com/ScriptSmith/reaper/releases")
             self.updateStatusLabel.setText(new_text)
