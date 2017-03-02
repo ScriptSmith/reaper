@@ -538,6 +538,11 @@ To get started, you must provide Reaper with authentication </string>
                         <string>reverse_chronological</string>
                        </property>
                       </item>
+                      <item>
+                       <property name="text">
+                        <string>ranked</string>
+                       </property>
+                      </item>
                      </widget>
                     </item>
                    </layout>
@@ -926,6 +931,11 @@ To get started, you must provide Reaper with authentication </string>
                     <item>
                      <property name="text">
                       <string>reverse_chronological</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>ranked</string>
                      </property>
                     </item>
                    </widget>
