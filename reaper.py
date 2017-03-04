@@ -111,7 +111,9 @@ class Reaper(Ui_MainWindow):
         self.table_thread = None
         self.table_max_cols = 30
 
-        self.generator_thread = GenerateData({}, (), 0)
+        blank_source = socialreaper.Source()
+        blank_iter = iter(())
+        self.generator_thread = GenerateData(blank_source, blank_iter, 0)
         self.generator_thread.start()
 
         self.window = window
@@ -474,9 +476,17 @@ class Reaper(Ui_MainWindow):
                 include_hidden = self.f3_includeHidden.isChecked()
                 num_posts = self.f3_numPosts.value()
 
+                fields = []
+                ck = Qt.Checked
+
+                for index in range(self.f3_postFields.count()):
+                    if self.f3_postFields.item(index).checkState() == ck:
+                        fields.append(self.f3_postFields.item(index).text())
+
                 generator = source.page_posts(page_id, count=num_posts,
                                               post_type=post_type,
-                                              include_hidden=include_hidden)
+                                              include_hidden=include_hidden,
+                                              fields=fields)
                 count = num_posts
 
             elif function_id == 4:
