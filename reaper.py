@@ -450,7 +450,14 @@ class Reaper(Ui_MainWindow):
                 posts = self.f1_postIds.toPlainText()
                 posts = posts.replace(" ", "").split(",")
 
-                generator = source.posts(posts)
+                fields = []
+                ck = Qt.Checked
+
+                for index in range(self.f3_postFields.count()):
+                    if self.f3_postFields.item(index).checkState() == ck:
+                        fields.append(self.f3_postFields.item(index).text())
+
+                generator = source.posts(posts, fields=fields)
                 count = len(posts)
 
             elif function_id == 2:
