@@ -2226,7 +2226,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
         self.inputTab.setCurrentIndex(0)
         self.f_functions.setCurrentRow(0)
-        self.stackedWidget_2.setCurrentIndex(2)
+        self.stackedWidget_2.setCurrentIndex(0)
         self.f2_commentType.setCurrentRow(0)
         self.f2_commentOrder.setCurrentRow(0)
         self.f2_commentFields.setCurrentRow(-1)

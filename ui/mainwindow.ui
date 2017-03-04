@@ -432,7 +432,7 @@ To get started, you must provide Reaper with authentication </string>
             <item row="2" column="0">
              <widget class="QStackedWidget" name="stackedWidget_2">
               <property name="currentIndex">
-               <number>2</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="page">
                <layout class="QVBoxLayout" name="verticalLayout_5">

@@ -100,7 +100,7 @@ class Reaper(Ui_MainWindow):
     def __init__(self, window, show=True):
         super().__init__()
 
-        self.version = "v0.1.1"
+        self.version = "v0.1.2"
 
         self.auth_keys = {}
         self.download_details = {}
@@ -120,6 +120,8 @@ class Reaper(Ui_MainWindow):
         self.window.setWindowIcon(QIcon('ui/icon.png'))
 
         self.setupUi(window)
+        self.updateStatusLabel.setText(
+            'Current version: {}'.format(self.version))
 
         self.stack_introduction()
         self.load_auth_keys()
