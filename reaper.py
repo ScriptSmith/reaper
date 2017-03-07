@@ -285,11 +285,14 @@ class Reaper(Ui_MainWindow):
         self.redditTab.setEnabled(reddit)
 
     @staticmethod
-    def error_message(exception):
+    def error_message(exception,
+                      text="An error occurred when processing your request",
+                      title="Error"):
+
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
-        msg.setText("An error occurred when processing your request")
-        msg.setWindowTitle("Error")
+        msg.setText(text)
+        msg.setWindowTitle(title)
         msg.setDetailedText(str(exception))
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec_()
@@ -986,9 +989,10 @@ class Reaper(Ui_MainWindow):
             self.updateStatusLabel.setText("Reaper {} is up to date".format(
                 self.version))
         else:
-            new_text = "<a href='{}'>Download latest version</a>".format(
-                "http://github.com/ScriptSmith/reaper/releases")
+            new_text = "<a href='{}'>Download latest Reaper version</a>".format(
+                "http://github.com/ScriptSmith/reaper/releases/latest")
             self.updateStatusLabel.setText(new_text)
+            self.error_message(None, text=new_text, title="Update")
 
 
 if __name__ == "__main__":
