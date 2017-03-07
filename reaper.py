@@ -701,7 +701,7 @@ class Reaper(Ui_MainWindow):
                 order = self.y2_order.currentItem().text()
                 search_term = self.y2_searchTerm.text()
                 comment_format = self.y2_format.currentItem().text()
-                num_comments = self.y2_numComments
+                num_comments = self.y2_numComments.value()
 
                 generator = source.video_comments(video_id,
                                                   count=num_comments,
