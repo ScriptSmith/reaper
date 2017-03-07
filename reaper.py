@@ -259,6 +259,9 @@ class Reaper(Ui_MainWindow):
         self.auth_keys['reddit_application_secret'] = \
             self.redditApplicationSecretInput.text()
 
+        for k, v in self.auth_keys.items():
+            self.auth_keys[k] = v.strip()
+
         pickle.dump(self.auth_keys, open('reaper_keys.p', 'wb'))
 
         self.enable_tabs()
