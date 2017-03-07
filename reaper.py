@@ -197,7 +197,6 @@ class Reaper(Ui_MainWindow):
         self.stack_input()
         self.data = []
         self.existing_field_names = []
-        self.inputDownload.setEnabled(True)
         self.textOut.clear()
         self.tableWidget.clear()
         self.display_table = True
@@ -422,8 +421,6 @@ class Reaper(Ui_MainWindow):
 
     def initiate_download(self):
         index = self.inputTab.currentIndex()
-        # self.exit_generator()
-        self.inputDownload.setEnabled(False)
         self.stack_progress()
 
         self.progressBar.setValue(0)
