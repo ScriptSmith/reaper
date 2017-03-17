@@ -335,7 +335,7 @@ class Reaper(Ui_MainWindow):
         for row_count, row in enumerate(table_data):
             for col_count, col in enumerate(field_names):
                 value = row[col]
-                if isinstance(value, list):
+                if not isinstance(value, str):
                     value = str(value)
 
                 self.tableWidget.setItem(row_count, col_count,
@@ -398,7 +398,7 @@ class Reaper(Ui_MainWindow):
 
             for col_count, col in enumerate(field_names):
                 value = item[col]
-                if isinstance(value, list) or isinstance(value, int):
+                if not isinstance(value, str):
                     value = str(value)
 
                 self.tableWidget.setItem(row_count-1, col_count,
