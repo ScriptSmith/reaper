@@ -114,6 +114,7 @@ class Reaper(Ui_MainWindow):
         blank_source = socialreaper.Source()
         blank_iter = iter(())
         self.generator_thread = GenerateData(blank_source, blank_iter, 0)
+        self.generator_thread.write_console.connect(self.write_console)
         self.generator_thread.start()
 
         self.window = window
