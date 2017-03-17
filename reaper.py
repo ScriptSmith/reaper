@@ -57,6 +57,7 @@ class GenerateData(QThread):
         self.count = count
         self.quit_bool = False
         self.paused = False
+        self.ran = False
 
         chunk_size = int(count / 1000)
         self.chunk_size = 10 if chunk_size == 0 else chunk_size
@@ -76,6 +77,7 @@ class GenerateData(QThread):
             if isinstance(item, Exception):
                 self.api_error.emit(item)
             else:
+                self.ran = True
                 self.item_generated.emit(item)
 
             self.progress_changed.emit(int(100 * downloaded_count /
@@ -88,6 +90,9 @@ class GenerateData(QThread):
             downloaded_count += 1
         self.progress_changed.emit(100)
         self.show_status.emit("Query complete", 2000)
+
+        if not self.ran:
+            self.item_generated.emit({"Message": "No results for this query"})
 
     def write(self, text):
         self.write_console.emit(str(text))
