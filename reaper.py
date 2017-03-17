@@ -332,7 +332,8 @@ class Reaper(Ui_MainWindow):
         self.generator_thread.toggle_pause()
 
     def enable_display_results(self):
-        self.displayResultsButton.setEnabled(True)
+        if len(self.data) > 1:
+            self.displayResultsButton.setEnabled(True)
 
     def disable_display_results(self):
         self.displayResultsButton.setEnabled(False)
