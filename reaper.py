@@ -319,6 +319,8 @@ class Reaper(Ui_MainWindow):
         QDesktopServices.openUrl(url)
 
     def write_console(self, text):
+        self.textOut.setHidden(False)
+        self.errorLogLabel.setHidden(False)
         self.textOut.append(str(text))
         self.textOut.moveCursor(QTextCursor.End)
 
@@ -332,7 +334,7 @@ class Reaper(Ui_MainWindow):
         self.generator_thread.toggle_pause()
 
     def enable_display_results(self):
-        if len(self.data) > 1:
+        if len(self.data) >= 1:
             self.displayResultsButton.setEnabled(True)
 
     def disable_display_results(self):
@@ -436,6 +438,8 @@ class Reaper(Ui_MainWindow):
         index = self.inputTab.currentIndex()
         self.stack_progress()
 
+        self.textOut.setHidden(True)
+        self.errorLogLabel.setHidden(True)
         self.progressBar.setValue(0)
         self.tableWidget.clear()
         self.textOut.clear()

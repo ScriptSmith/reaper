@@ -9,3 +9,4 @@ __pycache__/
 *.bak
 *.tar.gz
 makefile
+*.venv

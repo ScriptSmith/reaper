@@ -5176,7 +5176,7 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QLabel" name="label_126">
+         <widget class="QLabel" name="errorLogLabel">
           <property name="text">
            <string>Error Log</string>
           </property>
