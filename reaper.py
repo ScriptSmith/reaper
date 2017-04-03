@@ -543,6 +543,54 @@ class Reaper(Ui_MainWindow):
                                                        )
                 count = num_posts * num_comments
 
+            elif function_id == 5:
+                group_id = self.f5_groupId.text()
+                include_hidden = self.f5_includeHidden.isChecked()
+                num_posts = self.f5_numPosts.value()
+
+                fields = []
+                ck = Qt.Checked
+
+                for index in range(self.f5_postFields.count()):
+                    if self.f5_postFields.item(index).checkState() == ck:
+                        fields.append(self.f5_postFields.item(index).text())
+
+                generator = source.page_posts(
+                    group_id, count=num_posts, include_hidden=include_hidden,
+                    post_type="feed", fields=fields)
+
+                count = num_posts
+
+            elif function_id == 6:
+                page_id = self.f6_groupId.text()
+                include_hidden = self.f6_includeHidden.isChecked()
+                num_posts = self.f6_numPosts.value()
+                comment_type = self.f6_commentType.currentItem().text()
+                comment_order = self.f6_commentOrder.currentItem().text()
+                num_comments = self.f6_numComments.value()
+
+                fields = []
+                ck = Qt.Checked
+
+                for index in range(self.f6_commentFields.count()):
+                    if self.f6_commentFields.item(index).checkState() == ck:
+                        fields.append(self.f6_commentFields.item(index).text())
+
+                generator = source.page_posts_comments(page_id,
+                                                       post_count=num_posts,
+                                                       post_type="feed",
+                                                       include_hidden_posts=
+                                                       include_hidden,
+                                                       comment_count=
+                                                       num_comments,
+                                                       comment_category=
+                                                       comment_type,
+                                                       comment_order=
+                                                       comment_order,
+                                                       comment_fields=fields
+                                                       )
+                count = num_posts * num_comments
+
         elif index == 1:  # Twitter
             source = socialreaper.Twitter(
                 self.auth_keys['twitter_app_key'],

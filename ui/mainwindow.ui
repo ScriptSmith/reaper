@@ -427,6 +427,16 @@ To get started, you must provide Reaper with authentication </string>
                 <string>Comments from page's posts</string>
                </property>
               </item>
+              <item>
+               <property name="text">
+                <string>Posts from group</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Comments from group's posts</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="2" column="0">
@@ -2103,6 +2113,916 @@ To get started, you must provide Reaper with authentication </string>
                   </item>
                   <item row="7" column="0" colspan="2">
                    <widget class="QListWidget" name="f4_commentFields">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="selectionMode">
+                     <enum>QAbstractItemView::ExtendedSelection</enum>
+                    </property>
+                    <property name="currentRow">
+                     <number>-1</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>id</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                     <property name="flags">
+                      <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>application</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>attachment</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>can_comment</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>can_remove</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>can_like</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>comments</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>comment_count</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>created_time</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>from</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>like_count</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>live_broadcast_timestamp</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>message</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>message_tags</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>object</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>parent</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>user_likes</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="page_22">
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
+                <item>
+                 <layout class="QFormLayout" name="formLayout_37">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_126">
+                    <property name="text">
+                     <string>Group id</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0" colspan="2">
+                   <widget class="QLineEdit" name="f5_groupId">
+                    <property name="placeholderText">
+                     <string>108934215825398</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QCheckBox" name="f5_includeHidden">
+                    <property name="text">
+                     <string>Include hidden posts</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_134">
+                    <property name="text">
+                     <string>Number of posts</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QSpinBox" name="f5_numPosts">
+                    <property name="minimum">
+                     <number>0</number>
+                    </property>
+                    <property name="maximum">
+                     <number>999999999</number>
+                    </property>
+                    <property name="value">
+                     <number>200</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_15">
+                  <item>
+                   <widget class="QLabel" name="label_135">
+                    <property name="text">
+                     <string>Post fields</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QListWidget" name="f5_postFields">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>actions</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>admin_creator</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>allowed_advertising_objectives</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>application</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>backdated_time</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>call_to_action</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>caption</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>child_attachments</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>comments_mirroring_domain</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>coordinates</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>created_time</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>description</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>event</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>expanded_height</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>expanded_width</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>feed_targeting</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>from</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>full_pictureheight</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>icon</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>id</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>instagram_eligibility</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>is_app_share</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>is_expired</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>is_hidden</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>is_instagram_eligable</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>is_popular</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>is_published</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>is_spherical</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>link</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>message</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>message_tags</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>multi_share_end_card</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>multi_share_optimized</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>name</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>object_id</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>parent_id</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>picture</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>place</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>privacy</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>promotion_status</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>properties</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>reactions.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>scheduled_publish_time</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>shares</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>source</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>status_type</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>story</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>story_tags</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>subscribed</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>target</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>targeting</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>timeline_visibility</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>type</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>updated_time</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>via</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>width</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>attachments</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>comments</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>dynamic_posts</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>insights</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>permalink_url</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>reactions</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>sharedposts</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>sponsor_tags</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>to</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>with_tags</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="page_23">
+               <layout class="QHBoxLayout" name="horizontalLayout_16">
+                <item>
+                 <layout class="QFormLayout" name="formLayout_39">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_140">
+                    <property name="text">
+                     <string>Group id</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0" colspan="2">
+                   <widget class="QLineEdit" name="f6_groupId">
+                    <property name="placeholderText">
+                     <string>108934215825398</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QCheckBox" name="f6_includeHidden">
+                    <property name="text">
+                     <string>Include hidden posts</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_142">
+                    <property name="text">
+                     <string>Number of posts</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QSpinBox" name="f6_numPosts">
+                    <property name="minimum">
+                     <number>0</number>
+                    </property>
+                    <property name="maximum">
+                     <number>999999999</number>
+                    </property>
+                    <property name="value">
+                     <number>50</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="label_136">
+                    <property name="text">
+                     <string>Comment type</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0" colspan="2">
+                   <widget class="QListWidget" name="f6_commentType">
+                    <property name="currentRow">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>stream</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>toplevel</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="label_137">
+                    <property name="text">
+                     <string>Comment order</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="0" colspan="2">
+                   <widget class="QListWidget" name="f6_commentOrder">
+                    <property name="currentRow">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>chronological</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>reverse_chronological</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>ranked</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="9" column="0">
+                   <widget class="QLabel" name="label_139">
+                    <property name="text">
+                     <string>Number of comments per post</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="10" column="0">
+                   <widget class="QSpinBox" name="f6_numComments">
+                    <property name="minimum">
+                     <number>0</number>
+                    </property>
+                    <property name="maximum">
+                     <number>999999999</number>
+                    </property>
+                    <property name="value">
+                     <number>50</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_16">
+                  <item>
+                   <widget class="QLabel" name="label_138">
+                    <property name="text">
+                     <string>Comment fields</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QListWidget" name="f6_commentFields">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                       <horstretch>0</horstretch>
