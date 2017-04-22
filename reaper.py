@@ -479,6 +479,7 @@ class Reaper(Ui_MainWindow):
                 comment_type = self.f2_commentType.currentItem().text()
                 comment_order = self.f2_commentOrder.currentItem().text()
                 num_comments = self.f2_numComments.value()
+                include_post = self.f2_includeOriginal.isChecked()
 
                 fields = []
                 ck = Qt.Checked
@@ -487,9 +488,19 @@ class Reaper(Ui_MainWindow):
                     if self.f2_commentFields.item(index).checkState() == ck:
                         fields.append(self.f2_commentFields.item(index).text())
 
+                post_fields = []
+                ck = Qt.Checked
+
+                for index in range(self.f2_postFields.count()):
+                    if self.f2_postFields.item(index).checkState() == ck:
+                        post_fields.append(self.f2_postFields.item(
+                            index).text())
+
                 generator = source.post_comments(post_id, count=num_comments,
                                                  category=comment_type,
                                                  order=comment_order,
+                                                 include_post=include_post,
+                                                 post_fields=post_fields,
                                                  fields=fields)
                 count = num_comments
 
@@ -516,6 +527,7 @@ class Reaper(Ui_MainWindow):
                 page_id = self.f4_pageId.text()
                 post_type = self.f4_postType.currentItem().text()
                 include_hidden = self.f4_includeHIdden.isChecked()
+                include_post = self.f4_includeOriginal.isChecked()
                 num_posts = self.f4_numPosts.value()
                 comment_type = self.f4_commentType.currentItem().text()
                 comment_order = self.f4_commentOrder.currentItem().text()
@@ -528,19 +540,22 @@ class Reaper(Ui_MainWindow):
                     if self.f4_commentFields.item(index).checkState() == ck:
                         fields.append(self.f4_commentFields.item(index).text())
 
-                generator = source.page_posts_comments(page_id,
-                                                       post_count=num_posts,
-                                                       post_type=post_type,
-                                                       include_hidden_posts=
-                                                       include_hidden,
-                                                       comment_count=
-                                                       num_comments,
-                                                       comment_category=
-                                                       comment_type,
-                                                       comment_order=
-                                                       comment_order,
-                                                       comment_fields=fields
-                                                       )
+                post_fields = []
+                ck = Qt.Checked
+
+                for index in range(self.f4_postFields.count()):
+                    if self.f4_postFields.item(index).checkState() == ck:
+                        post_fields.append(self.f4_postFields.item(
+                            index).text())
+
+                generator = source.page_posts_comments(
+                    page_id, post_count=num_posts, post_type=post_type,
+                    include_hidden_posts=include_hidden,
+                    include_post=include_post,
+                    post_fields=post_fields, comment_count=num_comments,
+                    comment_category=comment_type,
+                    comment_order=comment_order, comment_fields=fields)
+
                 count = num_posts * num_comments
 
             elif function_id == 5:
@@ -564,6 +579,7 @@ class Reaper(Ui_MainWindow):
             elif function_id == 6:
                 page_id = self.f6_groupId.text()
                 include_hidden = self.f6_includeHidden.isChecked()
+                include_post = self.f6_includeOriginal.isChecked()
                 num_posts = self.f6_numPosts.value()
                 comment_type = self.f6_commentType.currentItem().text()
                 comment_order = self.f6_commentOrder.currentItem().text()
@@ -576,19 +592,22 @@ class Reaper(Ui_MainWindow):
                     if self.f6_commentFields.item(index).checkState() == ck:
                         fields.append(self.f6_commentFields.item(index).text())
 
-                generator = source.page_posts_comments(page_id,
-                                                       post_count=num_posts,
-                                                       post_type="feed",
-                                                       include_hidden_posts=
-                                                       include_hidden,
-                                                       comment_count=
-                                                       num_comments,
-                                                       comment_category=
-                                                       comment_type,
-                                                       comment_order=
-                                                       comment_order,
-                                                       comment_fields=fields
-                                                       )
+                post_fields = []
+                ck = Qt.Checked
+
+                for index in range(self.f6_postFields.count()):
+                    if self.f6_postFields.item(index).checkState() == ck:
+                        post_fields.append(self.f6_postFields.item(
+                            index).text())
+
+                generator = source.page_posts_comments(
+                    page_id, post_count=num_posts, post_type="feed",
+                    include_hidden_posts=include_hidden,
+                    include_post=include_post, post_fields=post_fields,
+                    comment_count=num_comments,
+                    comment_category=comment_type,
+                    comment_order=comment_order, comment_fields=fields)
+
                 count = num_posts * num_comments
 
         elif index == 1:  # Twitter
