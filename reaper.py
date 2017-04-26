@@ -105,7 +105,7 @@ class Reaper(Ui_MainWindow):
     def __init__(self, window, show=True):
         super().__init__()
 
-        self.version = "v0.1.5"
+        self.version = "v0.1.7"
 
         self.auth_keys = {}
         self.download_details = {}
@@ -683,11 +683,12 @@ class Reaper(Ui_MainWindow):
                 thread_id = self.r2_threadId.text()
                 subreddit = self.r2_subreddit.text()
                 comment_order = self.r2_commentOrder.currentItem().text()
+                include_parent = self.r2_includeParent.isChecked()
                 num_comments = self.r2_numComments.value()
 
-                generator = source.thread_comments(thread_id, subreddit,
-                                                   count=num_comments,
-                                                   order=comment_order)
+                generator = source.thread_comments(
+                    thread_id, subreddit, count=num_comments,
+                    include_parent=include_parent, order=comment_order)
                 count = num_comments
 
             elif function_id == 3:
@@ -707,19 +708,15 @@ class Reaper(Ui_MainWindow):
                 time_period = self.r4_timePeriod.currentItem().text()
                 num_threads = self.r4_numThreads.value()
                 comment_order = self.r4_commentOrder.currentItem().text()
+                include_parent = self.r4_includeParent.isChecked()
                 num_comments = self.r4_numComments.value()
 
-                generator = source.search_thread_comments(query,
-                                                          thread_count=
-                                                          num_threads,
-                                                          search_order=
-                                                          thread_order,
-                                                          search_time_period=
-                                                          time_period,
-                                                          comment_order=
-                                                          comment_order,
-                                                          comment_count=
-                                                          num_comments)
+                generator = source.search_thread_comments(
+                    query, thread_count=num_threads,
+                    search_order=thread_order,
+                    search_time_period=time_period,
+                    comment_order=comment_order,
+                    include_parent=include_parent, comment_count=num_comments)
                 count = num_threads * num_comments
 
             elif function_id == 5:
@@ -739,18 +736,13 @@ class Reaper(Ui_MainWindow):
                 time_period = self.r6_timePeriod.currentItem().text()
                 num_threads = self.r6_numThreads.value()
                 comment_order = self.r6_commentOrder.currentItem().text()
+                include_parent = self.r6_includeParent.isChecked()
                 num_comments = self.r6_numComments.value()
 
-                generator = source.subreddit_thread_comments(subreddit,
-                                                             thread_count=
-                                                             num_threads,
-                                                             order=thread_order,
-                                                             time_period=
-                                                             time_period,
-                                                             comment_order=
-                                                             comment_order,
-                                                             comment_count=
-                                                             num_comments)
+                generator = source.subreddit_thread_comments(
+                    subreddit, thread_count=num_threads, order=thread_order,
+                    time_period=time_period, comment_order=comment_order,
+                    include_parent=include_parent, comment_count=num_comments)
                 count = num_threads * num_comments
 
             elif function_id == 7:
@@ -1074,7 +1066,7 @@ class Reaper(Ui_MainWindow):
 
 
 if __name__ == "__main__":
-    sys.excepthook = log_handler
+    # sys.excepthook = log_handler
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
     ui = Reaper(main_window)

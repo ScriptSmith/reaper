@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>802</width>
-    <height>394</height>
+    <width>1551</width>
+    <height>763</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -5318,14 +5318,14 @@ To get started, you must provide Reaper with authentication </string>
                   </property>
                  </widget>
                 </item>
-                <item row="9" column="0">
+                <item row="10" column="0">
                  <widget class="QLabel" name="label_37">
                   <property name="text">
                    <string>Number of comments</string>
                   </property>
                  </widget>
                 </item>
-                <item row="10" column="0">
+                <item row="11" column="0">
                  <widget class="QSpinBox" name="r2_numComments">
                   <property name="minimum">
                    <number>0</number>
@@ -5373,6 +5373,13 @@ To get started, you must provide Reaper with authentication </string>
                     <string>q&amp;a</string>
                    </property>
                   </item>
+                 </widget>
+                </item>
+                <item row="9" column="0">
+                 <widget class="QCheckBox" name="r2_includeParent">
+                  <property name="text">
+                   <string>Include parent</string>
+                  </property>
                  </widget>
                 </item>
                </layout>
@@ -5497,7 +5504,7 @@ To get started, you must provide Reaper with authentication </string>
                <layout class="QHBoxLayout" name="horizontalLayout_3">
                 <item>
                  <layout class="QFormLayout" name="formLayout_5">
-                  <item row="7" column="0">
+                  <item row="8" column="0">
                    <widget class="QLabel" name="label_43">
                     <property name="text">
                      <string>Number of threads</string>
@@ -5525,7 +5532,7 @@ To get started, you must provide Reaper with authentication </string>
                     </property>
                    </widget>
                   </item>
-                  <item row="8" column="0">
+                  <item row="9" column="0">
                    <widget class="QSpinBox" name="r4_numThreads">
                     <property name="minimum">
                      <number>0</number>
@@ -5607,6 +5614,13 @@ To get started, you must provide Reaper with authentication </string>
                       <string>hour</string>
                      </property>
                     </item>
+                   </widget>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QCheckBox" name="r4_includeParent">
+                    <property name="text">
+                     <string>Include parent</string>
+                    </property>
                    </widget>
                   </item>
                  </layout>
@@ -5871,14 +5885,14 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                    </widget>
                   </item>
-                  <item row="7" column="0">
+                  <item row="8" column="0">
                    <widget class="QLabel" name="label_53">
                     <property name="text">
                      <string>Number of threads</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="8" column="0">
+                  <item row="9" column="0">
                    <widget class="QSpinBox" name="r6_numThreads">
                     <property name="minimum">
                      <number>0</number>
@@ -5921,6 +5935,13 @@ To get started, you must provide Reaper with authentication </string>
                       <string>controversial</string>
                      </property>
                     </item>
+                   </widget>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QCheckBox" name="r6_includeParent">
+                    <property name="text">
+                     <string>Include parent</string>
+                    </property>
                    </widget>
                   </item>
                  </layout>
@@ -6356,7 +6377,7 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>reviewCount</string>
+                      <string>viewCount</string>
                      </property>
                     </item>
                     <item>
@@ -6819,7 +6840,7 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>reviewCount</string>
+                      <string>viewCount</string>
                      </property>
                     </item>
                     <item>
@@ -9386,8 +9407,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>802</width>
-     <height>22</height>
+     <width>1551</width>
+     <height>37</height>
     </rect>
    </property>
    <property name="defaultUp">
