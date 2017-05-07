@@ -992,7 +992,6 @@ class Reaper(Ui_MainWindow):
 
     def save(self, file_type="csv"):
         options = QtWidgets.QFileDialog.Options()
-        options |= QtWidgets.QFileDialog.DontUseNativeDialog
         file_name, _ = QtWidgets.QFileDialog.getSaveFileName(
             caption="Save", directory="",
             filter="{} Files (*.{});;All Files (*)".format(
