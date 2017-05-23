@@ -483,6 +483,38 @@ To get started, you must provide Reaper with authentication </string>
                     </property>
                     <item>
                      <property name="text">
+                      <string>comments.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>reactions.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>shares</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
                       <string>actions</string>
                      </property>
                      <property name="checkState">
@@ -707,14 +739,6 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>likes.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>link</string>
                      </property>
                      <property name="checkState">
@@ -819,23 +843,7 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>reactions.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>scheduled_publish_time</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Unchecked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>shares</string>
                      </property>
                      <property name="checkState">
                       <enum>Unchecked</enum>
@@ -1153,6 +1161,38 @@ To get started, you must provide Reaper with authentication </string>
                     </property>
                     <item>
                      <property name="text">
+                      <string>comments.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>reactions.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>shares</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
                       <string>actions</string>
                      </property>
                      <property name="checkState">
@@ -1377,14 +1417,6 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>likes.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>link</string>
                      </property>
                      <property name="checkState">
@@ -1489,23 +1521,7 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>reactions.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>scheduled_publish_time</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Unchecked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>shares</string>
                      </property>
                      <property name="checkState">
                       <enum>Unchecked</enum>
@@ -1971,6 +1987,38 @@ To get started, you must provide Reaper with authentication </string>
                     </property>
                     <item>
                      <property name="text">
+                      <string>comments.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>reactions.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>shares</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
                       <string>actions</string>
                      </property>
                      <property name="checkState">
@@ -2195,14 +2243,6 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>likes.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>link</string>
                      </property>
                      <property name="checkState">
@@ -2307,23 +2347,7 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>reactions.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>scheduled_publish_time</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Unchecked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>shares</string>
                      </property>
                      <property name="checkState">
                       <enum>Unchecked</enum>
@@ -2585,6 +2609,13 @@ To get started, you must provide Reaper with authentication </string>
                     </property>
                    </widget>
                   </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_141">
+                    <property name="text">
+                     <string>Original post fields</string>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="8" column="0">
                    <widget class="QLabel" name="label_18">
                     <property name="text">
@@ -2605,7 +2636,7 @@ To get started, you must provide Reaper with authentication </string>
                     </property>
                    </widget>
                   </item>
-                  <item row="7" column="0">
+                  <item row="7" column="0" colspan="2">
                    <widget class="QListWidget" name="f4_postFields">
                     <property name="enabled">
                      <bool>false</bool>
@@ -2616,6 +2647,38 @@ To get started, you must provide Reaper with authentication </string>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <item>
+                     <property name="text">
+                      <string>comments.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>reactions.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>shares</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
                     <item>
                      <property name="text">
                       <string>actions</string>
@@ -2842,14 +2905,6 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>likes.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>link</string>
                      </property>
                      <property name="checkState">
@@ -2954,23 +3009,7 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>reactions.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>scheduled_publish_time</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Unchecked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>shares</string>
                      </property>
                      <property name="checkState">
                       <enum>Unchecked</enum>
@@ -3160,13 +3199,6 @@ To get started, you must provide Reaper with authentication </string>
                       <enum>Unchecked</enum>
                      </property>
                     </item>
-                   </widget>
-                  </item>
-                  <item row="6" column="0">
-                   <widget class="QLabel" name="label_141">
-                    <property name="text">
-                     <string>Original post fields</string>
-                    </property>
                    </widget>
                   </item>
                  </layout>
@@ -3486,6 +3518,38 @@ To get started, you must provide Reaper with authentication </string>
                     </property>
                     <item>
                      <property name="text">
+                      <string>comments.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>reactions.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>shares</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
                       <string>actions</string>
                      </property>
                      <property name="checkState">
@@ -3710,14 +3774,6 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>likes.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>link</string>
                      </property>
                      <property name="checkState">
@@ -3822,23 +3878,7 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>reactions.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>scheduled_publish_time</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Unchecked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>shares</string>
                      </property>
                      <property name="checkState">
                       <enum>Unchecked</enum>
@@ -4183,6 +4223,38 @@ To get started, you must provide Reaper with authentication </string>
                     </property>
                     <item>
                      <property name="text">
+                      <string>comments.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>likes.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>reactions.limit(1).summary(true)</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>shares</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
                       <string>actions</string>
                      </property>
                      <property name="checkState">
@@ -4407,14 +4479,6 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>likes.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>link</string>
                      </property>
                      <property name="checkState">
@@ -4519,23 +4583,7 @@ To get started, you must provide Reaper with authentication </string>
                     </item>
                     <item>
                      <property name="text">
-                      <string>reactions.limit(1).summary(true)</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
                       <string>scheduled_publish_time</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Unchecked</enum>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>shares</string>
                      </property>
                      <property name="checkState">
                       <enum>Unchecked</enum>
@@ -9507,8 +9555,8 @@ p, li { white-space: pre-wrap; }
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>294</x>
-     <y>193</y>
+     <x>332</x>
+     <y>370</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -9523,12 +9571,12 @@ p, li { white-space: pre-wrap; }
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>110</x>
-     <y>124</y>
+     <x>119</x>
+     <y>233</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>200</y>
+     <x>119</x>
+     <y>383</y>
     </hint>
    </hints>
   </connection>
@@ -9539,12 +9587,12 @@ p, li { white-space: pre-wrap; }
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>110</x>
-     <y>124</y>
+     <x>119</x>
+     <y>233</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>255</y>
+     <x>119</x>
+     <y>428</y>
     </hint>
    </hints>
   </connection>
@@ -9555,12 +9603,12 @@ p, li { white-space: pre-wrap; }
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>110</x>
-     <y>124</y>
+     <x>119</x>
+     <y>233</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>200</y>
+     <x>119</x>
+     <y>383</y>
     </hint>
    </hints>
   </connection>
@@ -9571,12 +9619,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>72</x>
-     <y>229</y>
+     <x>94</x>
+     <y>399</y>
     </hint>
     <hint type="destinationlabel">
-     <x>72</x>
-     <y>229</y>
+     <x>94</x>
+     <y>401</y>
     </hint>
    </hints>
   </connection>
@@ -9587,12 +9635,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>72</x>
-     <y>229</y>
+     <x>94</x>
+     <y>393</y>
     </hint>
     <hint type="destinationlabel">
-     <x>72</x>
-     <y>229</y>
+     <x>94</x>
+     <y>396</y>
     </hint>
    </hints>
   </connection>
@@ -9603,12 +9651,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>72</x>
-     <y>229</y>
+     <x>94</x>
+     <y>393</y>
     </hint>
     <hint type="destinationlabel">
-     <x>72</x>
-     <y>229</y>
+     <x>94</x>
+     <y>396</y>
     </hint>
    </hints>
   </connection>
@@ -9619,12 +9667,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>72</x>
-     <y>229</y>
+     <x>94</x>
+     <y>399</y>
     </hint>
     <hint type="destinationlabel">
-     <x>72</x>
-     <y>229</y>
+     <x>94</x>
+     <y>401</y>
     </hint>
    </hints>
   </connection>
@@ -9635,12 +9683,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>50</x>
-     <y>229</y>
+     <x>75</x>
+     <y>411</y>
     </hint>
     <hint type="destinationlabel">
-     <x>63</x>
-     <y>229</y>
+     <x>79</x>
+     <y>416</y>
     </hint>
    </hints>
   </connection>
@@ -9651,12 +9699,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>50</x>
-     <y>229</y>
+     <x>75</x>
+     <y>411</y>
     </hint>
     <hint type="destinationlabel">
-     <x>63</x>
-     <y>229</y>
+     <x>79</x>
+     <y>416</y>
     </hint>
    </hints>
   </connection>
@@ -9667,12 +9715,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>138</x>
-     <y>547</y>
+     <x>281</x>
+     <y>897</y>
     </hint>
     <hint type="destinationlabel">
-     <x>504</x>
-     <y>262</y>
+     <x>1067</x>
+     <y>591</y>
     </hint>
    </hints>
   </connection>
@@ -9683,12 +9731,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>126</x>
-     <y>424</y>
+     <x>267</x>
+     <y>720</y>
     </hint>
     <hint type="destinationlabel">
-     <x>167</x>
-     <y>476</y>
+     <x>307</x>
+     <y>818</y>
     </hint>
    </hints>
   </connection>
@@ -9699,12 +9747,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>179</x>
-     <y>299</y>
+     <x>309</x>
+     <y>576</y>
     </hint>
     <hint type="destinationlabel">
-     <x>515</x>
-     <y>323</y>
+     <x>1182</x>
+     <y>569</y>
     </hint>
    </hints>
   </connection>
