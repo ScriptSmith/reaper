@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1551</width>
-    <height>763</height>
+    <height>775</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -6501,7 +6501,7 @@ To get started, you must provide Reaper with authentication </string>
                   <item row="0" column="0">
                    <widget class="QCheckBox" name="y3_pubAfterCheck">
                     <property name="enabled">
-                     <bool>false</bool>
+                     <bool>true</bool>
                     </property>
                     <property name="text">
                      <string>Published after</string>
@@ -6518,7 +6518,7 @@ To get started, you must provide Reaper with authentication </string>
                   <item row="2" column="0">
                    <widget class="QCheckBox" name="y3_pubBeforeCheck">
                     <property name="enabled">
-                     <bool>false</bool>
+                     <bool>true</bool>
                     </property>
                     <property name="text">
                      <string>Published before</string>
@@ -6967,7 +6967,7 @@ To get started, you must provide Reaper with authentication </string>
                   <item row="0" column="0">
                    <widget class="QCheckBox" name="y4_pubAfterCheck">
                     <property name="enabled">
-                     <bool>false</bool>
+                     <bool>true</bool>
                     </property>
                     <property name="text">
                      <string>Published after</string>
@@ -6984,7 +6984,7 @@ To get started, you must provide Reaper with authentication </string>
                   <item row="2" column="0">
                    <widget class="QCheckBox" name="y4_pubBeforeCheck">
                     <property name="enabled">
-                     <bool>false</bool>
+                     <bool>true</bool>
                     </property>
                     <property name="text">
                      <string>Published before</string>
@@ -9456,7 +9456,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1551</width>
-     <height>37</height>
+     <height>39</height>
     </rect>
    </property>
    <property name="defaultUp">

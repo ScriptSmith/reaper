@@ -797,11 +797,11 @@ class Reaper(Ui_MainWindow):
                 radius = self.y3_radius.text()
                 radius = radius if radius else None
                 if self.y3_pubAfterCheck.isChecked():
-                    pub_after = self.y3_pubAfter.dateTime()
+                    pub_after = self.y3_pubAfter.dateTime().toString("yyyy-MM-ddTHH:mm:ssZ")
                 else:
                     pub_after = None
                 if self.y3_pubBeforeCheck.isChecked():
-                    pub_before = self.y3_pubBefore.dateTime()
+                    pub_before = self.y3_pubBefore.dateTime().toString("yyyy-MM-ddTHH:mm:ssZ")
                 else:
                     pub_before = None
                 region_code = self.y3_regionCode.text()
@@ -861,11 +861,11 @@ class Reaper(Ui_MainWindow):
                 radius = self.y4_radius.text()
                 radius = radius if radius else None
                 if self.y4_pubAfterCheck.isChecked():
-                    pub_after = self.y4_pubAfter.dateTime()
+                    pub_after = self.y4_pubAfter.dateTime().toString("yyyy-MM-ddTHH:mm:ssZ")
                 else:
                     pub_after = None
                 if self.y4_pubBeforeCheck.isChecked():
-                    pub_before = self.y4_pubBefore.dateTime()
+                    pub_before = self.y4_pubBefore.dateTime().toString("yyyy-MM-ddTHH:mm:ssZ")
                 else:
                     pub_before = None
                 region_code = self.y4_regionCode.text()
