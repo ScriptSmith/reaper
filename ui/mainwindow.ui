@@ -106,9 +106,9 @@
           </property>
           <property name="text">
            <string>
-Reaper is a graphical tool that interacts with social media APIs using the socialreaper python package. 
+Reaper is a graphical tool that interacts with social media APIs using the socialreaper python package.
 
-Reaper currently supports scraping Facebook, Twitter, Reddit and Youtube. By using this software, you are agreeing to these platform's privacy policies and terms of use 
+Reaper currently supports scraping Facebook, Twitter, Reddit and Youtube. By using this software, you are agreeing to these platform's privacy policies and terms of use
 
 To get started, you must provide Reaper with authentication </string>
           </property>
@@ -137,7 +137,7 @@ To get started, you must provide Reaper with authentication </string>
             <item>
              <widget class="QLabel" name="label_124">
               <property name="text">
-               <string>Reaper is licensed under the GPL 3.0 
+               <string>Reaper is licensed under the GPL 3.0
 
 © Adam Smith, 2017
 </string>
@@ -481,6 +481,62 @@ To get started, you must provide Reaper with authentication </string>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <item>
+	<property name="text">
+		<string>reactions.type(LIKE).limit(0).summary(true).as(like)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(LOVE).limit(0).summary(true).as(love)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(WOW).limit(0).summary(true).as(wow)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(HAHA).limit(0).summary(true).as(haha)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(SAD).limit(0).summary(true).as(sad)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(ANGRY).limit(0).summary(true).as(angry)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(THANKFUL).limit(0).summary(true).as(thankful)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
                     <item>
                      <property name="text">
                       <string>comments.limit(1).summary(true)</string>
@@ -1159,6 +1215,62 @@ To get started, you must provide Reaper with authentication </string>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <item>
+	<property name="text">
+		<string>reactions.type(LIKE).limit(0).summary(true).as(like)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(LOVE).limit(0).summary(true).as(love)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(WOW).limit(0).summary(true).as(wow)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(HAHA).limit(0).summary(true).as(haha)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(SAD).limit(0).summary(true).as(sad)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(ANGRY).limit(0).summary(true).as(angry)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(THANKFUL).limit(0).summary(true).as(thankful)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
                     <item>
                      <property name="text">
                       <string>comments.limit(1).summary(true)</string>
@@ -1986,6 +2098,62 @@ To get started, you must provide Reaper with authentication </string>
                      </sizepolicy>
                     </property>
                     <item>
+	<property name="text">
+		<string>reactions.type(LIKE).limit(0).summary(true).as(like)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(LOVE).limit(0).summary(true).as(love)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(WOW).limit(0).summary(true).as(wow)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(HAHA).limit(0).summary(true).as(haha)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(SAD).limit(0).summary(true).as(sad)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(ANGRY).limit(0).summary(true).as(angry)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(THANKFUL).limit(0).summary(true).as(thankful)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+                    <item>
                      <property name="text">
                       <string>comments.limit(1).summary(true)</string>
                      </property>
@@ -2647,6 +2815,62 @@ To get started, you must provide Reaper with authentication </string>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <item>
+	<property name="text">
+		<string>reactions.type(LIKE).limit(0).summary(true).as(like)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(LOVE).limit(0).summary(true).as(love)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(WOW).limit(0).summary(true).as(wow)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(HAHA).limit(0).summary(true).as(haha)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(SAD).limit(0).summary(true).as(sad)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(ANGRY).limit(0).summary(true).as(angry)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(THANKFUL).limit(0).summary(true).as(thankful)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
                     <item>
                      <property name="text">
                       <string>comments.limit(1).summary(true)</string>
@@ -3517,6 +3741,62 @@ To get started, you must provide Reaper with authentication </string>
                      </sizepolicy>
                     </property>
                     <item>
+	<property name="text">
+		<string>reactions.type(LIKE).limit(0).summary(true).as(like)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(LOVE).limit(0).summary(true).as(love)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(WOW).limit(0).summary(true).as(wow)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(HAHA).limit(0).summary(true).as(haha)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(SAD).limit(0).summary(true).as(sad)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(ANGRY).limit(0).summary(true).as(angry)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(THANKFUL).limit(0).summary(true).as(thankful)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+                    <item>
                      <property name="text">
                       <string>comments.limit(1).summary(true)</string>
                      </property>
@@ -4221,6 +4501,62 @@ To get started, you must provide Reaper with authentication </string>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <item>
+	<property name="text">
+		<string>reactions.type(LIKE).limit(0).summary(true).as(like)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(LOVE).limit(0).summary(true).as(love)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(WOW).limit(0).summary(true).as(wow)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(HAHA).limit(0).summary(true).as(haha)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(SAD).limit(0).summary(true).as(sad)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(ANGRY).limit(0).summary(true).as(angry)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
+<item>
+	<property name="text">
+		<string>reactions.type(THANKFUL).limit(0).summary(true).as(thankful)</string>
+	</property>
+	<property name="checkState">
+		<enum>Unchecked</enum>
+	</property>
+</item>
                     <item>
                      <property name="text">
                       <string>comments.limit(1).summary(true)</string>

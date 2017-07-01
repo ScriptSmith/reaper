@@ -467,9 +467,9 @@ class Reaper(Ui_MainWindow):
                 fields = []
                 ck = Qt.Checked
 
-                for index in range(self.f3_postFields.count()):
-                    if self.f3_postFields.item(index).checkState() == ck:
-                        fields.append(self.f3_postFields.item(index).text())
+                for index in range(self.f1_postFields.count()):
+                    if self.f1_postFields.item(index).checkState() == ck:
+                        fields.append(self.f1_postFields.item(index).text())
 
                 generator = source.posts(posts, fields=fields)
                 count = len(posts)
