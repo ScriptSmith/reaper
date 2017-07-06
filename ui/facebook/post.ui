@@ -10,12 +10,24 @@
     <height>1718</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -25,21 +37,58 @@
         <x>0</x>
         <y>0</y>
         <width>662</width>
-        <height>1754</height>
+        <height>1652</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout_4">
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Post Statistics</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout_3">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="checkBox_36">
+            <property name="text">
+             <string>Like count</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_37">
+            <property name="text">
+             <string>Reaction count</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="checkBox_38">
+            <property name="text">
+             <string>Share count</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="checkBox_39">
+            <property name="text">
+             <string>Comment count</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBox_40">
          <property name="text">
-          <string>Post Id</string>
+          <string>Customize post fields</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="3" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Fields</string>
+          <string>Post Fields</string>
          </property>
          <layout class="QFormLayout" name="formLayout_2">
           <item row="0" column="0">
@@ -289,53 +338,6 @@
           </item>
          </layout>
         </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="title">
-          <string>Statistics</string>
-         </property>
-         <layout class="QFormLayout" name="formLayout_3">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="checkBox_36">
-            <property name="text">
-             <string>Like count</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="checkBox_37">
-            <property name="text">
-             <string>Reaction count</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="checkBox_38">
-            <property name="text">
-             <string>Share count</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QCheckBox" name="checkBox_39">
-            <property name="text">
-             <string>Comment count</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="checkBox_40">
-         <property name="text">
-          <string>Customize fields</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLineEdit" name="lineEdit"/>
        </item>
       </layout>
      </widget>

@@ -6,29 +6,280 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1290</width>
-    <height>1354</height>
+    <width>1142</width>
+    <height>785</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Reaper</string>
+  </property>
+  <property name="statusTip">
+   <string>Visit https://reaper.social for help &amp; tutorials</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="statusTip">
+    <string/>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="tab_12">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <attribute name="title">
-        <string>API Keys</string>
+        <string>0. Introduction</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_19">
+            <property name="font">
+             <font>
+              <pointsize>28</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Welcome to Reaper!</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_28">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_20">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_41">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;© The University of Queensland&lt;/p&gt;&lt;p&gt;Developed by &lt;a href=&quot;https://github.com/ScriptSmith&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Adam Smith&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <widget class="QLabel" name="label_22">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Reaper helps you gather social media data, no coding required.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_38">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_23">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Simply:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_24">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>1. Add &amp; verify your API Keys</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_25">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>2. Input your parameters</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_26">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>3. Add your scraping instruction to the queue</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_27">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>4. Download your data</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <attribute name="title">
+        <string>1. API Keys</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_42">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>By using these platforms, you are agreeing to their terms &amp; conditions</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QScrollArea" name="scrollArea">
           <property name="enabled">
            <bool>true</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QAbstractScrollArea
+{
+background-color: transparent;
+}
+QWidget#scrollAreaWidgetContents{
+background-color: transparent; /*or a colour*/
+} </string>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Sunken</enum>
@@ -41,9 +292,12 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1184</width>
-             <height>1518</height>
+             <width>1086</width>
+             <height>990</height>
             </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
@@ -52,20 +306,54 @@
                <string>Facebook</string>
               </property>
               <layout class="QFormLayout" name="formLayout">
-               <item row="0" column="0">
+               <item row="1" column="0">
                 <widget class="QLabel" name="label">
                  <property name="text">
                   <string>Access Token</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLineEdit" name="lineEdit"/>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit">
+                 <property name="autoFillBackground">
+                  <bool>false</bool>
+                 </property>
+                 <property name="inputMethodHints">
+                  <set>Qt::ImhNone</set>
+                 </property>
+                 <property name="dragEnabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="1" column="0">
-                <widget class="QPushButton" name="pushButton">
+               <item row="2" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_2">
+                   <property name="text">
+                    <string>Verify</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_14">
+                   <property name="text">
+                    <string>Add to DB</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_31">
                  <property name="text">
-                  <string>Verify</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://reaper.social&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;How do I get this?&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -78,50 +366,87 @@
                <string>Twitter</string>
               </property>
               <layout class="QFormLayout" name="formLayout_2">
-               <item row="1" column="0">
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_2">
                  <property name="text">
                   <string>Consumer Key</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="lineEdit_2"/>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="lineEdit_2">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="2" column="0">
+               <item row="3" column="0">
                 <widget class="QLabel" name="label_3">
                  <property name="text">
                   <string>Consumer Secret</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QLineEdit" name="lineEdit_5"/>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="lineEdit_5">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="3" column="0">
+               <item row="4" column="0">
                 <widget class="QLabel" name="label_4">
                  <property name="text">
                   <string>Access Token</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QLineEdit" name="lineEdit_6"/>
+               <item row="4" column="1">
+                <widget class="QLineEdit" name="lineEdit_6">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="4" column="0">
+               <item row="5" column="0">
                 <widget class="QLabel" name="label_5">
                  <property name="text">
                   <string>Access Token Secret</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1">
-                <widget class="QLineEdit" name="lineEdit_7"/>
+               <item row="5" column="1">
+                <widget class="QLineEdit" name="lineEdit_7">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="5" column="0">
-                <widget class="QPushButton" name="pushButton_2">
+               <item row="6" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_5">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_3">
+                   <property name="text">
+                    <string>Verify</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_15">
+                   <property name="text">
+                    <string>Add to DB</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_32">
                  <property name="text">
-                  <string>Verify</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://reaper.social&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;How do I get this?&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -134,30 +459,59 @@
                <string>Reddit</string>
               </property>
               <layout class="QFormLayout" name="formLayout_3">
-               <item row="0" column="0">
+               <item row="1" column="0">
                 <widget class="QLabel" name="label_6">
                  <property name="text">
                   <string>Identifier</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLineEdit" name="lineEdit_3"/>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_3">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="1" column="0">
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_7">
                  <property name="text">
                   <string>Secret</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="lineEdit_8"/>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="lineEdit_8">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QPushButton" name="pushButton_3">
+               <item row="3" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_4">
+                   <property name="text">
+                    <string>Verify</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_16">
+                   <property name="text">
+                    <string>Add to DB</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_33">
                  <property name="text">
-                  <string>Verify</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://reaper.social&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;How do I get this?&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -170,20 +524,45 @@
                <string>YouTube</string>
               </property>
               <layout class="QFormLayout" name="formLayout_4">
-               <item row="0" column="0">
+               <item row="1" column="0">
                 <widget class="QLabel" name="label_8">
                  <property name="text">
                   <string>Key</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLineEdit" name="lineEdit_4"/>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_4">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="1" column="0">
-                <widget class="QPushButton" name="pushButton_4">
+               <item row="2" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_8">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_8">
+                   <property name="text">
+                    <string>Verify</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_17">
+                   <property name="text">
+                    <string>Add to DB</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_36">
                  <property name="text">
-                  <string>Verify</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://reaper.social&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;How do I get this?&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -196,30 +575,59 @@
                <string>Tumblr</string>
               </property>
               <layout class="QFormLayout" name="formLayout_6">
-               <item row="0" column="0">
+               <item row="1" column="0">
                 <widget class="QLabel" name="label_12">
                  <property name="text">
                   <string>Key</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_9">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_13">
                  <property name="text">
                   <string>Secret</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLineEdit" name="lineEdit_9"/>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="lineEdit_10">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="lineEdit_10"/>
+               <item row="3" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_9">
+                   <property name="text">
+                    <string>Verify</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_18">
+                   <property name="text">
+                    <string>Add to DB</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
-               <item row="2" column="0">
-                <widget class="QPushButton" name="pushButton_8">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_34">
                  <property name="text">
-                  <string>Verify</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://reaper.social&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;How do I get this?&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -232,30 +640,59 @@
                <string>LinkedIn</string>
               </property>
               <layout class="QFormLayout" name="formLayout_7">
-               <item row="0" column="0">
+               <item row="1" column="0">
                 <widget class="QLabel" name="label_17">
                  <property name="text">
                   <string>Client Id</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_11">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_18">
                  <property name="text">
                   <string>Client Secret</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLineEdit" name="lineEdit_11"/>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="lineEdit_12">
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="lineEdit_12"/>
+               <item row="3" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_10">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_19">
+                   <property name="text">
+                    <string>Verify</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_20">
+                   <property name="text">
+                    <string>Add to DB</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
-               <item row="2" column="0">
-                <widget class="QPushButton" name="pushButton_9">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_35">
                  <property name="text">
-                  <string>Verify</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://reaper.social&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;How do I get this?&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -269,14 +706,55 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <attribute name="title">
-        <string>Sources</string>
+        <string>2. Sources</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Select the source that you want to scrape from</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Double-click a node to see and select its edges</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::AutoText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QTabWidget" name="tabWidget_2">
+          <property name="tabPosition">
+           <enum>QTabWidget::North</enum>
+          </property>
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
           <property name="currentIndex">
            <number>0</number>
+          </property>
+          <property name="elideMode">
+           <enum>Qt::ElideNone</enum>
+          </property>
+          <property name="usesScrollButtons">
+           <bool>true</bool>
+          </property>
+          <property name="tabsClosable">
+           <bool>false</bool>
+          </property>
+          <property name="tabBarAutoHide">
+           <bool>false</bool>
           </property>
           <widget class="QWidget" name="tab_5">
            <attribute name="title">
@@ -285,99 +763,1016 @@
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
              <widget class="QStackedWidget" name="fb_stack">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="currentIndex">
                <number>0</number>
               </property>
               <widget class="QWidget" name="page_3">
                <layout class="QVBoxLayout" name="verticalLayout_5">
                 <item>
-                 <widget class="QLabel" name="label_14">
-                  <property name="text">
-                   <string>Select the source that you want to scrape from</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_15">
-                  <property name="text">
-                   <string>Double-click a node to see and select its edges</string>
-                  </property>
-                  <property name="textFormat">
-                   <enum>Qt::AutoText</enum>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QTreeWidget" name="treeWidget">
-                  <column>
-                   <property name="text">
-                    <string>Nodes</string>
-                   </property>
-                  </column>
+                 <layout class="QHBoxLayout" name="horizontalLayout_11">
                   <item>
-                   <property name="text">
-                    <string>Page</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>Posts</string>
-                    </property>
+                   <widget class="QTreeWidget" name="treeWidget">
+                    <column>
+                     <property name="text">
+                      <string>Nodes</string>
+                     </property>
+                    </column>
                     <item>
                      <property name="text">
-                      <string>Likes</string>
+                      <string>Page</string>
                      </property>
+                     <item>
+                      <property name="text">
+                       <string>Feed</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Attachments</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Posts</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Attachments</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Tagged</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Attachments</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Events</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Admins</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Attending</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Declined</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Feed</string>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Likes</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reactions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Comments</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>SharedPosts</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Attachments</string>
+                        </property>
+                       </item>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Interested</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Live_Videos</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Maybe</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>NoReply</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Photos</string>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Likes</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reactions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Comments</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>SharedPosts</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Sponsor_Tags</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Tags</string>
+                        </property>
+                       </item>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Picture</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Roles</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Videos</string>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Auto_generated_Captions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Captions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Comments</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Crosspost_Shared_Pages</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Likes</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reactions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>SharedPosts</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Sponsor_Tags</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Tags</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Thumbnails</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Insights</string>
+                        </property>
+                       </item>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Albums</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Picture</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Photos</string>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Likes</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reactions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Comments</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>SharedPosts</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Sponsor_Tags</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Tags</string>
+                        </property>
+                       </item>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Photos</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sponsor_Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Tags</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Videos</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Auto_generated_Captions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Captions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Crosspost_Shared_Pages</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sponsor_Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Thumbnails</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Insights</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Picture</string>
+                      </property>
+                     </item>
                     </item>
                     <item>
                      <property name="text">
-                      <string>Reactions</string>
+                      <string>Group</string>
                      </property>
+                     <item>
+                      <property name="text">
+                       <string>Admins</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Albums</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Picture</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Photos</string>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Likes</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reactions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Comments</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>SharedPosts</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Sponsor_Tags</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Tags</string>
+                        </property>
+                       </item>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Docs</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Events</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Admins</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Attending</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Declined</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Feed</string>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Likes</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reactions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Comments</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>SharedPosts</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Attachments</string>
+                        </property>
+                       </item>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Interested</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Live_Videos</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Maybe</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>NoReply</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Photos</string>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Likes</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reactions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Comments</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>SharedPosts</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>SponsorTags</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Tags</string>
+                        </property>
+                       </item>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Picture</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Roles</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Videos</string>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Likes</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reactions</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Comments</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>SharedPosts</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Tags</string>
+                        </property>
+                       </item>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Feed</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Shares</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Attachments</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Files</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Live_Videos</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Members</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Photos</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sponsor_Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Tags</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Videos</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Auto_generated_Captions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Captions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Crosspost_Shared_Pages</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sponsor_Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Thumbnails</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Insights</string>
+                       </property>
+                      </item>
+                     </item>
                     </item>
                     <item>
                      <property name="text">
-                      <string>Comments</string>
+                      <string>Event</string>
                      </property>
+                     <item>
+                      <property name="text">
+                       <string>Admins</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Attending</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Comments</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Declined</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Feed</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Attachments</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Interested</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Live_Videos</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Maybe</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>NoReply</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Photos</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sponsor_Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Tags</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Picture</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Roles</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Videos</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Auto_generated_Captions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Captions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Crosspost_Shared_Pages</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sponsor_Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Thumbnails</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Insights</string>
+                       </property>
+                      </item>
+                     </item>
                     </item>
                     <item>
                      <property name="text">
-                      <string>SharedPosts</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Attachments</string>
-                     </property>
-                    </item>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Events</string>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Admins</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Attending</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Comments</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Declined</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Feed</string>
+                      <string>Post</string>
                      </property>
                      <item>
                       <property name="text">
@@ -407,27 +1802,92 @@
                     </item>
                     <item>
                      <property name="text">
-                      <string>Interested</string>
+                      <string>Comment</string>
                      </property>
+                     <item>
+                      <property name="text">
+                       <string>Likes</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Reactions</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Comments</string>
+                      </property>
+                     </item>
                     </item>
                     <item>
                      <property name="text">
-                      <string>Live_Videos</string>
+                      <string>Album</string>
                      </property>
+                     <item>
+                      <property name="text">
+                       <string>Picture</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Photos</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>Likes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Reactions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Comments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SharedPosts</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sponsor_Tags</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Tags</string>
+                       </property>
+                      </item>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>SharedPosts</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Likes</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Reactions</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Comments</string>
+                      </property>
+                     </item>
                     </item>
                     <item>
                      <property name="text">
-                      <string>Maybe</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>NoReply</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Photos</string>
+                      <string>Photo</string>
                      </property>
                      <item>
                       <property name="text">
@@ -462,26 +1922,16 @@
                     </item>
                     <item>
                      <property name="text">
-                      <string>Picture</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Roles</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Videos</string>
+                      <string>Video</string>
                      </property>
                      <item>
                       <property name="text">
-                       <string>Likes</string>
+                       <string>Auto_generated_Captions</string>
                       </property>
                      </item>
                      <item>
                       <property name="text">
-                       <string>Reactions</string>
+                       <string>Captions</string>
                       </property>
                      </item>
                      <item>
@@ -491,29 +1941,9 @@
                      </item>
                      <item>
                       <property name="text">
-                       <string>SharedPosts</string>
+                       <string>Crosspost_Shared_Pages</string>
                       </property>
                      </item>
-                     <item>
-                      <property name="text">
-                       <string>Attachments</string>
-                      </property>
-                     </item>
-                    </item>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Albums</string>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Picture</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Photos</string>
-                     </property>
                      <item>
                       <property name="text">
                        <string>Likes</string>
@@ -522,11 +1952,6 @@
                      <item>
                       <property name="text">
                        <string>Reactions</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Comments</string>
                       </property>
                      </item>
                      <item>
@@ -544,389 +1969,153 @@
                        <string>Tags</string>
                       </property>
                      </item>
+                     <item>
+                      <property name="text">
+                       <string>Thumbnails</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Insights</string>
+                      </property>
+                     </item>
                     </item>
-                    <item>
-                     <property name="text">
-                      <string>SharedPosts</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Likes</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Reactions</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Comments</string>
-                     </property>
-                    </item>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Photos</string>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Likes</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Reactions</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Comments</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>SharedPosts</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Sponsor_Tags</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Tags</string>
-                     </property>
-                    </item>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Videos</string>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Likes</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Reactions</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Comments</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>SharedPosts</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Attachments</string>
-                     </property>
-                    </item>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Picture</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Misc. node</string>
-                    </property>
-                   </item>
+                   </widget>
                   </item>
                   <item>
-                   <property name="text">
-                    <string>Event</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>Admins</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Attending</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Comments</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Declined</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Feed</string>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Likes</string>
-                     </property>
+                   <layout class="QFormLayout" name="formLayout_9">
+                    <item row="1" column="0" colspan="2">
+                     <widget class="QGroupBox" name="groupBox_7">
+                      <property name="title">
+                       <string>Details</string>
+                      </property>
+                      <layout class="QFormLayout" name="formLayout_10">
+                       <item row="0" column="0">
+                        <widget class="QLabel" name="label_37">
+                         <property name="text">
+                          <string>Bla bla</string>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                      <zorder>label_37</zorder>
+                      <zorder>pushButton_21</zorder>
+                     </widget>
                     </item>
-                    <item>
-                     <property name="text">
-                      <string>Reactions</string>
-                     </property>
+                    <item row="5" column="0">
+                     <widget class="QPushButton" name="fb_next">
+                      <property name="text">
+                       <string>Next</string>
+                      </property>
+                     </widget>
                     </item>
-                    <item>
-                     <property name="text">
-                      <string>Comments</string>
-                     </property>
+                    <item row="2" column="0" colspan="2">
+                     <widget class="QGroupBox" name="groupBox_9">
+                      <property name="title">
+                       <string>API Reference</string>
+                      </property>
+                      <layout class="QFormLayout" name="formLayout_12">
+                       <item row="0" column="0" colspan="2">
+                        <widget class="QLabel" name="label_39">
+                         <property name="text">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://developers.facebook.com/docs/graph-api/reference/page/feed/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://developers.facebook.com/docs/graph-api/reference/page/feed/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>false</bool>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                         <property name="openExternalLinks">
+                          <bool>true</bool>
+                         </property>
+                         <property name="textInteractionFlags">
+                          <set>Qt::TextBrowserInteraction</set>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
                     </item>
-                    <item>
-                     <property name="text">
-                      <string>SharedPosts</string>
-                     </property>
+                    <item row="0" column="0" colspan="2">
+                     <widget class="QGroupBox" name="groupBox_8">
+                      <property name="title">
+                       <string>Text description</string>
+                      </property>
+                      <layout class="QFormLayout" name="formLayout_11">
+                       <item row="0" column="0">
+                        <widget class="QLabel" name="label_16">
+                         <property name="font">
+                          <font>
+                           <italic>true</italic>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>I want to scrape a Facebook X's Y's Zs</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
                     </item>
-                    <item>
-                     <property name="text">
-                      <string>Attachments</string>
-                     </property>
+                    <item row="3" column="0" colspan="2">
+                     <widget class="QGroupBox" name="groupBox_10">
+                      <property name="title">
+                       <string>SocialReaper function</string>
+                      </property>
+                      <layout class="QFormLayout" name="formLayout_13">
+                       <item row="0" column="0">
+                        <widget class="QLabel" name="label_40">
+                         <property name="font">
+                          <font>
+                           <family>Monospace</family>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Facebook().page_feed()</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
                     </item>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Interested</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Live_Videos</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Maybe</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>NoReply</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Photos</string>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Likes</string>
-                     </property>
+                    <item row="4" column="0" colspan="2">
+                     <widget class="QGroupBox" name="groupBox_11">
+                      <property name="title">
+                       <string>Fields</string>
+                      </property>
+                      <layout class="QFormLayout" name="formLayout_14">
+                       <item row="0" column="0">
+                        <widget class="QListWidget" name="listWidget">
+                         <property name="selectionMode">
+                          <enum>QAbstractItemView::NoSelection</enum>
+                         </property>
+                         <item>
+                          <property name="text">
+                           <string>id</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>message</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>from</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
                     </item>
-                    <item>
-                     <property name="text">
-                      <string>Reactions</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Comments</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>SharedPosts</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Sponsor_Tags</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Tags</string>
-                     </property>
-                    </item>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Picture</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Roles</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Videos</string>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Likes</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Reactions</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Comments</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>SharedPosts</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Attachments</string>
-                     </property>
-                    </item>
-                   </item>
+                   </layout>
                   </item>
-                  <item>
-                   <property name="text">
-                    <string>Post</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>Likes</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Reactions</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Comments</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>SharedPosts</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Attachments</string>
-                    </property>
-                   </item>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Comment</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>Likes</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Reactions</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Comments</string>
-                    </property>
-                   </item>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Album</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>Picture</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Photos</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>SharedPosts</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Likes</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Reactions</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Comments</string>
-                    </property>
-                   </item>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Photo</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>Likes</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Reactions</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Comments</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>SharedPosts</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Sponsor_Tags</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Tags</string>
-                    </property>
-                   </item>
-                  </item>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_16">
-                  <property name="text">
-                   <string>I want to scrape a Facebook X's Y's Zs</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="fb_next">
-                  <property name="text">
-                   <string>Next</string>
-                  </property>
-                 </widget>
+                 </layout>
                 </item>
                </layout>
               </widget>
@@ -944,6 +2133,106 @@
            <attribute name="title">
             <string>Reddit</string>
            </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_9">
+            <item>
+             <widget class="QLabel" name="label_30">
+              <property name="text">
+               <string>I want to scrape a Reddit X's Y's Z's</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTreeWidget" name="treeWidget_2">
+              <column>
+               <property name="text">
+                <string>Nodes</string>
+               </property>
+              </column>
+              <item>
+               <property name="text">
+                <string>User</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Posts</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Threads</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Comments</string>
+                </property>
+               </item>
+              </item>
+              <item>
+               <property name="text">
+                <string>Search</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Comments</string>
+                </property>
+               </item>
+              </item>
+              <item>
+               <property name="text">
+                <string>Thread</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Comments</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>User</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Posts</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Threads</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Comments</string>
+                 </property>
+                </item>
+               </item>
+              </item>
+              <item>
+               <property name="text">
+                <string>Subreddit</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Threads</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Comments</string>
+                 </property>
+                </item>
+               </item>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_13">
+              <property name="text">
+               <string>Next</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tab_8">
            <attribute name="title">
@@ -974,80 +2263,258 @@
             <string>LinkedIn</string>
            </attribute>
           </widget>
+          <widget class="QWidget" name="tab_13">
+           <attribute name="title">
+            <string>Meetup</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="tab_14">
+           <attribute name="title">
+            <string>Eventbrite</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="tab_15">
+           <attribute name="title">
+            <string>Pinterest</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="tab_16">
+           <attribute name="title">
+            <string>VK</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="tab_17">
+           <attribute name="title">
+            <string>Imgur</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="tab_18">
+           <attribute name="title">
+            <string>Twitch</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="tab_19">
+           <attribute name="title">
+            <string>DeviantArt</string>
+           </attribute>
+          </widget>
          </widget>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>Job Queue</string>
+        <string>3. Job Queue</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QTableWidget" name="tableWidget">
-          <property name="dragEnabled">
-           <bool>false</bool>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAsNeeded</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAsNeeded</enum>
+            </property>
+            <property name="showDropIndicator" stdset="0">
+             <bool>true</bool>
+            </property>
+            <property name="dragEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::NoDragDrop</enum>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="verticalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
+            <row>
+             <property name="text">
+              <string>Job 1</string>
+             </property>
+            </row>
+            <row>
+             <property name="text">
+              <string>Job 2</string>
+             </property>
+            </row>
+            <column>
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Status</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>File path</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Source</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Parameters</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>API Keys</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="queueTools">
+            <item>
+             <widget class="QToolButton" name="toolButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset theme="up">
+                <normaloff>.</normaloff>.</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="toolButton_2">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset theme="down">
+                <normaloff>.</normaloff>.</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="toolButton_3">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset theme="edit">
+                <normaloff>.</normaloff>.</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="toolButton_4">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset theme="remove">
+                <normaloff>.</normaloff>.</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_29">
+          <property name="text">
+           <string>Queue Controls</string>
           </property>
-          <property name="dragDropMode">
-           <enum>QAbstractItemView::NoDragDrop</enum>
-          </property>
-          <property name="alternatingRowColors">
-           <bool>true</bool>
-          </property>
-          <row>
-           <property name="text">
-            <string>Row 1</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Row 2</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>Name</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>File path</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Source</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Parameters</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>API Keys</string>
-           </property>
-          </column>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_5">
-          <property name="text">
-           <string>Save Queue</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="pushButton_6">
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_10">
+            <property name="text">
+             <string>Stop</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_11">
+            <property name="text">
+             <string>Clear</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="text">
+             <string>Save Queue to file</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
-        <string>Current Job</string>
+        <string>4. Current Job</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
@@ -1056,6 +2523,24 @@
            <string>Progress:</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QProgressBar" name="progressBar">
+            <property name="value">
+             <number>24</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>Pause</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QLabel" name="label_10">
@@ -1068,14 +2553,20 @@
          </widget>
         </item>
         <item>
-         <widget class="QProgressBar" name="progressBar">
-          <property name="value">
-           <number>24</number>
+         <widget class="QTableWidget" name="tableWidget_2">
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
          </widget>
-        </item>
-        <item>
-         <widget class="QTableWidget" name="tableWidget_2"/>
         </item>
         <item>
          <widget class="QLabel" name="label_21">
@@ -1090,7 +2581,7 @@
         <item>
          <widget class="QPushButton" name="pushButton_7">
           <property name="text">
-           <string>Save Progress</string>
+           <string>Save Progress to file</string>
           </property>
          </widget>
         </item>
@@ -1105,8 +2596,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1290</width>
-     <height>39</height>
+     <width>1142</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1117,9 +2608,18 @@
      <property name="title">
       <string>Open</string>
      </property>
+     <widget class="QMenu" name="menuBackups">
+      <property name="title">
+       <string>Backups</string>
+      </property>
+      <addaction name="actionQueue"/>
+      <addaction name="actionJob"/>
+     </widget>
      <addaction name="actionAPI_Key_file"/>
      <addaction name="actionJob_Queue"/>
      <addaction name="actionScraping_state"/>
+     <addaction name="separator"/>
+     <addaction name="menuBackups"/>
     </widget>
     <widget class="QMenu" name="menuSave">
      <property name="title">
@@ -1131,18 +2631,32 @@
     <addaction name="menuSave"/>
     <addaction name="separator"/>
     <addaction name="actionSettings"/>
+    <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
-    <addaction name="actionLicenses"/>
     <addaction name="actionHelp"/>
     <addaction name="actionReport_a_bug"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+    <addaction name="actionLicenses"/>
+    <addaction name="separator"/>
+    <addaction name="actionWebsite"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionHistory_2"/>
+    <addaction name="actionAPI_Key_Database"/>
+    <addaction name="separator"/>
+    <addaction name="actionAdvanced_mode"/>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuView"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -1163,7 +2677,7 @@
   </action>
   <action name="actionAbout">
    <property name="text">
-    <string>About</string>
+    <string>About Reaper</string>
    </property>
   </action>
   <action name="actionLicenses">
@@ -1194,6 +2708,58 @@
   <action name="actionReport_a_bug">
    <property name="text">
     <string>Report a bug</string>
+   </property>
+  </action>
+  <action name="actionScraping">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Scraping</string>
+   </property>
+  </action>
+  <action name="actionHistory">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>History</string>
+   </property>
+  </action>
+  <action name="actionHistory_2">
+   <property name="text">
+    <string>History</string>
+   </property>
+  </action>
+  <action name="actionAPI_Key_Database">
+   <property name="text">
+    <string>API Key Database</string>
+   </property>
+  </action>
+  <action name="actionAdvanced_mode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Advanced mode</string>
+   </property>
+  </action>
+  <action name="actionWebsite">
+   <property name="text">
+    <string>Website</string>
+   </property>
+  </action>
+  <action name="actionQueue">
+   <property name="text">
+    <string>Queue</string>
+   </property>
+  </action>
+  <action name="actionJob">
+   <property name="text">
+    <string>Job</string>
    </property>
   </action>
  </widget>

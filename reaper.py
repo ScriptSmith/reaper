@@ -45,8 +45,11 @@ class Reaper(Ui_MainWindow):
             window.show()
 
         self.setupUi(window)
+
+        self.wdg = QtWidgets.QWidget()
         post = Facebook_Post.Ui_Form()
-        post.setupUi(self.page_4)
+        post.setupUi(self.wdg)
+        self.wdg.show()
 
         self.add_actions()
 
