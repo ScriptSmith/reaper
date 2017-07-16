@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1142</width>
-    <height>785</height>
+    <width>818</width>
+    <height>671</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -30,7 +30,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_12">
        <property name="enabled">
@@ -292,7 +292,7 @@ background-color: transparent; /*or a colour*/
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1086</width>
+             <width>762</width>
              <height>990</height>
             </rect>
            </property>
@@ -787,36 +787,6 @@ background-color: transparent; /*or a colour*/
                      <item>
                       <property name="text">
                        <string>Feed</string>
-                      </property>
-                      <item>
-                       <property name="text">
-                        <string>Likes</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>Reactions</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>Comments</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>SharedPosts</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>Attachments</string>
-                       </property>
-                      </item>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Posts</string>
                       </property>
                       <item>
                        <property name="text">
@@ -1983,137 +1953,155 @@ background-color: transparent; /*or a colour*/
                    </widget>
                   </item>
                   <item>
-                   <layout class="QFormLayout" name="formLayout_9">
-                    <item row="1" column="0" colspan="2">
-                     <widget class="QGroupBox" name="groupBox_7">
-                      <property name="title">
-                       <string>Details</string>
-                      </property>
-                      <layout class="QFormLayout" name="formLayout_10">
-                       <item row="0" column="0">
-                        <widget class="QLabel" name="label_37">
-                         <property name="text">
-                          <string>Bla bla</string>
-                         </property>
-                         <property name="wordWrap">
-                          <bool>true</bool>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                      <zorder>label_37</zorder>
-                      <zorder>pushButton_21</zorder>
-                     </widget>
-                    </item>
-                    <item row="5" column="0">
-                     <widget class="QPushButton" name="fb_next">
-                      <property name="text">
-                       <string>Next</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="0" colspan="2">
-                     <widget class="QGroupBox" name="groupBox_9">
-                      <property name="title">
-                       <string>API Reference</string>
-                      </property>
-                      <layout class="QFormLayout" name="formLayout_12">
-                       <item row="0" column="0" colspan="2">
-                        <widget class="QLabel" name="label_39">
-                         <property name="text">
-                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://developers.facebook.com/docs/graph-api/reference/page/feed/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://developers.facebook.com/docs/graph-api/reference/page/feed/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                         </property>
-                         <property name="scaledContents">
-                          <bool>false</bool>
-                         </property>
-                         <property name="wordWrap">
-                          <bool>true</bool>
-                         </property>
-                         <property name="openExternalLinks">
-                          <bool>true</bool>
-                         </property>
-                         <property name="textInteractionFlags">
-                          <set>Qt::TextBrowserInteraction</set>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item row="0" column="0" colspan="2">
-                     <widget class="QGroupBox" name="groupBox_8">
-                      <property name="title">
-                       <string>Text description</string>
-                      </property>
-                      <layout class="QFormLayout" name="formLayout_11">
-                       <item row="0" column="0">
-                        <widget class="QLabel" name="label_16">
-                         <property name="font">
-                          <font>
-                           <italic>true</italic>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>I want to scrape a Facebook X's Y's Zs</string>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item row="3" column="0" colspan="2">
-                     <widget class="QGroupBox" name="groupBox_10">
-                      <property name="title">
-                       <string>SocialReaper function</string>
-                      </property>
-                      <layout class="QFormLayout" name="formLayout_13">
-                       <item row="0" column="0">
-                        <widget class="QLabel" name="label_40">
-                         <property name="font">
-                          <font>
-                           <family>Monospace</family>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Facebook().page_feed()</string>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item row="4" column="0" colspan="2">
-                     <widget class="QGroupBox" name="groupBox_11">
-                      <property name="title">
-                       <string>Fields</string>
-                      </property>
-                      <layout class="QFormLayout" name="formLayout_14">
-                       <item row="0" column="0">
-                        <widget class="QListWidget" name="listWidget">
-                         <property name="selectionMode">
-                          <enum>QAbstractItemView::NoSelection</enum>
-                         </property>
-                         <item>
-                          <property name="text">
-                           <string>id</string>
-                          </property>
+                   <widget class="QScrollArea" name="scrollArea_2">
+                    <property name="styleSheet">
+                     <string notr="true">background: transparent;</string>
+                    </property>
+                    <property name="widgetResizable">
+                     <bool>true</bool>
+                    </property>
+                    <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>345</width>
+                       <height>540</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: transparent;</string>
+                     </property>
+                     <layout class="QFormLayout" name="formLayout_8">
+                      <item row="0" column="0" colspan="2">
+                       <widget class="QGroupBox" name="groupBox_8">
+                        <property name="title">
+                         <string>Text description</string>
+                        </property>
+                        <layout class="QFormLayout" name="formLayout_11">
+                         <item row="0" column="0" colspan="2">
+                          <widget class="QLabel" name="label_16">
+                           <property name="font">
+                            <font>
+                             <italic>true</italic>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>I want to scrape a Facebook X's Y's Zs</string>
+                           </property>
+                           <property name="wordWrap">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
                          </item>
-                         <item>
-                          <property name="text">
-                           <string>message</string>
-                          </property>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item row="1" column="0" colspan="2">
+                       <widget class="QGroupBox" name="groupBox_7">
+                        <property name="title">
+                         <string>Details</string>
+                        </property>
+                        <layout class="QFormLayout" name="formLayout_10">
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="label_37">
+                           <property name="text">
+                            <string>Bla bla</string>
+                           </property>
+                           <property name="wordWrap">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
                          </item>
-                         <item>
-                          <property name="text">
-                           <string>from</string>
-                          </property>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item row="2" column="0" colspan="2">
+                       <widget class="QGroupBox" name="groupBox_9">
+                        <property name="title">
+                         <string>API Reference</string>
+                        </property>
+                        <layout class="QFormLayout" name="formLayout_12">
+                         <item row="0" column="0" colspan="2">
+                          <widget class="QLabel" name="label_39">
+                           <property name="text">
+                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://developers.facebook.com/docs/graph-api/reference/page/feed/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://developers.facebook.com/docs/graph-api/reference/page/feed/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                           </property>
+                           <property name="scaledContents">
+                            <bool>false</bool>
+                           </property>
+                           <property name="wordWrap">
+                            <bool>true</bool>
+                           </property>
+                           <property name="openExternalLinks">
+                            <bool>true</bool>
+                           </property>
+                           <property name="textInteractionFlags">
+                            <set>Qt::TextBrowserInteraction</set>
+                           </property>
+                          </widget>
                          </item>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                   </layout>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item row="3" column="0" colspan="2">
+                       <widget class="QGroupBox" name="groupBox_10">
+                        <property name="title">
+                         <string>SocialReaper function</string>
+                        </property>
+                        <layout class="QFormLayout" name="formLayout_13">
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="label_40">
+                           <property name="font">
+                            <font>
+                             <family>Monospace</family>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>Facebook().page_feed()</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item row="4" column="0" colspan="2">
+                       <widget class="QGroupBox" name="groupBox_11">
+                        <property name="title">
+                         <string>Fields</string>
+                        </property>
+                        <layout class="QVBoxLayout" name="verticalLayout_12">
+                         <item>
+                          <widget class="QListWidget" name="listWidget">
+                           <property name="selectionMode">
+                            <enum>QAbstractItemView::NoSelection</enum>
+                           </property>
+                           <item>
+                            <property name="text">
+                             <string>id</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>message</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>from</string>
+                            </property>
+                           </item>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QFormLayout" name="formLayout_9"/>
                   </item>
                  </layout>
                 </item>
@@ -2258,6 +2246,11 @@ background-color: transparent; /*or a colour*/
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="tab_20">
+           <attribute name="title">
+            <string>HackerNews</string>
+           </attribute>
+          </widget>
           <widget class="QWidget" name="tab_11">
            <attribute name="title">
             <string>LinkedIn</string>
@@ -2299,6 +2292,30 @@ background-color: transparent; /*or a colour*/
            </attribute>
           </widget>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <item>
+           <widget class="QPushButton" name="pushButton_12">
+            <property name="text">
+             <string>Next</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -2569,21 +2586,38 @@ background-color: transparent; /*or a colour*/
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_21">
-          <property name="text">
-           <string>Note: Only a subset of the downloading data is displayed</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_7">
-          <property name="text">
-           <string>Save Progress to file</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <item>
+           <widget class="QPushButton" name="pushButton_7">
+            <property name="text">
+             <string>Save Progress to file</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>Note: Only a subset of the downloading data is displayed</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -2596,7 +2630,7 @@ background-color: transparent; /*or a colour*/
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1142</width>
+     <width>818</width>
      <height>22</height>
     </rect>
    </property>

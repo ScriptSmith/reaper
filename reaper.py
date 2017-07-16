@@ -24,7 +24,7 @@ import tempfile
 import os
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMessageBox, QSizePolicy
+from PyQt5.QtWidgets import QMessageBox, QSizePolicy, QStyleFactory
 from PyQt5.QtCore import QThread, pyqtSignal, QUrl, Qt
 from PyQt5.QtGui import QDesktopServices, QTextCursor, QIcon
 
@@ -60,7 +60,8 @@ class Reaper(Ui_MainWindow):
         self.fb_stack_jump(1)
 
     def add_actions(self):
-        self.fb_next.clicked.connect(self.fb_next_stack)
+        # self.fb_next.clicked.connect(self.fb_next_stack)
+        pass
     
 
 if __name__ == "__main__":

@@ -1,0 +1,376 @@
+<source>
+    <Facebook>
+        <nodes>
+            <Page>
+                <nodes>
+                    <Feed>
+                        <nodes>
+                            <Likes>
+                                <description>
+                                    I want to scrape a Facebook Page's Feed's Likes
+                                </description>
+                                <details>
+
+                                </details>
+                                <reference>
+
+                                </reference>
+                                <function>
+                                    page_feed_likes
+                                </function>
+                                <input>
+                                    <identifier required="true">
+                                        Page id
+                                    </identifier>
+                                    <advanced>
+                                        <fields>
+                                            <field>can_post</field>
+                                            <field>id</field>
+                                            <field>link</field>
+                                            <field>name</field>
+                                            <field>pic</field>
+                                            <field>pic_crop</field>
+                                            <field>pic_large</field>
+                                            <field>pic_small</field>
+                                            <field>pic_square</field>
+                                            <field>profile_type</field>
+                                            <field>username</field>
+                                            <field>picture</field>
+                                        </fields>
+                                        <counter default="all">
+                                            Number of posts
+                                        </counter>
+                                        <counter default="all">
+                                            Number of likes per post
+                                        </counter>
+                                    </advanced>
+                                </input>
+                            </Likes>
+                            <Reactions>
+                                <description>
+                                    I want to scrape a Facebook Page's Feed's Reactions
+                                </description>
+                                <details>
+
+                                </details>
+                                <reference>
+
+                                </reference>
+                                <function>
+                                    page_feed_reactions
+                                </function>
+                                <input>
+                                    <identifier required="true">
+                                        Page id
+                                    </identifier>
+                                    <advanced>
+                                        <fields>
+                                            <field>can_post</field>
+                                            <field>id</field>
+                                            <field>link</field>
+                                            <field>name</field>
+                                            <field>pic</field>
+                                            <field>pic_crop</field>
+                                            <field>pic_large</field>
+                                            <field>pic_small</field>
+                                            <field>pic_square</field>
+                                            <field>profile_type</field>
+                                            <field>username</field>
+                                            <field>picture</field>
+                                            <field>type</field>
+                                        </fields>
+                                        <counter default="all">
+                                            Number of posts
+                                        </counter>
+                                        <counter default="all">
+                                            Number of reactions per post
+                                        </counter>
+                                    </advanced>
+                                </input>
+                            </Reactions>
+                            <Comments>
+                                <description>
+                                    I want to scrape a Facebook Page's Feed's Comments
+                                </description>
+                                <details>
+
+                                </details>
+                                <reference>
+
+                                </reference>
+                                <function>
+                                    page_feed_comments
+                                </function>
+                                <input>
+                                    <identifier required="true">
+                                        Page id
+                                    </identifier>
+                                    <advanced>
+                                        <fields>
+                                            <field>admin_creator</field>
+                                            <field>application</field>
+                                            <field>attachment</field>
+                                            <field>can_comment</field>
+                                            <field>can_hide</field>
+                                            <field>can_like</field>
+                                            <field>can_remove</field>
+                                            <field>can_reply_privately</field>
+                                            <field>comment_count</field>
+                                            <field>created_time</field>
+                                            <field>from</field>
+                                            <field>id</field>
+                                            <field>is_hidden</field>
+                                            <field>is_private</field>
+                                            <field>like_count</field>
+                                            <field>live_broadcast_timestamp</field>
+                                            <field>message</field>
+                                            <field>message_tags</field>
+                                            <field>object</field>
+                                            <field>parent</field>
+                                            <field>permalink_url</field>
+                                            <field>private_reply_conversation</field>
+                                            <field>user_likes</field>
+                                        </fields>
+                                        <counter default="all">
+                                            Number of posts
+                                        </counter>
+                                        <counter default="all">
+                                            Number of comments per post
+                                        </counter>
+                                    </advanced>
+                                </input>
+                            </Comments>
+                            <Sharedposts>
+                                <description>
+                                    I want to scrape a Facebook Page's Feed's Sharedposts
+                                </description>
+                                <details>
+
+                                </details>
+                                <reference>
+
+                                </reference>
+                                <function>
+                                    page_feed_sharedposts
+                                </function>
+                                <input>
+                                    <identifier required="true">
+                                        Page id
+                                    </identifier>
+                                    <advanced>
+                                        <fields>
+                                            <field>actions</field>
+                                            <field>admin_creator</field>
+                                            <field>allowed_advertising_objectives</field>
+                                            <field>application</field>
+                                            <field>backdated_time</field>
+                                            <field>call_to_action</field>
+                                            <field>caption</field>
+                                            <field>child_attachments</field>
+                                            <field>comments_mirroring_domain</field>
+                                            <field>coordinates</field>
+                                            <field>created_time</field>
+                                            <field>description</field>
+                                            <field>event</field>
+                                            <field>expanded_height</field>
+                                            <field>expanded_width</field>
+                                            <field>feed_targeting</field>
+                                            <field>from</field>
+                                            <field>full_picture</field>
+                                            <field>height</field>
+                                            <field>icon</field>
+                                            <field>id</field>
+                                            <field>instagram_eligibility</field>
+                                            <field>is_app_share</field>
+                                            <field>is_expired</field>
+                                            <field>is_hidden</field>
+                                            <field>is_instagram_eligible</field>
+                                            <field>is_popular</field>
+                                            <field>is_published</field>
+                                            <field>is_spherical</field>
+                                            <field>link</field>
+                                            <field>message</field>
+                                            <field>message_tags</field>
+                                            <field>multi_share_end_card</field>
+                                            <field>multi_share_optimized</field>
+                                            <field>name</field>
+                                            <field>object_id</field>
+                                            <field>parent_id</field>
+                                            <field>picture</field>
+                                            <field>place</field>
+                                            <field>privacy</field>
+                                            <field>promotable_id</field>
+                                            <field>promotion_status</field>
+                                            <field>properties</field>
+                                            <field>scheduled_publish_time</field>
+                                            <field>shares</field>
+                                            <field>source</field>
+                                            <field>status_type</field>
+                                            <field>story</field>
+                                            <field>story_tags</field>
+                                            <field>subscribed</field>
+                                            <field>target</field>
+                                            <field>targeting</field>
+                                            <field>timeline_visibility</field>
+                                            <field>type</field>
+                                            <field>updated_time</field>
+                                            <field>via</field>
+                                            <field>width</field>
+                                        </fields>
+                                        <counter default="all">
+                                            Number of posts
+                                        </counter>
+                                        <counter default="all">
+                                            Number of shared posts per post
+                                        </counter>
+                                    </advanced>
+                                </input>
+                            </Sharedposts>
+                            <Attachments>
+                                <description>
+                                    I want to scrape a Facebook Page's Feed's Attachments
+                                </description>
+                                <details>
+
+                                </details>
+                                <reference>
+
+                                </reference>
+                                <function>
+                                    page_feed_attachments
+                                </function>
+                                <input>
+                                    <identifier required="true">
+                                        Page id
+                                    </identifier>
+                                    <advanced>
+                                        <fields>
+                                            <field>description</field>
+                                            <field>description_tags</field>
+                                            <field>media</field>
+                                            <field>target</field>
+                                            <field>title</field>
+                                            <field>type</field>
+                                            <field>url</field>
+                                            <field>subattachments</field>
+                                        </fields>
+                                        <counter default="all">
+                                            Number of posts
+                                        </counter>
+                                        <counter default="all">
+                                            Number of attachments per post
+                                        </counter>
+                                    </advanced>
+                                </input>
+                            </Attachments>
+                        </nodes>
+                    </Feed>
+                    <Tagged>
+                        <nodes>
+
+                        </nodes>
+                    </Tagged>
+                    <Events>
+                        <nodes>
+
+                        </nodes>
+                    </Events>
+                    <Albums>
+                        <nodes>
+
+                        </nodes>
+                    </Albums>
+                    <Photos>
+                        <nodes>
+
+                        </nodes>
+                    </Photos>
+                    <Videos>
+                        <nodes>
+
+                        </nodes>
+                    </Videos>
+                    <Picture>
+                        <nodes>
+
+                        </nodes>
+                    </Picture>
+                </nodes>
+            </Page>
+            <Group>
+                <nodes>
+
+                </nodes>
+            </Group>
+            <Event>
+                <nodes>
+
+                </nodes>
+            </Event>
+            <Post>
+                <nodes>
+
+                </nodes>
+            </Post>
+            <Comment>
+                <nodes>
+
+                </nodes>
+            </Comment>
+            <Album>
+                <nodes>
+
+                </nodes>
+            </Album>
+            <Photo>
+                <nodes>
+
+                </nodes>
+            </Photo>
+            <Video>
+                <nodes>
+
+                </nodes>
+            </Video>
+        </nodes>
+    </Facebook>
+    <Twitter>
+
+    </Twitter>
+    <Reddit>
+
+    </Reddit>
+    <Youtube>
+
+    </Youtube>
+    <Tumblr>
+
+    </Tumblr>
+    <Instagram>
+
+    </Instagram>
+    <Linkedin>
+
+    </Linkedin>
+    <Meetup>
+
+    </Meetup>
+    <Eventbrite>
+
+    </Eventbrite>
+    <Pinterest>
+
+    </Pinterest>
+    <Vk>
+
+    </Vk>
+    <Imgur>
+
+    </Imgur>
+    <Twitch>
+
+    </Twitch>
+    <Deviantart>
+
+    </Deviantart>
+</source>
