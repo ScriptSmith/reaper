@@ -41,7 +41,9 @@ def build(window):
 
         # Add source nodes to sourceTree and sourceDescription
         add_nodes(sourceName, source, sourceTree, sourceDescription)
-        sourceTree.topLevelItem(0).setSelected(True)
+        top_item = sourceTree.topLevelItem(0)
+        if top_item:
+            top_item.setSelected(True)
 
 
 def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescription="", level=0):
@@ -103,7 +105,7 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
             treeItem.hierarchy = treeWidget.hierarchy + " → " + name
             modifier = "'s" if textDescription[-1] != 's' else "'"
             textDescription = "{}{} {}".format(textDescription, modifier, name)
-        textContent = "I want to scrape a {}".format(textDescription)
+        textContent = "I want to scrape a {} {}".format(sourceName, textDescription)
 
         # Add title
         title = QtWidgets.QLabel(treeItem.hierarchy)
