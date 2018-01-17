@@ -28,8 +28,14 @@ from PyQt5.QtWidgets import QMessageBox, QSizePolicy, QStyleFactory
 from PyQt5.QtCore import QThread, pyqtSignal, QUrl, Qt
 from PyQt5.QtGui import QDesktopServices, QTextCursor, QIcon
 
+import qdarkstyle
+
 from mainwindow import Ui_MainWindow
 from components.facebook import post as Facebook_Post
+
+from build_sources import build
+
+from socialreaper import Facebook
 
 
 class Reaper(Ui_MainWindow):
@@ -46,12 +52,15 @@ class Reaper(Ui_MainWindow):
 
         self.setupUi(window)
 
-        self.wdg = QtWidgets.QWidget()
-        post = Facebook_Post.Ui_Form()
-        post.setupUi(self.wdg)
-        self.wdg.show()
+        # self.wdg = QtWidgets.QWidget()
+        # post = Facebook_Post.Ui_Form()
+        # post.setupUi(self.wdg)
+        # self.wdg.show()
 
         self.add_actions()
+
+        build(self)
+
 
     def fb_stack_jump(self, i):
         self.fb_stack.setCurrentIndex(i)
@@ -62,10 +71,14 @@ class Reaper(Ui_MainWindow):
     def add_actions(self):
         # self.fb_next.clicked.connect(self.fb_next_stack)
         pass
-    
+
+    def crap(self):
+        self.pageTab.setLayout(QtWidgets.QVBoxLayout())
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    # app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     main_window = QtWidgets.QMainWindow()
     ui = Reaper(main_window)
     sys.exit(app.exec_())

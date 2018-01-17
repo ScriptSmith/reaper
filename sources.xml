@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE sources [
+        <!ELEMENT sources (source+)>
+        <!ELEMENT source (name,children+)>
+        <!ELEMENT name (#PCDATA)>
+        <!ELEMENT children (node*)>
+        <!ELEMENT node (name,function,inputs,children+)>
+        <!ELEMENT inputs (input+)>
+        <!ELEMENT input (name,type)>
+        <!ELEMENT type (#PCDATA)>
+        <!ELEMENT function (#PCDATA)>
+        ]>
+<sources>
+    <source>
+        <name>Facebook</name>
+        <children>
+            <node>
+                <name>Page</name>
+                <function>page</function>
+                <inputs>
+                    <input>
+                        <name>Page id</name>
+                        <type>text</type>
+                    </input>
+                </inputs>
+                <children>
+                    <node>
+                        <name>Feed</name>
+                        <function>page_feed</function>
+                        <inputs>
+                            <input>
+                                <name>Page id</name>
+                                <type>text</type>
+                            </input>
+                        </inputs>
+                        <children>
+                            <node>
+                                <name>Comments</name>
+                                <function>page_feed_comments</function>
+                                <inputs>
+                                    <input>
+                                        <name>Page id</name>
+                                        <type>text</type>
+                                    </input>
+                                </inputs>
+                                <children></children>
+                            </node>
+                        </children>
+                    </node>
+                </children>
+            </node>
+            <node>
+                <name>Post</name>
+                <function>post</function>
+                <inputs>
+                    <input>
+                        <name>Post id</name>
+                        <type>text</type>
+                    </input>
+                </inputs>
+                <children></children>
+            </node>
+        </children>
+    </source>
+</sources>
