@@ -84,13 +84,8 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
         # Create page description
         pageStack = QtWidgets.QWidget(sourceDescription)
         pageStack.layout = QtWidgets.QVBoxLayout()
+        pageStack.layout.setContentsMargins(0,0,0,0)
         pageStack.setLayout(pageStack.layout)
-
-        # Add title
-        # title = QtWidgets.QLabel(name)
-        # title.setStyleSheet("font-weight: bold;")
-        # pageStack.layout.addWidget(title)
-
 
         pageScroll = QtWidgets.QScrollArea(sourceDescription)
         pageScroll.setWidgetResizable(True)
@@ -99,7 +94,7 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
 
 
         pageDescription = QtWidgets.QWidget(pageStack)
-        pageDescription.layout = QtWidgets.QVBoxLayout()
+        pageDescription.layout = QtWidgets.QFormLayout()
         pageDescription.setLayout(pageDescription.layout)
         pageDescription.sizePolicy().setHorizontalPolicy(QtWidgets.QSizePolicy.Minimum)
         # pageDescription.setGeometry(QtCore.QRect(0, 0, 484, 461))
@@ -122,13 +117,21 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
         text.layout = QtWidgets.QFormLayout()
         text.setLayout(text.layout)
 
-        # Create the text
+        # Create the description text and title
         if level == 1:
+            treeItem.hierarchy = name
             textDescription = name
         else:
+            treeItem.hierarchy = treeWidget.hierarchy + " → " + name
             modifier = "'s" if textDescription[-1] != 's' else "'"
             textDescription = "{}{} {}".format(textDescription, modifier, name)
         textContent = "I want to scrape a {}".format(textDescription)
+
+        # Add title
+        title = QtWidgets.QLabel(name)
+        title.setStyleSheet("font-weight: bold;")
+        title.setText(treeItem.hierarchy)
+        pageDescription.layout.addWidget(title)
 
         # Add text to layout
         text.layout.addWidget(QtWidgets.QLabel(textContent))
