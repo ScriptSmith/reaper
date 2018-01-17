@@ -742,7 +742,7 @@ background-color: transparent; /*or a colour*/
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>-1</number>
           </property>
           <property name="elideMode">
            <enum>Qt::ElideNone</enum>
@@ -756,64 +756,6 @@ background-color: transparent; /*or a colour*/
           <property name="tabBarAutoHide">
            <bool>false</bool>
           </property>
-          <widget class="QWidget" name="tab_5">
-           <attribute name="title">
-            <string>Page</string>
-           </attribute>
-           <layout class="QHBoxLayout" name="horizontalLayout_15">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_11">
-              <item>
-               <widget class="QTreeWidget" name="treeWidget">
-                <column>
-                 <property name="text">
-                  <string notr="true">1</string>
-                 </property>
-                </column>
-               </widget>
-              </item>
-              <item>
-               <widget class="QStackedWidget" name="stackedWidget">
-                <property name="currentIndex">
-                 <number>0</number>
-                </property>
-                <widget class="QWidget" name="page">
-                 <layout class="QVBoxLayout" name="verticalLayout_4">
-                  <item>
-                   <widget class="QScrollArea" name="scrollArea_2">
-                    <property name="widgetResizable">
-                     <bool>true</bool>
-                    </property>
-                    <widget class="QWidget" name="scrollAreaWidgetContents_3">
-                     <property name="geometry">
-                      <rect>
-                       <x>0</x>
-                       <y>0</y>
-                       <width>484</width>
-                       <height>461</height>
-                      </rect>
-                     </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_5">
-                      <item>
-                       <widget class="QPushButton" name="pushButton_23">
-                        <property name="text">
-                         <string>PushButton</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </widget>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-                <widget class="QWidget" name="page_2"/>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
          </widget>
         </item>
         <item>

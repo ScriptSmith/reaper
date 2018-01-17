@@ -2,10 +2,9 @@ import xml.etree.ElementTree as ET
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 def tree_handler(item, column_no):
-    # items = item.tree.findItems(None, QtCore.Qt.MatchRecursive, QtCore.Qt.MatchWildcard)
     item.sourceDescription.setCurrentIndex(item.pageIndex)
-    print(f"{item} {item.pageIndex}")
 
 
 def build(window):
@@ -27,7 +26,6 @@ def build(window):
         sourceTree.setHeaderLabel("Nodes")
         sourcePage.layout.addWidget(sourceTree)
 
-
         # Add signals to tree
         sourceTree.itemClicked.connect(tree_handler)
 
@@ -37,23 +35,13 @@ def build(window):
         sourceDescription.setLayout(sourceDescription.layout)
         sourcePage.layout.addWidget(sourceDescription)
 
-        # Create small scroll
-        # scrollArea = QtWidgets.QScrollArea()
-        # scrollArea.setWidgetResizable(True)
-        # scrollWidget = QtWidgets.QWidget()
-        # scrollWidget.layout = QtWidgets.QVBoxLayout()
-        # scrollWidget.setLayout(scrollWidget.layout)
-        # for _ in range(15):
-        #     scrollWidget.layout.addWidget(QtWidgets.QPushButton("Hi"))
-
-        # scrollArea.setWidget(scrollWidget)
-        # sourceDescription.layout.addWidget(scrollWidget)
-
+        # Define global pageIndex counter that maps tree items to stack indexes
         global pageIndex
         pageIndex = 0
+
+        # Add source nodes to sourceTree and sourceDescription
         add_nodes(sourceName, source, sourceTree, sourceDescription)
         sourceTree.topLevelItem(0).setSelected(True)
-        print(pageIndex)
 
 
 def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescription="", level=0):
@@ -73,43 +61,33 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
         treeItem.sourceDescription = sourceDescription
         treeItem.setText(0, name)
 
-        treeItem.parent = treeWidget
+        # Assign treeItem a pageIndex
         treeItem.pageIndex = pageIndex
         pageIndex += 1
+
+        # Add treeItem to tree hierarchy
         if type(treeWidget) == QtWidgets.QTreeWidget:
             treeWidget.addTopLevelItem(treeItem)
         else:
             treeWidget.addChild(treeItem)
 
-        # Create page description
+        # Create description stack page
         pageStack = QtWidgets.QWidget(sourceDescription)
         pageStack.layout = QtWidgets.QVBoxLayout()
-        pageStack.layout.setContentsMargins(0,0,0,0)
+        pageStack.layout.setContentsMargins(0, 0, 0, 0)
         pageStack.setLayout(pageStack.layout)
 
+        # Create a scroll area
         pageScroll = QtWidgets.QScrollArea(sourceDescription)
         pageScroll.setWidgetResizable(True)
         pageScroll.setBackgroundRole(QtGui.QPalette.Light)
-        # pageStack.setMinimumWidth(100)
 
-
+        # Create a widget that scrolls
         pageDescription = QtWidgets.QWidget(pageStack)
         pageDescription.layout = QtWidgets.QFormLayout()
         pageDescription.setLayout(pageDescription.layout)
-        pageDescription.sizePolicy().setHorizontalPolicy(QtWidgets.QSizePolicy.Minimum)
-        # pageDescription.setGeometry(QtCore.QRect(0, 0, 484, 461))
-        # pageDescription.sizePolicy().setHorizontalPolicy(QtWidgets.QSizePolicy.Maximum)
-        # pageStack.setFixedWidth(400)
-        # pageScroll.setMinimumSize(400,400)
-        # pageDescription.setFixedWidth(400)
-        # sourceDescription.setFixedWidth(400)
         pageStack.layout.addWidget(pageDescription)
         pageStack.layout.addWidget(pageScroll)
-
-        # for _ in range(10):
-        #     pageDescription.layout.addWidget(QtWidgets.QLabel("hello"))
-
-        # pageScroll.setHorizontalScrollPolicy(QtCore.Qt.ScrollBarAlwaysOff)
 
         # Create text description box
         text = QtWidgets.QGroupBox()
@@ -128,9 +106,8 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
         textContent = "I want to scrape a {}".format(textDescription)
 
         # Add title
-        title = QtWidgets.QLabel(name)
+        title = QtWidgets.QLabel(treeItem.hierarchy)
         title.setStyleSheet("font-weight: bold;")
-        title.setText(treeItem.hierarchy)
         pageDescription.layout.addWidget(title)
 
         # Add text to layout
@@ -150,20 +127,6 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
         pageScroll.setWidget(pageDescription)
         sourceDescription.addWidget(pageStack)
         sourceDescription.setCurrentIndex(0)
-        print(sourceDescription.count())
 
         # Recurse through children
         add_nodes(sourceName, node, treeItem, sourceDescription, textDescription, level)
-
-
-class SourceInput(QtWidgets.QWidget):
-    def __init__(self, parent=None):
-        super(SourceInput, self).__init__(parent)
-
-        self.pushButton = QtWidgets.QPushButton('Hello')
-        self.pushButton2 = QtWidgets.QPushButton('Hello2')
-
-        self.the_layout = QtWidgets.QGridLayout()
-        self.the_layout.addWidget(self.pushButton)
-        self.the_layout.addWidget(self.pushButton2)
-        self.setLayout(self.the_layout)
