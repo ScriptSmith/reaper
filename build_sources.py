@@ -2,6 +2,8 @@ import xml.etree.ElementTree as ET
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from socialreaper import Facebook
+
 
 def tree_handler(item, column_no):
     item.sourceDescription.setCurrentIndex(item.pageIndex)
@@ -57,6 +59,7 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
         # Define node information
         name = node.find('name').text
         functionName = node.find('function').text
+        inputs = node.find('inputs')
 
         # Add item to tree
         treeItem = QtWidgets.QTreeWidgetItem(treeWidget)
@@ -92,10 +95,9 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
         pageStack.layout.addWidget(pageScroll)
 
         # Create text description box
-        text = QtWidgets.QGroupBox()
-        text.setTitle("Text description")
-        text.layout = QtWidgets.QFormLayout()
-        text.setLayout(text.layout)
+        textBox = QtWidgets.QGroupBox("Text description")
+        textBox.layout = QtWidgets.QFormLayout()
+        textBox.setLayout(textBox.layout)
 
         # Create the description text and title
         if level == 1:
@@ -113,17 +115,51 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
         pageDescription.layout.addWidget(title)
 
         # Add text to layout
-        text.layout.addWidget(QtWidgets.QLabel(textContent))
-        pageDescription.layout.addWidget(text)
+        textContentLabel = QtWidgets.QLabel(textContent)
+        textContentLabel.setWordWrap(True)
+        textContentLabel.setStyleSheet("font-style: italic;")
+        textBox.layout.addWidget(textContentLabel)
+        pageDescription.layout.addWidget(textBox)
 
         # Create socialreaper box
-        srFunction = QtWidgets.QGroupBox()
-        srFunction.setTitle("Social Reaper function")
+        srFunction = QtWidgets.QGroupBox("Social Reaper function")
         srFunction.layout = QtWidgets.QFormLayout()
         srFunction.setLayout(srFunction.layout)
         srFunctionText = "{}().{}()".format(sourceName, functionName)
         srFunction.layout.addWidget(QtWidgets.QLabel(srFunctionText))
         pageDescription.layout.addWidget(srFunction)
+
+        # Add inputs
+        inputBox = QtWidgets.QGroupBox("Input")
+        inputBox.layout = QtWidgets.QFormLayout()
+        inputBox.setLayout(inputBox.layout)
+
+        for input in inputs.findall('input'):
+            inputName = input.find('name').text
+            inputType = input.find('type').text
+
+            if inputType == "text":
+                textBox = QtWidgets.QLineEdit(inputBox)
+                inputBox.layout.addRow(inputName, textBox)
+            elif inputType == "list":
+                listBox = QtWidgets.QListWidget(inputBox)
+                listBox.setToolTip("Ctrl + Click to deselect list items")
+                for elem in input.find('elems'):
+                    listItem = QtWidgets.QListWidgetItem(elem.text, listBox)
+                inputBox.layout.addRow(inputName, listBox)
+
+            print(input.find('name').text)
+        pageDescription.layout.addWidget(inputBox)
+
+        # Add download box
+        downloadBox = QtWidgets.QGroupBox("Download")
+        downloadBox.layout = QtWidgets.QFormLayout()
+        downloadBox.setLayout(downloadBox.layout)
+        downloadButton = QtWidgets.QPushButton("Add job", downloadBox)
+        downloadButton.setSizePolicy(QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed))
+        downloadButton.setToolTip("Add a scraping job to the job queue")
+        downloadBox.layout.addRow(downloadButton)
+        pageDescription.layout.addWidget(downloadBox)
 
         # Add description to pages
         pageScroll.setWidget(pageDescription)
