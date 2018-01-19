@@ -83,8 +83,6 @@ def build(window):
 
         # Add description to tab
         sourceDescription = QtWidgets.QStackedWidget()
-        sourceDescription.layout = QtWidgets.QVBoxLayout()
-        sourceDescription.setLayout(sourceDescription.layout)
         sourcePage.layout.addWidget(sourceDescription)
 
         # Define global pageIndex counter that maps tree items to stack indexes
