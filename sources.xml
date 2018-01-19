@@ -6,10 +6,19 @@
         <!ELEMENT children (node*)>
         <!ELEMENT node (name,function,inputs,children+)>
         <!ELEMENT inputs (input+)>
-        <!ELEMENT input (name,type,elems*)>
+        <!ELEMENT input (name,type,elems*,columns*,rows*)>
         <!ELEMENT type (#PCDATA)>
+
         <!ELEMENT elems (elem*)>
         <!ELEMENT elem (#PCDATA)>
+
+        <!ELEMENT rows (row*)>
+        <!ELEMENT row (cell*)>
+        <!ELEMENT cell (#PCDATA)>
+
+        <!ELEMENT columns (column*)>
+        <!ELEMENT column (#PCDATA)>
+
         <!ELEMENT function (#PCDATA)>
         ]>
 <sources>
@@ -163,6 +172,24 @@
                             <elem>written_by</elem>
                         </elems>
                     </input>
+                    <input>
+                        <name>Arguments</name>
+                        <type>table</type>
+                        <columns>
+                            <column>Argument</column>
+                            <column>Value</column>
+                        </columns>
+                        <rows>
+                            <row>
+                                <cell>arg1</cell>
+                                <cell>val1</cell>
+                            </row>
+                            <row>
+                                <cell>arg2</cell>
+                                <cell>val2</cell>
+                            </row>
+                        </rows>
+                    </input>
                 </inputs>
                 <children>
                     <node>
@@ -173,6 +200,72 @@
                                 <name>Page id</name>
                                 <type>text</type>
                             </input>
+                            <input>
+                                <name>Fields</name>
+                                <type>list</type>
+                                <elems>
+                                    <elem>id</elem>
+                                    <elem>actions</elem>
+                                    <elem>admin_creator</elem>
+                                    <elem>allowed_advertising_objectives</elem>
+                                    <elem>application</elem>
+                                    <elem>backdated_time</elem>
+                                    <elem>call_to_action</elem>
+                                    <elem>can_reply_privately</elem>
+                                    <elem>caption</elem>
+                                    <elem>child_attachments</elem>
+                                    <elem>comments_mirroring_domain</elem>
+                                    <elem>coordinates</elem>
+                                    <elem>created_time</elem>
+                                    <elem>description</elem>
+                                    <elem>event</elem>
+                                    <elem>expanded_height</elem>
+                                    <elem>expanded_width</elem>
+                                    <elem>feed_targeting</elem>
+                                    <elem>from</elem>
+                                    <elem>full_picture</elem>
+                                    <elem>height</elem>
+                                    <elem>icon</elem>
+                                    <elem>instagram_eligibility</elem>
+                                    <elem>is_app_share</elem>
+                                    <elem>is_expired</elem>
+                                    <elem>is_hidden</elem>
+                                    <elem>is_instagram_eligible</elem>
+                                    <elem>is_popular</elem>
+                                    <elem>is_published</elem>
+                                    <elem>is_spherical</elem>
+                                    <elem>link</elem>
+                                    <elem>message</elem>
+                                    <elem>message_tags</elem>
+                                    <elem>multi_share_end_card</elem>
+                                    <elem>multi_share_optimized</elem>
+                                    <elem>name</elem>
+                                    <elem>object_id</elem>
+                                    <elem>parent_id</elem>
+                                    <elem>permalink_url</elem>
+                                    <elem>picture</elem>
+                                    <elem>place</elem>
+                                    <elem>privacy</elem>
+                                    <elem>promotable_id</elem>
+                                    <elem>promotion_status</elem>
+                                    <elem>properties</elem>
+                                    <elem>scheduled_publish_time</elem>
+                                    <elem>shares</elem>
+                                    <elem>source</elem>
+                                    <elem>status_type</elem>
+                                    <elem>story</elem>
+                                    <elem>story_tags</elem>
+                                    <elem>subscribed</elem>
+                                    <elem>target</elem>
+                                    <elem>targeting</elem>
+                                    <elem>timeline_visibility</elem>
+                                    <elem>type</elem>
+                                    <elem>updated_time</elem>
+                                    <elem>via</elem>
+                                    <elem>video_buying_eligibility</elem>
+                                    <elem>width</elem>
+                                </elems>
+                            </input>
                         </inputs>
                         <children>
                             <node>
@@ -182,6 +275,35 @@
                                     <input>
                                         <name>Page id</name>
                                         <type>text</type>
+                                    </input>
+                                    <input>
+                                        <name>Fields</name>
+                                        <type>list</type>
+                                        <elems>
+                                            <elem>id</elem>
+                                            <elem>admin_creator</elem>
+                                            <elem>application</elem>
+                                            <elem>attachment</elem>
+                                            <elem>can_comment</elem>
+                                            <elem>can_hide</elem>
+                                            <elem>can_like</elem>
+                                            <elem>can_remove</elem>
+                                            <elem>can_reply_privately</elem>
+                                            <elem>comment_count</elem>
+                                            <elem>created_time</elem>
+                                            <elem>from</elem>
+                                            <elem>is_hidden</elem>
+                                            <elem>is_private</elem>
+                                            <elem>like_count</elem>
+                                            <elem>live_broadcast_timestamp</elem>
+                                            <elem>message</elem>
+                                            <elem>message_tags</elem>
+                                            <elem>object</elem>
+                                            <elem>parent</elem>
+                                            <elem>permalink_url</elem>
+                                            <elem>private_reply_conversation</elem>
+                                            <elem>user_likes</elem>
+                                        </elems>
                                     </input>
                                 </inputs>
                                 <children></children>
@@ -197,6 +319,72 @@
                     <input>
                         <name>Post id</name>
                         <type>text</type>
+                    </input>
+                    <input>
+                        <name>Fields</name>
+                        <type>list</type>
+                        <elems>
+                            <elem>id</elem>
+                            <elem>actions</elem>
+                            <elem>admin_creator</elem>
+                            <elem>allowed_advertising_objectives</elem>
+                            <elem>application</elem>
+                            <elem>backdated_time</elem>
+                            <elem>call_to_action</elem>
+                            <elem>can_reply_privately</elem>
+                            <elem>caption</elem>
+                            <elem>child_attachments</elem>
+                            <elem>comments_mirroring_domain</elem>
+                            <elem>coordinates</elem>
+                            <elem>created_time</elem>
+                            <elem>description</elem>
+                            <elem>event</elem>
+                            <elem>expanded_height</elem>
+                            <elem>expanded_width</elem>
+                            <elem>feed_targeting</elem>
+                            <elem>from</elem>
+                            <elem>full_picture</elem>
+                            <elem>height</elem>
+                            <elem>icon</elem>
+                            <elem>instagram_eligibility</elem>
+                            <elem>is_app_share</elem>
+                            <elem>is_expired</elem>
+                            <elem>is_hidden</elem>
+                            <elem>is_instagram_eligible</elem>
+                            <elem>is_popular</elem>
+                            <elem>is_published</elem>
+                            <elem>is_spherical</elem>
+                            <elem>link</elem>
+                            <elem>message</elem>
+                            <elem>message_tags</elem>
+                            <elem>multi_share_end_card</elem>
+                            <elem>multi_share_optimized</elem>
+                            <elem>name</elem>
+                            <elem>object_id</elem>
+                            <elem>parent_id</elem>
+                            <elem>permalink_url</elem>
+                            <elem>picture</elem>
+                            <elem>place</elem>
+                            <elem>privacy</elem>
+                            <elem>promotable_id</elem>
+                            <elem>promotion_status</elem>
+                            <elem>properties</elem>
+                            <elem>scheduled_publish_time</elem>
+                            <elem>shares</elem>
+                            <elem>source</elem>
+                            <elem>status_type</elem>
+                            <elem>story</elem>
+                            <elem>story_tags</elem>
+                            <elem>subscribed</elem>
+                            <elem>target</elem>
+                            <elem>targeting</elem>
+                            <elem>timeline_visibility</elem>
+                            <elem>type</elem>
+                            <elem>updated_time</elem>
+                            <elem>via</elem>
+                            <elem>video_buying_eligibility</elem>
+                            <elem>width</elem>
+                        </elems>
                     </input>
                 </inputs>
                 <children></children>

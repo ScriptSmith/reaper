@@ -8,6 +8,34 @@ from socialreaper import Facebook
 def tree_handler(item, column_no):
     item.sourceDescription.setCurrentIndex(item.pageIndex)
 
+def table_cell_changed(item):
+    parent = item.parent
+    parent.itemChanged.disconnect(table_cell_changed)
+
+    itemRow = item.row()
+    parentRowCount = parent.rowCount()
+    parentColCount = parent.columnCount()
+
+    # Add new empty row
+    if itemRow == parentRowCount - 1:
+        parent.setRowCount(parentRowCount + 1)
+        parentRowCount = parent.rowCount()
+        for col_c in range(parentColCount):
+            newItem = QtWidgets.QTableWidgetItem()
+            newItem.parent = parent
+            parent.setItem(parentRowCount - 1, col_c, newItem)
+
+    # Remove empty second last row
+    elif itemRow == parentRowCount - 2:
+        searchRow = parentRowCount - 2
+        for col_c in range(parentColCount):
+            if parent.item(searchRow, col_c).text() != "":
+                break
+        else:
+            parent.setRowCount(parentRowCount - 1)
+
+    parent.itemChanged.connect(table_cell_changed)
+
 
 def build(window):
     # Get sources from XML
@@ -143,10 +171,32 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
                 inputBox.layout.addRow(inputName, textBox)
             elif inputType == "list":
                 listBox = QtWidgets.QListWidget(inputBox)
+                listBox.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
                 listBox.setToolTip("Ctrl + Click to deselect list items")
                 for elem in input.find('elems'):
                     listItem = QtWidgets.QListWidgetItem(elem.text, listBox)
+                    # listItem.setFlags(listItem.flags() ^ QtCore.Qt.ItemIsEditable)
+                    listBox.addItem(listItem)
                 inputBox.layout.addRow(inputName, listBox)
+            elif inputType == "table":
+                columns = input.find('columns')
+                rows = input.find('rows')
+
+                tableBox = QtWidgets.QTableWidget(len(rows), len(columns), inputBox)
+                tableBox.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+                tableBox.verticalHeader().setVisible(False)
+                tableBox.setHorizontalHeaderLabels([column.text for column in columns])
+
+                for row_c, row in enumerate(rows):
+                    for cell_c, cell in enumerate(row):
+                        tableBoxItem = QtWidgets.QTableWidgetItem(cell.text)
+                        tableBoxItem.parent = tableBox
+                        tableBox.setItem(row_c, cell_c, tableBoxItem)
+
+                tableBox.itemChanged.connect(table_cell_changed)
+
+                inputBox.layout.addRow(inputName, tableBox)
+
 
             print(input.find('name').text)
         pageDescription.layout.addWidget(inputBox)
