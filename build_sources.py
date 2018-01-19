@@ -127,13 +127,13 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
             treeWidget.addChild(treeItem)
 
         # Create description stack page
-        pageStack = QtWidgets.QWidget(sourceDescription)
+        pageStack = QtWidgets.QWidget()
         pageStack.layout = QtWidgets.QVBoxLayout()
         pageStack.layout.setContentsMargins(0, 0, 0, 0)
         pageStack.setLayout(pageStack.layout)
 
         # Create a scroll area
-        pageScroll = QtWidgets.QScrollArea(sourceDescription)
+        pageScroll = QtWidgets.QScrollArea()
         pageScroll.setWidgetResizable(True)
         pageScroll.setBackgroundRole(QtGui.QPalette.Light)
 
