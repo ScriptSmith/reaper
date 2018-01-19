@@ -1,8 +1,27 @@
 import xml.etree.ElementTree as ET
+import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from socialreaper import Facebook
+
+class AdvancedBox(QtWidgets.QCheckBox):
+    def __init__(self, parent = None):
+        QtWidgets.QWidget.__init__(self, parent)
+
+        self.child_items = []
+
+        self.stateChanged.connect(self.changeVisibility)
+
+    def addRow(self, label, widget):
+        self.child_items.append(label)
+        self.child_items.append(widget)
+
+    def changeVisibility(self, state):
+        for item in self.child_items:
+            item.setVisible(not item.isVisible())
+
+
 
 
 def tree_handler(item, column_no):
@@ -165,13 +184,18 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
         inputBox.layout = QtWidgets.QFormLayout()
         inputBox.setLayout(inputBox.layout)
 
+        advancedBox = AdvancedBox()
+        inputBox.layout.addRow("Show all", advancedBox)
+
         for input in inputs.findall('input'):
             inputName = input.find('name').text
             inputType = input.find('type').text
+            inputRequired = input.attrib.get('required')
+
+            rowContent = None
 
             if inputType == "text":
-                textBox = QtWidgets.QLineEdit(inputBox)
-                inputBox.layout.addRow(inputName, textBox)
+                rowContent = QtWidgets.QLineEdit(inputBox)
             elif inputType == "list":
                 listBox = QtWidgets.QListWidget(inputBox)
                 listBox.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
@@ -179,8 +203,22 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
                 for elem in input.find('elems'):
                     listItem = QtWidgets.QListWidgetItem(elem.text, listBox)
                     listBox.addItem(listItem)
-                inputBox.layout.addRow(inputName, listBox)
+                rowContent = listBox
             elif inputType == "table":
+                setters = input.find('setters')
+                if setters:
+                    for setter in setters:
+                        setterName = setter.find('name').text
+                        setterType = setter.find('type').text
+                        setterValue = setter.find('value').text
+
+                        if setterType == "counter":
+                            setCounter = QtWidgets.QSpinBox(inputBox)
+                            setCounter.setMinimum(0)
+                            setCounter.setMaximum(sys.maxsize)
+                            setCounter.setValue(int(setterValue))
+                            inputBox.layout.addRow(setterName, setCounter)
+
                 columns = input.find('columns')
                 rows = input.find('rows')
                 if not rows:
@@ -202,10 +240,18 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
 
                 tableBox.itemChanged.connect(table_cell_changed)
 
-                inputBox.layout.addRow(inputName, tableBox)
+                rowContent = tableBox
+
+            rowContent.required = True if inputRequired else False
+            rowContent.setVisible(rowContent.required)
+            rowLabel = QtWidgets.QLabel(inputName)
+            rowLabel.setVisible(rowContent.required)
+            inputBox.layout.addRow(rowLabel, rowContent)
+
+            if not rowContent.required:
+                advancedBox.addRow(rowLabel, rowContent)
 
 
-            print(input.find('name').text)
         pageDescription.layout.addWidget(inputBox)
 
         # Add download box

@@ -6,7 +6,7 @@
         <!ELEMENT children (node*)>
         <!ELEMENT node (name,function,inputs,children+)>
         <!ELEMENT inputs (input+)>
-        <!ELEMENT input (name,type,elems*,columns*,rows*)>
+        <!ELEMENT input (name,type,elems*,columns*,rows*,setters*)>
         <!ELEMENT type (#PCDATA)>
 
         <!ELEMENT elems (elem*)>
@@ -19,7 +19,15 @@
         <!ELEMENT columns (column*)>
         <!ELEMENT column (#PCDATA)>
 
+        <!ELEMENT setters (setter*)>
+        <!ELEMENT setter (name,argument,value,type)>
+        <!ELEMENT argument (#PCDATA)>
+        <!ELEMENT value (#PCDATA)>
+
+
         <!ELEMENT function (#PCDATA)>
+
+        <!ATTLIST input required CDATA #IMPLIED>
         ]>
 <sources>
     <source>
@@ -29,7 +37,7 @@
                 <name>Page</name>
                 <function>page</function>
                 <inputs>
-                    <input>
+                    <input required="true">
                         <name>Page id</name>
                         <type>text</type>
                     </input>
@@ -186,12 +194,159 @@
                         <name>Feed</name>
                         <function>page_feed</function>
                         <inputs>
-                            <input>
+                            <input required="true">
                                 <name>Page id</name>
                                 <type>text</type>
                             </input>
                             <input>
-                                <name>Fields</name>
+                                <name>Page fields</name>
+                                <type>list</type>
+                                <elems>
+                                    <elem>id</elem>
+                                    <elem>about</elem>
+                                    <elem>access_token</elem>
+                                    <elem>ad_campaign</elem>
+                                    <elem>affiliation</elem>
+                                    <elem>app_id</elem>
+                                    <elem>app_links</elem>
+                                    <elem>artists_we_like</elem>
+                                    <elem>attire</elem>
+                                    <elem>awards</elem>
+                                    <elem>band_interests</elem>
+                                    <elem>band_members</elem>
+                                    <elem>best_page</elem>
+                                    <elem>bio</elem>
+                                    <elem>birthday</elem>
+                                    <elem>booking_agent</elem>
+                                    <elem>built</elem>
+                                    <elem>business</elem>
+                                    <elem>can_checkin</elem>
+                                    <elem>can_post</elem>
+                                    <elem>category</elem>
+                                    <elem>category_list</elem>
+                                    <elem>checkins</elem>
+                                    <elem>company_overview</elem>
+                                    <elem>connected_instagram_account</elem>
+                                    <elem>contact_address</elem>
+                                    <elem>context</elem>
+                                    <elem>country_page_likes</elem>
+                                    <elem>cover</elem>
+                                    <elem>culinary_team</elem>
+                                    <elem>current_location</elem>
+                                    <elem>description</elem>
+                                    <elem>description_html</elem>
+                                    <elem>directed_by</elem>
+                                    <elem>display_subtext</elem>
+                                    <elem>displayed_message_response_time</elem>
+                                    <elem>emails</elem>
+                                    <elem>engagement</elem>
+                                    <elem>fan_count</elem>
+                                    <elem>featured_video</elem>
+                                    <elem>features</elem>
+                                    <elem>food_styles</elem>
+                                    <elem>founded</elem>
+                                    <elem>general_info</elem>
+                                    <elem>general_manager</elem>
+                                    <elem>genre</elem>
+                                    <elem>global_brand_page_name</elem>
+                                    <elem>global_brand_root_id</elem>
+                                    <elem>has_added_app</elem>
+                                    <elem>has_whatsapp_number</elem>
+                                    <elem>hometown</elem>
+                                    <elem>hours</elem>
+                                    <elem>impressum</elem>
+                                    <elem>influences</elem>
+                                    <elem>instagram_business_account</elem>
+                                    <elem>instant_articles_review_status</elem>
+                                    <elem>is_always_open</elem>
+                                    <elem>is_chain</elem>
+                                    <elem>is_community_page</elem>
+                                    <elem>is_eligible_for_branded_content</elem>
+                                    <elem>is_owned</elem>
+                                    <elem>is_permanently_closed</elem>
+                                    <elem>is_published</elem>
+                                    <elem>is_unclaimed</elem>
+                                    <elem>is_webhooks_subscribed</elem>
+                                    <elem>leadgen_form_preview_details</elem>
+                                    <elem>leadgen_has_crm_integration</elem>
+                                    <elem>leadgen_has_fat_ping_crm_integration</elem>
+                                    <elem>leadgen_tos_acceptance_time</elem>
+                                    <elem>leadgen_tos_accepted</elem>
+                                    <elem>leadgen_tos_accepting_user</elem>
+                                    <elem>link</elem>
+                                    <elem>location</elem>
+                                    <elem>members</elem>
+                                    <elem>merchant_id</elem>
+                                    <elem>merchant_review_status</elem>
+                                    <elem>messenger_ads_default_page_welcome_message</elem>
+                                    <elem>messenger_ads_quick_replies_type</elem>
+                                    <elem>mission</elem>
+                                    <elem>mpg</elem>
+                                    <elem>name</elem>
+                                    <elem>name_with_location_descriptor</elem>
+                                    <elem>network</elem>
+                                    <elem>new_like_count</elem>
+                                    <elem>offer_eligible</elem>
+                                    <elem>overall_star_rating</elem>
+                                    <elem>page_token</elem>
+                                    <elem>parent_page</elem>
+                                    <elem>parking</elem>
+                                    <elem>payment_options</elem>
+                                    <elem>personal_info</elem>
+                                    <elem>personal_interests</elem>
+                                    <elem>pharma_safety_info</elem>
+                                    <elem>phone</elem>
+                                    <elem>place_type</elem>
+                                    <elem>plot_outline</elem>
+                                    <elem>preferred_audience</elem>
+                                    <elem>press_contact</elem>
+                                    <elem>price_range</elem>
+                                    <elem>produced_by</elem>
+                                    <elem>products</elem>
+                                    <elem>promotion_eligible</elem>
+                                    <elem>promotion_ineligible_reason</elem>
+                                    <elem>public_transit</elem>
+                                    <elem>publisher_space</elem>
+                                    <elem>rating_count</elem>
+                                    <elem>recipient</elem>
+                                    <elem>record_label</elem>
+                                    <elem>release_date</elem>
+                                    <elem>restaurant_services</elem>
+                                    <elem>restaurant_specialties</elem>
+                                    <elem>schedule</elem>
+                                    <elem>screenplay_by</elem>
+                                    <elem>season</elem>
+                                    <elem>single_line_address</elem>
+                                    <elem>starring</elem>
+                                    <elem>start_info</elem>
+                                    <elem>store_location_descriptor</elem>
+                                    <elem>store_number</elem>
+                                    <elem>studio</elem>
+                                    <elem>supports_instant_articles</elem>
+                                    <elem>talking_about_count</elem>
+                                    <elem>unread_message_count</elem>
+                                    <elem>unread_notif_count</elem>
+                                    <elem>unseen_message_count</elem>
+                                    <elem>username</elem>
+                                    <elem>verification_status</elem>
+                                    <elem>voip_info</elem>
+                                    <elem>website</elem>
+                                    <elem>were_here_count</elem>
+                                    <elem>whatsapp_number</elem>
+                                    <elem>wifi_information</elem>
+                                    <elem>written_by</elem>
+                                </elems>
+                            </input>
+                            <input>
+                                <name>Page arguments</name>
+                                <type>table</type>
+                                <columns>
+                                    <column>Argument</column>
+                                    <column>Value</column>
+                                </columns>
+                            </input>
+                            <input>
+                                <name>Post fields</name>
                                 <type>list</type>
                                 <elems>
                                     <elem>id</elem>
@@ -256,18 +411,116 @@
                                     <elem>width</elem>
                                 </elems>
                             </input>
+                            <input>
+                                <name>Post arguments</name>
+                                <type>table</type>
+                                <columns>
+                                    <column>Argument</column>
+                                    <column>Value</column>
+                                </columns>
+                                <setters>
+                                    <setter>
+                                        <name>Post count</name>
+                                        <argument>count</argument>
+                                        <value>500</value>
+                                        <type>counter</type>
+                                    </setter>
+                                </setters>
+                            </input>
                         </inputs>
                         <children>
                             <node>
                                 <name>Comments</name>
                                 <function>page_feed_comments</function>
                                 <inputs>
-                                    <input>
+                                    <input required="true">
                                         <name>Page id</name>
                                         <type>text</type>
                                     </input>
                                     <input>
-                                        <name>Fields</name>
+                                        <name>Post fields</name>
+                                        <type>list</type>
+                                        <elems>
+                                            <elem>id</elem>
+                                            <elem>actions</elem>
+                                            <elem>admin_creator</elem>
+                                            <elem>allowed_advertising_objectives</elem>
+                                            <elem>application</elem>
+                                            <elem>backdated_time</elem>
+                                            <elem>call_to_action</elem>
+                                            <elem>can_reply_privately</elem>
+                                            <elem>caption</elem>
+                                            <elem>child_attachments</elem>
+                                            <elem>comments_mirroring_domain</elem>
+                                            <elem>coordinates</elem>
+                                            <elem>created_time</elem>
+                                            <elem>description</elem>
+                                            <elem>event</elem>
+                                            <elem>expanded_height</elem>
+                                            <elem>expanded_width</elem>
+                                            <elem>feed_targeting</elem>
+                                            <elem>from</elem>
+                                            <elem>full_picture</elem>
+                                            <elem>height</elem>
+                                            <elem>icon</elem>
+                                            <elem>instagram_eligibility</elem>
+                                            <elem>is_app_share</elem>
+                                            <elem>is_expired</elem>
+                                            <elem>is_hidden</elem>
+                                            <elem>is_instagram_eligible</elem>
+                                            <elem>is_popular</elem>
+                                            <elem>is_published</elem>
+                                            <elem>is_spherical</elem>
+                                            <elem>link</elem>
+                                            <elem>message</elem>
+                                            <elem>message_tags</elem>
+                                            <elem>multi_share_end_card</elem>
+                                            <elem>multi_share_optimized</elem>
+                                            <elem>name</elem>
+                                            <elem>object_id</elem>
+                                            <elem>parent_id</elem>
+                                            <elem>permalink_url</elem>
+                                            <elem>picture</elem>
+                                            <elem>place</elem>
+                                            <elem>privacy</elem>
+                                            <elem>promotable_id</elem>
+                                            <elem>promotion_status</elem>
+                                            <elem>properties</elem>
+                                            <elem>scheduled_publish_time</elem>
+                                            <elem>shares</elem>
+                                            <elem>source</elem>
+                                            <elem>status_type</elem>
+                                            <elem>story</elem>
+                                            <elem>story_tags</elem>
+                                            <elem>subscribed</elem>
+                                            <elem>target</elem>
+                                            <elem>targeting</elem>
+                                            <elem>timeline_visibility</elem>
+                                            <elem>type</elem>
+                                            <elem>updated_time</elem>
+                                            <elem>via</elem>
+                                            <elem>video_buying_eligibility</elem>
+                                            <elem>width</elem>
+                                        </elems>
+                                    </input>
+                                    <input>
+                                        <name>Post arguments</name>
+                                        <type>table</type>
+                                        <columns>
+                                            <column>Argument</column>
+                                            <column>Value</column>
+                                        </columns>
+                                        <setters>
+                                            <setter>
+                                                <name>Post count</name>
+                                                <argument>count</argument>
+                                                <value>500</value>
+                                                <type>counter</type>
+                                            </setter>
+                                        </setters>
+                                    </input>
+                                    <input>
+                                        <name>Comment fields</name>
                                         <type>list</type>
                                         <elems>
                                             <elem>id</elem>
@@ -295,6 +548,22 @@
                                             <elem>user_likes</elem>
                                         </elems>
                                     </input>
+                                    <input>
+                                        <name>Comment arguments</name>
+                                        <type>table</type>
+                                        <columns>
+                                            <column>Argument</column>
+                                            <column>Value</column>
+                                        </columns>
+                                        <setters>
+                                            <setter>
+                                                <name>Comment count</name>
+                                                <argument>count</argument>
+                                                <value>500</value>
+                                                <type>counter</type>
+                                            </setter>
+                                        </setters>
+                                    </input>
                                 </inputs>
                                 <children></children>
                             </node>
@@ -306,7 +575,7 @@
                 <name>Post</name>
                 <function>post</function>
                 <inputs>
-                    <input>
+                    <input required="true">
                         <name>Post id</name>
                         <type>text</type>
                     </input>
@@ -375,6 +644,14 @@
                             <elem>video_buying_eligibility</elem>
                             <elem>width</elem>
                         </elems>
+                    </input>
+                    <input>
+                        <name>Arguments</name>
+                        <type>table</type>
+                        <columns>
+                            <column>Argument</column>
+                            <column>Value</column>
+                        </columns>
                     </input>
                 </inputs>
                 <children></children>
