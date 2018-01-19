@@ -98,7 +98,11 @@ class ArgTable(QtWidgets.QTableWidget):
         elif isinstance(item, ArgTableVal):
             argument = item.pair.argument().text()
             value = item.text()
-            self.arguments[argument] = value
+
+            if value == "" and argument == "":
+                self.arguments.pop("")
+            else:
+                self.arguments[argument] = value
 
         self.fill_table()
 
