@@ -8,6 +8,12 @@ from socialreaper import Facebook
 def tree_handler(item, column_no):
     item.sourceDescription.setCurrentIndex(item.pageIndex)
 
+
+def table_add_item(text, parent, row, col):
+    newItem = QtWidgets.QTableWidgetItem(text)
+    newItem.parent = parent
+    parent.setItem(row, col, newItem)
+
 def table_cell_changed(item):
     parent = item.parent
     parent.itemChanged.disconnect(table_cell_changed)
@@ -21,9 +27,7 @@ def table_cell_changed(item):
         parent.setRowCount(parentRowCount + 1)
         parentRowCount = parent.rowCount()
         for col_c in range(parentColCount):
-            newItem = QtWidgets.QTableWidgetItem()
-            newItem.parent = parent
-            parent.setItem(parentRowCount - 1, col_c, newItem)
+            table_add_item("", parent, parentRowCount - 1, col_c)
 
     # Remove empty second last row
     elif itemRow == parentRowCount - 2:
@@ -175,23 +179,24 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
                 listBox.setToolTip("Ctrl + Click to deselect list items")
                 for elem in input.find('elems'):
                     listItem = QtWidgets.QListWidgetItem(elem.text, listBox)
-                    # listItem.setFlags(listItem.flags() ^ QtCore.Qt.ItemIsEditable)
                     listBox.addItem(listItem)
                 inputBox.layout.addRow(inputName, listBox)
             elif inputType == "table":
                 columns = input.find('columns')
                 rows = input.find('rows')
 
-                tableBox = QtWidgets.QTableWidget(len(rows), len(columns), inputBox)
+                tableBox = QtWidgets.QTableWidget(len(rows) + 1, len(columns), inputBox)
                 tableBox.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
                 tableBox.verticalHeader().setVisible(False)
                 tableBox.setHorizontalHeaderLabels([column.text for column in columns])
 
+                row_c = 0
                 for row_c, row in enumerate(rows):
                     for cell_c, cell in enumerate(row):
-                        tableBoxItem = QtWidgets.QTableWidgetItem(cell.text)
-                        tableBoxItem.parent = tableBox
-                        tableBox.setItem(row_c, cell_c, tableBoxItem)
+                        table_add_item(cell.text, tableBox, row_c, cell_c)
+
+                for cell_c in range(len(columns)):
+                    table_add_item("", tableBox, row_c + 1, cell_c)
 
                 tableBox.itemChanged.connect(table_cell_changed)
 
