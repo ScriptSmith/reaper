@@ -29,14 +29,13 @@ def table_cell_changed(item):
         for col_c in range(parentColCount):
             table_add_item("", parent, parentRowCount - 1, col_c)
 
-    # Remove empty second last row
-    elif itemRow == parentRowCount - 2:
-        searchRow = parentRowCount - 2
+    # Remove empty rows
+    if item.text() == "":
         for col_c in range(parentColCount):
-            if parent.item(searchRow, col_c).text() != "":
+            if parent.item(itemRow, col_c).text() != "":
                 break
         else:
-            parent.setRowCount(parentRowCount - 1)
+            parent.removeRow(itemRow)
 
     parent.itemChanged.connect(table_cell_changed)
 
