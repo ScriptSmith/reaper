@@ -135,7 +135,7 @@ class CounterSetter(QtWidgets.QSpinBox):
         QtWidgets.QWidget.__init__(self, parent)
 
         self.setMinimum(0)
-        self.setMaximum(sys.maxsize - 1)
+        self.setMaximum(999999999)
 
         self.table = table
         self.argument = argument
