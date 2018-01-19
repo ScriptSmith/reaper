@@ -179,16 +179,6 @@
                             <column>Argument</column>
                             <column>Value</column>
                         </columns>
-                        <rows>
-                            <row>
-                                <cell>arg1</cell>
-                                <cell>val1</cell>
-                            </row>
-                            <row>
-                                <cell>arg2</cell>
-                                <cell>val2</cell>
-                            </row>
-                        </rows>
                     </input>
                 </inputs>
                 <children>

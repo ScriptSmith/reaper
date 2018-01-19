@@ -183,6 +183,8 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
             elif inputType == "table":
                 columns = input.find('columns')
                 rows = input.find('rows')
+                if not rows:
+                    rows = []
 
                 tableBox = QtWidgets.QTableWidget(len(rows) + 1, len(columns), inputBox)
                 tableBox.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
@@ -194,6 +196,7 @@ def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescrip
                     for cell_c, cell in enumerate(row):
                         table_add_item(cell.text, tableBox, row_c, cell_c)
 
+                row_c = -1 if row_c == 0 else 0 # Create first empty row if table has no rows
                 for cell_c in range(len(columns)):
                     table_add_item("", tableBox, row_c + 1, cell_c)
 
