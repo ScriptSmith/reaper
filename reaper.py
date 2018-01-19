@@ -52,25 +52,17 @@ class Reaper(Ui_MainWindow):
 
         self.setupUi(window)
 
-        # self.wdg = QtWidgets.QWidget()
-        # post = Facebook_Post.Ui_Form()
-        # post.setupUi(self.wdg)
-        # self.wdg.show()
+        self.advanced_mode = False
 
         self.add_actions()
 
         build(self)
 
-
-    def fb_stack_jump(self, i):
-        self.fb_stack.setCurrentIndex(i)
-
-    def fb_next_stack(self):
-        self.fb_stack_jump(1)
+    def enable_advanced_mode(self, bool):
+        self.advanced_mode = bool
 
     def add_actions(self):
-        # self.fb_next.clicked.connect(self.fb_next_stack)
-        pass
+        self.actionAdvanced_mode.toggled.connect(self.enable_advanced_mode)
 
     def crap(self):
         self.pageTab.setLayout(QtWidgets.QVBoxLayout())
