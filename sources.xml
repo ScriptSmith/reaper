@@ -182,7 +182,7 @@
                     </input>
                     <input>
                         <name>Arguments</name>
-                        <type>table</type>
+                        <type>arguments</type>
                         <columns>
                             <column>Argument</column>
                             <column>Value</column>
@@ -339,7 +339,7 @@
                             </input>
                             <input>
                                 <name>Page arguments</name>
-                                <type>table</type>
+                                <type>arguments</type>
                                 <columns>
                                     <column>Argument</column>
                                     <column>Value</column>
@@ -413,7 +413,7 @@
                             </input>
                             <input>
                                 <name>Post arguments</name>
-                                <type>table</type>
+                                <type>arguments</type>
                                 <columns>
                                     <column>Argument</column>
                                     <column>Value</column>
@@ -505,7 +505,7 @@
                                     </input>
                                     <input>
                                         <name>Post arguments</name>
-                                        <type>table</type>
+                                        <type>arguments</type>
                                         <columns>
                                             <column>Argument</column>
                                             <column>Value</column>
@@ -550,7 +550,7 @@
                                     </input>
                                     <input>
                                         <name>Comment arguments</name>
-                                        <type>table</type>
+                                        <type>arguments</type>
                                         <columns>
                                             <column>Argument</column>
                                             <column>Value</column>
@@ -647,7 +647,7 @@
                     </input>
                     <input>
                         <name>Arguments</name>
-                        <type>table</type>
+                        <type>arguments</type>
                         <columns>
                             <column>Argument</column>
                             <column>Value</column>
