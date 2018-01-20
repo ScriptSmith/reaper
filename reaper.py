@@ -33,7 +33,7 @@ import qdarkstyle
 from mainwindow import Ui_MainWindow
 from components.facebook import post as Facebook_Post
 
-from build_sources import SourceTabs
+from sources import SourceTabs
 
 from socialreaper import Facebook
 
