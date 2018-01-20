@@ -33,7 +33,7 @@ import qdarkstyle
 from mainwindow import Ui_MainWindow
 from components.facebook import post as Facebook_Post
 
-from build_sources import build
+from build_sources import SourceTabs
 
 from socialreaper import Facebook
 
@@ -43,6 +43,7 @@ class Reaper(Ui_MainWindow):
         super().__init__()
 
         self.version = "v2.0"
+        self.source_file = 'sources.xml'
 
         self.window = window
         self.window.setWindowIcon(QIcon('ui/icon.png'))
@@ -56,7 +57,8 @@ class Reaper(Ui_MainWindow):
 
         self.add_actions()
 
-        build(self)
+        # build(self)
+        SourceTabs(self, self.source_file)
 
     def enable_advanced_mode(self, bool):
         self.advanced_mode = bool

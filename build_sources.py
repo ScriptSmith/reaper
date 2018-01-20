@@ -1,5 +1,7 @@
 import xml.etree.ElementTree as ET
 import sys
+import json
+from collections import OrderedDict
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -60,16 +62,153 @@ class ArgTablePair():
         return self.arg, self.val
 
 
-class ArgTable(QtWidgets.QTableWidget):
-    def __init__(self, rows=None, parent=None):
+class NodeTree(QtWidgets.QTreeWidget):
+    def __init__(self, sourceName, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
-        super().__init__(0, 2)
+
+        self.sourceName = sourceName
+        self.pageIndex = 0
+
+        self.setHeaderLabel("Nodes")
+        self.itemClicked.connect(self.item_clicked)
+
+    def set_stack(self, stack):
+        self.nodeStack = stack
+
+    def item_clicked(self, item, col_no):
+        self.nodeStack.setCurrentIndex(item.pageIndex)
+
+    def add_item(self, name, parent=None):
+        treeItem = QtWidgets.QTreeWidgetItem()
+        treeItem.setText(0, name)
+        treeItem.setExpanded(True)
+
+        treeItem.pageIndex = self.pageIndex
+        self.pageIndex += 1
+
+        textDescription = None
+
+        if parent:
+            textDescription = parent.textDescription
+            treeItem.level = parent.level + 1
+            treeItem.hierarchy = parent.hierarchy + " → " + name
+
+            modifier = "'s" if textDescription[-1] != 's' else "'"
+            textDescription = "{}{} {}".format(textDescription, modifier, name)
+
+            parent.addChild(treeItem)
+        else:
+            textDescription = name
+            treeItem.level = 1
+            treeItem.hierarchy = name
+
+            self.addTopLevelItem(treeItem)
+
+        treeItem.textDescription = textDescription
+
+        treeItem.textContent = "I want to scrape a {} {}".format(self.sourceName, textDescription)
+
+        return treeItem
+
+
+class NodePageBox(QtWidgets.QGroupBox):
+    def __init__(self, title, content=None, parent=None):
+        QtWidgets.QWidget.__init__(self, parent)
+
+        self.layout = QtWidgets.QFormLayout()
+        self.setLayout(self.layout)
+
+        self.setTitle(title)
+        if content:
+            self.layout.addWidget(content)
+
+    def add_widget(self, widget):
+        self.layout.addWidget(widget)
+
+
+class NodeStackPage(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        QtWidgets.QWidget.__init__(self, parent)
+
+        self.read_values = lambda : print("No input added")
+
+        # Add layout
+        self.layout = QtWidgets.QVBoxLayout()
+        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.layout)
+
+        # Create a scroll area
+        self.pageScroll = QtWidgets.QScrollArea()
+        self.pageScroll.setWidgetResizable(True)
+        self.pageScroll.setBackgroundRole(QtGui.QPalette.Light)
+
+        # Create a widget that scrolls
+        self.pageDescription = QtWidgets.QWidget(self)
+        self.pageDescription.layout = QtWidgets.QFormLayout()
+        self.pageDescription.setLayout(self.pageDescription.layout)
+        self.layout.addWidget(self.pageDescription)
+        self.layout.addWidget(self.pageScroll)
+
+        self.pageScroll.setWidget(self.pageDescription)
+
+    def add_widget(self, widget):
+        if isinstance(widget, NodeInputBox):
+            self.read_values = widget.read_values
+
+        self.pageDescription.layout.addWidget(widget)
+
+
+    def display_values(self, clicked):
+        print(self.read_values())
+
+    def add_download(self):
+        # Add download box
+        downloadBox = NodePageBox("Download")
+        downloadButton = QtWidgets.QPushButton("Add job", downloadBox)
+        downloadButton.setSizePolicy(
+            QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed))
+        downloadButton.setToolTip("Add a scraping job to the job queue")
+        downloadBox.layout.addRow(downloadButton)
+
+        downloadButton.clicked.connect(self.display_values)
+        self.add_widget(downloadBox)
+
+
+class NodeInputBox(NodePageBox):
+    def __init__(self):
+        super().__init__("Input")
+
+        self.inputs = []
+
+    def add_input(self, name, input):
+        self.layout.addRow(name, input)
+        self.inputs.append(input)
+
+    def read_values(self):
+        arguments = ", ".join([inputWidget.get_value() for inputWidget in self.inputs])
+        return arguments
+
+
+class NodeInputWidget():
+    def __init__(self, required=True):
+        self.required = required
+        self.setVisible(self.required)
+
+    def get_value(self):
+        pass
+
+
+class NodeInputArgs(QtWidgets.QTableWidget, NodeInputWidget):
+    def __init__(self, rows=None, required=True, parent=None):
+        super().__init__(0, 2, parent)
+        NodeInputWidget.__init__(self, required=required)
+
 
         self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.verticalHeader().setVisible(False)
         self.setHorizontalHeaderLabels(['Argument', 'Value'])
 
-        self.arguments = {}
+        self.arguments = OrderedDict()
 
         self.itemChanged.connect(self.item_changed)
 
@@ -133,6 +272,35 @@ class ArgTable(QtWidgets.QTableWidget):
 
         self.add_row("", "")
 
+    def get_value(self):
+        return json.dumps(self.arguments)
+
+
+class NodeInputLine(QtWidgets.QLineEdit, NodeInputWidget):
+    def __init__(self, required=None, parent=None):
+        QtWidgets.QWidget.__init__(self, parent)
+        NodeInputWidget.__init__(self, required=required)
+
+    def get_value(self):
+        return json.dumps(self.text())
+
+
+class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):
+    def __init__(self, required=None, parent=None):
+        QtWidgets.QWidget.__init__(self, parent)
+        NodeInputWidget.__init__(self, required=required)
+
+        self.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.setToolTip("Ctrl + Click to deselect list items")
+
+    def add_elements(self, elements):
+        for element in elements:
+            listItem = QtWidgets.QListWidgetItem(element.text, self)
+            self.addItem(listItem)
+
+    def get_value(self):
+        return json.dumps([item.text() for item in self.selectedItems()])
+
 
 class CounterSetter(QtWidgets.QSpinBox):
     def __init__(self, value, table, argument, parent=None):
@@ -146,235 +314,170 @@ class CounterSetter(QtWidgets.QSpinBox):
         self.valueChanged.connect(self.set_arg)
         self.setValue(value)
 
-
     def set_arg(self, value):
         self.table.set_argument(self.argument, value)
         self.table.fill_table()
 
 
-def tree_handler(item, column_no):
-    item.sourceDescription.setCurrentIndex(item.pageIndex)
+class SourceTabs():
+    def __init__(self, window, sourceFile):
+        self.window = window
+        self.sourceFile = sourceFile
 
+        self.sources = self.read_sources()
+        self.add_sources()
 
-def table_add_item(text, parent, row, col):
-    newItem = QtWidgets.QTableWidgetItem(text)
-    newItem.parent = parent
-    parent.setItem(row, col, newItem)
+    @staticmethod
+    def tree_click(item, column_no):
+        item.sourceDescription.setCurrentIndex(item.pageIndex)
 
+    def read_sources(self):
+        tree = ET.parse(self.sourceFile)
+        sourceRoot = tree.getroot()
+        sources = sourceRoot.findall('source')
 
-def table_cell_changed(item):
-    parent = item.parent
-    parent.itemChanged.disconnect(table_cell_changed)
+        return sources
 
-    itemRow = item.row()
-    parentRowCount = parent.rowCount()
-    parentColCount = parent.columnCount()
+    def add_sources(self):
+        for source in self.sources:
+            sourcePage, sourceName = self.create_source_page(source)
+            nodeTree = self.create_node_tree(sourcePage, sourceName)
+            nodeStack = self.create_node_stack(sourcePage)
+            nodeTree.set_stack(nodeStack)
 
-    # Add new empty row
-    if itemRow == parentRowCount - 1:
-        parent.setRowCount(parentRowCount + 1)
-        parentRowCount = parent.rowCount()
-        for col_c in range(parentColCount):
-            table_add_item("", parent, parentRowCount - 1, col_c)
+            # Add source nodes to sourceTree and sourceDescription
+            self.create_nodes(sourceName, source, nodeTree, nodeStack)
 
-    # Remove empty rows
-    if item.text() == "":
-        for col_c in range(parentColCount):
-            if parent.item(itemRow, col_c).text() != "":
-                break
-        else:
-            parent.removeRow(itemRow)
+            # Select the first node
+            topItem = nodeTree.topLevelItem(0)
+            if topItem:
+                topItem.setSelected(True)
 
-    parent.itemChanged.connect(table_cell_changed)
-
-
-def build(window):
-    # Get sources from XML
-    tree = ET.parse('sources.xml')
-    sources = tree.getroot()
-    sources = sources.findall('source')
-
-    for source in sources:
-        # Add tab
+    def create_source_page(self, source):
         sourcePage = QtWidgets.QWidget()
         sourceName = source.find('name').text
-        window.sourcesTabs.addTab(sourcePage, sourceName)
+        self.window.sourcesTabs.addTab(sourcePage, sourceName)
         sourcePage.layout = QtWidgets.QHBoxLayout()
         sourcePage.setLayout(sourcePage.layout)
 
-        # Add tree to tab
-        sourceTree = QtWidgets.QTreeWidget()
-        sourceTree.setHeaderLabel("Nodes")
-        sourcePage.layout.addWidget(sourceTree)
+        return sourcePage, sourceName
 
-        # Add signals to tree
-        sourceTree.itemClicked.connect(tree_handler)
+    def create_node_tree(self, sourcePage, sourceName):
+        nodeTree = NodeTree(sourceName)
+        sourcePage.layout.addWidget(nodeTree)
+        return nodeTree
 
-        # Add description to tab
+    def create_node_stack(self, sourcePage):
         sourceDescription = QtWidgets.QStackedWidget()
         sourcePage.layout.addWidget(sourceDescription)
 
-        # Define global pageIndex counter that maps tree items to stack indexes
-        global pageIndex
-        pageIndex = 0
+        return sourceDescription
 
-        # Add source nodes to sourceTree and sourceDescription
-        add_nodes(sourceName, source, sourceTree, sourceDescription)
-        top_item = sourceTree.topLevelItem(0)
-        if top_item:
-            top_item.setSelected(True)
+    def create_nodes(self, sourceName, parentNode, treeWidget, nodeStack, treeParentItem=None,
+                     textDescription=""):
 
+        nodes = parentNode.find('children')
+        for node in nodes.findall('node'):
+            # Define node information
+            nodeName, functionName, inputs = self.get_node_info(node)
 
-def add_nodes(sourceName, parentNode, treeWidget, sourceDescription, textDescription="", level=0):
-    global pageIndex
-    level += 1
+            # Create tree node
+            treeItem = treeWidget.add_item(nodeName, treeParentItem)
 
-    # Find child nodes
-    nodes = parentNode.find('children')
+            # Create description stack page
+            pageStack = NodeStackPage()
+            textContent = treeItem.textContent
 
-    for node in nodes.findall('node'):
-        # Define node information
+            # Add title
+            title = QtWidgets.QLabel(treeItem.hierarchy)
+            title.setStyleSheet("font-weight: bold;")
+            pageStack.add_widget(title)
+
+            # Create text description box
+            textContentLabel = QtWidgets.QLabel(textContent)
+            textContentLabel.setWordWrap(True)
+            textContentLabel.setStyleSheet("font-style: italic;")
+            textBox = NodePageBox("Text description", textContentLabel)
+            pageStack.add_widget(textBox)
+
+            # Create socialreaper box
+            srFunctionText = QtWidgets.QLabel("{}().{}()".format(sourceName, functionName))
+            srFunction = NodePageBox("Social Reaper function", srFunctionText)
+            pageStack.add_widget(srFunction)
+
+            # Create inputs
+            inputBox = NodeInputBox()
+
+            # Add advanced box
+            advancedBox = AdvancedBox()
+            inputBox.layout.addRow("Show all", advancedBox)
+
+            # Add input widget
+            self.add_inputs(inputs, inputBox, advancedBox)
+            pageStack.add_widget(inputBox)
+
+            # Add download widget
+            pageStack.add_download()
+
+            # Add page to stack
+            nodeStack.addWidget(pageStack)
+            nodeStack.setCurrentIndex(0)
+
+            # Recurse through children
+            self.create_nodes(sourceName, node, treeWidget, nodeStack, treeItem, textDescription)
+
+    def add_setters(self, setters, inputBox, table):
+        if setters:
+            for setter in setters:
+                setterName = setter.find('name').text
+                setterType = setter.find('type').text
+                setterValue = setter.find('value').text
+
+                setterWidget = None
+                if setterType == "counter":
+                    setterWidget = CounterSetter(int(setterValue), table, "count")
+                inputBox.layout.addRow(setterName, setterWidget)
+
+    def add_inputs(self, inputs, inputBox, advancedBox):
+        for input in inputs.findall('input'):
+            inputName = input.find('name').text
+            inputType = input.find('type').text
+            inputRequired = bool(input.attrib.get('required'))
+
+            inputWidget = None
+
+            if inputType == "text":
+                inputWidget = NodeInputLine(inputRequired, inputBox)
+
+            elif inputType == "list":
+                inputWidget = NodeInputList(inputRequired, inputBox)
+                inputWidget.add_elements(input.find('elems'))
+
+            elif inputType == "arguments":
+                # Create table
+                rows = input.find('rows')
+                argumentTable = NodeInputArgs(rows, inputRequired, inputBox)
+
+                # Add table setters
+                setters = input.find('setters')
+                self.add_setters(setters, inputBox, argumentTable)
+
+                inputWidget = argumentTable
+
+            else:
+                sys.exit("UNKNOWN WIDGET")
+
+            rowLabel = QtWidgets.QLabel(inputName)
+            rowLabel.setVisible(inputWidget.required)
+            inputBox.add_input(rowLabel, inputWidget)
+
+            if not inputWidget.required:
+                advancedBox.addRow(rowLabel, inputWidget)
+
+    @staticmethod
+    def get_node_info(node):
         name = node.find('name').text
         functionName = node.find('function').text
         inputs = node.find('inputs')
 
-        # Add item to tree
-        treeItem = QtWidgets.QTreeWidgetItem(treeWidget)
-        treeItem.sourceDescription = sourceDescription
-        treeItem.setText(0, name)
-        treeItem.setExpanded(True)
-
-        # Assign treeItem a pageIndex
-        treeItem.pageIndex = pageIndex
-        pageIndex += 1
-
-        # Add treeItem to tree hierarchy
-        if type(treeWidget) == QtWidgets.QTreeWidget:
-            treeWidget.addTopLevelItem(treeItem)
-        else:
-            treeWidget.addChild(treeItem)
-
-        # Create description stack page
-        pageStack = QtWidgets.QWidget()
-        pageStack.layout = QtWidgets.QVBoxLayout()
-        pageStack.layout.setContentsMargins(0, 0, 0, 0)
-        pageStack.setLayout(pageStack.layout)
-
-        # Create a scroll area
-        pageScroll = QtWidgets.QScrollArea()
-        pageScroll.setWidgetResizable(True)
-        pageScroll.setBackgroundRole(QtGui.QPalette.Light)
-
-        # Create a widget that scrolls
-        pageDescription = QtWidgets.QWidget(pageStack)
-        pageDescription.layout = QtWidgets.QFormLayout()
-        pageDescription.setLayout(pageDescription.layout)
-        pageStack.layout.addWidget(pageDescription)
-        pageStack.layout.addWidget(pageScroll)
-
-        # Create text description box
-        textBox = QtWidgets.QGroupBox("Text description")
-        textBox.layout = QtWidgets.QFormLayout()
-        textBox.setLayout(textBox.layout)
-
-        # Create the description text and title
-        if level == 1:
-            treeItem.hierarchy = name
-            textDescription = name
-        else:
-            treeItem.hierarchy = treeWidget.hierarchy + " → " + name
-            modifier = "'s" if textDescription[-1] != 's' else "'"
-            textDescription = "{}{} {}".format(textDescription, modifier, name)
-        textContent = "I want to scrape a {} {}".format(sourceName, textDescription)
-
-        # Add title
-        title = QtWidgets.QLabel(treeItem.hierarchy)
-        title.setStyleSheet("font-weight: bold;")
-        pageDescription.layout.addWidget(title)
-
-        # Add text to layout
-        textContentLabel = QtWidgets.QLabel(textContent)
-        textContentLabel.setWordWrap(True)
-        textContentLabel.setStyleSheet("font-style: italic;")
-        textBox.layout.addWidget(textContentLabel)
-        pageDescription.layout.addWidget(textBox)
-
-        # Create socialreaper box
-        srFunction = QtWidgets.QGroupBox("Social Reaper function")
-        srFunction.layout = QtWidgets.QFormLayout()
-        srFunction.setLayout(srFunction.layout)
-        srFunctionText = "{}().{}()".format(sourceName, functionName)
-        srFunction.layout.addWidget(QtWidgets.QLabel(srFunctionText))
-        pageDescription.layout.addWidget(srFunction)
-
-        # Add inputs
-        inputBox = QtWidgets.QGroupBox("Input")
-        inputBox.layout = QtWidgets.QFormLayout()
-        inputBox.setLayout(inputBox.layout)
-
-        advancedBox = AdvancedBox()
-        inputBox.layout.addRow("Show all", advancedBox)
-
-        for input in inputs.findall('input'):
-            inputName = input.find('name').text
-            inputType = input.find('type').text
-            inputRequired = input.attrib.get('required')
-
-            rowContent = None
-
-            if inputType == "text":
-                rowContent = QtWidgets.QLineEdit(inputBox)
-            elif inputType == "list":
-                listBox = QtWidgets.QListWidget(inputBox)
-                listBox.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
-                listBox.setToolTip("Ctrl + Click to deselect list items")
-                for elem in input.find('elems'):
-                    listItem = QtWidgets.QListWidgetItem(elem.text, listBox)
-                    listBox.addItem(listItem)
-                rowContent = listBox
-            elif inputType == "arguments":
-                rows = input.find('rows')
-
-                tableBox = ArgTable(rows)
-
-                setters = input.find('setters')
-                if setters:
-                    for setter in setters:
-                        setterName = setter.find('name').text
-                        setterType = setter.find('type').text
-                        setterValue = setter.find('value').text
-
-                        if setterType == "counter":
-                            setCounter = CounterSetter(int(setterValue), tableBox, "count")
-                            inputBox.layout.addRow(setterName, setCounter)
-
-                rowContent = tableBox
-
-            rowContent.required = True if inputRequired else False
-            rowContent.setVisible(rowContent.required)
-            rowLabel = QtWidgets.QLabel(inputName)
-            rowLabel.setVisible(rowContent.required)
-            inputBox.layout.addRow(rowLabel, rowContent)
-
-            if not rowContent.required:
-                advancedBox.addRow(rowLabel, rowContent)
-
-        pageDescription.layout.addWidget(inputBox)
-
-        # Add download box
-        downloadBox = QtWidgets.QGroupBox("Download")
-        downloadBox.layout = QtWidgets.QFormLayout()
-        downloadBox.setLayout(downloadBox.layout)
-        downloadButton = QtWidgets.QPushButton("Add job", downloadBox)
-        downloadButton.setSizePolicy(QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed))
-        downloadButton.setToolTip("Add a scraping job to the job queue")
-        downloadBox.layout.addRow(downloadButton)
-        pageDescription.layout.addWidget(downloadBox)
-
-        # Add description to pages
-        pageScroll.setWidget(pageDescription)
-        sourceDescription.addWidget(pageStack)
-        sourceDescription.setCurrentIndex(0)
-
-        # Recurse through children
-        add_nodes(sourceName, node, treeItem, sourceDescription, textDescription, level)
+        return name, functionName, inputs
