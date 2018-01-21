@@ -1,5 +1,6 @@
-import xml.etree.ElementTree as ET
 import sys
+from os import environ
+import xml.etree.ElementTree as ET
 
 from PyQt5 import QtGui
 
@@ -97,7 +98,7 @@ class NodeStackPage(QtWidgets.QWidget):
 
     def add_widget(self, widget):
         if isinstance(widget, NodeInputBox):
-            self.read_values = widget.read_values
+            self.read_values = widget.construct_iterator
 
         self.pageDescription.layout.addWidget(widget)
 
@@ -119,8 +120,12 @@ class NodeStackPage(QtWidgets.QWidget):
 
 
 class NodeInputBox(NodePageBox):
-    def __init__(self):
+    def __init__(self, sourceName, sourceArgs, functionName):
         super().__init__("Input")
+
+        self.sourceName = sourceName
+        self.sourceArgs = {'api_key': environ.get('api_key')}
+        self.functionName = functionName
 
         self.inputs = []
 
@@ -131,6 +136,12 @@ class NodeInputBox(NodePageBox):
     def read_values(self):
         arguments = ", ".join([inputWidget.get_value() for inputWidget in self.inputs])
         return arguments
+
+    def construct_iterator(self):
+        functionArgs = self.read_values()
+
+        print( "socialreaper.{}(**{}).{}({})".format(self.sourceName, self.sourceArgs, self.functionName, functionArgs))
+
 
 
 class SourceTabs():
@@ -220,7 +231,7 @@ class SourceTabs():
             pageStack.add_widget(srFunction)
 
             # Create inputs
-            inputBox = NodeInputBox()
+            inputBox = NodeInputBox(sourceName, {}, functionName)
 
             # Add advanced box
             advancedBox = AdvancedBox()

@@ -145,9 +145,10 @@ class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):
         self.setToolTip("Ctrl + Click to deselect list items")
 
     def add_elements(self, elements):
-        for element in elements:
-            listItem = QtWidgets.QListWidgetItem(element.text, self)
-            self.addItem(listItem)
+        if elements:
+            for element in elements:
+                listItem = QtWidgets.QListWidgetItem(element.text, self)
+                self.addItem(listItem)
 
     def get_value(self):
         return json.dumps([item.text() for item in self.selectedItems()])
