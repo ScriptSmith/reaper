@@ -21,12 +21,14 @@ class NodeTree(QtWidgets.QTreeWidget):
         self.nodeStack = stack
 
     def item_clicked(self, item, col_no):
-        self.nodeStack.setCurrentIndex(item.pageIndex)
+        self.nodeStack.create_page(item, self.sourceName)
 
-    def add_item(self, name, parent=None):
+    def add_item(self, node, parent=None):
+        name = node.find('name').text
         treeItem = QtWidgets.QTreeWidgetItem()
         treeItem.setText(0, name)
         treeItem.setExpanded(True)
+        treeItem.node = node
 
         treeItem.pageIndex = self.pageIndex
         self.pageIndex += 1
@@ -71,11 +73,9 @@ class NodePageBox(QtWidgets.QGroupBox):
         self.layout.addWidget(widget)
 
 
-class NodeStackPage(QtWidgets.QWidget):
+class NodePage(QtWidgets.QWidget):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
-
-        self.read_values = lambda : print("No input added")
 
         # Add layout
         self.layout = QtWidgets.QVBoxLayout()
@@ -96,17 +96,57 @@ class NodeStackPage(QtWidgets.QWidget):
 
         self.pageScroll.setWidget(self.pageDescription)
 
-    def add_widget(self, widget):
-        if isinstance(widget, NodeInputBox):
-            self.read_values = widget.construct_iterator
+    def create_page(self, treeItem, sourceName):
+        self.clearLayout(self.pageDescription.layout)
+        node = treeItem.node
 
-        self.pageDescription.layout.addWidget(widget)
+        # Define node information
+        nodeName, functionName, inputs = self.get_node_info(node)
 
+        # Create description stack page
+        textContent = treeItem.textContent
 
-    def display_values(self, clicked):
-        print(self.read_values())
+        # Add title
+        title = QtWidgets.QLabel(treeItem.hierarchy)
+        title.setStyleSheet("font-weight: bold;")
+        self.add_widget(title)
 
-    def add_download(self):
+        # Create text description box
+        textContentLabel = QtWidgets.QLabel(textContent)
+        textContentLabel.setWordWrap(True)
+        textContentLabel.setStyleSheet("font-style: italic;")
+        textBox = NodePageBox("Text description", textContentLabel)
+        self.add_widget(textBox)
+
+        # Create socialreaper box
+        srFunctionText = QtWidgets.QLabel("{}().{}()".format(sourceName, functionName))
+        srFunction = NodePageBox("Social Reaper function", srFunctionText)
+        self.add_widget(srFunction)
+
+        # Create inputs
+        inputBox = NodeInputBox(sourceName, {}, functionName)
+
+        # Add advanced box
+        advancedBox = AdvancedBox()
+        inputBox.layout.addRow("Show all", advancedBox)
+
+        # Add input widget
+        self.add_inputs(inputs, inputBox, advancedBox)
+        self.add_widget(inputBox)
+
+        # Add download widget
+        self.add_download(inputBox)
+
+    def clearLayout(self, layout):
+        while layout.count():
+            while layout.count():
+                child = layout.takeAt(0)
+                if child.widget() is not None:
+                    child.widget().deleteLater()
+                elif child.layout() is not None:
+                    self.clearLayout(child.layout())
+
+    def add_download(self, inputBox):
         # Add download box
         downloadBox = NodePageBox("Download")
         downloadButton = QtWidgets.QPushButton("Add job", downloadBox)
@@ -115,8 +155,70 @@ class NodeStackPage(QtWidgets.QWidget):
         downloadButton.setToolTip("Add a scraping job to the job queue")
         downloadBox.layout.addRow(downloadButton)
 
-        downloadButton.clicked.connect(self.display_values)
+        downloadButton.clicked.connect(lambda : print(inputBox.construct_iterator()))
         self.add_widget(downloadBox)
+
+    def add_widget(self, widget):
+        if isinstance(widget, NodeInputBox):
+            self.read_values = widget.construct_iterator
+
+        self.pageDescription.layout.addWidget(widget)
+
+    def add_setters(self, setters, inputBox, table):
+        if setters:
+            for setter in setters:
+                setterName = setter.find('name').text
+                setterType = setter.find('type').text
+                setterValue = setter.find('value').text
+
+                setterWidget = None
+                if setterType == "counter":
+                    setterWidget = CounterSetter(int(setterValue), table, "count")
+                inputBox.layout.addRow(setterName, setterWidget)
+
+    def add_inputs(self, inputs, inputBox, advancedBox):
+        for input in inputs.findall('input'):
+            inputName = input.find('name').text
+            inputType = input.find('type').text
+            inputRequired = bool(input.attrib.get('required'))
+
+            inputWidget = None
+
+            if inputType == "text":
+                inputWidget = NodeInputLine(inputRequired, inputBox)
+
+            elif inputType == "list":
+                inputWidget = NodeInputList(inputRequired, inputBox)
+                inputWidget.add_elements(input.find('elems'))
+
+            elif inputType == "arguments":
+                # Create table
+                rows = input.find('rows')
+                argumentTable = NodeInputArgs(rows, inputRequired, inputBox)
+
+                # Add table setters
+                setters = input.find('setters')
+                self.add_setters(setters, inputBox, argumentTable)
+
+                inputWidget = argumentTable
+
+            else:
+                sys.exit("UNKNOWN WIDGET")
+
+            rowLabel = QtWidgets.QLabel(inputName)
+            rowLabel.setVisible(inputWidget.required)
+            inputBox.add_input(rowLabel, inputWidget)
+
+            if not inputWidget.required:
+                advancedBox.addRow(rowLabel, inputWidget)
+
+    @staticmethod
+    def get_node_info(node):
+        name = node.find('name').text
+        functionName = node.find('function').text
+        inputs = node.find('inputs')
+
+        return name, functionName, inputs
 
 
 class NodeInputBox(NodePageBox):
@@ -140,8 +242,7 @@ class NodeInputBox(NodePageBox):
     def construct_iterator(self):
         functionArgs = self.read_values()
 
-        print( "socialreaper.{}(**{}).{}({})".format(self.sourceName, self.sourceArgs, self.functionName, functionArgs))
-
+        print("socialreaper.{}(**{}).{}({})".format(self.sourceName, self.sourceArgs, self.functionName, functionArgs))
 
 
 class SourceTabs():
@@ -193,7 +294,7 @@ class SourceTabs():
         return nodeTree
 
     def create_node_stack(self, sourcePage):
-        sourceDescription = QtWidgets.QStackedWidget()
+        sourceDescription = NodePage()
         sourcePage.layout.addWidget(sourceDescription)
 
         return sourceDescription
@@ -203,52 +304,8 @@ class SourceTabs():
 
         nodes = parentNode.find('children')
         for node in nodes.findall('node'):
-            # Define node information
-            nodeName, functionName, inputs = self.get_node_info(node)
-
             # Create tree node
-            treeItem = treeWidget.add_item(nodeName, treeParentItem)
-
-            # Create description stack page
-            pageStack = NodeStackPage()
-            textContent = treeItem.textContent
-
-            # Add title
-            title = QtWidgets.QLabel(treeItem.hierarchy)
-            title.setStyleSheet("font-weight: bold;")
-            pageStack.add_widget(title)
-
-            # Create text description box
-            textContentLabel = QtWidgets.QLabel(textContent)
-            textContentLabel.setWordWrap(True)
-            textContentLabel.setStyleSheet("font-style: italic;")
-            textBox = NodePageBox("Text description", textContentLabel)
-            pageStack.add_widget(textBox)
-
-            # Create socialreaper box
-            srFunctionText = QtWidgets.QLabel("{}().{}()".format(sourceName, functionName))
-            srFunction = NodePageBox("Social Reaper function", srFunctionText)
-            pageStack.add_widget(srFunction)
-
-            # Create inputs
-            inputBox = NodeInputBox(sourceName, {}, functionName)
-
-            # Add advanced box
-            advancedBox = AdvancedBox()
-            inputBox.layout.addRow("Show all", advancedBox)
-
-            # Add input widget
-            self.add_inputs(inputs, inputBox, advancedBox)
-            pageStack.add_widget(inputBox)
-
-            # Add download widget
-            pageStack.add_download()
-
-            # Add page to stack
-            nodeStack.addWidget(pageStack)
-            nodeStack.setCurrentIndex(0)
-
-            # Recurse through children
+            treeItem = treeWidget.add_item(node, treeParentItem)
             self.create_nodes(sourceName, node, treeWidget, nodeStack, treeItem, textDescription)
 
     def add_setters(self, setters, inputBox, table):
