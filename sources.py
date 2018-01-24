@@ -278,6 +278,7 @@ class SourceTabs():
             topItem = nodeTree.topLevelItem(0)
             if topItem:
                 topItem.setSelected(True)
+                nodeTree.item_clicked(topItem, 0)
 
     def create_source_page(self, source):
         sourcePage = QtWidgets.QWidget()
