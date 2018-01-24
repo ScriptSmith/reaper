@@ -2,7 +2,7 @@ import sys
 from os import environ
 import xml.etree.ElementTree as ET
 
-from PyQt5 import QtGui
+from PyQt5 import QtGui, QtWidgets, QtCore
 
 from .nodewidgets import *
 
@@ -93,7 +93,7 @@ class NodePage(QtWidgets.QWidget):
 
         # Create a widget that scrolls
         self.pageDescription = QtWidgets.QWidget(self)
-        self.pageDescription.layout = QtWidgets.QFormLayout()
+        self.pageDescription.layout = QtWidgets.QVBoxLayout()
         self.pageDescription.setLayout(self.pageDescription.layout)
         self.layout.addWidget(self.pageDescription)
         self.layout.addWidget(self.pageScroll)
@@ -140,6 +140,8 @@ class NodePage(QtWidgets.QWidget):
 
         # Add download widget
         self.add_download(inputBox)
+
+        self.add_widget(QtWidgets.QSplitter(QtCore.Qt.Vertical))
 
     def clearLayout(self, layout):
         while layout.count():
