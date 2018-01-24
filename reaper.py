@@ -17,29 +17,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import pickle
 import sys
-import logging
-import tempfile
-import os
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMessageBox, QSizePolicy, QStyleFactory
-from PyQt5.QtCore import QThread, pyqtSignal, QUrl, Qt
-from PyQt5.QtGui import QDesktopServices, QTextCursor, QIcon
+from PyQt5.QtGui import QIcon
+
+from mainwindow import Ui_MainWindow
+
+from components.sources import SourceTabs
+from components.iterqueue import Queue
 
 import qdarkstyle
 
-from mainwindow import Ui_MainWindow
-from components.facebook import post as Facebook_Post
-
-from sources import SourceTabs
-
-from socialreaper import Facebook
-
 
 class Reaper(Ui_MainWindow):
-    def __init__(self, window, show=True):
+    def __init__(self, window, app, show=True):
         super().__init__()
 
         self.version = "v2.0"
@@ -48,31 +40,50 @@ class Reaper(Ui_MainWindow):
         self.window = window
         self.window.setWindowIcon(QIcon('ui/icon.png'))
 
+        self.app = app
+
         if show:
             window.show()
 
         self.setupUi(window)
 
         self.advanced_mode = False
+        self.dark_mode = False
 
         self.add_actions()
 
-        # build(self)
-        SourceTabs(self, self.source_file)
+        self.set_icons()
+
+        # Create queue page
+        self.queue = Queue(self)
+
+        # Create sources page
+        self.source_tabs = SourceTabs(self, self.source_file)
 
     def enable_advanced_mode(self, bool):
         self.advanced_mode = bool
 
+    def enable_dark_mode(self, bool):
+        if bool:
+            self.app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+        else:
+            self.app.setStyleSheet("")
+
+
     def add_actions(self):
         self.actionAdvanced_mode.toggled.connect(self.enable_advanced_mode)
+        self.actionDark_mode.toggled.connect(self.enable_dark_mode)
 
-    def crap(self):
-        self.pageTab.setLayout(QtWidgets.QVBoxLayout())
+    def set_icons(self):
+        self.queueUp.setIcon(QIcon('ui/up.png'))
+        self.queueDown.setIcon(QIcon('ui/down.png'))
+        self.queueRemove.setIcon(QIcon('ui/remove.png'))
+        self.window.setWindowIcon(QIcon('ui/icon.ico'))
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     # app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     main_window = QtWidgets.QMainWindow()
-    ui = Reaper(main_window)
+    ui = Reaper(main_window, app)
     sys.exit(app.exec_())

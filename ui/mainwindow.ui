@@ -30,7 +30,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_12">
        <property name="enabled">
@@ -768,7 +768,7 @@ background-color: transparent; /*or a colour*/
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QTableWidget" name="tableWidget">
+           <widget class="QTableWidget" name="queueTable">
             <property name="verticalScrollBarPolicy">
              <enum>Qt::ScrollBarAsNeeded</enum>
             </property>
@@ -844,7 +844,7 @@ background-color: transparent; /*or a colour*/
           <item>
            <layout class="QVBoxLayout" name="queueTools">
             <item>
-             <widget class="QToolButton" name="toolButton">
+             <widget class="QToolButton" name="queueUp">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -852,13 +852,13 @@ background-color: transparent; /*or a colour*/
                <string>...</string>
               </property>
               <property name="icon">
-               <iconset theme="up">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset>
+                <normaloff>up.png</normaloff>up.png</iconset>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="toolButton_2">
+             <widget class="QToolButton" name="queueDown">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -866,13 +866,13 @@ background-color: transparent; /*or a colour*/
                <string>...</string>
               </property>
               <property name="icon">
-               <iconset theme="down">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset>
+                <normaloff>down.png</normaloff>down.png</iconset>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="toolButton_3">
+             <widget class="QToolButton" name="queueRemove">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -880,22 +880,8 @@ background-color: transparent; /*or a colour*/
                <string>...</string>
               </property>
               <property name="icon">
-               <iconset theme="edit">
-                <normaloff>.</normaloff>.</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="toolButton_4">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset theme="remove">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset>
+                <normaloff>remove.png</normaloff>remove.png</iconset>
               </property>
              </widget>
             </item>
@@ -926,21 +912,21 @@ background-color: transparent; /*or a colour*/
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QPushButton" name="pushButton_6">
+           <widget class="QPushButton" name="queueStart">
             <property name="text">
              <string>Start</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_10">
+           <widget class="QPushButton" name="queueStop">
             <property name="text">
              <string>Stop</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_11">
+           <widget class="QPushButton" name="queueClear">
             <property name="text">
              <string>Clear</string>
             </property>
@@ -960,7 +946,10 @@ background-color: transparent; /*or a colour*/
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_5">
+           <widget class="QPushButton" name="queueSave">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Save Queue to file</string>
             </property>
@@ -1129,6 +1118,7 @@ background-color: transparent; /*or a colour*/
     <addaction name="actionAPI_Key_Database"/>
     <addaction name="separator"/>
     <addaction name="actionAdvanced_mode"/>
+    <addaction name="actionDark_mode"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -1235,6 +1225,14 @@ background-color: transparent; /*or a colour*/
   <action name="actionJob">
    <property name="text">
     <string>Job</string>
+   </property>
+  </action>
+  <action name="actionDark_mode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Dark mode</string>
    </property>
   </action>
  </widget>

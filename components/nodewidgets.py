@@ -124,7 +124,7 @@ class NodeInputArgs(QtWidgets.QTableWidget, NodeInputWidget):
         self.add_row("", "")
 
     def get_value(self):
-        return json.dumps(self.arguments)
+        return f"**{json.dumps(self.arguments)}"
 
 
 class NodeInputLine(QtWidgets.QLineEdit, NodeInputWidget):
