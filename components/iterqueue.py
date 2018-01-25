@@ -1,37 +1,49 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 import socialreaper
 
+from .queuewidgets import QueueTable
+
 class Queue(QtCore.QThread):
     def __init__(self, window):
         super().__init__()
 
         self.window = window
-        window.queueStart.clicked.connect(self.run)
-        self.iterators = []
+        window.queueStart.clicked.connect(self.start)
+        self.jobs = []
+
+        self.table = QueueTable()
+        self.window.queueLayout.addWidget(self.table)
 
     def add_iterator(self, sourceName, sourceKeys, functionName, functionArgs, outputPath):
         try:
             iterator = eval("socialreaper.{}(**{}).{}({})".format(sourceName, sourceKeys, functionName, functionArgs))
             print(iterator)
 
-            itr = {
+            job = {
                 'iterator': iterator,
                 'outputPath': outputPath,
                 'sourceName': sourceName,
+                'sourceFunction': functionName,
                 'functionArgs': functionArgs,
-                'sourceKeys': sourceKeys
+                'sourceKeys': sourceKeys,
+                'status': 'queued'
             }
 
-            self.iterators.append(itr)
+            self.jobs.append(job)
         except Exception as e:
             print(f"Error occurred adding iterator\n{e}")
+
+        self.display_table()
+
+    def display_table(self):
+        self.table.display_jobs(self.jobs)
 
     def test(self):
         print("Hello")
 
     def run(self):
         print("Running")
-        for job in self.iterators:
+        for job in self.jobs:
             for datum in job.get('iterator'):
                 print(datum)
 
