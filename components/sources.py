@@ -61,10 +61,10 @@ class NodeTree(QtWidgets.QTreeWidget):
 
 
 class NodePageBox(QtWidgets.QGroupBox):
-    def __init__(self, title, content=None, parent=None):
+    def __init__(self, title, content=None, layout=QtWidgets.QVBoxLayout, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
-        self.layout = QtWidgets.QFormLayout()
+        self.layout = layout()
         self.setLayout(self.layout)
 
         self.setTitle(title)
@@ -159,7 +159,7 @@ class NodePage(QtWidgets.QWidget):
         downloadButton.setSizePolicy(
             QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed))
         downloadButton.setToolTip("Add a scraping job to the job queue")
-        downloadBox.layout.addRow(downloadButton)
+        downloadBox.layout.addWidget(downloadButton)
 
         downloadButton.clicked.connect(inputBox.construct_iterator)
         self.add_widget(downloadBox)
@@ -229,7 +229,7 @@ class NodePage(QtWidgets.QWidget):
 
 class NodePageInputBox(NodePageBox):
     def __init__(self, sourceName, sourceArgs, queue, functionName):
-        super().__init__("Input")
+        super().__init__("Input", layout=QtWidgets.QFormLayout)
 
         self.queue = queue
 
