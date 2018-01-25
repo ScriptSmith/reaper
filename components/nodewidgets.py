@@ -1,10 +1,11 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 
 from collections import OrderedDict
 import json
 
 
 class NodeInputWidget():
+    containsValue = QtCore.pyqtSignal(bool)
     def __init__(self, required=True):
         self.required = required
         self.setVisible(self.required)
@@ -132,8 +133,17 @@ class NodeInputLine(QtWidgets.QLineEdit, NodeInputWidget):
         QtWidgets.QWidget.__init__(self, parent)
         NodeInputWidget.__init__(self, required=required)
 
+        self.textChanged.connect(self.value_changed)
+
     def get_value(self):
         return json.dumps(self.text())
+
+    def value_changed(self, text):
+        if text:
+            self.containsValue.emit(True)
+        else:
+            self.containsValue.emit(False)
+
 
 
 class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):

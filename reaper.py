@@ -38,7 +38,6 @@ class Reaper(Ui_MainWindow):
         self.source_file = 'sources.xml'
 
         self.window = window
-        self.window.setWindowIcon(QIcon('ui/icon.png'))
 
         self.app = app
 
@@ -46,6 +45,9 @@ class Reaper(Ui_MainWindow):
             window.show()
 
         self.setupUi(window)
+
+        self.window.setWindowIcon(QIcon('ui/icon.png'))
+        self.window.setWindowTitle(f"Reaper {self.version}")
 
         self.advanced_mode = False
         self.dark_mode = False

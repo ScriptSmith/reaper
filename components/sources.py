@@ -155,6 +155,7 @@ class NodePage(QtWidgets.QWidget):
     def add_download(self, inputBox):
         # Add download box
         downloadBox = NodePageBox("Download")
+        downloadBox.setEnabled(False)
         downloadButton = QtWidgets.QPushButton("Add job", downloadBox)
         downloadButton.setSizePolicy(
             QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed))
@@ -162,6 +163,7 @@ class NodePage(QtWidgets.QWidget):
         downloadBox.layout.addWidget(downloadButton)
 
         downloadButton.clicked.connect(inputBox.construct_iterator)
+        inputBox.downloadBox = downloadBox
         self.add_widget(downloadBox)
 
     def add_widget(self, widget):
@@ -217,6 +219,8 @@ class NodePage(QtWidgets.QWidget):
 
             if not inputWidget.required:
                 advancedBox.addRow(rowLabel, inputWidget)
+            else:
+                inputBox.add_required(inputWidget)
 
     @staticmethod
     def get_node_info(node):
@@ -233,11 +237,14 @@ class NodePageInputBox(NodePageBox):
 
         self.queue = queue
 
+        self.downloadBox = None
+
         self.sourceName = sourceName
         self.sourceArgs = {'api_key': environ.get('api_key')}
         self.functionName = functionName
 
         self.inputs = []
+        self.required = []
 
     def add_input(self, name, input):
         self.layout.addRow(name, input)
@@ -251,6 +258,22 @@ class NodePageInputBox(NodePageBox):
         functionArgs = self.read_values()
         self.queue.add_iterator(self.sourceName, self.sourceArgs, self.functionName, functionArgs, "C:")
 
+    def add_required(self, input):
+        self.required.append(False)
+        required_i = len(self.required) - 1
+
+        input.containsValue.connect(lambda bool: self.required_changed(required_i, bool) )
+
+    def required_changed(self, i, bool):
+        if i < len(self.required):
+            self.required[i] = bool
+
+        for req in self.required:
+            if not req:
+                self.downloadBox.setEnabled(False)
+                return
+
+        self.downloadBox.setEnabled(True)
 
 class SourceTabs():
     def __init__(self, window, sourceFile):
