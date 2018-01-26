@@ -180,6 +180,19 @@ class CounterSetter(QtWidgets.QSpinBox):
         self.table.set_argument(self.argument, value)
         self.table.fill_table()
 
+class CheckboxSetter(QtWidgets.QCheckBox):
+    def __init__(self, value, table, argument, parent=None):
+        QtWidgets.QWidget.__init__(self, parent)
+
+        self.table = table
+        self.argument = argument
+        self.toggled.connect(self.set_arg)
+        self.setEnabled(value)
+
+    def set_arg(self, value):
+        self.table.set_argument(self.argument, str(value))
+        self.table.fill_table()
+
 class AdvancedBox(QtWidgets.QCheckBox):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)

@@ -176,12 +176,16 @@ class NodePage(QtWidgets.QWidget):
         if setters:
             for setter in setters:
                 setterName = setter.find('name').text
+                setterArg = setter.find('argument').text
                 setterType = setter.find('type').text
                 setterValue = setter.find('value').text
 
                 setterWidget = None
                 if setterType == "counter":
-                    setterWidget = CounterSetter(int(setterValue), table, "count")
+                    setterWidget = CounterSetter(int(setterValue), table, setterArg)
+
+                elif setterType == "checkbox":
+                    setterWidget = CheckboxSetter(bool(setterValue), table, setterArg)
                 inputBox.layout.addRow(setterName, setterWidget)
 
     def add_inputs(self, inputs, inputBox, advancedBox):
