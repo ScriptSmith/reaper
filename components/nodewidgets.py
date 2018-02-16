@@ -33,7 +33,7 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
         self.radioCSV = QtWidgets.QRadioButton("Read CSV")
         self.radioCSV.setChecked(self.csvInput)
         self.radioCSV.toggled.connect(self.set_mode)
-        self.radioLines = QtWidgets.QRadioButton("Read Lines")
+        self.radioLines = QtWidgets.QRadioButton("Read Text")
         self.radioLayout.addWidget(self.radioCSV)
         self.radioLayout.addWidget(self.radioLines)
 
@@ -71,6 +71,7 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
 
         self.listWidget = QtWidgets.QListWidget()
         inputWidget.layout.addRow(self.listWidget)
+        self.listWidget.setSelectionMode(self.listWidget.NoSelection)
 
         self.centralWidget.layout.addWidget(inputWidget)
 
