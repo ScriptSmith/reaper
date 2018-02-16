@@ -76,11 +76,12 @@ class NodePageBox(QtWidgets.QGroupBox):
 
 
 class NodePage(QtWidgets.QWidget):
-    def __init__(self, queue, queueTable, primaryInputWindow, parent=None):
+    def __init__(self, mainWindow, primaryInputWindow, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
-        self.queue = queue
-        self.queue_table = queueTable
+        self.mainWindow = mainWindow
+        self.queue = mainWindow.queue
+        self.queue_table = mainWindow.queue_table
         self.primaryInputWindow = primaryInputWindow
 
         # Add layout
@@ -140,6 +141,9 @@ class NodePage(QtWidgets.QWidget):
         # Add input widget
         self.add_inputs(inputs, inputBox, advancedBox)
         self.add_widget(inputBox)
+
+        if self.mainWindow.advanced_mode:
+            advancedBox.toggle()
 
         # Add download widget
         self.add_download(inputBox)
@@ -326,7 +330,7 @@ class SourceTabs():
             nodeTree = NodeTree(sourceName)
             sourcePage.layout.addWidget(nodeTree)
 
-            nodePage = NodePage(self.mainWindow.queue, self.mainWindow.queue_table, self.primaryInputWindow)
+            nodePage = NodePage(self.mainWindow, self.primaryInputWindow)
             sourcePage.layout.addWidget(nodePage)
 
             nodeTree.setPage(nodePage)

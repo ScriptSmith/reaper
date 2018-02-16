@@ -365,7 +365,7 @@ class AdvancedBox(QtWidgets.QCheckBox):
 
         self.child_items = []
 
-        self.stateChanged.connect(self.changeVisibility)
+        self.toggled.connect(self.changeVisibility)
 
     def addRow(self, label, widget):
         self.child_items.append(label)
@@ -373,4 +373,4 @@ class AdvancedBox(QtWidgets.QCheckBox):
 
     def changeVisibility(self, state):
         for item in self.child_items:
-            item.setVisible(not item.isVisible())
+            item.setVisible(state)
