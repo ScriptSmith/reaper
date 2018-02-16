@@ -30,7 +30,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_12">
        <property name="enabled">
@@ -812,6 +812,52 @@ background-color: transparent; /*or a colour*/
              </widget>
             </item>
             <item>
+             <widget class="QTableWidget" name="tableWidget">
+              <attribute name="horizontalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderCascadingSectionResizes">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>false</bool>
+              </attribute>
+              <row>
+               <property name="text">
+                <string>New Row</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>New Row</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>New Row</string>
+               </property>
+              </row>
+              <column>
+               <property name="text">
+                <string>New Column</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>a</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>a</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
              <spacer name="verticalSpacer">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -995,6 +1041,9 @@ background-color: transparent; /*or a colour*/
      <string>File</string>
     </property>
     <widget class="QMenu" name="menuOpen">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>Open</string>
      </property>
@@ -1012,6 +1061,9 @@ background-color: transparent; /*or a colour*/
      <addaction name="menuBackups"/>
     </widget>
     <widget class="QMenu" name="menuSave">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>Save</string>
      </property>
@@ -1087,6 +1139,9 @@ background-color: transparent; /*or a colour*/
    </property>
   </action>
   <action name="actionSettings">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Settings</string>
    </property>
@@ -1121,11 +1176,17 @@ background-color: transparent; /*or a colour*/
    </property>
   </action>
   <action name="actionHistory_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>History</string>
    </property>
   </action>
   <action name="actionAPI_Key_Database">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>API Key Database</string>
    </property>

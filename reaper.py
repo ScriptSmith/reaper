@@ -83,6 +83,7 @@ class Reaper(Ui_MainWindow):
     def add_actions(self):
         self.actionAdvanced_mode.toggled.connect(self.enable_advanced_mode)
         self.actionDark_mode.toggled.connect(self.enable_dark_mode)
+        self.actionQuit.triggered.connect(self.quit)
 
     def set_icons(self):
         self.queueUp.setIcon(QIcon('ui/up.png'))
@@ -90,10 +91,12 @@ class Reaper(Ui_MainWindow):
         self.queueRemove.setIcon(QIcon('ui/remove.png'))
         self.window.setWindowIcon(QIcon('ui/icon.ico'))
 
+    def quit(self, _):
+        self.app.quit()
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    # app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     main_window = QtWidgets.QMainWindow()
     ui = Reaper(main_window, app)
     sys.exit(app.exec_())
