@@ -1,4 +1,4 @@
-# Reaper
+# Reaper v1
 ![Input screenshot](img/both.png)
 
 [Documentation](https://reaper.readthedocs.io)
