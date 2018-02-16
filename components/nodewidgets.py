@@ -13,7 +13,6 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
         self.csvInput = True
         self.filePath = ""
 
-
         self.setup_ui()
         # self.setFixedSize(300, 300)
 
@@ -287,11 +286,12 @@ class NodeInputPrimary(NodeInputLine):
         self.readingText = "Reading from file"
         self.data = []
 
-        clearAction = self.addAction(QtGui.QIcon('ui/remove.png'), self.TrailingPosition)
-        clearAction.triggered.connect(self.clear_file)
+        self.readAction = self.addAction(QtGui.QIcon('ui/read.png'), self.TrailingPosition)
+        self.readAction.triggered.connect(self.add_file)
 
-        addAction = self.addAction(QtGui.QIcon('ui/add.png'), self.TrailingPosition)
-        addAction.triggered.connect(self.add_file)
+        self.clearAction = self.addAction(QtGui.QIcon('ui/remove.png'), self.TrailingPosition)
+        self.clearAction.triggered.connect(self.clear_file)
+        self.clearAction.setVisible(False)
 
         self.textChanged.connect(self.updateText)
 
@@ -300,12 +300,16 @@ class NodeInputPrimary(NodeInputLine):
         self.window.show()
 
     def clear_file(self, _):
+        self.readAction.setVisible(True)
+        self.clearAction.setVisible(False)
         self.setReadOnly(False)
         self.setText("")
         self.setStyleSheet("")
         self.data.clear()
 
     def read_file(self, data):
+        self.readAction.setVisible(False)
+        self.clearAction.setVisible(True)
         self.setReadOnly(True)
         self.setText(self.readingText)
         self.setStyleSheet("background-color: #d0d4db")

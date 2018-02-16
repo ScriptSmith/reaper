@@ -267,7 +267,7 @@ class NodePageDownloadBox(NodePageBox):
 
     def add_name(self):
         self.fileName = QtWidgets.QLineEdit()
-        self.fileName.setToolTip("Adding {key} to the file path will replace the {key} with the primary key")
+        self.fileName.setToolTip("Adding {key} to the file name will replace the {key} with the primary key")
         self.fileName.setText(".csv")
         self.layout.addRow("File name", self.fileName)
 
