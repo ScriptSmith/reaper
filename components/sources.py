@@ -76,10 +76,12 @@ class NodePageBox(QtWidgets.QGroupBox):
 
 
 class NodePage(QtWidgets.QWidget):
-    def __init__(self, queue, parent=None):
+    def __init__(self, queue, queueTable, primaryInputWindow, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
         self.queue = queue
+        self.queue_table = queueTable
+        self.primaryInputWindow = primaryInputWindow
 
         # Add layout
         self.layout = QtWidgets.QVBoxLayout()
@@ -128,7 +130,8 @@ class NodePage(QtWidgets.QWidget):
         self.add_widget(srFunction)
 
         # Create inputs
-        inputBox = NodePageInputBox(sourceName, {}, self.queue, functionName)
+        inputBox = NodePageInputBox(sourceName, self.queue, self.queue_table, functionName)
+        inputBox.add_iterator.connect(self.queue.add_iterator)
 
         # Add advanced box
         advancedBox = AdvancedBox()
@@ -196,7 +199,10 @@ class NodePage(QtWidgets.QWidget):
 
             inputWidget = None
 
-            if inputType == "text":
+            if inputType == "primary":
+                inputWidget = NodeInputPrimary(self.primaryInputWindow, inputBox)
+
+            elif inputType == "text":
                 inputWidget = NodeInputLine(inputRequired, inputBox)
 
             elif inputType == "list":
@@ -236,10 +242,15 @@ class NodePage(QtWidgets.QWidget):
 
 
 class NodePageInputBox(NodePageBox):
-    def __init__(self, sourceName, sourceArgs, queue, functionName):
+    add_iterator = QtCore.pyqtSignal(list)
+
+    def __init__(self, sourceName, queue, queueTable, functionName):
         super().__init__("Input", layout=QtWidgets.QFormLayout)
 
         self.queue = queue
+        self.queueTable = queueTable
+
+        self.queue.job_table.connect(self.queueTable.display_jobs)
 
         self.downloadBox = None
 
@@ -255,18 +266,26 @@ class NodePageInputBox(NodePageBox):
         self.inputs.append(input)
 
     def read_values(self):
-        arguments = ", ".join([inputWidget.get_value() for inputWidget in self.inputs])
-        return arguments
+        primary_keys = self.inputs[0].get_value()
+        jobs = []
+        for primary_key in primary_keys:
+            arguments = ", ".join([inputWidget.get_value() for inputWidget in self.inputs[1:]])
+            arguments = primary_key + ", " + arguments
+            jobs.append(arguments)
+        return jobs
 
     def construct_iterator(self):
         functionArgs = self.read_values()
-        self.queue.add_iterator(self.sourceName, self.sourceArgs, self.functionName, functionArgs, "C:")
+        details = [(self.sourceName, self.sourceArgs, self.functionName, args, "C:") for args in functionArgs]
+        self.add_iterator.emit(details)
+        # self.queue.add_iterator(self.sourceName, self.sourceArgs, self.functionName, functionArgs, "C:")
+        # self.queueTable.display_jobs(self.jobs)
 
     def add_required(self, input):
         self.required.append(False)
         required_i = len(self.required) - 1
 
-        input.containsValue.connect(lambda bool: self.required_changed(required_i, bool) )
+        input.containsValue.connect(lambda bool: self.required_changed(required_i, bool))
 
     def required_changed(self, i, bool):
         if i < len(self.required):
@@ -279,9 +298,11 @@ class NodePageInputBox(NodePageBox):
 
         self.downloadBox.setEnabled(True)
 
+
 class SourceTabs():
-    def __init__(self, window, sourceFile):
-        self.window = window
+    def __init__(self, mainWindow, sourceFile, primaryInputWindow):
+        self.mainWindow = mainWindow
+        self.primaryInputWindow = primaryInputWindow
         self.sourceFile = sourceFile
 
         self.sources = self.read_sources()
@@ -301,8 +322,13 @@ class SourceTabs():
     def add_sources(self):
         for source in self.sources:
             sourcePage, sourceName = self.create_source_page(source)
-            nodeTree = self.create_node_tree(sourcePage, sourceName)
-            nodePage = self.create_node_page(sourcePage, self.window.queue)
+
+            nodeTree = NodeTree(sourceName)
+            sourcePage.layout.addWidget(nodeTree)
+
+            nodePage = NodePage(self.mainWindow.queue, self.mainWindow.queue_table, self.primaryInputWindow)
+            sourcePage.layout.addWidget(nodePage)
+
             nodeTree.setPage(nodePage)
 
             # Add source nodes to sourceTree and sourceDescription
@@ -317,22 +343,11 @@ class SourceTabs():
     def create_source_page(self, source):
         sourcePage = QtWidgets.QWidget()
         sourceName = source.find('name').text
-        self.window.sourcesTabs.addTab(sourcePage, sourceName)
+        self.mainWindow.sourcesTabs.addTab(sourcePage, sourceName)
         sourcePage.layout = QtWidgets.QHBoxLayout()
         sourcePage.setLayout(sourcePage.layout)
 
         return sourcePage, sourceName
-
-    def create_node_tree(self, sourcePage, sourceName):
-        nodeTree = NodeTree(sourceName)
-        sourcePage.layout.addWidget(nodeTree)
-        return nodeTree
-
-    def create_node_page(self, sourcePage, queue):
-        sourceDescription = NodePage(queue)
-        sourcePage.layout.addWidget(sourceDescription)
-
-        return sourceDescription
 
     def create_nodes(self, sourceName, parentNode, treeWidget, nodeStack, treeParentItem=None,
                      textDescription=""):

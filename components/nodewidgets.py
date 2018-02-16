@@ -1,11 +1,142 @@
-from PyQt5 import QtWidgets, QtCore
+import csv
+
+from PyQt5 import QtWidgets, QtCore, QtGui
 
 from collections import OrderedDict
 import json
 
 
+class PrimaryInputWindow(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super(PrimaryInputWindow, self).__init__(parent)
+
+        self.csvInput = True
+        self.filePath = ""
+
+
+        self.setup_ui()
+        # self.setFixedSize(300, 300)
+
+    def setup_ui(self):
+        self.setWindowTitle("Read from file")
+
+        self.centralWidget = QtWidgets.QWidget(self)
+        self.centralWidget.layout = QtWidgets.QHBoxLayout()
+        self.centralWidget.setLayout(self.centralWidget.layout)
+        self.setCentralWidget(self.centralWidget)
+
+        # Add radio boxes
+        self.radioBox = QtWidgets.QWidget()
+        self.radioLayout = QtWidgets.QVBoxLayout()
+        self.radioBox.layout = self.radioLayout
+        self.radioBox.setLayout(self.radioBox.layout)
+
+        self.radioCSV = QtWidgets.QRadioButton("Read CSV")
+        self.radioCSV.setChecked(self.csvInput)
+        self.radioCSV.toggled.connect(self.set_mode)
+        self.radioLines = QtWidgets.QRadioButton("Read Lines")
+        self.radioLayout.addWidget(self.radioCSV)
+        self.radioLayout.addWidget(self.radioLines)
+
+        openButton = QtWidgets.QPushButton("Open file")
+        openButton.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        openButton.clicked.connect(self.open_file)
+        self.radioBox.layout.addWidget(openButton)
+
+        self.radioLayout.addStretch(1)
+
+        self.centralWidget.layout.addWidget(self.radioBox)
+
+        # Add OK button
+        self.okButton = QtWidgets.QPushButton("OK")
+        self.okButton.clicked.connect(self.return_data)
+        self.radioBox.layout.addWidget(self.okButton)
+
+        # Add input widget
+        inputWidget = QtWidgets.QWidget()
+        inputWidget.layout = QtWidgets.QFormLayout()
+        inputWidget.setLayout(inputWidget.layout)
+
+        self.filePathLabel = QtWidgets.QLabel()
+        self.filePathLabel.setVisible(False)
+        self.filePathLabel.setStyleSheet("font-style: italic;")
+        inputWidget.layout.addRow(self.filePathLabel)
+
+        self.columnName = QtWidgets.QLineEdit()
+        self.columnName.setPlaceholderText("Column name")
+
+        self.extractButton = QtWidgets.QPushButton("Read")
+        self.extractButton.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        self.extractButton.clicked.connect(self.extract_file)
+        inputWidget.layout.addRow(self.columnName, self.extractButton)
+
+        self.listWidget = QtWidgets.QListWidget()
+        inputWidget.layout.addRow(self.listWidget)
+
+        self.centralWidget.layout.addWidget(inputWidget)
+
+    def open_file(self, _):
+        print("opening file")
+        options = QtWidgets.QFileDialog.Options()
+
+        title = "Open file"
+        directory = ""
+        filter = "CSV Files (*.csv);;" if self.csvInput else ""
+        filter += "All Files (*)"
+
+        filePath, _ = QtWidgets.QFileDialog.getOpenFileName(caption=title, directory=directory, filter=filter,
+                                                            options=options)
+        if filePath:
+            self.filePath = filePath
+            self.filePathLabel.setVisible(True)
+            self.filePathLabel.setText(self.filePath)
+
+            if not self.csvInput:
+                self.extract_file()
+
+    def set_mode(self, bool):
+        self.csvInput = bool
+
+        self.listWidget.clear()
+        self.filePathLabel.setText("")
+        self.extractButton.setVisible(bool)
+        self.columnName.setVisible(bool)
+
+    def extract_file(self):
+        if not self.filePath:
+            return
+
+        self.listWidget.clear()
+
+        if self.csvInput:
+            self.extract_csv()
+        else:
+            self.extract_lines()
+
+    def extract_csv(self):
+        with open(self.filePath, 'r', encoding='utf8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                datum = row.get(self.columnName.text())
+                if datum:
+                    self.listWidget.addItem(str(datum))
+
+    def extract_lines(self):
+        with open(self.filePath, 'r', encoding='utf8') as f:
+            lines = f.readlines()
+
+            for line in lines:
+                self.listWidget.addItem(line.strip())
+
+    def return_data(self):
+        data = [self.listWidget.item(i).text() for i in range(self.listWidget.count())]
+        self.return_function(data)
+        self.hide()
+
+
 class NodeInputWidget():
     containsValue = QtCore.pyqtSignal(bool)
+
     def __init__(self, required=True):
         self.required = required
         self.setVisible(self.required)
@@ -145,6 +276,39 @@ class NodeInputLine(QtWidgets.QLineEdit, NodeInputWidget):
             self.containsValue.emit(False)
 
 
+class NodeInputPrimary(NodeInputLine):
+    def __init__(self, window, parent=None):
+        NodeInputLine.__init__(self, required=True, parent=parent)
+
+        self.window = window
+
+        self.data = []
+
+        clearAction = self.addAction(QtGui.QIcon('ui/remove.png'), self.TrailingPosition)
+        clearAction.triggered.connect(self.clear_file)
+
+        addAction = self.addAction(QtGui.QIcon('ui/add.png'), self.TrailingPosition)
+        addAction.triggered.connect(self.add_file)
+
+    def add_file(self, _):
+        self.window.return_function = self.return_function
+        self.window.show()
+
+    def clear_file(self, _):
+        self.setReadOnly(False)
+        self.setText("")
+        self.data.clear()
+
+    def return_function(self, data):
+        self.setReadOnly(True)
+        self.setText("Reading from file")
+        self.data = data
+
+    def get_value(self):
+        if len(self.data) > 0:
+            return [json.dumps(datum) for datum in self.data]
+        else:
+            return [json.dumps(self.text())]
 
 class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):
     def __init__(self, required=None, parent=None):
@@ -180,6 +344,7 @@ class CounterSetter(QtWidgets.QSpinBox):
         self.table.set_argument(self.argument, value)
         self.table.fill_table()
 
+
 class CheckboxSetter(QtWidgets.QCheckBox):
     def __init__(self, value, table, argument, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
@@ -192,6 +357,7 @@ class CheckboxSetter(QtWidgets.QCheckBox):
     def set_arg(self, value):
         self.table.set_argument(self.argument, str(value))
         self.table.fill_table()
+
 
 class AdvancedBox(QtWidgets.QCheckBox):
     def __init__(self, parent=None):

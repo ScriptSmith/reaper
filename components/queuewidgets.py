@@ -13,6 +13,8 @@ class QueueTable(QtWidgets.QTableWidget):
         self.setColumnCount(6)
         self.setRowCount(1)
         self.setHorizontalHeaderLabels(['Source', 'Function', 'Parameters', 'API Keys', 'Path', 'Status'])
+        # self.horizontalHeader().setStretchLastSection(True)
+        self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
     def display_jobs(self, jobs):
         self.setEnabled(True)
@@ -31,5 +33,17 @@ class QueueTable(QtWidgets.QTableWidget):
             self.setItem(row, 3, sourceKeys)
             self.setItem(row, 4, outputPath)
             self.setItem(row, 5, status)
+
+    def pause_jobs(self):
+        pass
+
+    def play_jobs(self):
+        pass
+
+    def delete_job(self):
+        pass
+
+    def clear_jobs(self):
+        pass
 
         # self.selectRow(0)

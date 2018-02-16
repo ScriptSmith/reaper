@@ -26,6 +26,8 @@ from mainwindow import Ui_MainWindow
 
 from components.sources import SourceTabs
 from components.iterqueue import Queue
+from components.queuewidgets import QueueTable
+from components.nodewidgets import PrimaryInputWindow
 
 import qdarkstyle
 
@@ -54,13 +56,20 @@ class Reaper(Ui_MainWindow):
 
         self.add_actions()
 
-        self.set_icons()
-
         # Create queue page
         self.queue = Queue(self)
+        self.set_icons()
+
+        # Create queue table
+        self.queue_table = QueueTable()
+        self.queueLayout.addWidget(self.queue_table)
+
+        # Create window for primary key input
+        self.primaryInputWindow = PrimaryInputWindow(window)
 
         # Create sources page
-        self.source_tabs = SourceTabs(self, self.source_file)
+        self.source_tabs = SourceTabs(self, self.source_file, self.primaryInputWindow)
+
 
     def enable_advanced_mode(self, bool):
         self.advanced_mode = bool
@@ -70,7 +79,6 @@ class Reaper(Ui_MainWindow):
             self.app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
         else:
             self.app.setStyleSheet("")
-
 
     def add_actions(self):
         self.actionAdvanced_mode.toggled.connect(self.enable_advanced_mode)
