@@ -30,7 +30,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_12">
        <property name="enabled">
@@ -292,7 +292,7 @@ background-color: transparent; /*or a colour*/
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1021</width>
+             <width>256</width>
              <height>828</height>
             </rect>
            </property>
@@ -809,52 +809,6 @@ background-color: transparent; /*or a colour*/
                <iconset>
                 <normaloff>remove.png</normaloff>remove.png</iconset>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTableWidget" name="tableWidget">
-              <attribute name="horizontalHeaderVisible">
-               <bool>false</bool>
-              </attribute>
-              <attribute name="horizontalHeaderCascadingSectionResizes">
-               <bool>false</bool>
-              </attribute>
-              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-               <bool>false</bool>
-              </attribute>
-              <attribute name="horizontalHeaderStretchLastSection">
-               <bool>false</bool>
-              </attribute>
-              <row>
-               <property name="text">
-                <string>New Row</string>
-               </property>
-              </row>
-              <row>
-               <property name="text">
-                <string>New Row</string>
-               </property>
-              </row>
-              <row>
-               <property name="text">
-                <string>New Row</string>
-               </property>
-              </row>
-              <column>
-               <property name="text">
-                <string>New Column</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>a</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>a</string>
-               </property>
-              </column>
              </widget>
             </item>
             <item>

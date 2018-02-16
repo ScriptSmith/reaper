@@ -1,5 +1,5 @@
 import sys
-from os import environ
+from os import environ, getcwd, sep, path
 import xml.etree.ElementTree as ET
 
 from PyQt5 import QtGui, QtWidgets, QtCore
@@ -146,7 +146,13 @@ class NodePage(QtWidgets.QWidget):
             advancedBox.toggle()
 
         # Add download widget
-        self.add_download(inputBox)
+        downloadBox = NodePageDownloadBox(inputBox)
+        self.add_widget(downloadBox)
+
+        inputBox.path_function = downloadBox.get_path
+
+        # Add primary key listener
+        inputBox.primary.fileText.connect(downloadBox.set_path)
 
         self.add_widget(QtWidgets.QSplitter(QtCore.Qt.Vertical))
 
@@ -158,20 +164,6 @@ class NodePage(QtWidgets.QWidget):
                     child.widget().deleteLater()
                 elif child.layout() is not None:
                     self.clearLayout(child.layout())
-
-    def add_download(self, inputBox):
-        # Add download box
-        downloadBox = NodePageBox("Download")
-        downloadBox.setEnabled(False)
-        downloadButton = QtWidgets.QPushButton("Add job", downloadBox)
-        downloadButton.setSizePolicy(
-            QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed))
-        downloadButton.setToolTip("Add a scraping job to the job queue")
-        downloadBox.layout.addWidget(downloadButton)
-
-        downloadButton.clicked.connect(inputBox.construct_iterator)
-        inputBox.downloadBox = downloadBox
-        self.add_widget(downloadBox)
 
     def add_widget(self, widget):
         if isinstance(widget, NodePageInputBox):
@@ -245,6 +237,70 @@ class NodePage(QtWidgets.QWidget):
         return name, functionName, inputs
 
 
+class NodePageDownloadBox(NodePageBox):
+    def __init__(self, inputBox):
+        super().__init__("Download", layout=QtWidgets.QFormLayout)
+
+        self.setEnabled(False)
+        self.add_path()
+        self.add_name()
+        self.add_button(inputBox)
+
+        inputBox.downloadBox = self
+
+    def add_path(self):
+        pathWidget = QtWidgets.QWidget()
+        pathWidget.layout = QtWidgets.QHBoxLayout()
+        pathWidget.setLayout(pathWidget.layout)
+        pathWidget.layout.setContentsMargins(0, 0, 0, 0)
+
+        self.dirPath = QtWidgets.QLabel(getcwd())
+        pathWidget.layout.addWidget(self.dirPath)
+
+        pathWidget.layout.addStretch(1)
+
+        self.pathButton = QtWidgets.QPushButton("Choose folder")
+        pathWidget.layout.addWidget(self.pathButton)
+        self.pathButton.clicked.connect(self.open_dir)
+
+        self.layout.addRow("Folder", pathWidget)
+
+    def add_name(self):
+        self.fileName = QtWidgets.QLineEdit()
+        self.fileName.setToolTip("Adding {key} to the file path will replace the {key} with the primary key")
+        self.fileName.setText(".csv")
+        self.layout.addRow("File name", self.fileName)
+
+    def add_button(self, inputBox):
+        downloadButton = QtWidgets.QPushButton("Add job", self)
+
+        downloadButton.setSizePolicy(
+            QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed))
+        downloadButton.setToolTip("Add a scraping job to the job queue")
+        self.layout.addWidget(downloadButton)
+
+        downloadButton.clicked.connect(inputBox.construct_iterator)
+
+    def get_path(self):
+        dir = self.dirPath.text()
+        file = self.fileName.text()
+        return dir + sep + file
+
+    def set_path(self, text):
+        self.fileName.setText(text + ".csv")
+
+    def open_dir(self, _):
+        print("opening dir")
+        options = QtWidgets.QFileDialog.Options()
+
+        title = "Open folder"
+        directory = ""
+
+        dirPath = QtWidgets.QFileDialog.getExistingDirectory(caption=title, directory=directory, options=options)
+        if dirPath:
+            self.dirPath.setText(path.abspath(dirPath))
+
+
 class NodePageInputBox(NodePageBox):
     add_iterator = QtCore.pyqtSignal(list)
 
@@ -266,24 +322,30 @@ class NodePageInputBox(NodePageBox):
         self.required = []
 
     def add_input(self, name, input):
+        if isinstance(input, NodeInputPrimary):
+            self.primary = input
         self.layout.addRow(name, input)
         self.inputs.append(input)
 
     def read_values(self):
-        primary_keys = self.inputs[0].get_value()
+        primary_keys = self.primary.get_value()
         jobs = []
         for primary_key in primary_keys:
             arguments = ", ".join([inputWidget.get_value() for inputWidget in self.inputs[1:]])
             arguments = primary_key + ", " + arguments
-            jobs.append(arguments)
+            jobs.append((primary_key.replace('"',""), arguments))
         return jobs
 
     def construct_iterator(self):
-        functionArgs = self.read_values()
-        details = [(self.sourceName, self.sourceArgs, self.functionName, args, "C:") for args in functionArgs]
+        filePathKey = self.path_function()
+
+        details = []
+
+        for primary_key, args in self.read_values():
+            filePath = filePathKey.replace("{key}", primary_key)
+            details.append((self.sourceName, self.sourceArgs, self.functionName, args, filePath))
+
         self.add_iterator.emit(details)
-        # self.queue.add_iterator(self.sourceName, self.sourceArgs, self.functionName, functionArgs, "C:")
-        # self.queueTable.display_jobs(self.jobs)
 
     def add_required(self, input):
         self.required.append(False)

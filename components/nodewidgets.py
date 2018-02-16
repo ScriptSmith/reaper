@@ -130,7 +130,7 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
 
     def return_data(self):
         data = [self.listWidget.item(i).text() for i in range(self.listWidget.count())]
-        self.return_function(data)
+        self.read_file(data)
         self.hide()
 
 
@@ -277,11 +277,14 @@ class NodeInputLine(QtWidgets.QLineEdit, NodeInputWidget):
 
 
 class NodeInputPrimary(NodeInputLine):
+    fileText = QtCore.pyqtSignal(str)
+
     def __init__(self, window, parent=None):
         NodeInputLine.__init__(self, required=True, parent=parent)
 
         self.window = window
 
+        self.readingText = "Reading from file"
         self.data = []
 
         clearAction = self.addAction(QtGui.QIcon('ui/remove.png'), self.TrailingPosition)
@@ -290,18 +293,22 @@ class NodeInputPrimary(NodeInputLine):
         addAction = self.addAction(QtGui.QIcon('ui/add.png'), self.TrailingPosition)
         addAction.triggered.connect(self.add_file)
 
+        self.textChanged.connect(self.updateText)
+
     def add_file(self, _):
-        self.window.return_function = self.return_function
+        self.window.read_file = self.read_file
         self.window.show()
 
     def clear_file(self, _):
         self.setReadOnly(False)
         self.setText("")
+        self.setStyleSheet("")
         self.data.clear()
 
-    def return_function(self, data):
+    def read_file(self, data):
         self.setReadOnly(True)
-        self.setText("Reading from file")
+        self.setText(self.readingText)
+        self.setStyleSheet("background-color: #d0d4db")
         self.data = data
 
     def get_value(self):
@@ -309,6 +316,13 @@ class NodeInputPrimary(NodeInputLine):
             return [json.dumps(datum) for datum in self.data]
         else:
             return [json.dumps(self.text())]
+
+    def updateText(self, text):
+        if text == self.readingText:
+            self.fileText.emit("{key}")
+        else:
+            self.fileText.emit(text)
+
 
 class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):
     def __init__(self, required=None, parent=None):
