@@ -20,12 +20,12 @@ class QueueTable(QtWidgets.QTableWidget):
         self.setEnabled(True)
         self.setRowCount(len(jobs))
         for row, job in enumerate(jobs):
-            sourceName = QtWidgets.QTableWidgetItem(job['sourceName'])
-            sourceFunction = QtWidgets.QTableWidgetItem(job['sourceFunction'])
-            functionArgs = QtWidgets.QTableWidgetItem(job['functionArgs'])
-            sourceKeys = QtWidgets.QTableWidgetItem(json.dumps(job['sourceKeys']))
-            outputPath = QtWidgets.QTableWidgetItem(job['outputPath'])
-            status = QtWidgets.QTableWidgetItem(job['status'])
+            sourceName = QtWidgets.QTableWidgetItem(job.sourceName)
+            sourceFunction = QtWidgets.QTableWidgetItem(job.sourceFunction)
+            functionArgs = QtWidgets.QTableWidgetItem(job.functionArgs)
+            sourceKeys = QtWidgets.QTableWidgetItem(json.dumps(job.sourceKeys))
+            outputPath = QtWidgets.QTableWidgetItem(job.outputPath)
+            status = QtWidgets.QTableWidgetItem(job.state.value)
 
             self.setItem(row, 0, sourceName)
             self.setItem(row, 1, sourceFunction)

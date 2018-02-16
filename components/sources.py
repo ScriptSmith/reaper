@@ -132,7 +132,7 @@ class NodePage(QtWidgets.QWidget):
 
         # Create inputs
         inputBox = NodePageInputBox(sourceName, self.queue, self.queue_table, functionName)
-        inputBox.add_iterator.connect(self.queue.add_iterator)
+        inputBox.add_iterator.connect(self.queue.add_jobs)
 
         # Add advanced box
         advancedBox = AdvancedBox()
@@ -311,6 +311,7 @@ class NodePageInputBox(NodePageBox):
         self.queueTable = queueTable
 
         self.queue.job_table.connect(self.queueTable.display_jobs)
+        # self.queue.progress_table.connect(self.progressTable.display_value)
 
         self.downloadBox = None
 
@@ -343,7 +344,9 @@ class NodePageInputBox(NodePageBox):
 
         for primary_key, args in self.read_values():
             filePath = filePathKey.replace("{key}", primary_key)
-            details.append((self.sourceName, self.sourceArgs, self.functionName, args, filePath))
+            # details.append((self.sourceName, self.sourceArgs, self.functionName, args, filePath))
+            details.append((filePath, self.sourceName, self.functionName, args, self.sourceArgs))
+            # outputPath, sourceName, functionName, functionArgs, sourceKeys
 
         self.add_iterator.emit(details)
 
