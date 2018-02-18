@@ -1,5 +1,7 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
 from enum import Enum
+
+from PyQt5 import QtWidgets, QtCore
+
 from ..job_queue import Job, JobState
 
 
@@ -17,6 +19,7 @@ class ProgressWidget(QtWidgets.QWidget):
 
         self.state = ProgressState.RUNNING
         self.job = None
+        self.show_snapshot = False
 
         self.MAX_ROWS = 20
 
@@ -59,6 +62,10 @@ class ProgressWidget(QtWidgets.QWidget):
         self.stateLabel.setText("State: " + str(self.state.value))
 
     def create_snapshot(self):
+        self.snapshotCheckBox = QtWidgets.QCheckBox("Show snapshot")
+        self.snapshotCheckBox.toggled.connect(self.toggle_snapshot)
+        self.layout.addWidget(self.snapshotCheckBox)
+
         self.snapshot = QtWidgets.QTableWidget()
         self.snapshot.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Fixed)
         self.snapshot.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Interactive)
@@ -80,7 +87,7 @@ class ProgressWidget(QtWidgets.QWidget):
         self.rowCount.setText("Rows: " + str(rows))
 
         # Reduce update rate
-        if not (rows % self.MAX_ROWS and state) == JobState.RUNNING:
+        if not (rows % self.MAX_ROWS and state) == JobState.RUNNING or not self.show_snapshot:
             return
 
         if rows > self.MAX_ROWS:
@@ -103,6 +110,11 @@ class ProgressWidget(QtWidgets.QWidget):
     def clear_snapshot(self):
         self.snapshot.setColumnCount(0)
         self.snapshot.setRowCount(0)
+
+    def toggle_snapshot(self, bool):
+        self.show_snapshot = bool
+        if not bool:
+            self.clear_snapshot()
 
     @QtCore.pyqtSlot(Job)
     def set_job(self, job):

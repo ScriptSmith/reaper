@@ -67,10 +67,19 @@ class Job():
         self.state = JobState.SAVING
         self.job_update.emit(self)
         print("Saving job")
-        socialreaper.tools.to_csv(self.data, filename=self.outputPath)
+        socialreaper.tools.to_csv(self.flat_data, filename=self.outputPath, flat=False)
         self.state = JobState.FINISHED
         self.job_update.emit(self)
         return False
+
+    def send_update(self):
+        if self.state == JobState.RUNNING:
+            if self.iterator.total % 20:
+                self.job_update.emit(self)
+            else:
+                return
+
+        self.job_update.emit(self)
 
 
 class Queue(QtCore.QThread):
