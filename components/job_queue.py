@@ -1,10 +1,8 @@
 from enum import Enum
 from time import sleep
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtCore
 import socialreaper
-
-from .queuewidgets import QueueTable
 
 
 class QueueState(Enum):
@@ -31,12 +29,22 @@ class Job():
 
         self.state = JobState.QUEUED
         self.data = []
+        self.flat_data = []
         self.keys = set()
+        self.flat_keys = set()
 
     def add_data(self, data):
         self.data.append(data)
-        if data.keys() != self.keys:
-            self.keys.update(data.keys())
+        flat_data = socialreaper.tools.flatten(data)
+        self.flat_data.append(flat_data)
+
+        keys = data.keys()
+        if keys != self.keys:
+            self.keys.update(keys)
+
+        flat_keys = flat_data.keys()
+        if flat_keys != self.flat_keys:
+            self.flat_keys.update(flat_keys)
 
     def inc_data(self):
         self.state = JobState.RUNNING
@@ -60,6 +68,8 @@ class Job():
 
 
 class Queue(QtCore.QThread):
+    job_update = QtCore.pyqtSignal(Job)
+
     job_table = QtCore.pyqtSignal(list)
 
     progress_bar = QtCore.pyqtSignal(int)
@@ -126,12 +136,12 @@ class Queue(QtCore.QThread):
     def inc_job(self):
         if len(self.jobs) > 0:
             value = self.jobs[0].inc_data()
+            self.job_update.emit(self.jobs[0])
 
             if value:
                 self.display_value(value)
             else:
                 self.jobs.pop(0)
-                self.job_table.emit(self.jobs)
 
         else:
             self.state = QueueState.STOPPED

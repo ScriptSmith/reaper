@@ -2,9 +2,7 @@ import sys
 from os import environ, getcwd, sep, path
 import xml.etree.ElementTree as ET
 
-from PyQt5 import QtGui, QtWidgets, QtCore
-
-from .nodewidgets import *
+from components.widgets.nodes import *
 
 
 class NodeTree(QtWidgets.QTreeWidget):

@@ -25,9 +25,10 @@ from PyQt5.QtGui import QIcon
 from mainwindow import Ui_MainWindow
 
 from components.sources import SourceTabs
-from components.iterqueue import Queue
-from components.queuewidgets import QueueTable
-from components.nodewidgets import PrimaryInputWindow
+from components.job_queue import Queue
+from components.widgets.queue import QueueTable
+from components.widgets.nodes import PrimaryInputWindow
+from components.widgets.progress import ProgressWidget
 
 import qdarkstyle
 
@@ -69,6 +70,10 @@ class Reaper(Ui_MainWindow):
 
         # Create sources page
         self.source_tabs = SourceTabs(self, self.source_file, self.primaryInputWindow)
+
+        # Create progress page
+        self.progress_page = ProgressWidget(self.queue.job_update)
+        self.progressLayout.addWidget(self.progress_page)
 
 
     def enable_advanced_mode(self, bool):
