@@ -2,6 +2,7 @@ from enum import Enum
 from time import sleep
 
 from PyQt5 import QtCore
+
 import socialreaper
 
 
@@ -18,7 +19,7 @@ class JobState(Enum):
 
 
 class Job():
-    def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys):
+    def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys, job_update):
         self.iterator = eval(
             "socialreaper.{}(**{}).{}({})".format(sourceName, sourceKeys, sourceFunction, functionArgs))
         self.outputPath = outputPath
@@ -28,6 +29,7 @@ class Job():
         self.sourceKeys = sourceKeys
 
         self.state = JobState.QUEUED
+        self.job_update = job_update
         self.data = []
         self.flat_data = []
         self.keys = set()
@@ -51,6 +53,7 @@ class Job():
         try:
             value = self.iterator.__next__()
             self.add_data(value)
+            self.job_update.emit(self)
             return value
         except StopIteration:
             return self.end_job()
@@ -62,8 +65,11 @@ class Job():
     def end_job(self):
         # Save CSV
         self.state = JobState.SAVING
+        self.job_update.emit(self)
         print("Saving job")
         socialreaper.tools.to_csv(self.data, filename=self.outputPath)
+        self.state = JobState.FINISHED
+        self.job_update.emit(self)
         return False
 
 
@@ -117,7 +123,7 @@ class Queue(QtCore.QThread):
     def add_jobs(self, details):
         try:
             for params in details:
-                self.jobs.append(Job(*params))
+                self.jobs.append(Job(*params, self.job_update))
         except Exception as e:
             print(f"Error occurred adding iterator\n{e}")
 
@@ -136,7 +142,7 @@ class Queue(QtCore.QThread):
     def inc_job(self):
         if len(self.jobs) > 0:
             value = self.jobs[0].inc_data()
-            self.job_update.emit(self.jobs[0])
+            # self.job_update.emit(self.jobs[0])
 
             if value:
                 self.display_value(value)

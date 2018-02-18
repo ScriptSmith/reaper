@@ -1,9 +1,8 @@
 import csv
+import json
+from collections import OrderedDict
 
 from PyQt5 import QtWidgets, QtCore, QtGui
-
-from collections import OrderedDict
-import json
 
 
 class PrimaryInputWindow(QtWidgets.QMainWindow):

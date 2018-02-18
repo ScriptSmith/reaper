@@ -1,6 +1,7 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
-
 import json
+
+from PyQt5 import QtWidgets, QtCore
+
 
 class QueueTable(QtWidgets.QTableWidget):
     def __init__(self, parent=None):

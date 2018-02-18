@@ -1,6 +1,6 @@
 import sys
-from os import environ, getcwd, sep, path
 import xml.etree.ElementTree as ET
+from os import environ, getcwd, sep, path
 
 from components.widgets.nodes import *
 
@@ -315,6 +315,12 @@ class NodePageInputBox(NodePageBox):
 
         self.sourceName = sourceName
         self.sourceArgs = {'api_key': environ.get('api_key')}
+        self.sourceArgs = {
+            'app_key': "EFlxjNX2RobPexqWY2k0jCJZb",
+            'app_secret': "MKCWguSxQjUOMVTocnq0z7onqUpW7B9LFX6EVaCgCEwgAjiwSj",
+            'oauth_token': "706601329-TKRz5TOCpeiICuPqRrq7yvJZWEk5D1Dg0MMz5lzK",
+            'oauth_token_secret': "sWZpLKa9obzuTWqUu4OE0CZ8Wj3Xa88o3acIC9crZgobL"
+        }
         self.functionName = functionName
 
         self.inputs = []
@@ -332,7 +338,7 @@ class NodePageInputBox(NodePageBox):
         for primary_key in primary_keys:
             arguments = ", ".join([inputWidget.get_value() for inputWidget in self.inputs[1:]])
             arguments = primary_key + ", " + arguments
-            jobs.append((primary_key.replace('"',""), arguments))
+            jobs.append((primary_key.replace('"', ""), arguments))
         return jobs
 
     def construct_iterator(self):

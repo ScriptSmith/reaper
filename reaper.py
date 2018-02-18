@@ -19,18 +19,16 @@
 
 import sys
 
+import qdarkstyle
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
 
-from mainwindow import Ui_MainWindow
-
-from components.sources import SourceTabs
 from components.job_queue import Queue
-from components.widgets.queue import QueueTable
+from components.sources import SourceTabs
 from components.widgets.nodes import PrimaryInputWindow
 from components.widgets.progress import ProgressWidget
-
-import qdarkstyle
+from components.widgets.queue import QueueTable
+from mainwindow import Ui_MainWindow
 
 
 class Reaper(Ui_MainWindow):
@@ -72,7 +70,7 @@ class Reaper(Ui_MainWindow):
         self.source_tabs = SourceTabs(self, self.source_file, self.primaryInputWindow)
 
         # Create progress page
-        self.progress_page = ProgressWidget(self.queue.job_update)
+        self.progress_page = ProgressWidget(self.queue.job_update, self.tabWidget)
         self.progressLayout.addWidget(self.progress_page)
 
 

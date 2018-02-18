@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from enum import Enum
-from ..job_queue import Job
+from ..job_queue import Job, JobState
 
 
 class ProgressState(Enum):
@@ -9,9 +9,10 @@ class ProgressState(Enum):
 
 
 class ProgressWidget(QtWidgets.QWidget):
-    def __init__(self, job_signal, parent=None):
+    def __init__(self, job_signal, tabWidget, parent=None):
         super().__init__(parent=parent)
 
+        self.tabWidget = tabWidget
         job_signal.connect(self.set_job)
 
         self.state = ProgressState.RUNNING
@@ -21,7 +22,6 @@ class ProgressWidget(QtWidgets.QWidget):
 
         self.layout = QtWidgets.QVBoxLayout()
         self.setLayout(self.layout)
-        self.layout.addWidget(QtWidgets.QLabel("Progress:"))
 
         self.create_state_widget()
         self.create_snapshot()
@@ -66,6 +66,12 @@ class ProgressWidget(QtWidgets.QWidget):
         self.layout.addWidget(self.snapshot)
 
     def update_snapshot(self):
+        state = self.job.state
+        self.stateLabel.setText("State: " + str(state.value))
+
+        if self.tabWidget.currentIndex() != 4:
+            return
+
         data = list(self.job.flat_data)
         keys = set(self.job.flat_keys)
         # Otherwise it changes during update
@@ -73,15 +79,16 @@ class ProgressWidget(QtWidgets.QWidget):
         rows = len(data)
         self.rowCount.setText("Rows: " + str(rows))
 
+        # Reduce update rate
+        if not (rows % self.MAX_ROWS and state) == JobState.RUNNING:
+            return
+
         if rows > self.MAX_ROWS:
             self.snapshot.setRowCount(self.MAX_ROWS)
             self.snapshot.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
             self.snapshot.setVerticalHeaderLabels((str(val) for val in range(rows - self.MAX_ROWS + 1, rows + 1)))
         else:
             self.snapshot.setRowCount(rows)
-
-        state = self.job.state.value
-        self.stateLabel.setText("State: " + str(state))
 
         self.snapshot.setColumnCount(len(keys))
         self.snapshot.setHorizontalHeaderLabels(keys)
