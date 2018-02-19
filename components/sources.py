@@ -183,6 +183,9 @@ class NodePage(QtWidgets.QWidget):
 
                 elif setterType == "checkbox":
                     setterWidget = CheckboxSetter(bool(setterValue), table, setterArg)
+
+                elif setterType == "list":
+                    setterWidget = ListSetter(setterValue.split(","), table, setterArg)
                 inputBox.layout.addRow(setterName, setterWidget)
 
     def add_inputs(self, inputs, inputBox, advancedBox):
@@ -316,11 +319,12 @@ class NodePageInputBox(NodePageBox):
         self.sourceName = sourceName
         self.sourceArgs = {'api_key': environ.get('api_key')}
         self.sourceArgs = {
-            'app_key': "EFlxjNX2RobPexqWY2k0jCJZb",
-            'app_secret': "MKCWguSxQjUOMVTocnq0z7onqUpW7B9LFX6EVaCgCEwgAjiwSj",
-            'oauth_token': "706601329-TKRz5TOCpeiICuPqRrq7yvJZWEk5D1Dg0MMz5lzK",
-            'oauth_token_secret': "sWZpLKa9obzuTWqUu4OE0CZ8Wj3Xa88o3acIC9crZgobL"
+            'api_key': "EFlxjNX2RobPexqWY2k0jCJZb",
+            'api_secret': "MKCWguSxQjUOMVTocnq0z7onqUpW7B9LFX6EVaCgCEwgAjiwSj",
+            'access_token': "706601329-TKRz5TOCpeiICuPqRrq7yvJZWEk5D1Dg0MMz5lzK",
+            'access_token_secret': "sWZpLKa9obzuTWqUu4OE0CZ8Wj3Xa88o3acIC9crZgobL"
         }
+        self.sourceArgs = {"application_id": "USnY_aKOHDd32w", "application_secret": "wxzi-vu1KXJBr-FEZIO352iUM4E"}
         self.functionName = functionName
 
         self.inputs = []
@@ -430,54 +434,6 @@ class SourceTabs():
             # Create tree node
             treeItem = treeWidget.add_item(node, treeParentItem)
             self.create_nodes(sourceName, node, treeWidget, nodeStack, treeItem, textDescription)
-
-    def add_setters(self, setters, inputBox, table):
-        if setters:
-            for setter in setters:
-                setterName = setter.find('name').text
-                setterType = setter.find('type').text
-                setterValue = setter.find('value').text
-
-                setterWidget = None
-                if setterType == "counter":
-                    setterWidget = CounterSetter(int(setterValue), table, "count")
-                inputBox.layout.addRow(setterName, setterWidget)
-
-    def add_inputs(self, inputs, inputBox, advancedBox):
-        for input in inputs.findall('input'):
-            inputName = input.find('name').text
-            inputType = input.find('type').text
-            inputRequired = bool(input.attrib.get('required'))
-
-            inputWidget = None
-
-            if inputType == "text":
-                inputWidget = NodeInputLine(inputRequired, inputBox)
-
-            elif inputType == "list":
-                inputWidget = NodeInputList(inputRequired, inputBox)
-                inputWidget.add_elements(input.find('elems'))
-
-            elif inputType == "arguments":
-                # Create table
-                rows = input.find('rows')
-                argumentTable = NodeInputArgs(rows, inputRequired, inputBox)
-
-                # Add table setters
-                setters = input.find('setters')
-                self.add_setters(setters, inputBox, argumentTable)
-
-                inputWidget = argumentTable
-
-            else:
-                sys.exit("UNKNOWN WIDGET")
-
-            rowLabel = QtWidgets.QLabel(inputName)
-            rowLabel.setVisible(inputWidget.required)
-            inputBox.add_input(rowLabel, inputWidget)
-
-            if not inputWidget.required:
-                advancedBox.addRow(rowLabel, inputWidget)
 
     @staticmethod
     def get_node_info(node):
