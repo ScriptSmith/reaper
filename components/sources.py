@@ -79,6 +79,7 @@ class NodePage(QtWidgets.QWidget):
 
         self.mainWindow = mainWindow
         self.queue = mainWindow.queue
+        self.keys = mainWindow.key_page
         self.queue_table = mainWindow.queue_table
         self.primaryInputWindow = primaryInputWindow
 
@@ -129,7 +130,7 @@ class NodePage(QtWidgets.QWidget):
         self.add_widget(srFunction)
 
         # Create inputs
-        inputBox = NodePageInputBox(sourceName, self.queue, self.queue_table, functionName)
+        inputBox = NodePageInputBox(sourceName, self.queue, self.queue_table, self.keys, functionName)
         inputBox.add_iterator.connect(self.queue.add_jobs)
 
         # Add advanced box
@@ -305,7 +306,7 @@ class NodePageDownloadBox(NodePageBox):
 class NodePageInputBox(NodePageBox):
     add_iterator = QtCore.pyqtSignal(list)
 
-    def __init__(self, sourceName, queue, queueTable, functionName):
+    def __init__(self, sourceName, queue, queueTable, keys, functionName):
         super().__init__("Input", layout=QtWidgets.QFormLayout)
 
         self.queue = queue
@@ -314,18 +315,11 @@ class NodePageInputBox(NodePageBox):
         self.queue.job_table.connect(self.queueTable.display_jobs)
         # self.queue.progress_table.connect(self.progressTable.display_value)
 
+        self.keys = keys
+
         self.downloadBox = None
 
         self.sourceName = sourceName
-        self.sourceArgs = {'api_key': environ.get('api_key')}
-        self.sourceArgs = {
-            'api_key': "EFlxjNX2RobPexqWY2k0jCJZb",
-            'api_secret': "MKCWguSxQjUOMVTocnq0z7onqUpW7B9LFX6EVaCgCEwgAjiwSj",
-            'access_token': "706601329-TKRz5TOCpeiICuPqRrq7yvJZWEk5D1Dg0MMz5lzK",
-            'access_token_secret': "sWZpLKa9obzuTWqUu4OE0CZ8Wj3Xa88o3acIC9crZgobL"
-        }
-        self.sourceArgs = {"application_id": "USnY_aKOHDd32w", "application_secret": "wxzi-vu1KXJBr-FEZIO352iUM4E"}
-        self.sourceArgs = {"api_key": "AIzaSyAFzLtWI6FiIDkEpLtjXtFhdSEnRJ7qLso"}
         self.functionName = functionName
 
         self.inputs = []
@@ -353,8 +347,10 @@ class NodePageInputBox(NodePageBox):
 
         for primary_key, args in self.read_values():
             filePath = filePathKey.replace("{key}", primary_key)
+
+            keys = self.keys.get_keys(self.sourceName)
             # details.append((self.sourceName, self.sourceArgs, self.functionName, args, filePath))
-            details.append((filePath, self.sourceName, self.functionName, args, self.sourceArgs))
+            details.append((filePath, self.sourceName, self.functionName, args, keys))
             # outputPath, sourceName, functionName, functionArgs, sourceKeys
 
         self.add_iterator.emit(details)
@@ -378,8 +374,9 @@ class NodePageInputBox(NodePageBox):
 
 
 class SourceTabs():
-    def __init__(self, mainWindow, sourceFile, primaryInputWindow):
+    def __init__(self, mainWindow, keyPage, sourceFile, primaryInputWindow):
         self.mainWindow = mainWindow
+        self.keyPage = keyPage
         self.primaryInputWindow = primaryInputWindow
         self.sourceFile = sourceFile
 
@@ -410,6 +407,8 @@ class SourceTabs():
         for source in self.sources:
             sourcePage, sourceName = self.create_source_page(source)
 
+            self.create_source_keys(sourceName, source)
+
             nodeTree = NodeTree(sourceName)
             sourcePage.layout.addWidget(nodeTree)
 
@@ -435,6 +434,12 @@ class SourceTabs():
         sourcePage.setLayout(sourcePage.layout)
 
         return sourcePage, sourceName
+
+    def create_source_keys(self, sourceName, source):
+        keys = source.find('keys')
+        key_list = [(key.find('name').text, key.find('value').text) for key in keys.findall('key')]
+
+        self.keyPage.add_source(sourceName, key_list)
 
     def create_nodes(self, sourceName, parentNode, treeWidget, nodeStack, treeParentItem=None,
                      textDescription=""):

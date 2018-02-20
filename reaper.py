@@ -24,6 +24,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
 
 from components.job_queue import Queue
+from components.keys import KeyPage
 from components.sources import SourceTabs
 from components.widgets.nodes import PrimaryInputWindow
 from components.widgets.progress import ProgressWidget
@@ -66,8 +67,11 @@ class Reaper(Ui_MainWindow):
         # Create window for primary key input
         self.primaryInputWindow = PrimaryInputWindow(window)
 
+        # Create api key page
+        self.key_page = KeyPage(self.scrollAreaWidgetContents)
+
         # Create sources page
-        self.source_tabs = SourceTabs(self, self.source_file, self.primaryInputWindow)
+        self.source_tabs = SourceTabs(self, self.key_page, self.source_file, self.primaryInputWindow)
 
         # Create progress page
         self.progress_page = ProgressWidget(self.queue.job_update, self.tabWidget)

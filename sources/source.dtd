@@ -2,7 +2,7 @@
 <!ELEMENT source (name,keys,children+)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT keys (key*)>
-<!ELEMENT key (#PCDATA)>
+<!ELEMENT key (name,value)>
 <!ELEMENT children (node*)>
 <!ELEMENT node (name,function,inputs,children+)>
 <!ELEMENT inputs (input+)>

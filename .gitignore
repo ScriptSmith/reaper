@@ -1,5 +1,4 @@
 .idea
-*.p
 dist/
 build/
 build_packages/
@@ -10,3 +9,5 @@ __pycache__/
 *.tar.gz
 makefile
 *.venv
+*.csv
+*.json

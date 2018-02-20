@@ -3,7 +3,10 @@
 <source>
     <name>YouTube</name>
     <keys>
-        <key>api_key</key>
+        <key>
+            <name>API key</name>
+            <value>api_key</value>
+        </key>
     </keys>
     <children>
         <node>

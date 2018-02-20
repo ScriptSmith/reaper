@@ -3,10 +3,22 @@
 <source>
     <name>Twitter</name>
     <keys>
-        <key>api_key</key>
-        <key>api_secret</key>
-        <key>access_token</key>
-        <key>access_token_secret</key>
+        <key>
+            <name>API key</name>
+            <value>api_key</value>
+        </key>
+        <key>
+            <name>API secret</name>
+            <value>api_secret</value>
+        </key>
+        <key>
+            <name>Access token</name>
+            <value>access_token</value>
+        </key>
+        <key>
+            <name>Access token secret</name>
+            <value>access_token_secret</value>
+        </key>
     </keys>
     <children>
         <node>
