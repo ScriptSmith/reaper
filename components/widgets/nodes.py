@@ -392,7 +392,7 @@ class ListSetter(QtWidgets.QListWidget):
     def fill_values(self):
         for value in self.values:
             self.addItem(value)
-        self.setCurrentRow(0)
+        # self.setCurrentRow(0)
 
     def set_arg(self, row):
         self.table.set_argument(self.argument, self.item(row).text())

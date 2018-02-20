@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!ELEMENT source (name,keys,children+)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT keys (key*)>
+<!ELEMENT key (#PCDATA)>
+<!ELEMENT children (node*)>
+<!ELEMENT node (name,function,inputs,children+)>
+<!ELEMENT inputs (input+)>
+<!ELEMENT input (name,type,elems*,columns*,rows*,setters*)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT elems (elem*)>
+<!ELEMENT elem (#PCDATA)>
+<!ELEMENT rows (row*)>
+<!ELEMENT row (cell*)>
+<!ELEMENT cell (#PCDATA)>
+<!ELEMENT columns (column*)>
+<!ELEMENT column (#PCDATA)>
+<!ELEMENT setters (setter*)>
+<!ELEMENT setter (name,argument,value,type)>
+<!ELEMENT argument (#PCDATA)>
+<!ELEMENT value (#PCDATA)>
+<!ELEMENT function (#PCDATA)>
+<!ATTLIST input required CDATA #IMPLIED>
+

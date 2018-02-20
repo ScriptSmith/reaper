@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE source SYSTEM "source.dtd">
+<source>
+    <name>Twitter</name>
+    <keys>
+        <key>api_key</key>
+        <key>api_secret</key>
+        <key>access_token</key>
+        <key>access_token_secret</key>
+    </keys>
+    <children>
+        <node>
+            <name>Search</name>
+            <function>search</function>
+            <inputs>
+                <input required="true">
+                    <name>Query</name>
+                    <type>primary</type>
+                </input>
+                <input>
+                    <name>Arguments</name>
+                    <type>arguments</type>
+                    <columns>
+                        <column>Argument</column>
+                        <column>Value</column>
+                    </columns>
+                    <setters>
+                        <setter>
+                            <name>Tweet count</name>
+                            <argument>count</argument>
+                            <value>500</value>
+                            <type>counter</type>
+                        </setter>
+                        <setter>
+                            <name>Include entities</name>
+                            <argument>include_entities</argument>
+                            <value>True</value>
+                            <type>checkbox</type>
+                        </setter>
+                    </setters>
+                </input>
+            </inputs>
+            <children/>
+        </node>
+        <node>
+            <name>User</name>
+            <function>user</function>
+            <inputs>
+                <input required="true">
+                    <name>User</name>
+                    <type>primary</type>
+                </input>
+                <input>
+                    <name>Arguments</name>
+                    <type>arguments</type>
+                    <columns>
+                        <column>Argument</column>
+                        <column>Value</column>
+                    </columns>
+                    <setters>
+                        <setter>
+                            <name>Tweet count</name>
+                            <argument>count</argument>
+                            <value>3200</value>
+                            <type>counter</type>
+                        </setter>
+                        <setter>
+                            <name>Exclude replies</name>
+                            <argument>exclude_replies</argument>
+                            <value>True</value>
+                            <type>checkbox</type>
+                        </setter>
+                        <setter>
+                            <name>Include retweets</name>
+                            <argument>include_retweets</argument>
+                            <value>False</value>
+                            <type>checkbox</type>
+                        </setter>
+                    </setters>
+                </input>
+            </inputs>
+            <children/>
+        </node>
+    </children>
+</source>

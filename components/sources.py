@@ -325,6 +325,7 @@ class NodePageInputBox(NodePageBox):
             'access_token_secret': "sWZpLKa9obzuTWqUu4OE0CZ8Wj3Xa88o3acIC9crZgobL"
         }
         self.sourceArgs = {"application_id": "USnY_aKOHDd32w", "application_secret": "wxzi-vu1KXJBr-FEZIO352iUM4E"}
+        self.sourceArgs = {"api_key": "AIzaSyAFzLtWI6FiIDkEpLtjXtFhdSEnRJ7qLso"}
         self.functionName = functionName
 
         self.inputs = []
@@ -391,8 +392,17 @@ class SourceTabs():
 
     def read_sources(self):
         tree = ET.parse(self.sourceFile)
-        sourceRoot = tree.getroot()
-        sources = sourceRoot.findall('source')
+        sources_root = tree.getroot()
+        source_files = sources_root.findall('source')
+
+        sources = []
+
+        for source_file in source_files:
+            location = source_file.find('location').text
+
+            source_tree = ET.parse(f"sources/{location}")
+            source_root = source_tree.getroot()
+            sources.append(source_root)
 
         return sources
 

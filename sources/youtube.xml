@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE source SYSTEM "source.dtd">
+<source>
+    <name>YouTube</name>
+    <keys>
+        <key>api_key</key>
+    </keys>
+    <children>
+        <node>
+            <name>Search</name>
+            <function>search</function>
+            <inputs>
+                <input required="true">
+                    <name>Query</name>
+                    <type>primary</type>
+                </input>
+                <input>
+                    <name>Arguments</name>
+                    <type>arguments</type>
+                    <columns>
+                        <column>Argument</column>
+                        <column>Value</column>
+                    </columns>
+                    <setters>
+                        <setter>
+                            <name>Count</name>
+                            <argument>count</argument>
+                            <value>1000</value>
+                            <type>counter</type>
+                        </setter>
+                        <setter>
+                            <name>Order</name>
+                            <argument>order</argument>
+                            <value>date,rating,relevance,viewCount,title</value>
+                            <type>list</type>
+                        </setter>
+                        <setter>
+                            <name>Event type</name>
+                            <argument>event_type</argument>
+                            <value>completed,live,upcoming</value>
+                            <type>list</type>
+                        </setter>
+                        <setter>
+                            <name>Safe search</name>
+                            <argument>safe_search</argument>
+                            <value>moderate,none,strict</value>
+                            <type>list</type>
+                        </setter>
+                        <setter>
+                            <name>Video caption</name>
+                            <argument>video_caption</argument>
+                            <value>any,closedCaption,none</value>
+                            <type>list</type>
+                        </setter>
+                        <setter>
+                            <name>Video definition</name>
+                            <argument>video_definition</argument>
+                            <value>any,high,standard</value>
+                            <type>list</type>
+                        </setter>
+                        <setter>
+                            <name>Video dimension</name>
+                            <argument>video_dimension</argument>
+                            <value>any,2d,3d</value>
+                            <type>list</type>
+                        </setter>
+                        <setter>
+                            <name>Video duration</name>
+                            <argument>video_duration</argument>
+                            <value>any,long,medium,short</value>
+                            <type>list</type>
+                        </setter>
+                        <setter>
+                            <name>Video license</name>
+                            <argument>video_license</argument>
+                            <value>any,creativeCommon,youtube</value>
+                            <type>list</type>
+                        </setter>
+                        <setter>
+                            <name>Video type</name>
+                            <argument>video_type</argument>
+                            <value>any,episode,movie</value>
+                            <type>list</type>
+                        </setter>
+                    </setters>
+                </input>
+            </inputs>
+            <children/>
+        </node>
+    </children>
+</source>
