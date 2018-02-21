@@ -12,8 +12,9 @@ class QueueState(Enum):
 
 
 class JobState(Enum):
-    QUEUED = "queued"
+    STOPPED = "stopped"
     RUNNING = "running"
+    QUEUED = "queued"
     SAVING = "saving"
     FINISHED = "finished"
 
@@ -28,7 +29,7 @@ class Job():
         self.functionArgs = functionArgs
         self.sourceKeys = sourceKeys
 
-        self.state = JobState.QUEUED
+        self.state = JobState.STOPPED
         self.job_update = job_update
         self.data = []
         self.flat_data = []
@@ -84,13 +85,8 @@ class Job():
 
 class Queue(QtCore.QThread):
     job_update = QtCore.pyqtSignal(Job)
-
-    job_table = QtCore.pyqtSignal(list)
-
-    progress_bar = QtCore.pyqtSignal(int)
-    progress_table = QtCore.pyqtSignal(list)
-
-    job_complete = QtCore.pyqtSignal(str)
+    queue_update = QtCore.pyqtSignal(list)
+    queue_selected = QtCore.pyqtSignal(list)
 
     def __init__(self, window):
         super().__init__()
@@ -99,6 +95,9 @@ class Queue(QtCore.QThread):
 
         self.window = window
         self.jobs = []
+
+        self.currentJobState = None
+
         self.start()
         self.add_actions()
 
@@ -111,23 +110,45 @@ class Queue(QtCore.QThread):
         self.window.queueRemove.clicked.connect(self.remove)
 
     def start_queue(self):
+        for job in self.jobs:
+            job.state = JobState.QUEUED
         self.state = QueueState.RUNNING
 
     def stop(self):
         self.state = QueueState.STOPPED
+        for job in self.jobs:
+            job.state = JobState.STOPPED
+        self.queue_update.emit(self.jobs)
+
 
     def clear(self):
         self.jobs.clear()
-        self.job_table.emit(self.jobs)
+        self.queue_update.emit(self.jobs)
 
     def up(self):
-        pass
+        indexes = self.window.queue_table.selected_jobs()
+        for i, index in enumerate(indexes):
+            if index > 0:
+                self.jobs.insert(index - 1, self.jobs.pop(index))
+                indexes[i] = indexes[i] - 1
+        self.queue_update.emit(self.jobs)
+        self.queue_selected.emit(indexes)
 
     def down(self):
-        pass
+        indexes = self.window.queue_table.selected_jobs()
+        for i, index in enumerate(indexes):
+            if index < len(self.jobs) - 1:
+                self.jobs.insert(index + 1, self.jobs.pop(index))
+                indexes[i] = indexes[i] + 1
+        self.queue_update.emit(self.jobs)
+        self.queue_selected.emit(indexes)
 
     def remove(self):
-        pass
+        indexes = self.window.queue_table.selected_jobs()
+        for index in indexes:
+            self.jobs.pop(index)
+        self.queue_update.emit(self.jobs)
+        self.queue_selected.emit(indexes)
 
     def add_jobs(self, details):
         try:
@@ -136,7 +157,7 @@ class Queue(QtCore.QThread):
         except Exception as e:
             print(f"Error occurred adding iterator\n{e}")
 
-        self.job_table.emit(self.jobs)
+        self.queue_update.emit(self.jobs)
 
     def test(self):
         print("Hello")
@@ -151,16 +172,21 @@ class Queue(QtCore.QThread):
     def inc_job(self):
         if len(self.jobs) > 0:
             value = self.jobs[0].inc_data()
-            # self.job_update.emit(self.jobs[0])
 
             if value:
-                self.display_value(value)
+                # self.display_value(value)
+                currentJobState = self.jobs[0].state
+                if self.currentJobState != currentJobState:
+                    self.currentJobState = currentJobState
+                    self.queue_update.emit(self.jobs)
             else:
                 self.jobs.pop(0)
+                self.queue_update.emit(self.jobs)
+
 
         else:
             self.state = QueueState.STOPPED
-            self.job_table.emit(self.jobs)
+            self.queue_update.emit(self.jobs)
 
     def display_value(self, value):
         print(value)

@@ -312,7 +312,8 @@ class NodePageInputBox(NodePageBox):
         self.queue = queue
         self.queueTable = queueTable
 
-        self.queue.job_table.connect(self.queueTable.display_jobs)
+        self.queue.queue_update.connect(self.queueTable.display_jobs)
+        self.queue.queue_selected.connect(self.queueTable.select_jobs)
         # self.queue.progress_table.connect(self.progressTable.display_value)
 
         self.keys = keys

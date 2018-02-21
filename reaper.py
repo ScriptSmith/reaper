@@ -77,7 +77,6 @@ class Reaper(Ui_MainWindow):
         self.progress_page = ProgressWidget(self.queue.job_update, self.tabWidget)
         self.progressLayout.addWidget(self.progress_page)
 
-
     def enable_advanced_mode(self, bool):
         self.advanced_mode = bool
 

@@ -30,7 +30,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="introTab">
        <property name="enabled">
@@ -371,7 +371,7 @@ background-color: transparent; /*or a colour*/
             <item>
              <widget class="QToolButton" name="queueUp">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="text">
                <string>...</string>
@@ -385,7 +385,7 @@ background-color: transparent; /*or a colour*/
             <item>
              <widget class="QToolButton" name="queueDown">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="text">
                <string>...</string>
@@ -399,7 +399,7 @@ background-color: transparent; /*or a colour*/
             <item>
              <widget class="QToolButton" name="queueRemove">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="text">
                <string>...</string>
