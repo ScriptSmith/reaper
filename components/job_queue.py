@@ -145,10 +145,8 @@ class Queue(QtCore.QThread):
 
     def remove(self):
         indexes = self.window.queue_table.selected_jobs()
-        for index in indexes:
-            self.jobs.pop(index)
+        self.jobs = [job for job_i, job in enumerate(self.jobs) if job_i not in indexes]
         self.queue_update.emit(self.jobs)
-        self.queue_selected.emit(indexes)
 
     def add_jobs(self, details):
         try:
@@ -163,18 +161,21 @@ class Queue(QtCore.QThread):
         print("Hello")
 
     def run(self):
-        while True:
-            if self.state == QueueState.RUNNING:
-                self.inc_job()
-            elif self.state == QueueState.STOPPED:
-                sleep(1)
+        try:
+            while True:
+                if self.state == QueueState.RUNNING:
+                    self.inc_job()
+                elif self.state == QueueState.STOPPED:
+                    sleep(1)
+        except Exception as e:
+            self.start()
 
     def inc_job(self):
         if len(self.jobs) > 0:
             value = self.jobs[0].inc_data()
 
             if value:
-                # self.display_value(value)
+                self.display_value(value)
                 currentJobState = self.jobs[0].state
                 if self.currentJobState != currentJobState:
                     self.currentJobState = currentJobState

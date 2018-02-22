@@ -59,8 +59,8 @@ class QueueTable(QtWidgets.QTableWidget):
 
     @QtCore.pyqtSlot(list)
     def select_jobs(self, rows):
-        # for row in rows:
-        #     for col in range(self.columnCount()):
-        #         item = self.itemAt(row, col)
-        #         item.setSelected(True)
+        for row in rows:
+            for col in range(self.columnCount()):
+                item = self.itemAt(row, col)
+                item.setSelected(True)
         pass
