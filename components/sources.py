@@ -51,6 +51,10 @@ class NodeTree(QtWidgets.QTreeWidget):
 
             self.addTopLevelItem(treeItem)
 
+        descriptionNode = node.find('description')
+        if isinstance(descriptionNode, ET.Element):
+            textDescription = descriptionNode.text
+
         treeItem.textDescription = textDescription
 
         treeItem.textContent = "I want to scrape a {} {}".format(self.sourceName, textDescription)
@@ -151,7 +155,7 @@ class NodePage(QtWidgets.QWidget):
         inputBox.path_function = downloadBox.get_path
 
         # Add primary key listener
-        inputBox.primary.fileText.connect(downloadBox.set_path)
+        inputBox.primary[0].fileText.connect(downloadBox.set_path)
 
         self.add_widget(QtWidgets.QSplitter(QtCore.Qt.Vertical))
 
@@ -317,6 +321,7 @@ class NodePageInputBox(NodePageBox):
         # self.queue.progress_table.connect(self.progressTable.display_value)
 
         self.keys = keys
+        self.primary = []
 
         self.downloadBox = None
 
@@ -328,17 +333,19 @@ class NodePageInputBox(NodePageBox):
 
     def add_input(self, name, input):
         if isinstance(input, NodeInputPrimary):
-            self.primary = input
+            self.primary.append(input)
         self.layout.addRow(name, input)
         self.inputs.append(input)
 
     def read_values(self):
-        primary_keys = self.primary.get_value()
+
+        primary_keys = (list(tup) for tup in zip(*[primary.get_value() for primary in self.primary]))
+
         jobs = []
-        for primary_key in primary_keys:
-            arguments = ", ".join([inputWidget.get_value() for inputWidget in self.inputs[1:]])
-            arguments = primary_key + ", " + arguments
-            jobs.append((primary_key.replace('"', ""), arguments))
+        for primary_tuple in primary_keys:
+            arguments = ", ".join([inputWidget.get_value() for inputWidget in self.inputs[len(self.primary):]])
+            arguments = ", ".join(primary_tuple) + ", " + arguments
+            jobs.append(("_".join(primary_tuple).replace('"', ""), arguments))
         return jobs
 
     def construct_iterator(self):
