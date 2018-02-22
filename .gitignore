@@ -11,3 +11,4 @@ makefile
 *.venv
 *.csv
 *.json
+Output/
