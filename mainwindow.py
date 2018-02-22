@@ -337,7 +337,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Reaper"))
-        MainWindow.setStatusTip(_translate("MainWindow", "Visit https://reaper.social for help & tutorials"))
+        MainWindow.setStatusTip(_translate("MainWindow", "Visit http://reaper.social for help & tutorials"))
         self.label_19.setText(_translate("MainWindow", "Welcome to Reaper!"))
         self.label_41.setText(_translate("MainWindow", "<html><head/><body><p>© The University of Queensland</p><p>Developed by <a href=\"https://github.com/ScriptSmith\"><span style=\" text-decoration: underline; color:#0000ff;\">Adam Smith</span></a></p></body></html>"))
         self.label_22.setText(_translate("MainWindow", "Reaper helps you gather social media data, no coding required."))
