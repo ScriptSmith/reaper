@@ -16,9 +16,10 @@
         <node>
             <name>Search</name>
             <function>search</function>
+            <description>Search's Threads</description>
             <inputs>
-                <input>
-                    <name required="true">query</name>
+                <input required="true">
+                    <name>Query</name>
                     <type>primary</type>
                 </input>
                 <input>
@@ -36,7 +37,7 @@
                             <type>list</type>
                         </setter>
                         <setter>
-                            <name>Count</name>
+                            <name>Thread count</name>
                             <argument>count</argument>
                             <value>1000</value>
                             <type>counter</type>
@@ -55,9 +56,10 @@
         <node>
             <name>Subreddit</name>
             <function>subreddit</function>
+            <description>Subreddit's Threads</description>
             <inputs>
-                <input>
-                    <name required="true">subreddit</name>
+                <input required="true">
+                    <name>Subreddit</name>
                     <type>primary</type>
                 </input>
                 <input>
@@ -75,7 +77,7 @@
                             <type>list</type>
                         </setter>
                         <setter>
-                            <name>Count</name>
+                            <name>Thread count</name>
                             <argument>count</argument>
                             <value>1000</value>
                             <type>counter</type>
@@ -94,9 +96,10 @@
         <node>
             <name>User</name>
             <function>user</function>
+            <description>User's Threads and Comments</description>
             <inputs>
-                <input>
-                    <name required="true">user</name>
+                <input required="true">
+                    <name>User</name>
                     <type>primary</type>
                 </input>
                 <input>
@@ -114,7 +117,7 @@
                             <type>list</type>
                         </setter>
                         <setter>
-                            <name>Count</name>
+                            <name>Result count</name>
                             <argument>count</argument>
                             <value>1000</value>
                             <type>counter</type>
@@ -129,6 +132,67 @@
                 </input>
             </inputs>
             <children/>
+        </node>
+        <node>
+            <name>Thread</name>
+            <function>thread</function>
+            <inputs>
+                <input required="true">
+                    <name>Thread id</name>
+                    <type>primary</type>
+                </input>
+                <input required="true">
+                    <name>Subreddit</name>
+                    <type>primary</type>
+                </input>
+                <input>
+                    <name>Arguments</name>
+                    <type>arguments</type>
+                    <columns>
+                        <column>Argument</column>
+                        <column>Value</column>
+                    </columns>
+                </input>
+            </inputs>
+            <children>
+                <node>
+                    <name>Comments</name>
+                    <function>thread_comments</function>
+                    <inputs>
+                        <input required="true">
+                            <name>Thread id</name>
+                            <type>primary</type>
+                        </input>
+                        <input required="true">
+                            <name>Subreddit</name>
+                            <type>primary</type>
+                        </input>
+                        <input>
+                            <name>Arguments</name>
+                            <type>arguments</type>
+                            <columns>
+                                <column>Argument</column>
+                                <column>Value</column>
+                            </columns>
+                            <setters>
+                                <setter>
+                                    <name>Comment count</name>
+                                    <argument>count</argument>
+                                    <value>500</value>
+                                    <type>counter</type>
+                                </setter>
+                                <setter>
+                                    <name>Comment order</name>
+                                    <argument>order</argument>
+                                    <value>top,new,best,controversial,old,q&amp;a</value>
+                                    <type>list</type>
+                                </setter>
+                            </setters>
+                        </input>
+                    </inputs>
+                    <children></children>
+                </node>
+            </children>
         </node>
     </children>
 </source>
