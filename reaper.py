@@ -22,10 +22,13 @@ import sys
 import qdarkstyle
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
+from PyQt5.Qt import QDesktopServices
+from PyQt5.QtCore import QUrl
 
 from components.job_queue import Queue
 from components.keys import KeyPage
 from components.sources import SourceTabs
+from components.popup import *
 from components.widgets.nodes import PrimaryInputWindow
 from components.widgets.progress import ProgressWidget
 from components.widgets.queue import QueueTable
@@ -55,6 +58,9 @@ class Reaper(Ui_MainWindow):
         self.dark_mode = False
 
         self.add_actions()
+
+        # Add windows
+        self.add_windows()
 
         # Create queue page
         self.queue = Queue(self)
@@ -90,12 +96,22 @@ class Reaper(Ui_MainWindow):
         self.actionAdvanced_mode.toggled.connect(self.enable_advanced_mode)
         self.actionDark_mode.toggled.connect(self.enable_dark_mode)
         self.actionQuit.triggered.connect(self.quit)
+        self.actionHelp.triggered.connect(self.open_website)
+        self.actionAbout.triggered.connect(self.open_website)
+        self.actionWebsite.triggered.connect(self.open_website)
+
+    def add_windows(self):
+        self.license_window = LicenseWindow()
+        self.actionLicenses.triggered.connect(self.license_window.pop)
 
     def set_icons(self):
         self.queueUp.setIcon(QIcon('ui/up.png'))
         self.queueDown.setIcon(QIcon('ui/down.png'))
         self.queueRemove.setIcon(QIcon('ui/remove.png'))
         self.window.setWindowIcon(QIcon('ui/icon.ico'))
+
+    def open_website(self, _):
+        QDesktopServices.openUrl(QUrl("http://reaper.social"))
 
     def quit(self, _):
         self.app.quit()
