@@ -1,6 +1,7 @@
 from enum import Enum
 from time import sleep
 
+import sys
 from PyQt5 import QtCore
 
 import socialreaper
@@ -168,6 +169,10 @@ class Queue(QtCore.QThread):
                 elif self.state == QueueState.STOPPED:
                     sleep(1)
         except Exception as e:
+            print("something went wrong")
+            print(sys.exc_info())
+            print(e)
+            self.clear()
             self.start()
 
     def inc_job(self):

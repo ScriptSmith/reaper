@@ -23,6 +23,7 @@
     <children>
         <node>
             <name>Search</name>
+            <description>Search's tweets</description>
             <function>search</function>
             <inputs>
                 <input required="true">
@@ -56,6 +57,7 @@
         </node>
         <node>
             <name>User</name>
+            <description>User's tweets</description>
             <function>user</function>
             <inputs>
                 <input required="true">

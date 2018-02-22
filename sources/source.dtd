@@ -4,7 +4,7 @@
 <!ELEMENT keys (key*)>
 <!ELEMENT key (name,value)>
 <!ELEMENT children (node*)>
-<!ELEMENT node (name,function,inputs,children+)>
+<!ELEMENT node (name,description*,function,inputs,children*)>
 <!ELEMENT inputs (input+)>
 <!ELEMENT input (name,type,elems*,columns*,rows*,setters*)>
 <!ELEMENT type (#PCDATA)>
@@ -20,5 +20,6 @@
 <!ELEMENT argument (#PCDATA)>
 <!ELEMENT value (#PCDATA)>
 <!ELEMENT function (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
 <!ATTLIST input required CDATA #IMPLIED>
 
