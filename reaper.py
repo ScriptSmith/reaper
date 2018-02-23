@@ -24,6 +24,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.Qt import QDesktopServices
 from PyQt5.QtCore import QUrl
+import traceback
 
 from components.job_queue import Queue
 from components.keys import KeyPage
@@ -118,7 +119,12 @@ class Reaper(Ui_MainWindow):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    main_window = QtWidgets.QMainWindow()
-    ui = Reaper(main_window, app)
-    sys.exit(app.exec_())
+    try:
+        app = QtWidgets.QApplication(sys.argv)
+        main_window = QtWidgets.QMainWindow()
+        ui = Reaper(main_window, app)
+        sys.exit(app.exec_())
+    except Exception as e:
+        with open('log.txt', 'a') as f:
+            f.write(str(e))
+            f.write(traceback.format_exc())
