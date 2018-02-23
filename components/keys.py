@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 import json
+from os import sep
 
 
 class KeyLine(QtWidgets.QLineEdit):
@@ -22,19 +23,21 @@ class KeyLine(QtWidgets.QLineEdit):
 
 
 class KeyPage(QtWidgets.QWidget):
-    def __init__(self, scrollWidget, parent=None):
+    def __init__(self, scrollWidget, bundle_dir, parent=None):
         super().__init__(parent=parent)
 
         self.scrollWidget = scrollWidget
         self.scrollWidget.layout = QtWidgets.QVBoxLayout()
         self.scrollWidget.setLayout(self.scrollWidget.layout)
 
+        self.bundle_dir = bundle_dir
+
         self.sources = {}
         self.read_keys()
 
     def read_keys(self):
         try:
-            with open('keys.json', 'r') as f:
+            with open(f"{self.bundle_dir}{sep}keys.json", 'r') as f:
                 data = json.load(f)
                 self.sources = data
         except (FileNotFoundError, json.decoder.JSONDecodeError):

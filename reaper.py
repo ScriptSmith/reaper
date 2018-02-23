@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
+import sys, os
 
 import qdarkstyle
 from PyQt5 import QtWidgets
@@ -60,6 +60,11 @@ class Reaper(Ui_MainWindow):
 
         self.add_actions()
 
+        if getattr(sys, 'frozen', False):
+            self.bundle_dir = sys._MEIPASS
+        else:
+            self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
+
         # Add windows
         self.add_windows()
 
@@ -75,7 +80,7 @@ class Reaper(Ui_MainWindow):
         self.primaryInputWindow = PrimaryInputWindow(window)
 
         # Create api key page
-        self.key_page = KeyPage(self.scrollAreaWidgetContents)
+        self.key_page = KeyPage(self.scrollAreaWidgetContents, self.bundle_dir)
 
         # Create sources page
         self.source_tabs = SourceTabs(self, self.key_page, self.source_file, self.primaryInputWindow)
@@ -102,7 +107,7 @@ class Reaper(Ui_MainWindow):
         self.actionWebsite.triggered.connect(self.open_website)
 
     def add_windows(self):
-        self.license_window = LicenseWindow()
+        self.license_window = LicenseWindow(self.bundle_dir)
         self.actionLicenses.triggered.connect(self.license_window.pop)
 
     def set_icons(self):
@@ -125,6 +130,6 @@ if __name__ == "__main__":
         ui = Reaper(main_window, app)
         sys.exit(app.exec_())
     except Exception as e:
-        with open('log.txt', 'a') as f:
+        with open('log.log', 'a') as f:
             f.write(str(e))
             f.write(traceback.format_exc())

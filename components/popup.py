@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, QtGui
+from os import sep
 
 
 class PopupWindow(QtWidgets.QMessageBox):
@@ -33,8 +34,9 @@ class LicenseWidget(QtWidgets.QWidget):
 
 
 class LicenseWindow(QtWidgets.QMainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, bundle_dir, parent=None):
         super().__init__(parent=parent)
+        self.bundle_dir = bundle_dir
 
         self.mainWidget = QtWidgets.QWidget()
         self.mainWidget.layout = QtWidgets.QVBoxLayout()
@@ -58,27 +60,27 @@ class LicenseWindow(QtWidgets.QMainWindow):
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        with open('LICENSE.txt', 'r') as f:
+        with open(f"{self.bundle_dir}{sep}LICENSE.txt", 'r') as f:
             reaper = LicenseWidget("Reaper GPL license", f.read())
             self.scrollAreaWidgetContents.layout.addWidget(reaper)
 
-        with open('licenses/socialreaper.txt', 'r') as f:
+        with open(f"{self.bundle_dir}{sep}licenses/socialreaper.txt", 'r') as f:
             reaper = LicenseWidget("Social Reaper MIT license", f.read())
             self.scrollAreaWidgetContents.layout.addWidget(reaper)
 
-        with open('LICENSE.txt', 'r') as f:
+        with open(f"{self.bundle_dir}{sep}LICENSE.txt", 'r') as f:
             reaper = LicenseWidget("PyQt GPL license", f.read())
             self.scrollAreaWidgetContents.layout.addWidget(reaper)
 
-        with open('licenses/requests.txt', 'r') as f:
+        with open(f"{self.bundle_dir}{sep}licenses/requests.txt", 'r') as f:
             reaper = LicenseWidget("Requests Apache license", f.read())
             self.scrollAreaWidgetContents.layout.addWidget(reaper)
 
-        with open('licenses/requests-oauthlib.txt', 'r') as f:
+        with open(f"{self.bundle_dir}{sep}licenses/requests-oauthlib.txt", 'r') as f:
             reaper = LicenseWidget("Requests-OAuthLib ISC license", f.read())
             self.scrollAreaWidgetContents.layout.addWidget(reaper)
 
-        with open('licenses/oauthlib.txt', 'r') as f:
+        with open(f"{self.bundle_dir}{sep}licenses/oauthlib.txt", 'r') as f:
             reaper = LicenseWidget("OAuthLib BSD license", f.read())
             self.scrollAreaWidgetContents.layout.addWidget(reaper)
 

@@ -7,6 +7,7 @@ __pycache__/
 *.zip
 *.bak
 *.tar.gz
+*.log
 makefile
 *.venv
 *.csv

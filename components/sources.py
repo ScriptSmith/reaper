@@ -396,7 +396,7 @@ class SourceTabs():
         item.sourceDescription.setCurrentIndex(item.pageIndex)
 
     def read_sources(self):
-        tree = ET.parse(self.sourceFile)
+        tree = ET.parse(f"{self.mainWindow.bundle_dir}{sep}{self.sourceFile}")
         sources_root = tree.getroot()
         source_files = sources_root.findall('source')
 
@@ -405,7 +405,7 @@ class SourceTabs():
         for source_file in source_files:
             location = source_file.find('location').text
 
-            source_tree = ET.parse(f"sources/{location}")
+            source_tree = ET.parse(f"{self.mainWindow.bundle_dir}{sep}sources/{location}")
             source_root = source_tree.getroot()
             sources.append(source_root)
 
