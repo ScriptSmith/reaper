@@ -1,6 +1,7 @@
-from PyQt5 import QtWidgets
 import json
-from os import sep
+from os import sep, makedirs, path
+
+from PyQt5 import QtWidgets
 
 
 class KeyLine(QtWidgets.QLineEdit):
@@ -10,7 +11,7 @@ class KeyLine(QtWidgets.QLineEdit):
         self.key = key
         self.name = name
         self.sources = sources
-        self.save =save
+        self.save = save
 
         self.setText(sources[name][key])
 
@@ -23,28 +24,31 @@ class KeyLine(QtWidgets.QLineEdit):
 
 
 class KeyPage(QtWidgets.QWidget):
-    def __init__(self, scrollWidget, bundle_dir, parent=None):
+    def __init__(self, scrollWidget, data_dir, parent=None):
         super().__init__(parent=parent)
 
         self.scrollWidget = scrollWidget
         self.scrollWidget.layout = QtWidgets.QVBoxLayout()
         self.scrollWidget.setLayout(self.scrollWidget.layout)
 
-        self.bundle_dir = bundle_dir
+        self.location = f"{data_dir}{sep}keys.json"
+
+        if not path.exists(data_dir):
+            makedirs(data_dir)
 
         self.sources = {}
         self.read_keys()
 
     def read_keys(self):
         try:
-            with open(f"{self.bundle_dir}{sep}keys.json", 'r') as f:
+            with open(self.location, 'r') as f:
                 data = json.load(f)
                 self.sources = data
         except (FileNotFoundError, json.decoder.JSONDecodeError):
             pass
 
     def write_keys(self):
-        with open('keys.json', 'w') as f:
+        with open(self.location, 'w') as f:
             json.dump(self.sources, f)
 
     def add_source(self, name, keys):

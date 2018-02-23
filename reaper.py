@@ -24,6 +24,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.Qt import QDesktopServices
 from PyQt5.QtCore import QUrl
+from appdirs import user_data_dir
 import traceback
 
 from components.job_queue import Queue
@@ -65,6 +66,8 @@ class Reaper(Ui_MainWindow):
         else:
             self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
 
+        self.data_dir = user_data_dir("Reaper", "UQ")
+
         # Add windows
         self.add_windows()
 
@@ -80,7 +83,7 @@ class Reaper(Ui_MainWindow):
         self.primaryInputWindow = PrimaryInputWindow(window)
 
         # Create api key page
-        self.key_page = KeyPage(self.scrollAreaWidgetContents, self.bundle_dir)
+        self.key_page = KeyPage(self.scrollAreaWidgetContents, self.data_dir)
 
         # Create sources page
         self.source_tabs = SourceTabs(self, self.key_page, self.source_file, self.primaryInputWindow)
