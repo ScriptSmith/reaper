@@ -180,7 +180,6 @@ class Queue(QtCore.QThread):
             value = self.jobs[0].inc_data()
 
             if value:
-                self.display_value(value)
                 currentJobState = self.jobs[0].state
                 if self.currentJobState != currentJobState:
                     self.currentJobState = currentJobState
