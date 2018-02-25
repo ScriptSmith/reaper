@@ -114,10 +114,10 @@ class Reaper(Ui_MainWindow):
         self.actionLicenses.triggered.connect(self.license_window.pop)
 
     def set_icons(self):
-        self.queueUp.setIcon(QIcon('ui/up.png'))
-        self.queueDown.setIcon(QIcon('ui/down.png'))
-        self.queueRemove.setIcon(QIcon('ui/remove.png'))
-        self.window.setWindowIcon(QIcon('ui/icon.ico'))
+        self.queueUp.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/up.png"))
+        self.queueDown.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/down.png"))
+        self.queueRemove.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/remove.png"))
+        self.window.setWindowIcon(QIcon(f"{self.bundle_dir}{sep}ui/icon.ico"))
 
     def open_website(self, _):
         QDesktopServices.openUrl(QUrl("http://reaper.social"))
