@@ -18,7 +18,7 @@ class KeyLine(QtWidgets.QLineEdit):
         self.textChanged.connect(self.edit_key)
 
     def edit_key(self, text):
-        self.sources[self.name][self.key] = text
+        self.sources[self.name][self.key] = text.strip()
         if text:
             self.save()
 
