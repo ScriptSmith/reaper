@@ -138,7 +138,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1038, 575))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1038, 577))
         self.scrollAreaWidgetContents.setStyleSheet("")
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
@@ -299,6 +299,8 @@ class Ui_MainWindow(object):
         self.actionDark_mode = QtWidgets.QAction(MainWindow)
         self.actionDark_mode.setCheckable(True)
         self.actionDark_mode.setObjectName("actionDark_mode")
+        self.actionErrorManager = QtWidgets.QAction(MainWindow)
+        self.actionErrorManager.setObjectName("actionErrorManager")
         self.menuBackups.addAction(self.actionQueue)
         self.menuBackups.addAction(self.actionJob)
         self.menuOpen.addAction(self.actionAPI_Key_file)
@@ -320,6 +322,7 @@ class Ui_MainWindow(object):
         self.menuHelp.addAction(self.actionLicenses)
         self.menuHelp.addSeparator()
         self.menuHelp.addAction(self.actionWebsite)
+        self.menuView.addAction(self.actionErrorManager)
         self.menuView.addAction(self.actionHistory_2)
         self.menuView.addAction(self.actionAPI_Key_Database)
         self.menuView.addSeparator()
@@ -387,6 +390,7 @@ class Ui_MainWindow(object):
         self.actionQueue.setText(_translate("MainWindow", "Queue"))
         self.actionJob.setText(_translate("MainWindow", "Job"))
         self.actionDark_mode.setText(_translate("MainWindow", "Dark mode"))
+        self.actionErrorManager.setText(_translate("MainWindow", "Error manager"))
 
 
 if __name__ == "__main__":

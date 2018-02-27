@@ -296,7 +296,6 @@ class NodePageDownloadBox(NodePageBox):
         self.fileName.setText(text + ".csv")
 
     def open_dir(self, _):
-        print("opening dir")
         options = QtWidgets.QFileDialog.Options()
 
         title = "Open folder"

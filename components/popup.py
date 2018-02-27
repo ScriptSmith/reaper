@@ -1,5 +1,10 @@
-from PyQt5 import QtWidgets, QtGui
 from os import sep
+from pprint import pformat
+
+from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtCore import pyqtSignal
+
+from .job_queue import Job
 
 
 class PopupWindow(QtWidgets.QMessageBox):
@@ -86,3 +91,70 @@ class LicenseWindow(QtWidgets.QMainWindow):
 
     def pop(self):
         self.show()
+
+
+class ErrorWindow(QtWidgets.QMainWindow):
+    job_error = pyqtSignal(Job)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.job_error.connect(self.throw_job)
+        self.job = None
+        self.log = ""
+
+        self.setWindowTitle("Error manager")
+        self.setMinimumSize(400, 400)
+
+        self.mainWidget = QtWidgets.QWidget()
+        self.mainWidget.layout = QtWidgets.QVBoxLayout()
+        self.mainWidget.setLayout(self.mainWidget.layout)
+        self.setCentralWidget(self.mainWidget)
+
+        self.tabs = QtWidgets.QTabWidget()
+
+        self.console = QtWidgets.QTextBrowser()
+        self.tabs.addTab(self.console, "Error log")
+
+        self.job_browser = QtWidgets.QTextBrowser()
+        self.tabs.addTab(self.job_browser, "Job state")
+
+        self.itr_browser = QtWidgets.QTextBrowser()
+        self.tabs.addTab(self.itr_browser, "Iterator state")
+
+        self.api_browser = QtWidgets.QTextBrowser()
+        self.tabs.addTab(self.api_browser, "API state")
+
+        self.toggle_job_tabs(False)
+
+        self.mainWidget.layout.addWidget(self.tabs)
+
+        self.options = self.menuBar().addMenu("Options")
+        self.clearAction = QtWidgets.QAction("Clear")
+        self.clearAction.triggered.connect(self.clear)
+        self.options.addAction(self.clearAction)
+
+    def toggle_job_tabs(self, boolean):
+        for i in range(1,4):
+            self.tabs.setTabEnabled(i, boolean)
+
+    def clear(self, _):
+        self.log = ""
+        self.toggle_job_tabs(False)
+        self.console.clear()
+        self.job_browser.clear()
+        self.itr_browser.clear()
+        self.api_browser.clear()
+
+    @QtCore.pyqtSlot(Job)
+    def throw_job(self, job):
+        self.toggle_job_tabs(True)
+        self.job_browser.setText(pformat(vars(job)))
+        self.itr_browser.setText(str(job.iterator))
+        self.api_browser.setText(str(job.source.api))
+        self.show()
+
+    def log_error(self, log):
+        self.show()
+        self.log += log + '\n'
+        self.console.setText(self.log)

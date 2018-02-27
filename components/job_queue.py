@@ -1,7 +1,7 @@
 from enum import Enum
 from time import sleep
+from traceback import format_exc
 
-import sys
 from PyQt5 import QtCore
 
 import socialreaper
@@ -21,9 +21,14 @@ class JobState(Enum):
 
 
 class Job():
-    def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys, job_update):
-        self.iterator = eval(
-            "socialreaper.{}(**{}).{}({})".format(sourceName, sourceKeys, sourceFunction, functionArgs))
+    error_log = QtCore.pyqtSignal(str)
+
+    def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys, job_update, job_error_log):
+        self.source = eval(f"socialreaper.{sourceName}(**{sourceKeys})")
+        self.source.api.log_function = self.log
+        self.log_function = job_error_log
+
+        self.iterator = eval(f"self.source.{sourceFunction}({functionArgs})")
         self.outputPath = outputPath
         self.sourceName = sourceName
         self.sourceFunction = sourceFunction
@@ -32,10 +37,14 @@ class Job():
 
         self.state = JobState.STOPPED
         self.job_update = job_update
+        self.log_data = ""
         self.data = []
         self.flat_data = []
         self.keys = set()
         self.flat_keys = set()
+
+    def log(self, string):
+        self.log_function.emit(str(string))
 
     def add_data(self, data):
         self.data.append(data)
@@ -59,10 +68,10 @@ class Job():
             return value
         except StopIteration:
             return self.end_job()
-        except socialreaper.IterError as e:
-            print("Job Failed")
-            print(e)
-            return self.end_job()
+        # except socialreaper.IterError as e:
+        #     print("Job Failed")
+        #     print(e)
+        #     return self.end_job()
 
     def end_job(self):
         # Save CSV
@@ -84,10 +93,13 @@ class Job():
         self.job_update.emit(self)
 
 
+
 class Queue(QtCore.QThread):
     job_update = QtCore.pyqtSignal(Job)
     queue_update = QtCore.pyqtSignal(list)
     queue_selected = QtCore.pyqtSignal(list)
+    job_error = QtCore.pyqtSignal(Job)
+    job_error_log = QtCore.pyqtSignal(str)
 
     def __init__(self, window):
         super().__init__()
@@ -121,7 +133,6 @@ class Queue(QtCore.QThread):
             job.state = JobState.STOPPED
         self.queue_update.emit(self.jobs)
 
-
     def clear(self):
         self.jobs.clear()
         self.queue_update.emit(self.jobs)
@@ -152,9 +163,9 @@ class Queue(QtCore.QThread):
     def add_jobs(self, details):
         try:
             for params in details:
-                self.jobs.append(Job(*params, self.job_update))
+                self.jobs.append(Job(*params, self.job_update, self.job_error_log))
         except Exception as e:
-            print(f"Error occurred adding iterator\n{e}")
+            self.job_error_log.emit(format_exc())
 
         self.queue_update.emit(self.jobs)
 
@@ -162,18 +173,16 @@ class Queue(QtCore.QThread):
         print("Hello")
 
     def run(self):
-        try:
-            while True:
+        while True:
+            try:
                 if self.state == QueueState.RUNNING:
                     self.inc_job()
                 elif self.state == QueueState.STOPPED:
                     sleep(1)
-        except Exception as e:
-            print("something went wrong")
-            print(sys.exc_info())
-            print(e)
-            self.clear()
-            self.start()
+            except Exception as e:
+                if len(self.jobs) > 0:
+                    self.job_error.emit(self.jobs.pop(0))
+                self.stop()
 
     def inc_job(self):
         if len(self.jobs) > 0:

@@ -73,6 +73,9 @@ class Reaper(Ui_MainWindow):
 
         # Create queue page
         self.queue = Queue(self)
+        self.queue.job_error.connect(self.error_window.job_error)
+        self.queue.job_error_log.connect(self.error_window.log_error)
+
         self.set_icons()
 
         # Create queue table
@@ -102,6 +105,7 @@ class Reaper(Ui_MainWindow):
             self.app.setStyleSheet("")
 
     def add_actions(self):
+        self.actionErrorManager.triggered.connect(self.show_error_manager)
         self.actionAdvanced_mode.toggled.connect(self.enable_advanced_mode)
         self.actionDark_mode.toggled.connect(self.enable_dark_mode)
         self.actionQuit.triggered.connect(self.quit)
@@ -113,11 +117,16 @@ class Reaper(Ui_MainWindow):
         self.license_window = LicenseWindow(self.bundle_dir)
         self.actionLicenses.triggered.connect(self.license_window.pop)
 
+        self.error_window = ErrorWindow(self.window)
+
     def set_icons(self):
         self.queueUp.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/up.png"))
         self.queueDown.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/down.png"))
         self.queueRemove.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/remove.png"))
         self.window.setWindowIcon(QIcon(f"{self.bundle_dir}{sep}ui/icon.ico"))
+
+    def show_error_manager(self, _):
+        self.error_window.show()
 
     def open_website(self, _):
         QDesktopServices.openUrl(QUrl("http://reaper.social"))
