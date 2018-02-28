@@ -77,7 +77,6 @@ class Job():
         # Save CSV
         self.state = JobState.SAVING
         self.job_update.emit(self)
-        print("Saving job")
         socialreaper.tools.to_csv(self.flat_data, filename=self.outputPath, flat=False)
         self.state = JobState.FINISHED
         self.job_update.emit(self)
