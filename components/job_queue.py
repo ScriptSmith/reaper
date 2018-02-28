@@ -203,18 +203,3 @@ class Queue(QtCore.QThread):
 
     def display_value(self, value):
         print(value)
-
-
-class IterateData(QtCore.QThread):
-    item_generated = QtCore.pyqtSignal(dict)
-    progress_changed = QtCore.pyqtSignal(int)
-    api_error = QtCore.pyqtSignal(Exception)
-
-    def __init__(self, iterator):
-        super().__init__()
-
-        self.iterator = iterator
-
-    def run(self):
-        for count, item in enumerate(self.iterator):
-            print(item)
