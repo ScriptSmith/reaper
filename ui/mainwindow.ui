@@ -293,7 +293,7 @@ background-color: transparent; /*or a colour*/
              <x>0</x>
              <y>0</y>
              <width>1038</width>
-             <height>577</height>
+             <height>575</height>
             </rect>
            </property>
            <property name="styleSheet">
@@ -612,7 +612,7 @@ background-color: transparent; /*or a colour*/
   </action>
   <action name="actionSettings">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Settings</string>

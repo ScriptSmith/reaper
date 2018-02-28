@@ -30,7 +30,7 @@ import traceback
 from components.job_queue import Queue
 from components.keys import KeyPage
 from components.sources import SourceTabs
-from components.popup import *
+from components.windows import *
 from components.widgets.nodes import PrimaryInputWindow
 from components.widgets.progress import ProgressWidget
 from components.widgets.queue import QueueTable
@@ -114,10 +114,13 @@ class Reaper(Ui_MainWindow):
         self.actionWebsite.triggered.connect(self.open_website)
 
     def add_windows(self):
-        self.license_window = LicenseWindow(self.bundle_dir)
+        self.license_window = LicenseWindow(self.bundle_dir, self.window)
         self.actionLicenses.triggered.connect(self.license_window.pop)
 
         self.error_window = ErrorWindow(self.window)
+
+        self.settings_window = SettingsWindow(self)
+        self.actionSettings.triggered.connect(self.settings_window.show)
 
     def set_icons(self):
         self.queueUp.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/up.png"))

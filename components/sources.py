@@ -1,6 +1,6 @@
 import sys
 import xml.etree.ElementTree as ET
-from os import environ, getcwd, sep, path
+from os import sep, path
 
 from components.widgets.nodes import *
 
@@ -149,7 +149,7 @@ class NodePage(QtWidgets.QWidget):
             advancedBox.toggle()
 
         # Add download widget
-        downloadBox = NodePageDownloadBox(inputBox)
+        downloadBox = NodePageDownloadBox(inputBox, self.mainWindow.settings_window.get_save_path())
         self.add_widget(downloadBox)
 
         inputBox.path_function = downloadBox.get_path
@@ -244,32 +244,16 @@ class NodePage(QtWidgets.QWidget):
 
 
 class NodePageDownloadBox(NodePageBox):
-    def __init__(self, inputBox):
+    def __init__(self, inputBox, save_path):
         super().__init__("Download", layout=QtWidgets.QFormLayout)
 
         self.setEnabled(False)
-        self.add_path()
+        self.pathWidget = PathWidget(save_path)
+        self.layout.addRow("Folder", self.pathWidget)
         self.add_name()
         self.add_button(inputBox)
 
         inputBox.downloadBox = self
-
-    def add_path(self):
-        pathWidget = QtWidgets.QWidget()
-        pathWidget.layout = QtWidgets.QHBoxLayout()
-        pathWidget.setLayout(pathWidget.layout)
-        pathWidget.layout.setContentsMargins(0, 0, 0, 0)
-
-        self.dirPath = QtWidgets.QLabel(getcwd())
-        pathWidget.layout.addWidget(self.dirPath)
-
-        pathWidget.layout.addStretch(1)
-
-        self.pathButton = QtWidgets.QPushButton("Choose folder")
-        pathWidget.layout.addWidget(self.pathButton)
-        self.pathButton.clicked.connect(self.open_dir)
-
-        self.layout.addRow("Folder", pathWidget)
 
     def add_name(self):
         self.fileName = QtWidgets.QLineEdit()
@@ -288,22 +272,12 @@ class NodePageDownloadBox(NodePageBox):
         downloadButton.clicked.connect(inputBox.construct_iterator)
 
     def get_path(self):
-        dir = self.dirPath.text()
+        dir = self.pathWidget.get_path()
         file = self.fileName.text()
         return dir + sep + file
 
     def set_path(self, text):
         self.fileName.setText(text + ".csv")
-
-    def open_dir(self, _):
-        options = QtWidgets.QFileDialog.Options()
-
-        title = "Open folder"
-        directory = ""
-
-        dirPath = QtWidgets.QFileDialog.getExistingDirectory(caption=title, directory=directory, options=options)
-        if dirPath:
-            self.dirPath.setText(path.abspath(dirPath))
 
 
 class NodePageInputBox(NodePageBox):

@@ -1,6 +1,7 @@
 import csv
 import json
 from collections import OrderedDict
+from os import getcwd, path
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
@@ -414,3 +415,38 @@ class AdvancedBox(QtWidgets.QCheckBox):
     def changeVisibility(self, state):
         for item in self.child_items:
             item.setVisible(state)
+
+
+class PathWidget(QtWidgets.QWidget):
+    path_changed = QtCore.pyqtSignal(str)
+
+    def __init__(self, save_path=None, parent=None):
+        super().__init__(parent)
+
+        self.layout = QtWidgets.QHBoxLayout()
+        self.setLayout(self.layout)
+        self.layout.setContentsMargins(0, 0, 0, 0)
+
+        self.dirPath = QtWidgets.QLabel(save_path if save_path else getcwd())
+        self.layout.addWidget(self.dirPath)
+
+        self.layout.addStretch(1)
+
+        self.pathButton = QtWidgets.QPushButton("Choose folder")
+        self.layout.addWidget(self.pathButton)
+        self.pathButton.clicked.connect(self.open_dir)
+
+    def open_dir(self, _):
+        options = QtWidgets.QFileDialog.Options()
+
+        title = "Open folder"
+        directory = ""
+
+        dirPath = QtWidgets.QFileDialog.getExistingDirectory(caption=title, directory=directory, options=options)
+        if dirPath:
+            dirPath = path.abspath(dirPath)
+            self.dirPath.setText(dirPath)
+            self.path_changed.emit(dirPath)
+
+    def get_path(self):
+        return self.dirPath.text()
