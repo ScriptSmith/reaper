@@ -2,6 +2,111 @@
 <!DOCTYPE source SYSTEM "source.dtd">
 <source>
     <name>Tumblr</name>
-    <keys></keys>
-    <children/>
+    <keys>
+        <key>
+            <name>API key</name>
+            <value>api_key</value>
+        </key>
+    </keys>
+    <children>
+        <node>
+            <name>Blog</name>
+            <function>blog_info</function>
+            <inputs>
+                <input>
+                    <name>Blog id</name>
+                    <type>primary</type>
+                </input>
+                <input>
+                    <name>Arguments</name>
+                    <type>arguments</type>
+                    <columns>
+                        <column>Argument</column>
+                        <column>Value</column>
+                    </columns>
+                </input>
+            </inputs>
+            <children>
+                <node>
+                    <name>Posts</name>
+                    <function>blog_posts</function>
+                    <inputs>
+                        <input>
+                            <name>Blog id</name>
+                            <type>primary</type>
+                        </input>
+                        <input>
+                            <name>Arguments</name>
+                            <type>arguments</type>
+                            <columns>
+                                <column>Argument</column>
+                                <column>Value</column>
+                            </columns>
+                            <setters>
+                                <setter>
+                                    <name>Post type</name>
+                                    <argument>type</argument>
+                                    <value>text,quote,link,answer,video,audio,photo,char</value>
+                                    <type>list</type>
+                                </setter>
+                                <setter>
+                                    <name>Post count</name>
+                                    <argument>count</argument>
+                                    <value>500</value>
+                                    <type>counter</type>
+                                </setter>
+                                <setter>
+                                    <name>Include reblog info</name>
+                                    <argument>reblog_info</argument>
+                                    <value>False</value>
+                                    <type>checkbox</type>
+                                </setter>
+                                <setter>
+                                    <name>Include notes info</name>
+                                    <argument>notes_info</argument>
+                                    <value>False</value>
+                                    <type>checkbox</type>
+                                </setter>
+                                <setter>
+                                    <name>Filter</name>
+                                    <argument>filter</argument>
+                                    <value>text,raw</value>
+                                    <type>list</type>
+                                </setter>
+                            </setters>
+                        </input>
+                    </inputs>
+                    <children/>
+                </node>
+            </children>
+        </node>
+        <node>
+            <name>Tag</name>
+            <function>tag_posts</function>
+            <description>Tag's Posts</description>
+            <inputs>
+                <input>
+                    <name>Tag</name>
+                    <type>primary</type>
+                </input>
+                <input>
+                    <name>Arguments</name>
+                    <type>arguments</type>
+                    <columns>
+                        <column>Argument</column>
+                        <column>Value</column>
+                    </columns>
+                    <setters>
+                        <setter>
+                            <name>Post count</name>
+                            <argument>count</argument>
+                            <value>500</value>
+                            <type>counter</type>
+                        </setter>
+                    </setters>
+                </input>
+            </inputs>
+            <children/>
+        </node>
+    </children>
 </source>
