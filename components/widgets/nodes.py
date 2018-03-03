@@ -340,6 +340,8 @@ class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):
         self.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.setToolTip("Ctrl + Click to deselect list items")
 
+        self.currentItemChanged.connect(self.value_changed)
+
     def add_elements(self, elements):
         if elements:
             for element in elements:
@@ -348,6 +350,12 @@ class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):
 
     def get_value(self):
         return json.dumps([item.text() for item in self.selectedItems()])
+
+    def value_changed(self, item):
+        if item:
+            self.containsValue.emit(True)
+        else:
+            self.containsValue.emit(False)
 
 
 class CounterSetter(QtWidgets.QSpinBox):
