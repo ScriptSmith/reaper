@@ -73,7 +73,7 @@ class KeyPage(QtWidgets.QWidget):
         keys = self.sources.get(name)
         if keys:
             for key in keys.keys():
-                keys[key] = keys[key].rstrip()
+                keys[key] = keys[key].strip()
             return keys
         else:
             return None
