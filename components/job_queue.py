@@ -24,7 +24,7 @@ class JobState(Enum):
 class Job():
     error_log = QtCore.pyqtSignal(str)
 
-    def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys, job_update, job_error_log):
+    def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys, append, keyColumn, job_update, job_error_log):
         self.source = eval(f"socialreaper.{sourceName}(**{sourceKeys})")
         self.source.api.log_function = self.log
         self.log_function = job_error_log
@@ -36,6 +36,9 @@ class Job():
         self.sourceFunction = sourceFunction
         self.functionArgs = functionArgs
         self.sourceKeys = sourceKeys
+
+        self.append = append
+        self.keyColumn = keyColumn
 
         self.state = JobState.STOPPED
         self.job_update = job_update
@@ -69,7 +72,10 @@ class Job():
             self.job_update.emit(self)
             return value
         except StopIteration:
-            return self.end_job()
+            try:
+                return self.end_job()
+            except Exception as e:
+                self.error_log.emit(format_exc())
         except IterError as e:
             self.error = e
             raise e
@@ -82,7 +88,7 @@ class Job():
         # Save CSV
         self.state = JobState.SAVING
         self.job_update.emit(self)
-        socialreaper.tools.to_csv(self.flat_data, filename=self.outputPath, flat=False)
+        socialreaper.tools.CSV(self.flat_data, file_name=self.outputPath, flat=False, append=self.append, key_column=self.keyColumn)
         self.state = JobState.FINISHED
         self.job_update.emit(self)
         return False

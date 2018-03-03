@@ -170,7 +170,7 @@ class NodePage(QtWidgets.QWidget):
 
     def add_widget(self, widget):
         if isinstance(widget, NodePageInputBox):
-            self.read_values = widget.construct_iterator
+            self.read_values = widget.construct_job
 
         self.pageDescription.layout.addWidget(widget)
 
@@ -251,6 +251,7 @@ class NodePageDownloadBox(NodePageBox):
         self.pathWidget = PathWidget(save_path)
         self.layout.addRow("Folder", self.pathWidget)
         self.add_name()
+        self.add_options(inputBox)
         self.add_button(inputBox)
 
         inputBox.downloadBox = self
@@ -269,7 +270,16 @@ class NodePageDownloadBox(NodePageBox):
         downloadButton.setToolTip("Add a scraping job to the job queue")
         self.layout.addWidget(downloadButton)
 
-        downloadButton.clicked.connect(inputBox.construct_iterator)
+        downloadButton.clicked.connect(inputBox.construct_job)
+
+    def add_options(self, inputBox):
+        appendBox = QtWidgets.QCheckBox("Append to existing file")
+        appendBox.clicked.connect(inputBox.set_append)
+        self.layout.addWidget(appendBox)
+
+        keyBox = QtWidgets.QCheckBox("Add primary key column")
+        keyBox.clicked.connect(inputBox.set_key_column)
+        self.layout.addWidget(keyBox)
 
     def get_path(self):
         dir = self.pathWidget.get_path()
@@ -304,6 +314,9 @@ class NodePageInputBox(NodePageBox):
         self.inputs = []
         self.required = []
 
+        self.append = False
+        self.keyColumn = None
+
     def add_input(self, name, input):
         if isinstance(input, NodeInputPrimary):
             self.primary.append(input)
@@ -321,7 +334,13 @@ class NodePageInputBox(NodePageBox):
             jobs.append(("_".join(primary_tuple).replace('"', ""), arguments))
         return jobs
 
-    def construct_iterator(self):
+    def set_append(self, boolean):
+        self.append = boolean
+
+    def set_key_column(self, boolean):
+        self.keyColumn = boolean
+
+    def construct_job(self):
         filePathKey = self.path_function()
 
         details = []
@@ -330,9 +349,8 @@ class NodePageInputBox(NodePageBox):
             filePath = filePathKey.replace("{key}", primary_key)
 
             keys = self.keys.get_keys(self.sourceName)
-            # details.append((self.sourceName, self.sourceArgs, self.functionName, args, filePath))
-            details.append((filePath, self.sourceName, self.functionName, args, keys))
-            # outputPath, sourceName, functionName, functionArgs, sourceKeys
+            keyColumnValue = primary_key if self.keyColumn else None
+            details.append((filePath, self.sourceName, self.functionName, args, keys, self.append, keyColumnValue))
 
         self.add_iterator.emit(details)
 
