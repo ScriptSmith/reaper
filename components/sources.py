@@ -202,7 +202,7 @@ class NodePage(QtWidgets.QWidget):
             inputWidget = None
 
             if inputType == "primary":
-                inputWidget = NodeInputPrimary(self.primaryInputWindow, inputBox)
+                inputWidget = NodeInputPrimary(self.primaryInputWindow, self.mainWindow, inputBox)
 
             elif inputType == "text":
                 inputWidget = NodeInputLine(inputRequired, inputBox)

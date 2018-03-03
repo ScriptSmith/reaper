@@ -1,7 +1,7 @@
 import csv
 import json
 from collections import OrderedDict
-from os import getcwd, path
+from os import getcwd, path, sep
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
@@ -279,26 +279,29 @@ class NodeInputLine(QtWidgets.QLineEdit, NodeInputWidget):
 class NodeInputPrimary(NodeInputLine):
     fileText = QtCore.pyqtSignal(str)
 
-    def __init__(self, window, parent=None):
+    def __init__(self, primaryWindow, mainWindow, parent=None):
         NodeInputLine.__init__(self, required=True, parent=parent)
 
-        self.window = window
+        self.primaryWindow = primaryWindow
+        self.mainWindow = mainWindow
 
         self.readingText = "Reading from file"
         self.data = []
 
-        self.readAction = self.addAction(QtGui.QIcon('ui/read.png'), self.TrailingPosition)
+        self.readAction = self.addAction(QtGui.QIcon(
+            f"{mainWindow.bundle_dir}{sep}ui/read.png"), self.TrailingPosition)
         self.readAction.triggered.connect(self.add_file)
 
-        self.clearAction = self.addAction(QtGui.QIcon('ui/remove.png'), self.TrailingPosition)
+        self.clearAction = self.addAction(QtGui.QIcon(
+            f"{mainWindow.bundle_dir}{sep}ui/remove.png"), self.TrailingPosition)
         self.clearAction.triggered.connect(self.clear_file)
         self.clearAction.setVisible(False)
 
         self.textChanged.connect(self.updateText)
 
     def add_file(self, _):
-        self.window.read_file = self.read_file
-        self.window.show()
+        self.primaryWindow.read_file = self.read_file
+        self.primaryWindow.show()
 
     def clear_file(self, _):
         self.readAction.setVisible(True)
