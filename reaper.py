@@ -75,6 +75,7 @@ class Reaper(Ui_MainWindow):
         self.queue = Queue(self)
         self.queue.job_error.connect(self.error_window.job_error)
         self.queue.job_error_log.connect(self.error_window.log_error)
+        self.error_window.cancelButton.clicked.connect(self.queue.stop_retrying)
 
         self.set_icons()
 

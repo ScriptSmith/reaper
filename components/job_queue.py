@@ -206,5 +206,9 @@ class Queue(QtCore.QThread):
             self.state = QueueState.STOPPED
             self.queue_update.emit(self.jobs)
 
+    def stop_retrying(self, _):
+        if len(self.jobs) > 0:
+            self.jobs[0].source.api.force_stop = True
+
     def display_value(self, value):
         print(value)

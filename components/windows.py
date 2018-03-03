@@ -140,6 +140,9 @@ class ErrorWindow(QtWidgets.QMainWindow):
 
         self.mainWidget.layout.addWidget(self.tabs)
 
+        self.cancelButton = QtWidgets.QPushButton("Stop retrying")
+        self.mainWidget.layout.addWidget(self.cancelButton)
+
         self.options = self.menuBar().addMenu("Options")
         self.clearAction = QtWidgets.QAction("Clear")
         self.clearAction.triggered.connect(self.clear)
