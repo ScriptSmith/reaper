@@ -5,6 +5,7 @@ from traceback import format_exc
 from PyQt5 import QtCore
 
 import socialreaper
+from socialreaper.iterators import IterError
 
 
 class QueueState(Enum):
@@ -27,6 +28,7 @@ class Job():
         self.source = eval(f"socialreaper.{sourceName}(**{sourceKeys})")
         self.source.api.log_function = self.log
         self.log_function = job_error_log
+        self.error = None
 
         self.iterator = eval(f"self.source.{sourceFunction}({functionArgs})")
         self.outputPath = outputPath
@@ -68,6 +70,9 @@ class Job():
             return value
         except StopIteration:
             return self.end_job()
+        except IterError as e:
+            self.error = e
+            raise e
         # except socialreaper.IterError as e:
         #     print("Job Failed")
         #     print(e)

@@ -112,7 +112,7 @@ class ErrorWindow(QtWidgets.QMainWindow):
         self.log = ""
 
         self.setWindowTitle("Error manager")
-        self.setMinimumSize(400, 400)
+        self.setMinimumSize(500, 500)
 
         self.mainWidget = QtWidgets.QWidget()
         self.mainWidget.layout = QtWidgets.QVBoxLayout()
@@ -133,6 +133,9 @@ class ErrorWindow(QtWidgets.QMainWindow):
         self.api_browser = QtWidgets.QTextBrowser()
         self.tabs.addTab(self.api_browser, "API state")
 
+        self.error_browser = QtWidgets.QTextBrowser()
+        self.tabs.addTab(self.error_browser, "Error state")
+
         self.toggle_job_tabs(False)
 
         self.mainWidget.layout.addWidget(self.tabs)
@@ -143,7 +146,7 @@ class ErrorWindow(QtWidgets.QMainWindow):
         self.options.addAction(self.clearAction)
 
     def toggle_job_tabs(self, boolean):
-        for i in range(1, 4):
+        for i in range(1, 5):
             self.tabs.setTabEnabled(i, boolean)
 
     def clear(self, _):
@@ -153,6 +156,7 @@ class ErrorWindow(QtWidgets.QMainWindow):
         self.job_browser.clear()
         self.itr_browser.clear()
         self.api_browser.clear()
+        self.error_browser.clear()
 
     @QtCore.pyqtSlot(Job)
     def throw_job(self, job):
@@ -160,6 +164,7 @@ class ErrorWindow(QtWidgets.QMainWindow):
         self.job_browser.setText(pformat(vars(job)))
         self.itr_browser.setText(str(job.iterator))
         self.api_browser.setText(str(job.source.api))
+        self.error_browser.setText(str(job.error))
         self.show()
 
     def log_error(self, log):
