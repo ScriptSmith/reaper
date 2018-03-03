@@ -70,7 +70,8 @@ class KeyPage(QtWidgets.QWidget):
         self.scrollWidget.layout.addWidget(sourceBox)
 
     def get_keys(self, name):
-        return self.sources.get(name)
-
-    def test(self):
-        print()
+        key = self.sources.get(name)
+        if key:
+            return key.rstrip()
+        else:
+            return None
