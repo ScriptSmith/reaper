@@ -75,7 +75,7 @@ class Job():
             try:
                 return self.end_job()
             except Exception as e:
-                self.error_log.emit(format_exc())
+                self.log(format_exc())
         except IterError as e:
             self.error = e
             raise e
@@ -192,6 +192,7 @@ class Queue(QtCore.QThread):
             except Exception as e:
                 if len(self.jobs) > 0:
                     self.job_error.emit(self.jobs.pop(0))
+                    self.job_error_log.emit(format_exc())
                 self.stop()
 
     def inc_job(self):
