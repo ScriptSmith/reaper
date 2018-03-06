@@ -120,7 +120,7 @@
                                 </setter>
                                 <setter>
                                     <name>Comment format</name>
-                                    <argument>comment_format</argument>
+                                    <argument>text_format</argument>
                                     <value>plainText,html</value>
                                     <type>list</type>
                                 </setter>
@@ -242,7 +242,7 @@
                                 </setter>
                                 <setter>
                                     <name>Comment format</name>
-                                    <argument>comment_format</argument>
+                                    <argument>text_format</argument>
                                     <value>plainText,html</value>
                                     <type>list</type>
                                 </setter>
@@ -301,7 +301,7 @@
                                 </setter>
                                 <setter>
                                     <name>Comment format</name>
-                                    <argument>comment_format</argument>
+                                    <argument>text_format</argument>
                                     <value>plainText,html</value>
                                     <type>list</type>
                                 </setter>
