@@ -176,16 +176,38 @@ class ErrorWindow(QtWidgets.QMainWindow):
         self.console.setText(self.log)
 
 
+class BinaryBox(QtWidgets.QGroupBox):
+    def __init__(self, title, choices, description, toggle_function, parent=None):
+        super().__init__(parent)
+
+        self.setTitle(title)
+
+        self.layout = QtWidgets.QVBoxLayout()
+        self.setLayout(self.layout)
+
+        self.layout.addWidget(QtWidgets.QLabel(description))
+
+        self.option_1 = QtWidgets.QRadioButton(choices[0])
+        self.layout.addWidget(self.option_1)
+
+        self.option_2 = QtWidgets.QRadioButton(choices[1])
+        self.layout.addWidget(self.option_2)
+
+        self.option_2.toggled.connect(toggle_function)
+        self.option_1.toggle()
+
+
 class SettingsWindow(ScrollWindow):
     def __init__(self, parent):
         super().__init__("Settings", None, layout=QtWidgets.QFormLayout, parent=parent.window)
-        self.setMinimumWidth(300)
+        self.setMinimumSize(400,400)
         self.location = f"{parent.data_dir}{sep}settings.json"
         self.parent = parent
 
         self.data = {
             'save_path': f"{Path.home()}{sep}Downloads",
-            'dark': True
+            'dark': True,
+            'utf-8': True
         }
 
         self.savePathBox = QtWidgets.QGroupBox()
@@ -199,20 +221,12 @@ class SettingsWindow(ScrollWindow):
 
         self.contents.layout.addWidget(self.savePathBox)
 
-        self.themeBox = QtWidgets.QGroupBox()
-        self.themeBox.setTitle("Theme")
-        self.themeBox.layout = QtWidgets.QHBoxLayout()
-        self.themeBox.setLayout(self.themeBox.layout)
-
-        self.lightRadio = QtWidgets.QRadioButton("Light")
-        self.themeBox.layout.addWidget(self.lightRadio)
-        self.darkRadio = QtWidgets.QRadioButton("Dark")
-        self.themeBox.layout.addWidget(self.darkRadio)
-
-        self.darkRadio.toggled.connect(self.set_dark_mode)
-        self.lightRadio.toggle()
-
+        self.themeBox = BinaryBox("Theme", ("Light", "Dark"), "Change Reaper's Appearance", self.set_dark_mode)
         self.contents.layout.addWidget(self.themeBox)
+
+        self.encodingBox = BinaryBox("Output encoding", ("UTF-8", "ASCII"),
+                                     "Changing to ASCII will mean non-ASCII data will be lost", self.set_encoding)
+        self.contents.layout.addWidget(self.encodingBox)
 
         self.saveButtonWidget = QtWidgets.QWidget()
         self.saveButtonWidget.layout = QtWidgets.QHBoxLayout()
@@ -224,12 +238,18 @@ class SettingsWindow(ScrollWindow):
         self.saveButtonWidget.layout.addWidget(self.saveButton)
         self.saveButtonWidget.layout.addStretch(1)
 
-
         self.load_settings()
 
     def set_dark_mode(self, boolean):
         self.parent.enable_dark_mode(boolean)
         self.data['dark'] = boolean
+
+    def set_encoding(self, boolean):
+        if boolean:
+            self.parent.encoding = 'ascii'
+        else:
+            self.parent.encoding = "utf-8"
+        self.data['ascii'] = boolean
 
     def set_save_path(self, text):
         self.data['save_path'] = text

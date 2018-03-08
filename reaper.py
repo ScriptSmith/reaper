@@ -43,6 +43,7 @@ class Reaper(Ui_MainWindow):
 
         self.version = "v2.3"
         self.source_file = 'sources.xml'
+        self.encoding = 'utf-8'
 
         self.window = window
 

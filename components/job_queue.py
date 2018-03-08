@@ -1,11 +1,11 @@
 from enum import Enum
+from os import path, makedirs
+from pickle import dump
 from time import sleep
 from traceback import format_exc
-from pickle import dump, dumps
-from appdirs import user_log_dir
-from os import path, makedirs
 
 from PyQt5 import QtCore
+from appdirs import user_log_dir
 
 import socialreaper
 from socialreaper.iterators import IterError
@@ -27,11 +27,13 @@ class JobState(Enum):
 class Job():
     error_log = QtCore.pyqtSignal(str)
 
-    def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys, append, keyColumn, job_update, job_error_log):
+    def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys, append, keyColumn, encoding,
+                 job_update, job_error_log):
         self.source = eval(f"socialreaper.{sourceName}(**{sourceKeys})")
         self.source.api.log_function = self.log
         self.log_function = job_error_log
         self.error = None
+        self.encoding = encoding
 
         self.iterator = eval(f"self.source.{sourceFunction}({functionArgs})")
         self.outputPath = outputPath
@@ -91,7 +93,8 @@ class Job():
         # Save CSV
         self.state = JobState.SAVING
         self.job_update.emit(self)
-        socialreaper.tools.CSV(self.flat_data, file_name=self.outputPath, flat=False, append=self.append, key_column=self.keyColumn)
+        socialreaper.tools.CSV(self.flat_data, file_name=self.outputPath, flat=False, append=self.append,
+                               key_column=self.keyColumn, encoding=self.encoding)
         self.state = JobState.FINISHED
         self.job_update.emit(self)
         return False
@@ -116,7 +119,6 @@ class Job():
 
         with open(f"{dir}/out.pickle", 'wb') as f:
             dump(self, f)
-
 
 
 class Queue(QtCore.QThread):
@@ -188,7 +190,7 @@ class Queue(QtCore.QThread):
     def add_jobs(self, details):
         try:
             for params in details:
-                self.jobs.append(Job(*params, self.job_update, self.job_error_log))
+                self.jobs.append(Job(*params, self.window.encoding, self.job_update, self.job_error_log))
         except Exception as e:
             self.job_error_log.emit(format_exc())
 
