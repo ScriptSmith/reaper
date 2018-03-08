@@ -61,13 +61,11 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
         self.filePathLabel.setStyleSheet("font-style: italic;")
         inputWidget.layout.addRow(self.filePathLabel)
 
-        self.columnName = QtWidgets.QLineEdit()
-        self.columnName.setPlaceholderText("Column name")
+        self.columnName = QtWidgets.QComboBox()
+        self.columnName.setEnabled(False)
+        self.columnName.currentIndexChanged.connect(self.extract_file)
 
-        self.extractButton = QtWidgets.QPushButton("Read")
-        self.extractButton.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        self.extractButton.clicked.connect(self.extract_file)
-        inputWidget.layout.addRow(self.columnName, self.extractButton)
+        inputWidget.layout.addRow(self.columnName)
 
         self.listWidget = QtWidgets.QListWidget()
         inputWidget.layout.addRow(self.listWidget)
@@ -91,33 +89,47 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
             self.filePathLabel.setVisible(True)
             self.filePathLabel.setText(self.filePath)
 
-            if not self.csvInput:
+
+            if self.csvInput:
+                self.read_csv_headings()
+            else:
                 self.extract_file()
+        else:
+            self.columnName.setEnabled(False)
 
     def set_mode(self, bool):
         self.csvInput = bool
 
         self.listWidget.clear()
         self.filePathLabel.setText("")
-        self.extractButton.setVisible(bool)
         self.columnName.setVisible(bool)
+        self.columnName.clear()
 
     def extract_file(self):
         if not self.filePath:
             return
 
         self.listWidget.clear()
+        self.columnName.setEnabled(self.csvInput)
 
         if self.csvInput:
             self.extract_csv()
         else:
             self.extract_lines()
 
+    def read_csv_headings(self):
+        self.columnName.clear()
+        with open(self.filePath, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for col in reader.fieldnames:
+                self.columnName.insertItem(self.columnName.count(), col)
+        self.columnName.setEnabled(True)
+
     def extract_csv(self):
         with open(self.filePath, 'r', encoding='utf8') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                datum = row.get(self.columnName.text())
+                datum = row.get(self.columnName.currentText())
                 if datum:
                     self.listWidget.addItem(str(datum))
 
