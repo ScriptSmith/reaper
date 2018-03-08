@@ -1,6 +1,9 @@
 from enum import Enum
 from time import sleep
 from traceback import format_exc
+from pickle import dump, dumps
+from appdirs import user_log_dir
+from os import path, makedirs
 
 from PyQt5 import QtCore
 
@@ -102,6 +105,18 @@ class Job():
 
         self.job_update.emit(self)
 
+    def pickle(self):
+        self.log_function = None
+        self.job_update = None
+
+        dir = user_log_dir()
+
+        if not path.exists(dir):
+            makedirs(dir)
+
+        with open(f"{dir}/out.pickle", 'wb') as f:
+            dump(self, f)
+
 
 
 class Queue(QtCore.QThread):
@@ -191,7 +206,10 @@ class Queue(QtCore.QThread):
                     sleep(1)
             except Exception as e:
                 if len(self.jobs) > 0:
-                    self.job_error.emit(self.jobs.pop(0))
+                    job = self.jobs.pop(0)
+                    self.job_error.emit(job)
+                    job.pickle()
+
                     self.job_error_log.emit(format_exc())
                 self.stop()
 
