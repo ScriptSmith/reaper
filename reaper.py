@@ -136,6 +136,9 @@ class Reaper(Ui_MainWindow):
     def open_website(self, _):
         QDesktopServices.openUrl(QUrl("http://reaper.social"))
 
+    def open_report(self, _):
+        QDesktopServices.openUrl(QUrl("https://github.com/scriptsmith/reaper/issues"))
+
     def quit(self, _):
         self.app.quit()
 
