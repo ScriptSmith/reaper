@@ -212,7 +212,8 @@ class Queue(QtCore.QThread):
                     self.job_error.emit(job)
                     job.pickle()
 
-                    self.job_error_log.emit(format_exc())
+                    if not isinstance(e, IterError):
+                        self.job_error_log.emit(format_exc())
                 self.stop()
 
     def inc_job(self):
