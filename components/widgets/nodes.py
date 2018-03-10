@@ -401,17 +401,16 @@ class CheckboxSetter(QtWidgets.QCheckBox):
         self.table.fill_table()
 
 
-class ListSetter(QtWidgets.QListWidget):
+class ListSetter(QtWidgets.QComboBox):
     def __init__(self, values, table, argument, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
         self.values = values
         self.table = table
         self.argument = argument
-        self.currentRowChanged.connect(self.set_arg)
+        self.currentIndexChanged.connect(self.set_arg)
 
         self.fill_values()
-        self.setMaximumHeight(self.sizeHintForRow(0) * len(self.values) + 5)
 
     def fill_values(self):
         for value in self.values:
@@ -419,7 +418,7 @@ class ListSetter(QtWidgets.QListWidget):
         # self.setCurrentRow(0)
 
     def set_arg(self, row):
-        self.table.set_argument(self.argument, self.item(row).text())
+        self.table.set_argument(self.argument, self.currentText())
         self.table.fill_table()
 
 
