@@ -360,6 +360,10 @@ class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):
                 listItem = QtWidgets.QListWidgetItem(element.text, self)
                 self.addItem(listItem)
 
+        emptyItem = QtWidgets.QListWidgetItem("", self)
+        emptyItem.setFlags(emptyItem.flags() | QtCore.Qt.ItemIsEditable)
+        self.addItem(emptyItem)
+
     def get_value(self):
         return json.dumps([item.text() for item in self.selectedItems()])
 
