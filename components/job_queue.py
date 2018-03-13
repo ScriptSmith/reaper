@@ -153,6 +153,7 @@ class Queue(QtCore.QThread):
         for job in self.jobs:
             job.state = JobState.QUEUED
         self.state = QueueState.RUNNING
+        self.queue_update.emit(self.jobs)
 
     def stop(self):
         self.state = QueueState.STOPPED

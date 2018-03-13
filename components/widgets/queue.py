@@ -1,6 +1,6 @@
 import json
 
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 
 from components.job_queue import JobState
 
@@ -15,11 +15,11 @@ class QueueTable(QtWidgets.QTableWidget):
         self.setEnabled(False)
         self.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
-        self.setColumnCount(6)
-        self.setRowCount(1)
-        self.setHorizontalHeaderLabels(['Source', 'Function', 'Parameters', 'API Keys', 'Path', 'Status'])
+        self.setColumnCount(9)
+        self.setRowCount(0)
+        self.setHorizontalHeaderLabels(['Source', 'Function', 'Parameters', 'API Keys', 'Path', 'Status', 'Write mode', 'Encoding', 'Key column'])
         # self.horizontalHeader().setStretchLastSection(True)
-        self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Interactive)
 
     @QtCore.pyqtSlot(list)
     def display_jobs(self, jobs):
@@ -43,6 +43,9 @@ class QueueTable(QtWidgets.QTableWidget):
             sourceKeys = QtWidgets.QTableWidgetItem(json.dumps(job.sourceKeys))
             outputPath = QtWidgets.QTableWidgetItem(job.outputPath)
             status = QtWidgets.QTableWidgetItem(job.state.value)
+            write_mode = QtWidgets.QTableWidgetItem('Append' if job.append else 'Overwrite')
+            encoding = QtWidgets.QTableWidgetItem(job.encoding)
+            key_column = QtWidgets.QTableWidgetItem('Enabled' if job.keyColumn else 'Disabled')
 
             self.setItem(row, 0, sourceName)
             self.setItem(row, 1, sourceFunction)
@@ -50,6 +53,9 @@ class QueueTable(QtWidgets.QTableWidget):
             self.setItem(row, 3, sourceKeys)
             self.setItem(row, 4, outputPath)
             self.setItem(row, 5, status)
+            self.setItem(row, 6, write_mode)
+            self.setItem(row, 7, encoding)
+            self.setItem(row, 8, key_column)
 
     def selected_jobs(self):
         rows = set()
