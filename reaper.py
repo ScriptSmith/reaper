@@ -113,6 +113,7 @@ class Reaper(Ui_MainWindow):
         self.actionQuit.triggered.connect(self.quit)
         self.actionHelp.triggered.connect(self.open_website)
         self.actionAbout.triggered.connect(self.open_website)
+        self.actionReport_a_bug.triggered.connect(self.open_report)
         self.actionWebsite.triggered.connect(self.open_website)
 
     def add_windows(self):
