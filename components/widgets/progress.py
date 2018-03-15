@@ -46,20 +46,7 @@ class ProgressWidget(QtWidgets.QWidget):
 
         stateWidget.layout.addStretch(1)
 
-        self.pauseButton = QtWidgets.QPushButton(ProgressState.RUNNING.value)
-        self.pauseButton.clicked.connect(self.pause)
-        stateWidget.layout.addWidget(self.pauseButton)
-
         self.layout.addWidget(stateWidget)
-
-    def pause(self, _):
-        if self.state == ProgressState.RUNNING:
-            self.state = ProgressState.PAUSED
-        else:
-            self.state = ProgressState.RUNNING
-
-        self.pauseButton.setText(self.state.value)
-        self.stateLabel.setText("State: " + str(self.state.value))
 
     def create_snapshot(self):
         self.snapshotCheckBox = QtWidgets.QCheckBox("Show snapshot")
