@@ -17,23 +17,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys, os
+import os
+import sys
+import traceback
 
 import qdarkstyle
-from PyQt5 import QtWidgets
-from PyQt5.QtGui import QIcon
 from PyQt5.Qt import QDesktopServices
 from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QIcon
 from appdirs import user_data_dir
-import traceback
 
 from components.job_queue import Queue
 from components.keys import KeyPage
 from components.sources import SourceTabs
-from components.windows import *
 from components.widgets.nodes import PrimaryInputWindow
 from components.widgets.progress import ProgressWidget
 from components.widgets.queue import QueueTable
+from components.windows import *
 from mainwindow import Ui_MainWindow
 
 
@@ -115,6 +115,8 @@ class Reaper(Ui_MainWindow):
         self.actionAbout.triggered.connect(self.open_website)
         self.actionReport_a_bug.triggered.connect(self.open_report)
         self.actionWebsite.triggered.connect(self.open_website)
+        self.actionAPI_Key_file.triggered.connect(self.import_keys)
+        self.actionAPI_Keys.triggered.connect(self.export_keys)
 
     def add_windows(self):
         self.license_window = LicenseWindow(self.bundle_dir, self.window)
@@ -139,6 +141,41 @@ class Reaper(Ui_MainWindow):
 
     def open_report(self, _):
         QDesktopServices.openUrl(QUrl("https://github.com/scriptsmith/reaper/issues"))
+
+    def export_keys(self, _):
+        title = "Export Reaper keys"
+        filter = "JSON File (*.json)"
+        options = QtWidgets.QFileDialog.Options()
+
+        filePath, _ = QtWidgets.QFileDialog.getSaveFileName(caption=title,
+                                                            directory=self.settings_window.get_save_path(),
+                                                            filter=filter,
+                                                            options=options)
+        if filePath:
+            with open(filePath, 'w') as f:
+                json.dump(self.key_page.sources, f)
+
+    def import_keys(self, _):
+        title = "Import Reaper keys"
+        filter = "JSON File (*.json)"
+        options = QtWidgets.QFileDialog.Options()
+
+        filePath, _ = QtWidgets.QFileDialog.getOpenFileName(caption=title,
+                                                            directory=self.settings_window.get_save_path(),
+                                                            filter=filter,
+                                                            options=options)
+        if filePath:
+            with open(filePath, 'r') as f:
+                sources = json.load(f)
+
+                for i in range(self.key_page.scrollWidget.layout.count()):
+                    self.key_page.scrollWidget.layout.takeAt(i)
+
+                for source in sources.keys():
+                    self.key_page.add_source(source, sources[source].keys())
+
+
+
 
     def quit(self, _):
         self.app.quit()

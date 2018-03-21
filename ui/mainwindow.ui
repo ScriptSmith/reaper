@@ -292,8 +292,8 @@ background-color: transparent; /*or a colour*/
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1038</width>
-             <height>575</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <property name="styleSheet">
@@ -372,6 +372,18 @@ background-color: transparent; /*or a colour*/
              <string>Controls</string>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <property name="leftMargin">
+              <number>9</number>
+             </property>
+             <property name="topMargin">
+              <number>9</number>
+             </property>
+             <property name="rightMargin">
+              <number>9</number>
+             </property>
+             <property name="bottomMargin">
+              <number>9</number>
+             </property>
              <item>
               <widget class="QPushButton" name="queueStart">
                <property name="text">
@@ -466,7 +478,7 @@ background-color: transparent; /*or a colour*/
     </property>
     <widget class="QMenu" name="menuOpen">
      <property name="enabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="title">
       <string>Open</string>
@@ -489,7 +501,7 @@ background-color: transparent; /*or a colour*/
     </widget>
     <widget class="QMenu" name="menuSave">
      <property name="enabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="title">
       <string>Save</string>
