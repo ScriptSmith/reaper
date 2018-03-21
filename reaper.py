@@ -41,7 +41,7 @@ class Reaper(Ui_MainWindow):
     def __init__(self, window, app, show=True):
         super().__init__()
 
-        self.version = "v2.3"
+        self.version = "v2.4"
         self.source_file = 'sources.xml'
         self.encoding = 'utf-8'
 
