@@ -1,5 +1,5 @@
 # Reaper
-![Input screenshot](img/both.png)
+![Input screenshot](img/input.png)
 
 [Documentation](https://reaper.readthedocs.io)
 
