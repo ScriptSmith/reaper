@@ -1,15 +1,15 @@
 # Reaper
 ![Input screenshot](img/input.png)
 
-[Documentation](https://reaper.readthedocs.io)
+[Website](http://reaper.social)
 
-Reaper is a PyQt5 GUI that scrapes Facebook, Twitter, Reddit and Youtube apis 
+Reaper is a PyQt5 GUI that scrapes Facebook, Twitter, Reddit, Youtube, and Tumblr APIs 
 using `socialreaper`.
 
-Are you a programmer? [Try the Python package](https://github.com/ScriptSmith/socialreaper)
+Are you a developer? [Try the Python package](https://github.com/ScriptSmith/socialreaper)
 
-## [Download](https://github.com/ScriptSmith/reaper/releases)
+## Download
 To download the latest builds for your platform, check out the [releases](https://github.com/ScriptSmith/reaper/releases)
 
 ## Usage
-To use Reaper, `pip install socialreaper pyqt5`, then run `reaper.py`
+To use Reaper, `pip install -r requirements.txt`, then run `reaper.py`
