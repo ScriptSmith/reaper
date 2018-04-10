@@ -33,7 +33,6 @@ class Job():
         self.source.api.log_function = self.log
         self.log_function = job_error_log
         self.error = None
-        self.encoding = encoding
 
         self.iterator = eval(f"self.source.{sourceFunction}({functionArgs})")
         self.outputPath = outputPath
@@ -44,6 +43,7 @@ class Job():
 
         self.append = append
         self.keyColumn = keyColumn
+        self.encoding = encoding
 
         self.state = JobState.STOPPED
         self.job_update = job_update
