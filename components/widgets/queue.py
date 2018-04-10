@@ -43,6 +43,7 @@ class QueueTable(QtWidgets.QTableWidget):
             sourceKeys = QtWidgets.QTableWidgetItem(json.dumps(job.sourceKeys))
             outputPath = QtWidgets.QTableWidgetItem(job.outputPath)
             status = QtWidgets.QTableWidgetItem(job.state.value)
+            status.setBackground(self.create_brush(job.state))
             write_mode = QtWidgets.QTableWidgetItem('Append' if job.append else 'Overwrite')
             encoding = QtWidgets.QTableWidgetItem(job.encoding)
             key_column = QtWidgets.QTableWidgetItem('Enabled' if job.keyColumn else 'Disabled')
@@ -56,6 +57,21 @@ class QueueTable(QtWidgets.QTableWidget):
             self.setItem(row, 6, write_mode)
             self.setItem(row, 7, encoding)
             self.setItem(row, 8, key_column)
+
+    def create_brush(self, state):
+        colour = None
+        if state == JobState.RUNNING:
+            colour = QtGui.QColor(45,201,55)
+        elif state == JobState.STOPPED:
+            colour = QtGui.QColor(204,50,50)
+        elif state == JobState.QUEUED:
+            colour = QtGui.QColor(231,180,22)
+        elif state == JobState.SAVING:
+            colour = QtGui.QColor(153,193,64)
+        elif state == JobState.FINISHED:
+            colour = QtGui.QColor(45, 100, 200)
+
+        return QtGui.QBrush(colour)
 
     def selected_jobs(self):
         rows = set()
