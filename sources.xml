@@ -17,51 +17,11 @@
         <location>youtube.xml</location>
     </source>
     <source>
+        <name>Pinterest</name>
+        <location>pinterest.xml</location>
+    </source>
+    <source>
         <name>Tumblr</name>
         <location>tumblr.xml</location>
-    </source>
-    <source>
-        <name>Instagram</name>
-        <location>instagram.xml</location>
-    </source>
-    <source>
-        <name>HackerNews</name>
-        <location>hackernews.xml</location>
-    </source>
-    <source>
-        <name>LinkedIn</name>
-        <location>linkedin.xml</location>
-    </source>
-    <source>
-        <name>Meetup</name>
-        <location>meetup.xml</location>
-    </source>
-    <source>
-        <name>Eventbrite</name>
-        <location>eventbrite.xml</location>
-    </source>
-    <source>
-        <name>Pintrest</name>
-        <location>pintrest.xml</location>
-    </source>
-    <source>
-        <name>VK</name>
-        <location>vk.xml</location>
-    </source>
-    <source>
-        <name>Imgur</name>
-        <location>imgur.xml</location>
-    </source>
-    <source>
-        <name>Twitch</name>
-        <location>twitch.xml</location>
-    </source>
-    <source>
-        <name>DeviantArt</name>
-        <location>deviantart.xml</location>
-    </source>
-    <source>
-        <name>NewsAPI</name>
-        <location>newsapi.xml</location>
     </source>
 </sources>

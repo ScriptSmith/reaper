@@ -211,7 +211,7 @@ class BinaryBox(QtWidgets.QGroupBox):
 class SettingsWindow(ScrollWindow):
     def __init__(self, parent):
         super().__init__("Settings", None, layout=QtWidgets.QFormLayout, parent=parent.window)
-        self.setMinimumSize(400, 400)
+        self.setMinimumSize(400, 475)
         self.location = f"{parent.data_dir}{sep}settings.json"
         self.parent = parent
 
