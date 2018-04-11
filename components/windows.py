@@ -2,9 +2,11 @@ import json
 from os import sep
 from pathlib import Path
 from pprint import pformat
+from shutil import rmtree
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import pyqtSignal
+from appdirs import user_cache_dir
 
 from .job_queue import Job
 from .widgets.nodes import PathWidget
@@ -243,6 +245,17 @@ class SettingsWindow(ScrollWindow):
 
         self.cacheBox = BinaryBox("Cache", ("Use cache and memory", "Use memory"), "Store large data on disk",
                                   self.get_cache_mode(), self.set_cache)
+
+        clearCacheButton = QtWidgets.QPushButton("Clear cache")
+        clearCacheButton.clicked.connect(self.clear_cache)
+        clearCacheButtonLayout = QtWidgets.QWidget()
+        clearCacheButtonLayout.layout = QtWidgets.QHBoxLayout()
+        clearCacheButtonLayout.layout.setContentsMargins(0, 0, 0, 0)
+        clearCacheButtonLayout.setLayout(clearCacheButtonLayout.layout)
+        clearCacheButtonLayout.layout.addWidget(clearCacheButton)
+        clearCacheButtonLayout.layout.addStretch(1)
+
+        self.cacheBox.layout.addWidget(clearCacheButtonLayout)
         self.contents.layout.addWidget(self.cacheBox)
 
         self.saveButtonWidget = QtWidgets.QWidget()
@@ -272,6 +285,9 @@ class SettingsWindow(ScrollWindow):
 
     def set_save_path(self, text):
         self.data['save_path'] = text
+
+    def clear_cache(self, boolean):
+        rmtree(user_cache_dir('Reaper', 'UQ'), ignore_errors=True)
 
     def save(self, _):
         self.hide()

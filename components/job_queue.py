@@ -119,7 +119,7 @@ class JobData():
 
         def __next__(self):
             if not self.finished_cache:
-                if (self.cache_count <= self.job_data.cache_count) and self.cache_count != 0:
+                if (self.cache_count <= self.job_data.cache_count) and self.job_data.cache_count != 0:
                     if self.i < len(self.data):
                         return self.read_row()
                     else:
