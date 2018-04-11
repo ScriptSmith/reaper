@@ -1,11 +1,13 @@
 from enum import Enum
 from os import path, makedirs
-from pickle import dump
+from shutil import rmtree
+from pickle import dump, load
 from time import sleep
 from traceback import format_exc
+from uuid import uuid4
 
 from PyQt5 import QtCore
-from appdirs import user_log_dir
+from appdirs import user_log_dir, user_cache_dir
 
 import socialreaper
 from socialreaper.iterators import IterError
@@ -24,11 +26,124 @@ class JobState(Enum):
     FINISHED = "finished"
 
 
+class JobData():
+    def __init__(self, cache=True):
+        self.MAX_ROWS = 1000
+
+        self.cache_enabled = cache
+        self.location = path.join(user_cache_dir('Reaper', 'UQ'), str(uuid4()))
+        self.cache_count = 0
+        self.failed = False
+
+        self.data = []
+        self.keys = set()
+        self.count = 0
+
+    def add_row(self, row):
+        flat_data = socialreaper.tools.flatten(row)
+        self.data.append(flat_data)
+
+        self.count += 1
+
+        keys = flat_data.keys()
+        if keys != self.keys:
+            self.keys.update(keys)
+
+        if self.cache_enabled:
+            self.cache()
+
+    def cache(self):
+        if self.failed or (self.count % self.MAX_ROWS != 0):
+            return
+        else:
+            if self.cache_count == 0:
+                try:
+                    makedirs(self.location)
+                except OSError:
+                    self.failed = True
+                    return
+
+            location = path.join(self.location, str(self.cache_count))
+            try:
+                with open(location, 'wb') as f:
+                    dump(self.data, f)
+                    self.data = []
+                    self.cache_count += 1
+            except IOError:
+                self.failed = True
+
+    def read(self):
+        return self.JobDataIter(self)
+
+    class JobDataIter():
+        def __init__(self, job_data):
+            self.job_data = job_data
+            self.cache_count = 0
+            self.finished_cache = False
+
+            self.data = []
+            self.i = 0
+
+        def __iter__(self):
+            return self
+
+        def read_cache_i(self, i):
+            location = path.join(self.job_data.location, str(i))
+
+            try:
+                with open(location, 'rb') as f:
+                    self.data = load(f)
+                    self.i = 0
+                    self.cache_count += 1
+            except IOError as e:
+                print(e)
+                raise e
+
+        def read_memory(self):
+            self.data = self.job_data.data
+            self.i = 0
+            self.finished_cache = True
+
+        def read_row(self):
+            row = self.data[self.i]
+            self.i += 1
+
+            for key in self.job_data.keys:
+                if not row.get(key):
+                    row[key] = ''
+
+            return row
+
+        def clean_up(self):
+            rmtree(self.job_data.location, ignore_errors=True)
+
+        def __next__(self):
+            if not self.finished_cache:
+                if (self.cache_count <= self.job_data.cache_count) and self.cache_count != 0:
+                    if self.i < len(self.data):
+                        return self.read_row()
+                    else:
+                        if self.cache_count == self.job_data.cache_count:
+                            self.cache_count += 1
+                        else:
+                            self.read_cache_i(self.cache_count)
+                        return self.__next__()
+                else:
+                    self.read_memory()
+                    return self.__next__()
+            else:
+                if self.i < len(self.data):
+                    return self.read_row()
+                else:
+                    self.clean_up()
+                    raise StopIteration
+
+
 class Job():
     error_log = QtCore.pyqtSignal(str)
 
     def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys, append, keyColumn, encoding,
-                 job_update, job_error_log):
+                 cache, job_update, job_error_log):
         self.source = eval(f"socialreaper.{sourceName}(**{sourceKeys})")
         self.source.api.log_function = self.log
         self.log_function = job_error_log
@@ -44,36 +159,21 @@ class Job():
         self.append = append
         self.keyColumn = keyColumn
         self.encoding = encoding
+        self.cache = cache
 
         self.state = JobState.STOPPED
         self.job_update = job_update
         self.log_data = ""
-        self.data = []
-        self.flat_data = []
-        self.keys = set()
-        self.flat_keys = set()
+        self.data = JobData(cache)
 
     def log(self, string):
         self.log_function.emit(str(string))
 
-    def add_data(self, data):
-        self.data.append(data)
-        flat_data = socialreaper.tools.flatten(data)
-        self.flat_data.append(flat_data)
-
-        keys = data.keys()
-        if keys != self.keys:
-            self.keys.update(keys)
-
-        flat_keys = flat_data.keys()
-        if flat_keys != self.flat_keys:
-            self.flat_keys.update(flat_keys)
-
     def inc_data(self):
         self.state = JobState.RUNNING
         try:
-            value = self.iterator.__next__()
-            self.add_data(value)
+            value = next(self.iterator)
+            self.data.add_row(value)
             self.job_update.emit(self)
             return value
         except StopIteration:
@@ -84,17 +184,13 @@ class Job():
         except IterError as e:
             self.error = e
             raise e
-        # except socialreaper.IterError as e:
-        #     print("Job Failed")
-        #     print(e)
-        #     return self.end_job()
 
     def end_job(self):
-        # Save CSV
         self.state = JobState.SAVING
         self.job_update.emit(self)
-        socialreaper.tools.CSV(self.flat_data, file_name=self.outputPath, flat=False, append=self.append,
-                               key_column=self.keyColumn, encoding=self.encoding)
+        socialreaper.tools.CSV(self.data.read(), file_name=self.outputPath, flat=False, append=self.append,
+                               key_column=self.keyColumn, encoding=self.encoding, fill_gaps=False,
+                               field_names=sorted(self.data.keys))
         self.state = JobState.FINISHED
         self.job_update.emit(self)
         return False
@@ -191,7 +287,8 @@ class Queue(QtCore.QThread):
     def add_jobs(self, details):
         try:
             for params in details:
-                self.jobs.append(Job(*params, self.window.encoding, self.job_update, self.job_error_log))
+                self.jobs.append(
+                    Job(*params, self.window.encoding, self.window.cache_enabled, self.job_update, self.job_error_log))
         except Exception as e:
             self.job_error_log.emit(format_exc())
 

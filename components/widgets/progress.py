@@ -66,11 +66,11 @@ class ProgressWidget(QtWidgets.QWidget):
         if self.tabWidget.currentIndex() != 4:
             return
 
-        data = list(self.job.flat_data)
-        keys = set(self.job.flat_keys)
+        data = self.job.data.data
+        keys = list(self.job.data.keys)
         # Otherwise it changes during update
 
-        rows = len(data)
+        rows = self.job.data.count
         self.rowCount.setText("Rows: " + str(rows))
 
         # Reduce update rate

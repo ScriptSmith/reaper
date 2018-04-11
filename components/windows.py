@@ -177,8 +177,9 @@ class ErrorWindow(QtWidgets.QMainWindow):
 
 
 class BinaryBox(QtWidgets.QGroupBox):
-    def __init__(self, title, choices, description, toggle_function, parent=None):
+    def __init__(self, title, choices, description, default_choice, toggle_function, parent=None):
         super().__init__(parent)
+        self.toggle_function = toggle_function
 
         self.setTitle(title)
 
@@ -193,22 +194,32 @@ class BinaryBox(QtWidgets.QGroupBox):
         self.option_2 = QtWidgets.QRadioButton(choices[1])
         self.layout.addWidget(self.option_2)
 
-        self.option_2.toggled.connect(toggle_function)
-        self.option_1.toggle()
+        self.option_1.toggled.connect(toggle_function)
+        self.option_2.toggled.connect(self.invert)
+
+        if default_choice:
+            self.option_1.toggle()
+        else:
+            self.option_2.toggle()
+
+    def invert(self, boolean):
+        self.toggle_function(not boolean)
 
 
 class SettingsWindow(ScrollWindow):
     def __init__(self, parent):
         super().__init__("Settings", None, layout=QtWidgets.QFormLayout, parent=parent.window)
-        self.setMinimumSize(400,400)
+        self.setMinimumSize(400, 400)
         self.location = f"{parent.data_dir}{sep}settings.json"
         self.parent = parent
 
         self.data = {
             'save_path': f"{Path.home()}{sep}Downloads",
-            'dark': True,
-            'utf-8': True
+            'light': True,
+            'utf-8': True,
+            'cache': True
         }
+        self.load_settings()
 
         self.savePathBox = QtWidgets.QGroupBox()
         self.savePathBox.setTitle("Output directory")
@@ -221,12 +232,18 @@ class SettingsWindow(ScrollWindow):
 
         self.contents.layout.addWidget(self.savePathBox)
 
-        self.themeBox = BinaryBox("Theme", ("Light", "Dark"), "Change Reaper's Appearance", self.set_dark_mode)
+        self.themeBox = BinaryBox("Theme", ("Light", "Dark"), "Change Reaper's Appearance", self.get_light_mode(),
+                                  self.set_light_mode)
         self.contents.layout.addWidget(self.themeBox)
 
         self.encodingBox = BinaryBox("Output encoding", ("UTF-8", "ASCII"),
-                                     "Changing to ASCII will mean non-ASCII data will be lost", self.set_encoding)
+                                     "Changing to ASCII will mean non-ASCII data will be lost", self.get_encoding(),
+                                     self.set_encoding)
         self.contents.layout.addWidget(self.encodingBox)
+
+        self.cacheBox = BinaryBox("Cache", ("Use cache and memory", "Use memory"), "Store large data on disk",
+                                  self.get_cache_mode(), self.set_cache)
+        self.contents.layout.addWidget(self.cacheBox)
 
         self.saveButtonWidget = QtWidgets.QWidget()
         self.saveButtonWidget.layout = QtWidgets.QHBoxLayout()
@@ -238,18 +255,20 @@ class SettingsWindow(ScrollWindow):
         self.saveButtonWidget.layout.addWidget(self.saveButton)
         self.saveButtonWidget.layout.addStretch(1)
 
-        self.load_settings()
-
-    def set_dark_mode(self, boolean):
+    def set_light_mode(self, boolean):
         self.parent.enable_dark_mode(boolean)
-        self.data['dark'] = boolean
+        self.data['light'] = boolean
 
     def set_encoding(self, boolean):
         if boolean:
-            self.parent.encoding = 'ascii'
-        else:
             self.parent.encoding = "utf-8"
-        self.data['ascii'] = boolean
+        else:
+            self.parent.encoding = "ascii"
+        self.data['utf-8'] = boolean
+
+    def set_cache(self, boolean):
+        self.parent.cache_enabled = boolean
+        self.data['cache'] = boolean
 
     def set_save_path(self, text):
         self.data['save_path'] = text
@@ -266,14 +285,17 @@ class SettingsWindow(ScrollWindow):
         try:
             with open(self.location, "r") as f:
                 self.data = json.load(f)
-                self.savePath.dirPath.setText(self.data.get('save_path'))
-                if self.data.get('dark'):
-                    self.darkRadio.toggle()
         except (FileNotFoundError, json.decoder.JSONDecodeError):
             pass
 
     def get_save_path(self):
         return self.data.get('save_path')
 
-    def get_dark_mode(self):
-        return self.data.get('dark')
+    def get_encoding(self):
+        return self.data.get('utf-8')
+
+    def get_light_mode(self):
+        return self.data.get('light')
+
+    def get_cache_mode(self):
+        return self.data.get('cache')

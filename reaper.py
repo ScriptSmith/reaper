@@ -44,6 +44,7 @@ class Reaper(Ui_MainWindow):
         self.version = "v2.4"
         self.source_file = 'sources.xml'
         self.encoding = 'utf-8'
+        self.cache_enabled = True
 
         self.window = window
 
@@ -60,8 +61,6 @@ class Reaper(Ui_MainWindow):
         self.advanced_mode = False
         self.dark_mode = False
 
-        self.add_actions()
-
         if getattr(sys, 'frozen', False):
             self.bundle_dir = sys._MEIPASS
         else:
@@ -69,8 +68,9 @@ class Reaper(Ui_MainWindow):
 
         self.data_dir = user_data_dir("Reaper", "UQ")
 
-        # Add windows
+        # Add windows and actions
         self.add_windows()
+        self.add_actions()
 
         # Create queue page
         self.queue = Queue(self)
@@ -102,14 +102,14 @@ class Reaper(Ui_MainWindow):
 
     def enable_dark_mode(self, bool):
         if bool:
-            self.app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
-        else:
             self.app.setStyleSheet("")
+        else:
+            self.app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
 
     def add_actions(self):
         self.actionErrorManager.triggered.connect(self.show_error_manager)
         self.actionAdvanced_mode.toggled.connect(self.enable_advanced_mode)
-        self.actionDark_mode.toggled.connect(self.enable_dark_mode)
+        self.actionDark_mode.toggled.connect(lambda x: self.settings_window.set_light_mode(not x))
         self.actionQuit.triggered.connect(self.quit)
         self.actionHelp.triggered.connect(self.open_website)
         self.actionAbout.triggered.connect(self.open_website)
@@ -173,9 +173,6 @@ class Reaper(Ui_MainWindow):
 
                 for source in sources.keys():
                     self.key_page.add_source(source, sources[source].keys())
-
-
-
 
     def quit(self, _):
         self.app.quit()

@@ -15,9 +15,11 @@ class QueueTable(QtWidgets.QTableWidget):
         self.setEnabled(False)
         self.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
-        self.setColumnCount(9)
+        self.setColumnCount(10)
         self.setRowCount(0)
-        self.setHorizontalHeaderLabels(['Source', 'Function', 'Parameters', 'API Keys', 'Path', 'Status', 'Write mode', 'Encoding', 'Key column'])
+        self.setHorizontalHeaderLabels(
+            ['Source', 'Function', 'Parameters', 'API Keys', 'Path', 'Status', 'Write mode', 'Encoding',
+             'Caching', 'Key column'])
         # self.horizontalHeader().setStretchLastSection(True)
         self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Interactive)
 
@@ -46,6 +48,7 @@ class QueueTable(QtWidgets.QTableWidget):
             status.setBackground(self.create_brush(job.state))
             write_mode = QtWidgets.QTableWidgetItem('Append' if job.append else 'Overwrite')
             encoding = QtWidgets.QTableWidgetItem(job.encoding)
+            caching = QtWidgets.QTableWidgetItem('Enabled' if job.cache else 'Disabled')
             key_column = QtWidgets.QTableWidgetItem('Enabled' if job.keyColumn else 'Disabled')
 
             self.setItem(row, 0, sourceName)
@@ -56,18 +59,19 @@ class QueueTable(QtWidgets.QTableWidget):
             self.setItem(row, 5, status)
             self.setItem(row, 6, write_mode)
             self.setItem(row, 7, encoding)
-            self.setItem(row, 8, key_column)
+            self.setItem(row, 8, caching)
+            self.setItem(row, 9, key_column)
 
     def create_brush(self, state):
         colour = None
         if state == JobState.RUNNING:
-            colour = QtGui.QColor(45,201,55)
+            colour = QtGui.QColor(45, 201, 55)
         elif state == JobState.STOPPED:
-            colour = QtGui.QColor(204,50,50)
+            colour = QtGui.QColor(204, 50, 50)
         elif state == JobState.QUEUED:
-            colour = QtGui.QColor(231,180,22)
+            colour = QtGui.QColor(231, 180, 22)
         elif state == JobState.SAVING:
-            colour = QtGui.QColor(153,193,64)
+            colour = QtGui.QColor(153, 193, 64)
         elif state == JobState.FINISHED:
             colour = QtGui.QColor(45, 100, 200)
 
