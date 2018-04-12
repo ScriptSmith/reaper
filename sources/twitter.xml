@@ -50,6 +50,12 @@
                             <value>True</value>
                             <type>checkbox</type>
                         </setter>
+                        <setter>
+                            <name>Text length</name>
+                            <argument>tweet_mode</argument>
+                            <value>extended,compat</value>
+                            <type>list</type>
+                        </setter>
                     </setters>
                 </input>
             </inputs>
@@ -89,6 +95,12 @@
                             <argument>include_retweets</argument>
                             <value>False</value>
                             <type>checkbox</type>
+                        </setter>
+                        <setter>
+                            <name>Text length</name>
+                            <argument>tweet_mode</argument>
+                            <value>extended,compat</value>
+                            <type>list</type>
                         </setter>
                     </setters>
                 </input>
