@@ -1,5 +1,5 @@
 # Reaper
-![Input screenshot](img/input.png)
+![Input screenshot](img/preview.gif)
 
 [Website](http://reaper.social)
 
