@@ -3,7 +3,7 @@
 
 [Website](http://reaper.social)
 
-Reaper is a PyQt5 GUI that scrapes Facebook, Twitter, Reddit, Youtube, and Tumblr APIs 
+Reaper is a PyQt5 GUI that scrapes Facebook, Twitter, Reddit, Youtube, Pinterest, and Tumblr APIs 
 using `socialreaper`.
 
 Are you a developer? [Try the Python package](https://github.com/ScriptSmith/socialreaper)
