@@ -325,6 +325,7 @@ class Queue(QtCore.QThread):
                     self.queue_update.emit(self.jobs)
             else:
                 self.jobs.pop(0)
+                self.currentJobState = None
                 self.queue_update.emit(self.jobs)
 
 
