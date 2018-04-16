@@ -2,15 +2,15 @@
 <img src="ui/icon.png">
 </p>
 
----
-
-[![GitHub issues](https://img.shields.io/github/issues/scriptsmith/reaper.svg)](https://github.com/scriptsmith/reaper/issues)
-[![GitHub license](https://img.shields.io/github/license/scriptsmith/reaper.svg)](https://github.com/ScriptSmith/reaper/blob/master/LICENSE.txt)
-
 <h1 align="center">Reaper</h1>
+[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)](http://reaper.social)
+[![Github Releases](https://img.shields.io/github/downloads/atom/atom/latest/total.svg)](https://github.com/ScriptSmith/reaper/releases)
+[![GitHub license](https://img.shields.io/github/license/scriptsmith/reaper.svg)](https://github.com/ScriptSmith/reaper/blob/master/LICENSE.txt)
 <p align="center">
 <img src="img/preview.gif">
 </p>
+
+
 
 [Website](http://reaper.social)
 
