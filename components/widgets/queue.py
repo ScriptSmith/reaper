@@ -65,15 +65,15 @@ class QueueTable(QtWidgets.QTableWidget):
     def create_brush(self, state):
         colour = None
         if state == JobState.RUNNING:
-            colour = QtGui.QColor(45, 201, 55)
+            colour = QtGui.QColor(45, 201, 55, 100)
         elif state == JobState.STOPPED:
-            colour = QtGui.QColor(204, 50, 50)
+            colour = QtGui.QColor(204, 50, 50, 100)
         elif state == JobState.QUEUED:
-            colour = QtGui.QColor(231, 180, 22)
+            colour = QtGui.QColor(231, 180, 22, 100)
         elif state == JobState.SAVING:
-            colour = QtGui.QColor(153, 193, 64)
+            colour = QtGui.QColor(153, 193, 64, 100)
         elif state == JobState.FINISHED:
-            colour = QtGui.QColor(45, 100, 200)
+            colour = QtGui.QColor(45, 100, 200, 100)
 
         return QtGui.QBrush(colour)
 
