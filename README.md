@@ -31,7 +31,7 @@ Instructions for using Reaper are available on [http://reaper.social](http://rea
 Download
 ```
 git clone https://github.com/ScriptSmith/reaper.git
-cd socialreaper
+cd reaper
 ```
 Run
 ```
