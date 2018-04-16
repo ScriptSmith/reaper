@@ -21,7 +21,7 @@ Are you a developer? [Try the Python package](https://github.com/ScriptSmith/soc
 ## Download
 To download the latest builds for your platform, check out the [releases](https://github.com/ScriptSmith/reaper/releases)
 
-Installers and standalone versionsare available for Windows and macOS
+Installers and standalone versions are available for Windows and macOS
 
 ## Usage
 
