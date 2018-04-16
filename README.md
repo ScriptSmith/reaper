@@ -1,5 +1,16 @@
-# Reaper
-![Input screenshot](img/preview.gif)
+<p align="center">
+<img src="ui/icon.png">
+</p>
+
+---
+
+[![GitHub issues](https://img.shields.io/github/issues/scriptsmith/reaper.svg)](https://github.com/scriptsmith/reaper/issues)
+[![GitHub license](https://img.shields.io/github/license/scriptsmith/reaper.svg)](https://github.com/ScriptSmith/reaper/blob/master/LICENSE.txt)
+
+<h1 align="center">Reaper</h1>
+<p align="center">
+<img src="img/preview.gif">
+</p>
 
 [Website](http://reaper.social)
 
