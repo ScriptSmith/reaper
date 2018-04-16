@@ -29,12 +29,12 @@ Instructions for using Reaper are available on [http://reaper.social](http://rea
 
 ## Run source
 Download
-```bash
+```
 git clone https://github.com/ScriptSmith/reaper.git
 cd socialreaper
 ```
 Run
-```bash
+```
 pip3 install -r requirements.txt
 python3 reaper.py
 ```
