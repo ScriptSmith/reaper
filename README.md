@@ -21,11 +21,20 @@ Are you a developer? [Try the Python package](https://github.com/ScriptSmith/soc
 ## Download
 To download the latest builds for your platform, check out the [releases](https://github.com/ScriptSmith/reaper/releases)
 
-Builds are available for Windows and macOS as installers and standalone versions
+Installers and standalone versionsare available for Windows and macOS
 
 ## Usage
 
 Instructions for using Reaper are available on [http://reaper.social](http://reaper.social)
 
 ## Run source
-To run Reaper from source, `pip install -r requirements.txt`, then run `reaper.py`
+Download
+```bash
+git clone https://github.com/ScriptSmith/reaper.git
+cd socialreaper
+```
+Run
+```bash
+pip3 install -r requirements.txt
+python3 reaper.py
+```
