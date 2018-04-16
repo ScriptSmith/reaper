@@ -21,5 +21,7 @@ Are you a developer? [Try the Python package](https://github.com/ScriptSmith/soc
 ## Download
 To download the latest builds for your platform, check out the [releases](https://github.com/ScriptSmith/reaper/releases)
 
+Builds are available for Windows and macOS as installers and standalone versions
+
 ## Usage
-To use Reaper, `pip install -r requirements.txt`, then run `reaper.py`
+To use Reaper from source, `pip install -r requirements.txt`, then run `reaper.py`
