@@ -18,6 +18,19 @@ using `socialreaper`
 
 Are you a developer? [Try the Python package](https://github.com/ScriptSmith/socialreaper) [![PyPI](https://img.shields.io/pypi/v/nine.svg)](https://pypi.python.org/pypi/socialreaper)
 
+
+## Features
+- 6 social platforms
+- Instructions for getting API keys [here](http://reaper.social)
+- API key management
+- Download queuing system
+- Disk caching for big data
+- Read input from CSV and text files
+- **Dark** theme
+- Error management
+- UTF-8 and ASCII support
+- Fully-customisable parameter input
+
 ## Download
 To download the latest builds for your platform, check out the [releases](https://github.com/ScriptSmith/reaper/releases)
 
