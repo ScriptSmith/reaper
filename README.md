@@ -20,7 +20,7 @@ Are you a developer? [Try the Python package](https://github.com/ScriptSmith/soc
 
 
 ## Features
-- 6 social platforms
+- 6 social media platforms
 - Instructions for getting API keys [here](http://reaper.social)
 - API key management
 - Download queuing system
