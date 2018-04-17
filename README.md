@@ -13,7 +13,7 @@ Reaper is a PyQt5 GUI that scrapes Facebook, Twitter, Reddit, Youtube, Pinterest
 using `socialreaper`
 
 <p align="center">
-<img src="img/preview.gif">
+<img width="100%" src="img/preview.gif">
 </p>
 
 Are you a developer? [Try the Python package](https://github.com/ScriptSmith/socialreaper) [![PyPI](https://img.shields.io/pypi/v/nine.svg)](https://pypi.python.org/pypi/socialreaper)
