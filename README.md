@@ -31,7 +31,7 @@ Are you a developer? [Try the Python package](https://github.com/ScriptSmith/soc
 - Ability to append to exsting data
 - **Dark** theme
 - UTF-8 and ASCII support
-- Fully-customisable parameter input
+- Custom parameters
 
 ## Download
 To download the latest builds for your platform, check out the [releases](https://github.com/ScriptSmith/reaper/releases)
