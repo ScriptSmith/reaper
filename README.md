@@ -21,11 +21,12 @@ Are you a developer? [Try the Python package](https://github.com/ScriptSmith/soc
 
 ## Features
 - 6 social media platforms
+- CSV output
 - Instructions for getting API keys [here](http://reaper.social)
 - API key management
 - Download queuing system
 - Disk caching for big data
-- Read input from CSV and text files
+- Ability to read a list of inputs from CSV and text files
 - **Dark** theme
 - Error management
 - UTF-8 and ASCII support
