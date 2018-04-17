@@ -16,7 +16,7 @@ using `socialreaper`
 <img width="100%" src="img/preview.gif">
 </p>
 
-Are you a developer? [Try the Python package](https://github.com/ScriptSmith/socialreaper) [![PyPI](https://img.shields.io/pypi/v/nine.svg)](https://pypi.python.org/pypi/socialreaper)
+Are you a developer? [Try the Python package](https://github.com/ScriptSmith/socialreaper)
 
 
 ## Features
