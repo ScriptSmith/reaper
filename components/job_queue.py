@@ -208,7 +208,7 @@ class Job():
         self.log_function = None
         self.job_update = None
 
-        dir = user_log_dir()
+        dir = user_log_dir('Reaper', 'UQ')
 
         if not path.exists(dir):
             makedirs(dir)
