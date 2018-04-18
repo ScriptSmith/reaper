@@ -10,13 +10,27 @@
 [![GitHub license](https://img.shields.io/github/license/scriptsmith/reaper.svg)](https://github.com/ScriptSmith/reaper/blob/master/LICENSE.txt)
 
 Reaper is a PyQt5 GUI that scrapes Facebook, Twitter, Reddit, Youtube, Pinterest, and Tumblr APIs 
-using `socialreaper`
+using [socialreaper](https://github.com/ScriptSmith/socialreaper)
 
 <p align="center">
 <img width="100%" src="img/preview.gif">
 </p>
 
-Are you a developer? [Try the Python package](https://github.com/ScriptSmith/socialreaper) [![PyPI](https://img.shields.io/pypi/v/nine.svg)](https://pypi.python.org/pypi/socialreaper)
+Are you a developer? [Try the Python package](https://github.com/ScriptSmith/socialreaper)
+
+
+## Features
+- Support for 6 social media platforms
+- CSV output
+- Instructions for getting API keys
+- API key management
+- Download queuing system
+- Error management
+- Disk caching for big data
+- Ability to read a list of inputs from CSV and text files
+- Ability to append to exsting data
+- **Dark** theme
+- UTF-8 and ASCII support
 
 ## Download
 To download the latest builds for your platform, check out the [releases](https://github.com/ScriptSmith/reaper/releases)
