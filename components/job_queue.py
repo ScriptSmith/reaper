@@ -10,7 +10,7 @@ from PyQt5 import QtCore
 from appdirs import user_log_dir, user_cache_dir
 
 import socialreaper
-from socialreaper.iterators import IterError
+from socialreaper import IterError
 
 
 class QueueState(Enum):
