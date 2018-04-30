@@ -1,9 +1,6 @@
 #!/bin/bash
 git pull
-cd ../socialreaper/
-git pull
-cd ../reaper/
-pip3 install -e ../socialreaper/
+pip3 install git+https://github.com/ScriptSmith/socialreaper.git
 rm -r dist/
 pyinstaller reaper.spec
 cd dist/
