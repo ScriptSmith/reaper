@@ -13,3 +13,4 @@ makefile
 *.csv
 *.json
 Output/
+.DS_Store
