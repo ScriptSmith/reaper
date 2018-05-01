@@ -22,9 +22,8 @@ import sys
 import traceback
 
 import qdarkstyle
-from PyQt5.Qt import QDesktopServices
 from PyQt5.QtCore import QUrl
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QDesktopServices
 from appdirs import user_data_dir
 
 from components.job_queue import Queue
