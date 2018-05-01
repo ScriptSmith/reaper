@@ -33,7 +33,7 @@ from components.widgets.nodes import PrimaryInputWindow
 from components.widgets.progress import ProgressWidget
 from components.widgets.queue import QueueTable
 from components.windows import *
-from mainwindow import Ui_MainWindow
+from ui.mainwindow import Ui_MainWindow
 
 
 class Reaper(Ui_MainWindow):
