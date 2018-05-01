@@ -40,7 +40,7 @@ Installers and standalone versions are available for Windows and macOS
 
 ## Usage
 
-Instructions for using Reaper are available on [http://reaper.social](https://reaper.social)
+Instructions for using Reaper are available on [reaper.social](https://reaper.social)
 
 ## Run source
 Reaper uses string formatting that was added in Python 3.6. You need to run Reaper with Python 3.6+ or download a pre-built version from the [releases](https://github.com/ScriptSmith/reaper/releases)
