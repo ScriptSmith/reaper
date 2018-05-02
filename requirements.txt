@@ -1,4 +1,4 @@
-PyQt5==5.10.1
+PyQt5==5.9.1
 -e git+git@github.com:ScriptSmith/socialreaper.git#egg=socialreaper
 appdirs==1.4.3
 QDarkStyle==2.5.3 
