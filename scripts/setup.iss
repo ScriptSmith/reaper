@@ -2,7 +2,6 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Reaper"
-#define MyAppVersion "2.5.3"
 #define MyAppPublisher "The University of Queensland"
 #define MyAppURL "http://reaper.social"
 #define MyAppExeName "reaper.exe"
@@ -13,8 +12,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{D200F93A-07DC-4F73-8713-18E4CDCAA43C}
 AppName={#MyAppName}
-AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
+AppVersion={#ApplicationVersion}
+;AppVerName={#MyAppName} {#ApplicationVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
@@ -22,6 +21,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
 LicenseFile=C:\Users\s4394487\src\reaper\dist\reaper\LICENSE.txt
+OutputDir=C:\Users\s4394487\src\reaper\dist\
 OutputBaseFilename=reaper-setup
 SetupIconFile=C:\Users\s4394487\src\reaper\dist\reaper\ui\icon.ico
 Compression=lzma

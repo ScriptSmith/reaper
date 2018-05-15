@@ -1,3 +1,4 @@
+pip install -e ..\socialreaper
 rmdir build\ /s /q
 rmdir dist\reaper /s /q
 pyinstaller.exe -w -i ui/icon.ico reaper.py
@@ -6,4 +7,4 @@ robocopy sources dist\reaper\sources /mir
 robocopy licenses dist\reaper\licenses /mir
 copy LICENSE.txt dist\reaper\LICENSE.txt
 copy sources.xml dist\reaper\sources.xml
-scripts\setup.iss
+"C:\Program Files (x86)\Inno Setup 5\ISCC.exe" scripts\setup.iss /DApplicationVersion==%1
