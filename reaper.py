@@ -49,9 +49,6 @@ class Reaper(Ui_MainWindow):
 
         self.app = app
 
-        if show:
-            window.show()
-
         self.setupUi(window)
 
         self.window.setWindowIcon(QIcon('ui/icon.png'))
@@ -93,6 +90,9 @@ class Reaper(Ui_MainWindow):
         # Create progress page
         self.progress_page = ProgressWidget(self.queue.job_update, self.tabWidget)
         self.progressLayout.addWidget(self.progress_page)
+
+        if show:
+            window.show()
 
     def enable_advanced_mode(self, bool):
         self.advanced_mode = bool
@@ -178,8 +178,17 @@ class Reaper(Ui_MainWindow):
 if __name__ == "__main__":
     try:
         app = QtWidgets.QApplication(sys.argv)
+
+        pixmap = QtGui.QPixmap('ui/icon.svg')
+        splash = QtWidgets.QSplashScreen(pixmap)
+        splash.show()
+        app.processEvents()
+
         main_window = QtWidgets.QMainWindow()
         ui = Reaper(main_window, app)
+
+        splash.finish(main_window)
+
         sys.exit(app.exec_())
     except Exception as e:
         with open('log.log', 'a') as f:
