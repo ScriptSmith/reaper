@@ -7,10 +7,11 @@ from traceback import format_exc
 from uuid import uuid4
 
 from PyQt5 import QtCore
-from appdirs import user_log_dir, user_cache_dir
 
 import socialreaper
 from socialreaper import IterError
+
+from components.globals import *
 
 
 class QueueState(Enum):
@@ -31,7 +32,7 @@ class JobData():
         self.MAX_ROWS = 1000
 
         self.cache_enabled = cache
-        self.location = path.join(user_cache_dir('Reaper', 'UQ'), str(uuid4()))
+        self.location = path.join(CACHE_DIR, str(uuid4()))
         self.cache_count = 0
         self.failed = False
 
@@ -208,7 +209,7 @@ class Job():
         self.log_function = None
         self.job_update = None
 
-        dir = user_log_dir('Reaper', 'UQ')
+        dir = LOG_DIR
 
         if not path.exists(dir):
             makedirs(dir)

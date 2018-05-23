@@ -119,7 +119,7 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
 
     def read_csv_headings(self):
         self.columnName.clear()
-        with open(self.filePath, 'r', encoding='utf-8') as f:
+        with open(self.filePath, 'r', encoding='utf-8', newline='') as f:
             reader = csv.DictReader(f)
             for col in reader.fieldnames:
                 self.columnName.insertItem(self.columnName.count(), col)

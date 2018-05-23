@@ -6,8 +6,8 @@ from shutil import rmtree
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import pyqtSignal
-from appdirs import user_cache_dir
 
+from components.globals import *
 from .job_queue import Job
 from .widgets.nodes import PathWidget
 
@@ -212,7 +212,7 @@ class SettingsWindow(ScrollWindow):
     def __init__(self, parent):
         super().__init__("Settings", None, layout=QtWidgets.QFormLayout, parent=parent.window)
         self.setMinimumSize(400, 475)
-        self.location = f"{parent.data_dir}{sep}settings.json"
+        self.location = f"{DATA_DIR}{sep}settings.json"
         self.parent = parent
 
         self.data = {
@@ -287,7 +287,7 @@ class SettingsWindow(ScrollWindow):
         self.data['save_path'] = text
 
     def clear_cache(self, boolean):
-        rmtree(user_cache_dir('Reaper', 'UQ'), ignore_errors=True)
+        rmtree(CACHE_DIR, ignore_errors=True)
 
     def save(self, _):
         self.hide()
