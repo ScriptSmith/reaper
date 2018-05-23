@@ -32,18 +32,18 @@ class ScrollWindow(QtWidgets.QMainWindow):
         super().__init__(parent)
         self.setWindowTitle(title)
 
-        self.mainWidget = QtWidgets.QWidget()
-        self.mainWidget.layout = QtWidgets.QVBoxLayout()
+        self.mainWidget = QtWidgets.QWidget(self)
+        self.mainWidget.layout = QtWidgets.QVBoxLayout(self.mainWidget)
         self.mainWidget.setLayout(self.mainWidget.layout)
         self.setCentralWidget(self.mainWidget)
 
         if subtitle:
             self.mainWidget.layout.addWidget(QtWidgets.QLabel(subtitle))
 
-        self.scrollArea = QtWidgets.QScrollArea()
+        self.scrollArea = QtWidgets.QScrollArea(self.mainWidget)
         self.scrollArea.setWidgetResizable(True)
 
-        self.contents = QtWidgets.QWidget()
+        self.contents = QtWidgets.QWidget(self.scrollArea)
         self.contents.layout = layout()
         self.contents.setLayout(self.contents.layout)
         self.mainWidget.layout.addWidget(self.contents)
@@ -57,13 +57,13 @@ class LicenseWidget(QtWidgets.QWidget):
         super().__init__(parent=parent)
         self.setMinimumHeight(300)
 
-        self.layout = QtWidgets.QVBoxLayout()
+        self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
 
-        label = QtWidgets.QLabel(text)
+        label = QtWidgets.QLabel(text, self)
         self.layout.addWidget(label)
 
-        browser = QtWidgets.QTextBrowser()
+        browser = QtWidgets.QTextBrowser(self)
         browser.setText(details)
         self.layout.addWidget(browser)
 
@@ -76,27 +76,27 @@ class LicenseWindow(ScrollWindow):
         self.bundle_dir = bundle_dir
 
         with open(f"{self.bundle_dir}{sep}LICENSE.txt", 'r') as f:
-            reaper = LicenseWidget("Reaper GPL license", f.read())
+            reaper = LicenseWidget("Reaper GPL license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
         with open(f"{self.bundle_dir}{sep}licenses/socialreaper.txt", 'r') as f:
-            reaper = LicenseWidget("Social Reaper MIT license", f.read())
+            reaper = LicenseWidget("Social Reaper MIT license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
         with open(f"{self.bundle_dir}{sep}LICENSE.txt", 'r') as f:
-            reaper = LicenseWidget("PyQt GPL license", f.read())
+            reaper = LicenseWidget("PyQt GPL license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
         with open(f"{self.bundle_dir}{sep}licenses/requests.txt", 'r') as f:
-            reaper = LicenseWidget("Requests Apache license", f.read())
+            reaper = LicenseWidget("Requests Apache license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
         with open(f"{self.bundle_dir}{sep}licenses/requests-oauthlib.txt", 'r') as f:
-            reaper = LicenseWidget("Requests-OAuthLib ISC license", f.read())
+            reaper = LicenseWidget("Requests-OAuthLib ISC license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
         with open(f"{self.bundle_dir}{sep}licenses/oauthlib.txt", 'r') as f:
-            reaper = LicenseWidget("OAuthLib BSD license", f.read())
+            reaper = LicenseWidget("OAuthLib BSD license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
     def pop(self):
@@ -116,12 +116,12 @@ class ErrorWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("Error manager")
         self.setMinimumSize(500, 500)
 
-        self.mainWidget = QtWidgets.QWidget()
-        self.mainWidget.layout = QtWidgets.QVBoxLayout()
+        self.mainWidget = QtWidgets.QWidget(self)
+        self.mainWidget.layout = QtWidgets.QVBoxLayout(self.mainWidget)
         self.mainWidget.setLayout(self.mainWidget.layout)
         self.setCentralWidget(self.mainWidget)
 
-        self.tabs = QtWidgets.QTabWidget()
+        self.tabs = QtWidgets.QTabWidget(self.mainWidget)
 
         self.console = QtWidgets.QTextBrowser()
         self.tabs.addTab(self.console, "Error log")
@@ -142,7 +142,7 @@ class ErrorWindow(QtWidgets.QMainWindow):
 
         self.mainWidget.layout.addWidget(self.tabs)
 
-        self.cancelButton = QtWidgets.QPushButton("Stop retrying")
+        self.cancelButton = QtWidgets.QPushButton("Stop retrying", self.mainWidget)
         self.mainWidget.layout.addWidget(self.cancelButton)
 
         self.options = self.menuBar().addMenu("Options")
@@ -185,15 +185,15 @@ class BinaryBox(QtWidgets.QGroupBox):
 
         self.setTitle(title)
 
-        self.layout = QtWidgets.QVBoxLayout()
+        self.layout = QtWidgets.QVBoxLayout(self)
         self.setLayout(self.layout)
 
-        self.layout.addWidget(QtWidgets.QLabel(description))
+        self.layout.addWidget(QtWidgets.QLabel(description, self))
 
-        self.option_1 = QtWidgets.QRadioButton(choices[0])
+        self.option_1 = QtWidgets.QRadioButton(choices[0], self)
         self.layout.addWidget(self.option_1)
 
-        self.option_2 = QtWidgets.QRadioButton(choices[1])
+        self.option_2 = QtWidgets.QRadioButton(choices[1], self)
         self.layout.addWidget(self.option_2)
 
         self.option_1.toggled.connect(toggle_function)
@@ -223,7 +223,7 @@ class SettingsWindow(ScrollWindow):
         }
         self.load_settings()
 
-        self.savePathBox = QtWidgets.QGroupBox()
+        self.savePathBox = QtWidgets.QGroupBox(self)
         self.savePathBox.setTitle("Output directory")
         self.savePathBox.layout = QtWidgets.QVBoxLayout()
         self.savePathBox.setLayout(self.savePathBox.layout)
@@ -249,7 +249,7 @@ class SettingsWindow(ScrollWindow):
         clearCacheButton = QtWidgets.QPushButton("Clear cache")
         clearCacheButton.clicked.connect(self.clear_cache)
         clearCacheButtonLayout = QtWidgets.QWidget()
-        clearCacheButtonLayout.layout = QtWidgets.QHBoxLayout()
+        clearCacheButtonLayout.layout = QtWidgets.QHBoxLayout(clearCacheButtonLayout)
         clearCacheButtonLayout.layout.setContentsMargins(0, 0, 0, 0)
         clearCacheButtonLayout.setLayout(clearCacheButtonLayout.layout)
         clearCacheButtonLayout.layout.addWidget(clearCacheButton)
@@ -258,12 +258,12 @@ class SettingsWindow(ScrollWindow):
         self.cacheBox.layout.addWidget(clearCacheButtonLayout)
         self.contents.layout.addWidget(self.cacheBox)
 
-        self.saveButtonWidget = QtWidgets.QWidget()
-        self.saveButtonWidget.layout = QtWidgets.QHBoxLayout()
+        self.saveButtonWidget = QtWidgets.QWidget(self.contents)
+        self.saveButtonWidget.layout = QtWidgets.QHBoxLayout(self.saveButtonWidget)
         self.saveButtonWidget.setLayout(self.saveButtonWidget.layout)
         self.contents.layout.addWidget(self.saveButtonWidget)
 
-        self.saveButton = QtWidgets.QPushButton("Save")
+        self.saveButton = QtWidgets.QPushButton("Save", self.saveButtonWidget)
         self.saveButton.clicked.connect(self.save)
         self.saveButtonWidget.layout.addWidget(self.saveButton)
         self.saveButtonWidget.layout.addStretch(1)
