@@ -37,7 +37,7 @@ from ui.mainwindow import Ui_MainWindow
 
 
 class Reaper(Ui_MainWindow):
-    def __init__(self, window, app, show=True):
+    def __init__(self, window, app, splash, show=True):
         super().__init__()
 
         self.version = "v2.5.4"
@@ -46,9 +46,10 @@ class Reaper(Ui_MainWindow):
         self.cache_enabled = True
 
         self.window = window
-
         self.app = app
+        self.splash = splash
 
+        self.splash_msg("Setting up UI")
         self.setupUi(window)
 
         self.window.setWindowIcon(QIcon('ui/icon.png'))
@@ -57,42 +58,55 @@ class Reaper(Ui_MainWindow):
         self.advanced_mode = False
         self.dark_mode = False
 
+        self.splash_msg("Identifying app type")
         if getattr(sys, 'frozen', False):
             self.bundle_dir = sys._MEIPASS
         else:
             self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
 
         # Add windows and actions
+        self.splash_msg("Connecting widgets")
         self.add_windows()
         self.add_actions()
 
         # Create queue page
+        self.splash_msg("Creating Queue")
         self.queue = Queue(self)
         self.queue.job_error.connect(self.error_window.job_error)
         self.queue.job_error_log.connect(self.error_window.log_error)
         self.error_window.cancelButton.clicked.connect(self.queue.stop_retrying)
 
+        self.splash_msg("Adding iconds")
         self.set_icons()
 
         # Create queue table
+        self.splash_msg("Creating job queue")
         self.queue_table = QueueTable()
         self.queueLayout.addWidget(self.queue_table)
 
         # Create window for primary key input
+        self.splash_msg("Creating input window")
         self.primaryInputWindow = PrimaryInputWindow(window)
 
         # Create api key page
+        self.splash_msg("Creating API tab")
         self.key_page = KeyPage(self.scrollAreaWidgetContents, DATA_DIR)
 
         # Create sources page
+        self.splash_msg("Creating Source tab")
         self.source_tabs = SourceTabs(self, self.key_page, self.source_file, self.primaryInputWindow)
 
         # Create progress page
+        self.splash_msg("Creating progress tab")
         self.progress_page = ProgressWidget(self.queue.job_update, self.tabWidget)
         self.progressLayout.addWidget(self.progress_page)
 
         if show:
+            self.splash_msg("Showing window")
             window.show()
+
+    def splash_msg(self, message):
+        self.splash.showMessage(message)
 
     def enable_advanced_mode(self, bool):
         self.advanced_mode = bool
@@ -179,18 +193,19 @@ if __name__ == "__main__":
     try:
         app = QtWidgets.QApplication(sys.argv)
 
-        pixmap = QtGui.QPixmap('ui/icon.svg')
+        pixmap = QtGui.QPixmap('ui/splash.png')
         splash = QtWidgets.QSplashScreen(pixmap)
         splash.show()
+        splash.showMessage("Starting reaper")
         app.processEvents()
 
         main_window = QtWidgets.QMainWindow()
-        ui = Reaper(main_window, app)
+        ui = Reaper(main_window, app, splash)
 
         splash.finish(main_window)
 
         sys.exit(app.exec_())
     except Exception as e:
-        with open('log.log', 'a') as f:
+        with open(LOG_DIR + '/log.log', 'a') as f:
             f.write(str(e))
             f.write(traceback.format_exc())
