@@ -176,6 +176,8 @@ class ErrorWindow(QtWidgets.QMainWindow):
         self.show()
         self.log += log + '\n'
         self.console.setText(self.log)
+        scrollbar = self.console.verticalScrollBar()
+        scrollbar.setValue(scrollbar.maximum())
 
 
 class BinaryBox(QtWidgets.QGroupBox):
