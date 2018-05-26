@@ -6,6 +6,7 @@ from components.widgets.nodes import *
 
 
 class NodeTree(QtWidgets.QTreeWidget):
+
     def __init__(self, sourceName, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
@@ -24,7 +25,7 @@ class NodeTree(QtWidgets.QTreeWidget):
         self.nodePage.create_page(item, self.sourceName)
 
     def add_item(self, node, parent=None):
-        name = node.find('name').text
+        name = node.find("name").text
         treeItem = QtWidgets.QTreeWidgetItem()
         treeItem.setText(0, name)
         treeItem.setExpanded(True)
@@ -40,7 +41,7 @@ class NodeTree(QtWidgets.QTreeWidget):
             treeItem.level = parent.level + 1
             treeItem.hierarchy = parent.hierarchy + " → " + name
 
-            modifier = "'s" if textDescription[-1] != 's' else "'"
+            modifier = "'s" if textDescription[-1] != "s" else "'"
             textDescription = "{}{} {}".format(textDescription, modifier, name)
 
             parent.addChild(treeItem)
@@ -51,18 +52,21 @@ class NodeTree(QtWidgets.QTreeWidget):
 
             self.addTopLevelItem(treeItem)
 
-        descriptionNode = node.find('description')
+        descriptionNode = node.find("description")
         if isinstance(descriptionNode, ET.Element):
             textDescription = descriptionNode.text
 
         treeItem.textDescription = textDescription
 
-        treeItem.textContent = "I want to scrape a {} {}".format(self.sourceName, textDescription)
+        treeItem.textContent = "I want to scrape a {} {}".format(
+            self.sourceName, textDescription
+        )
 
         return treeItem
 
 
 class NodePageBox(QtWidgets.QGroupBox):
+
     def __init__(self, title, content=None, layout=QtWidgets.QVBoxLayout, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
@@ -78,6 +82,7 @@ class NodePageBox(QtWidgets.QGroupBox):
 
 
 class NodePage(QtWidgets.QWidget):
+
     def __init__(self, mainWindow, primaryInputWindow, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
@@ -134,7 +139,9 @@ class NodePage(QtWidgets.QWidget):
         self.add_widget(srFunction)
 
         # Create inputs
-        inputBox = NodePageInputBox(sourceName, self.queue, self.queue_table, self.keys, functionName)
+        inputBox = NodePageInputBox(
+            sourceName, self.queue, self.queue_table, self.keys, functionName
+        )
         inputBox.add_iterator.connect(self.queue.add_jobs)
 
         # Add advanced box
@@ -149,7 +156,9 @@ class NodePage(QtWidgets.QWidget):
             advancedBox.toggle()
 
         # Add download widget
-        downloadBox = NodePageDownloadBox(inputBox, self.mainWindow.settings_window.get_save_path())
+        downloadBox = NodePageDownloadBox(
+            inputBox, self.mainWindow.settings_window.get_save_path()
+        )
         self.add_widget(downloadBox)
 
         inputBox.path_function = downloadBox.get_path
@@ -177,10 +186,10 @@ class NodePage(QtWidgets.QWidget):
     def add_setters(self, setters, inputBox, table):
         if setters:
             for setter in setters:
-                setterName = setter.find('name').text
-                setterArg = setter.find('argument').text
-                setterType = setter.find('type').text
-                setterValue = setter.find('value').text
+                setterName = setter.find("name").text
+                setterArg = setter.find("argument").text
+                setterType = setter.find("type").text
+                setterValue = setter.find("value").text
 
                 setterWidget = None
                 if setterType == "counter":
@@ -194,30 +203,32 @@ class NodePage(QtWidgets.QWidget):
                 inputBox.layout.addRow(setterName, setterWidget)
 
     def add_inputs(self, inputs, inputBox, advancedBox):
-        for input in inputs.findall('input'):
-            inputName = input.find('name').text
-            inputType = input.find('type').text
-            inputRequired = bool(input.attrib.get('required'))
+        for input in inputs.findall("input"):
+            inputName = input.find("name").text
+            inputType = input.find("type").text
+            inputRequired = bool(input.attrib.get("required"))
 
             inputWidget = None
 
             if inputType == "primary":
-                inputWidget = NodeInputPrimary(self.primaryInputWindow, self.mainWindow, inputBox)
+                inputWidget = NodeInputPrimary(
+                    self.primaryInputWindow, self.mainWindow, inputBox
+                )
 
             elif inputType == "text":
                 inputWidget = NodeInputLine(inputRequired, inputBox)
 
             elif inputType == "list":
                 inputWidget = NodeInputList(inputRequired, inputBox)
-                inputWidget.add_elements(input.find('elems'))
+                inputWidget.add_elements(input.find("elems"))
 
             elif inputType == "arguments":
                 # Create table
-                rows = input.find('rows')
+                rows = input.find("rows")
                 argumentTable = NodeInputArgs(rows, inputRequired, inputBox)
 
                 # Add table setters
-                setters = input.find('setters')
+                setters = input.find("setters")
                 self.add_setters(setters, inputBox, argumentTable)
 
                 inputWidget = argumentTable
@@ -236,14 +247,15 @@ class NodePage(QtWidgets.QWidget):
 
     @staticmethod
     def get_node_info(node):
-        name = node.find('name').text
-        functionName = node.find('function').text
-        inputs = node.find('inputs')
+        name = node.find("name").text
+        functionName = node.find("function").text
+        inputs = node.find("inputs")
 
         return name, functionName, inputs
 
 
 class NodePageDownloadBox(NodePageBox):
+
     def __init__(self, inputBox, save_path):
         super().__init__("Download", layout=QtWidgets.QFormLayout)
 
@@ -258,7 +270,9 @@ class NodePageDownloadBox(NodePageBox):
 
     def add_name(self):
         self.fileName = QtWidgets.QLineEdit()
-        self.fileName.setToolTip("Adding {key} to the file name will replace the {key} with the primary key")
+        self.fileName.setToolTip(
+            "Adding {key} to the file name will replace the {key} with the primary key"
+        )
         self.fileName.setText(".csv")
         self.layout.addRow("File name", self.fileName)
 
@@ -266,7 +280,10 @@ class NodePageDownloadBox(NodePageBox):
         downloadButton = QtWidgets.QPushButton("Add job", self)
 
         downloadButton.setSizePolicy(
-            QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed))
+            QtWidgets.QSizePolicy(
+                QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+            )
+        )
         downloadButton.setToolTip("Add a scraping job to the job queue")
         self.layout.addWidget(downloadButton)
 
@@ -325,11 +342,18 @@ class NodePageInputBox(NodePageBox):
 
     def read_values(self):
 
-        primary_keys = (list(tup) for tup in zip(*[primary.get_value() for primary in self.primary]))
+        primary_keys = (
+            list(tup) for tup in zip(*[primary.get_value() for primary in self.primary])
+        )
 
         jobs = []
         for primary_tuple in primary_keys:
-            arguments = ", ".join([inputWidget.get_value() for inputWidget in self.inputs[len(self.primary):]])
+            arguments = ", ".join(
+                [
+                    inputWidget.get_value()
+                    for inputWidget in self.inputs[len(self.primary) :]
+                ]
+            )
             arguments = ", ".join(primary_tuple) + ", " + arguments
             jobs.append(("_".join(primary_tuple).replace('"', ""), arguments))
         return jobs
@@ -350,7 +374,17 @@ class NodePageInputBox(NodePageBox):
 
             keys = self.keys.get_keys(self.sourceName)
             keyColumnValue = primary_key if self.keyColumn else None
-            details.append((filePath, self.sourceName, self.functionName, args, keys, self.append, keyColumnValue))
+            details.append(
+                (
+                    filePath,
+                    self.sourceName,
+                    self.functionName,
+                    args,
+                    keys,
+                    self.append,
+                    keyColumnValue,
+                )
+            )
 
         self.add_iterator.emit(details)
 
@@ -358,7 +392,9 @@ class NodePageInputBox(NodePageBox):
         self.required.append(False)
         required_i = len(self.required) - 1
 
-        input.containsValue.connect(lambda bool: self.required_changed(required_i, bool))
+        input.containsValue.connect(
+            lambda bool: self.required_changed(required_i, bool)
+        )
 
     def required_changed(self, i, bool):
         if i < len(self.required):
@@ -372,7 +408,8 @@ class NodePageInputBox(NodePageBox):
         self.downloadBox.setEnabled(True)
 
 
-class SourceTabs():
+class SourceTabs:
+
     def __init__(self, mainWindow, keyPage, sourceFile, primaryInputWindow):
         self.mainWindow = mainWindow
         self.keyPage = keyPage
@@ -389,14 +426,16 @@ class SourceTabs():
     def read_sources(self):
         tree = ET.parse(f"{self.mainWindow.bundle_dir}{sep}{self.sourceFile}")
         sources_root = tree.getroot()
-        source_files = sources_root.findall('source')
+        source_files = sources_root.findall("source")
 
         sources = []
 
         for source_file in source_files:
-            location = source_file.find('location').text
+            location = source_file.find("location").text
 
-            source_tree = ET.parse(f"{self.mainWindow.bundle_dir}{sep}sources/{location}")
+            source_tree = ET.parse(
+                f"{self.mainWindow.bundle_dir}{sep}sources/{location}"
+            )
             source_root = source_tree.getroot()
             sources.append(source_root)
 
@@ -427,7 +466,7 @@ class SourceTabs():
 
     def create_source_page(self, source):
         sourcePage = QtWidgets.QWidget()
-        sourceName = source.find('name').text
+        sourceName = source.find("name").text
         self.mainWindow.sourcesTabs.addTab(sourcePage, sourceName)
         sourcePage.layout = QtWidgets.QHBoxLayout()
         sourcePage.setLayout(sourcePage.layout)
@@ -435,24 +474,36 @@ class SourceTabs():
         return sourcePage, sourceName
 
     def create_source_keys(self, sourceName, source):
-        keys = source.find('keys')
-        key_list = [(key.find('name').text, key.find('value').text) for key in keys.findall('key')]
+        keys = source.find("keys")
+        key_list = [
+            (key.find("name").text, key.find("value").text)
+            for key in keys.findall("key")
+        ]
 
         self.keyPage.add_source(sourceName, key_list)
 
-    def create_nodes(self, sourceName, parentNode, treeWidget, nodeStack, treeParentItem=None,
-                     textDescription=""):
+    def create_nodes(
+        self,
+        sourceName,
+        parentNode,
+        treeWidget,
+        nodeStack,
+        treeParentItem=None,
+        textDescription="",
+    ):
 
-        nodes = parentNode.find('children')
-        for node in nodes.findall('node'):
+        nodes = parentNode.find("children")
+        for node in nodes.findall("node"):
             # Create tree node
             treeItem = treeWidget.add_item(node, treeParentItem)
-            self.create_nodes(sourceName, node, treeWidget, nodeStack, treeItem, textDescription)
+            self.create_nodes(
+                sourceName, node, treeWidget, nodeStack, treeItem, textDescription
+            )
 
     @staticmethod
     def get_node_info(node):
-        name = node.find('name').text
-        functionName = node.find('function').text
-        inputs = node.find('inputs')
+        name = node.find("name").text
+        functionName = node.find("function").text
+        inputs = node.find("inputs")
 
         return name, functionName, inputs

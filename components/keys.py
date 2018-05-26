@@ -5,6 +5,7 @@ from PyQt5 import QtWidgets
 
 
 class KeyLine(QtWidgets.QLineEdit):
+
     def __init__(self, name, key, sources, save):
         super().__init__()
 
@@ -24,6 +25,7 @@ class KeyLine(QtWidgets.QLineEdit):
 
 
 class KeyPage(QtWidgets.QWidget):
+
     def __init__(self, scrollWidget, data_dir, parent=None):
         super().__init__(parent=parent)
 
@@ -41,14 +43,14 @@ class KeyPage(QtWidgets.QWidget):
 
     def read_keys(self):
         try:
-            with open(self.location, 'r') as f:
+            with open(self.location, "r") as f:
                 data = json.load(f)
                 self.sources = data
         except (FileNotFoundError, json.decoder.JSONDecodeError):
             pass
 
     def write_keys(self):
-        with open(self.location, 'w') as f:
+        with open(self.location, "w") as f:
             json.dump(self.sources, f)
 
     def add_source(self, name, keys):

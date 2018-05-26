@@ -7,6 +7,7 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 
 
 class PrimaryInputWindow(QtWidgets.QMainWindow):
+
     def __init__(self, parent=None):
         super(PrimaryInputWindow, self).__init__(parent)
 
@@ -38,7 +39,9 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
         self.radioLayout.addWidget(self.radioLines)
 
         openButton = QtWidgets.QPushButton("Open file")
-        openButton.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        openButton.setSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+        )
         openButton.clicked.connect(self.open_file)
         self.radioBox.layout.addWidget(openButton)
 
@@ -82,13 +85,13 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
         filter = "CSV Files (*.csv);;" if self.csvInput else ""
         filter += "All Files (*)"
 
-        filePath, _ = QtWidgets.QFileDialog.getOpenFileName(caption=title, directory=directory, filter=filter,
-                                                            options=options)
+        filePath, _ = QtWidgets.QFileDialog.getOpenFileName(
+            caption=title, directory=directory, filter=filter, options=options
+        )
         if filePath:
             self.filePath = filePath
             self.filePathLabel.setVisible(True)
             self.filePathLabel.setText(self.filePath)
-
 
             if self.csvInput:
                 self.read_csv_headings()
@@ -119,14 +122,14 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
 
     def read_csv_headings(self):
         self.columnName.clear()
-        with open(self.filePath, 'r', encoding='utf-8', newline='') as f:
+        with open(self.filePath, "r", encoding="utf-8", newline="") as f:
             reader = csv.DictReader(f)
             for col in reader.fieldnames:
                 self.columnName.insertItem(self.columnName.count(), col)
         self.columnName.setEnabled(True)
 
     def extract_csv(self):
-        with open(self.filePath, 'r', encoding='utf8') as f:
+        with open(self.filePath, "r", encoding="utf8") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 datum = row.get(self.columnName.currentText())
@@ -134,7 +137,7 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
                     self.listWidget.addItem(str(datum))
 
     def extract_lines(self):
-        with open(self.filePath, 'r', encoding='utf8') as f:
+        with open(self.filePath, "r", encoding="utf8") as f:
             lines = f.readlines()
 
             for line in lines:
@@ -146,7 +149,7 @@ class PrimaryInputWindow(QtWidgets.QMainWindow):
         self.hide()
 
 
-class NodeInputWidget():
+class NodeInputWidget:
     containsValue = QtCore.pyqtSignal(bool)
 
     def __init__(self, required=True):
@@ -158,6 +161,7 @@ class NodeInputWidget():
 
 
 class ArgTableItem(QtWidgets.QTableWidgetItem):
+
     def __init__(self, value, table, parent=None):
         super().__init__()
         QtWidgets.QWidget.__init__(self, parent)
@@ -168,18 +172,21 @@ class ArgTableItem(QtWidgets.QTableWidgetItem):
 
 
 class ArgTableArg(ArgTableItem):
+
     def __init__(self, value, table, pair, parent=None):
         super().__init__(value, table, parent)
         self.pair = pair
 
 
 class ArgTableVal(ArgTableItem):
+
     def __init__(self, value, table, pair, parent=None):
         super().__init__(value, table, parent)
         self.pair = pair
 
 
-class ArgTablePair():
+class ArgTablePair:
+
     def __init__(self, key, value, table):
         self.arg = ArgTableArg(key, table, self)
         self.val = ArgTableVal(value, table, self)
@@ -195,13 +202,14 @@ class ArgTablePair():
 
 
 class NodeInputArgs(QtWidgets.QTableWidget, NodeInputWidget):
+
     def __init__(self, rows=None, required=True, parent=None):
         super().__init__(0, 2, parent)
         NodeInputWidget.__init__(self, required=required)
 
         self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.verticalHeader().setVisible(False)
-        self.setHorizontalHeaderLabels(['Argument', 'Value'])
+        self.setHorizontalHeaderLabels(["Argument", "Value"])
 
         self.arguments = OrderedDict()
 
@@ -272,6 +280,7 @@ class NodeInputArgs(QtWidgets.QTableWidget, NodeInputWidget):
 
 
 class NodeInputLine(QtWidgets.QLineEdit, NodeInputWidget):
+
     def __init__(self, required=None, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
         NodeInputWidget.__init__(self, required=required)
@@ -300,12 +309,16 @@ class NodeInputPrimary(NodeInputLine):
         self.readingText = "Reading from file"
         self.data = []
 
-        self.readAction = self.addAction(QtGui.QIcon(
-            f"{mainWindow.bundle_dir}{sep}ui/read.png"), self.TrailingPosition)
+        self.readAction = self.addAction(
+            QtGui.QIcon(f"{mainWindow.bundle_dir}{sep}ui/read.png"),
+            self.TrailingPosition,
+        )
         self.readAction.triggered.connect(self.add_file)
 
-        self.clearAction = self.addAction(QtGui.QIcon(
-            f"{mainWindow.bundle_dir}{sep}ui/remove.png"), self.TrailingPosition)
+        self.clearAction = self.addAction(
+            QtGui.QIcon(f"{mainWindow.bundle_dir}{sep}ui/remove.png"),
+            self.TrailingPosition,
+        )
         self.clearAction.triggered.connect(self.clear_file)
         self.clearAction.setVisible(False)
 
@@ -345,6 +358,7 @@ class NodeInputPrimary(NodeInputLine):
 
 
 class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):
+
     def __init__(self, required=None, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
         NodeInputWidget.__init__(self, required=required)
@@ -375,6 +389,7 @@ class NodeInputList(QtWidgets.QListWidget, NodeInputWidget):
 
 
 class CounterSetter(QtWidgets.QSpinBox):
+
     def __init__(self, value, table, argument, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
@@ -392,6 +407,7 @@ class CounterSetter(QtWidgets.QSpinBox):
 
 
 class CheckboxSetter(QtWidgets.QCheckBox):
+
     def __init__(self, value, table, argument, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
@@ -406,6 +422,7 @@ class CheckboxSetter(QtWidgets.QCheckBox):
 
 
 class ListSetter(QtWidgets.QComboBox):
+
     def __init__(self, values, table, argument, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
@@ -427,6 +444,7 @@ class ListSetter(QtWidgets.QComboBox):
 
 
 class AdvancedBox(QtWidgets.QCheckBox):
+
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
@@ -468,7 +486,9 @@ class PathWidget(QtWidgets.QWidget):
         title = "Open folder"
         directory = ""
 
-        dirPath = QtWidgets.QFileDialog.getExistingDirectory(caption=title, directory=directory, options=options)
+        dirPath = QtWidgets.QFileDialog.getExistingDirectory(
+            caption=title, directory=directory, options=options
+        )
         if dirPath:
             dirPath = path.abspath(dirPath)
             self.dirPath.setText(dirPath)

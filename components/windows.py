@@ -13,12 +13,13 @@ from .widgets.nodes import PathWidget
 
 
 class PopupWindow(QtWidgets.QMessageBox):
+
     def __init__(self, title, text, details=None, width=200, height=400):
         super().__init__()
         self.setWindowTitle(title)
         self.setText(text)
         self.setDetailedText(details)
-        self.setWindowIcon(QtGui.QIcon('ui/icon.png'))
+        self.setWindowIcon(QtGui.QIcon("ui/icon.png"))
         self.setMinimumWidth(width)
         self.setMinimumWidth(height)
 
@@ -28,6 +29,7 @@ class PopupWindow(QtWidgets.QMessageBox):
 
 
 class ScrollWindow(QtWidgets.QMainWindow):
+
     def __init__(self, title, subtitle, layout=QtWidgets.QVBoxLayout, parent=None):
         super().__init__(parent)
         self.setWindowTitle(title)
@@ -53,6 +55,7 @@ class ScrollWindow(QtWidgets.QMainWindow):
 
 
 class LicenseWidget(QtWidgets.QWidget):
+
     def __init__(self, text, details, parent=None):
         super().__init__(parent=parent)
         self.setMinimumHeight(300)
@@ -69,33 +72,34 @@ class LicenseWidget(QtWidgets.QWidget):
 
 
 class LicenseWindow(ScrollWindow):
+
     def __init__(self, bundle_dir, parent=None):
         super().__init__("Software licenses", "Licenses", parent=parent)
         self.setFixedWidth(400)
 
         self.bundle_dir = bundle_dir
 
-        with open(f"{self.bundle_dir}{sep}LICENSE.txt", 'r') as f:
+        with open(f"{self.bundle_dir}{sep}LICENSE.txt", "r") as f:
             reaper = LicenseWidget("Reaper GPL license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}licenses/socialreaper.txt", 'r') as f:
+        with open(f"{self.bundle_dir}{sep}licenses/socialreaper.txt", "r") as f:
             reaper = LicenseWidget("Social Reaper MIT license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}LICENSE.txt", 'r') as f:
+        with open(f"{self.bundle_dir}{sep}LICENSE.txt", "r") as f:
             reaper = LicenseWidget("PyQt GPL license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}licenses/requests.txt", 'r') as f:
+        with open(f"{self.bundle_dir}{sep}licenses/requests.txt", "r") as f:
             reaper = LicenseWidget("Requests Apache license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}licenses/requests-oauthlib.txt", 'r') as f:
+        with open(f"{self.bundle_dir}{sep}licenses/requests-oauthlib.txt", "r") as f:
             reaper = LicenseWidget("Requests-OAuthLib ISC license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}licenses/oauthlib.txt", 'r') as f:
+        with open(f"{self.bundle_dir}{sep}licenses/oauthlib.txt", "r") as f:
             reaper = LicenseWidget("OAuthLib BSD license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
@@ -174,14 +178,17 @@ class ErrorWindow(QtWidgets.QMainWindow):
 
     def log_error(self, log):
         self.show()
-        self.log += log + '\n'
+        self.log += log + "\n"
         self.console.setText(self.log)
         scrollbar = self.console.verticalScrollBar()
         scrollbar.setValue(scrollbar.maximum())
 
 
 class BinaryBox(QtWidgets.QGroupBox):
-    def __init__(self, title, choices, description, default_choice, toggle_function, parent=None):
+
+    def __init__(
+        self, title, choices, description, default_choice, toggle_function, parent=None
+    ):
         super().__init__(parent)
         self.toggle_function = toggle_function
 
@@ -211,17 +218,20 @@ class BinaryBox(QtWidgets.QGroupBox):
 
 
 class SettingsWindow(ScrollWindow):
+
     def __init__(self, parent):
-        super().__init__("Settings", None, layout=QtWidgets.QFormLayout, parent=parent.window)
+        super().__init__(
+            "Settings", None, layout=QtWidgets.QFormLayout, parent=parent.window
+        )
         self.setMinimumSize(400, 475)
         self.location = f"{DATA_DIR}{sep}settings.json"
         self.parent = parent
 
         self.data = {
-            'save_path': f"{Path.home()}{sep}Downloads",
-            'light': True,
-            'utf-8': True,
-            'cache': True
+            "save_path": f"{Path.home()}{sep}Downloads",
+            "light": True,
+            "utf-8": True,
+            "cache": True,
         }
         self.load_settings()
 
@@ -230,23 +240,37 @@ class SettingsWindow(ScrollWindow):
         self.savePathBox.layout = QtWidgets.QVBoxLayout()
         self.savePathBox.setLayout(self.savePathBox.layout)
 
-        self.savePath = PathWidget(self.data.get('save_path'))
+        self.savePath = PathWidget(self.data.get("save_path"))
         self.savePath.path_changed.connect(self.set_save_path)
         self.savePathBox.layout.addWidget(self.savePath)
 
         self.contents.layout.addWidget(self.savePathBox)
 
-        self.themeBox = BinaryBox("Theme", ("Light", "Dark"), "Change Reaper's Appearance", self.get_light_mode(),
-                                  self.set_light_mode)
+        self.themeBox = BinaryBox(
+            "Theme",
+            ("Light", "Dark"),
+            "Change Reaper's Appearance",
+            self.get_light_mode(),
+            self.set_light_mode,
+        )
         self.contents.layout.addWidget(self.themeBox)
 
-        self.encodingBox = BinaryBox("Output encoding", ("UTF-8", "ASCII"),
-                                     "Changing to ASCII will mean non-ASCII data will be lost", self.get_encoding(),
-                                     self.set_encoding)
+        self.encodingBox = BinaryBox(
+            "Output encoding",
+            ("UTF-8", "ASCII"),
+            "Changing to ASCII will mean non-ASCII data will be lost",
+            self.get_encoding(),
+            self.set_encoding,
+        )
         self.contents.layout.addWidget(self.encodingBox)
 
-        self.cacheBox = BinaryBox("Cache", ("Use cache and memory", "Use memory"), "Store large data on disk",
-                                  self.get_cache_mode(), self.set_cache)
+        self.cacheBox = BinaryBox(
+            "Cache",
+            ("Use cache and memory", "Use memory"),
+            "Store large data on disk",
+            self.get_cache_mode(),
+            self.set_cache,
+        )
 
         clearCacheButton = QtWidgets.QPushButton("Clear cache")
         clearCacheButton.clicked.connect(self.clear_cache)
@@ -272,21 +296,21 @@ class SettingsWindow(ScrollWindow):
 
     def set_light_mode(self, boolean):
         self.parent.enable_dark_mode(boolean)
-        self.data['light'] = boolean
+        self.data["light"] = boolean
 
     def set_encoding(self, boolean):
         if boolean:
             self.parent.encoding = "utf-8"
         else:
             self.parent.encoding = "ascii"
-        self.data['utf-8'] = boolean
+        self.data["utf-8"] = boolean
 
     def set_cache(self, boolean):
         self.parent.cache_enabled = boolean
-        self.data['cache'] = boolean
+        self.data["cache"] = boolean
 
     def set_save_path(self, text):
-        self.data['save_path'] = text
+        self.data["save_path"] = text
 
     def clear_cache(self, boolean):
         rmtree(CACHE_DIR, ignore_errors=True)
@@ -296,7 +320,7 @@ class SettingsWindow(ScrollWindow):
         self.save_settings()
 
     def save_settings(self):
-        with open(self.location, 'w') as f:
+        with open(self.location, "w") as f:
             json.dump(self.data, f)
 
     def load_settings(self):
@@ -307,13 +331,13 @@ class SettingsWindow(ScrollWindow):
             pass
 
     def get_save_path(self):
-        return self.data.get('save_path')
+        return self.data.get("save_path")
 
     def get_encoding(self):
-        return self.data.get('utf-8')
+        return self.data.get("utf-8")
 
     def get_light_mode(self):
-        return self.data.get('light')
+        return self.data.get("light")
 
     def get_cache_mode(self):
-        return self.data.get('cache')
+        return self.data.get("cache")

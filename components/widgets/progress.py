@@ -11,6 +11,7 @@ class ProgressState(Enum):
 
 
 class ProgressWidget(QtWidgets.QWidget):
+
     def __init__(self, job_signal, tabWidget, parent=None):
         super().__init__(parent=parent)
 
@@ -55,7 +56,9 @@ class ProgressWidget(QtWidgets.QWidget):
 
         self.snapshot = QtWidgets.QTableWidget()
         self.snapshot.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Fixed)
-        self.snapshot.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Interactive)
+        self.snapshot.horizontalHeader().setSectionResizeMode(
+            QtWidgets.QHeaderView.Interactive
+        )
         self.snapshot.horizontalHeader().setCascadingSectionResizes(True)
         self.layout.addWidget(self.snapshot)
 
@@ -74,13 +77,20 @@ class ProgressWidget(QtWidgets.QWidget):
         self.rowCount.setText("Rows: " + str(rows))
 
         # Reduce update rate
-        if not (rows % self.MAX_ROWS and state) == JobState.RUNNING or not self.show_snapshot:
+        if (
+            not (rows % self.MAX_ROWS and state) == JobState.RUNNING
+            or not self.show_snapshot
+        ):
             return
 
         if rows > self.MAX_ROWS:
             self.snapshot.setRowCount(self.MAX_ROWS)
-            self.snapshot.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-            self.snapshot.setVerticalHeaderLabels((str(val) for val in range(rows - self.MAX_ROWS + 1, rows + 1)))
+            self.snapshot.verticalHeader().setSectionResizeMode(
+                QtWidgets.QHeaderView.Stretch
+            )
+            self.snapshot.setVerticalHeaderLabels(
+                (str(val) for val in range(rows - self.MAX_ROWS + 1, rows + 1))
+            )
         else:
             self.snapshot.setRowCount(rows)
 

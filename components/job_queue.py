@@ -27,7 +27,8 @@ class JobState(Enum):
     FINISHED = "finished"
 
 
-class JobData():
+class JobData:
+
     def __init__(self, cache=True):
         self.MAX_ROWS = 1000
 
@@ -66,7 +67,7 @@ class JobData():
 
             location = path.join(self.location, str(self.cache_count))
             try:
-                with open(location, 'wb') as f:
+                with open(location, "wb") as f:
                     dump(self.data, f)
                     self.data = []
                     self.cache_count += 1
@@ -76,7 +77,8 @@ class JobData():
     def read(self):
         return self.JobDataIter(self)
 
-    class JobDataIter():
+    class JobDataIter:
+
         def __init__(self, job_data):
             self.job_data = job_data
             self.cache_count = 0
@@ -92,7 +94,7 @@ class JobData():
             location = path.join(self.job_data.location, str(i))
 
             try:
-                with open(location, 'rb') as f:
+                with open(location, "rb") as f:
                     self.data = load(f)
                     self.i = 0
                     self.cache_count += 1
@@ -111,7 +113,7 @@ class JobData():
 
             for key in self.job_data.keys:
                 if not row.get(key):
-                    row[key] = ''
+                    row[key] = ""
 
             return row
 
@@ -120,7 +122,9 @@ class JobData():
 
         def __next__(self):
             if not self.finished_cache:
-                if (self.cache_count <= self.job_data.cache_count) and self.job_data.cache_count != 0:
+                if (
+                    self.cache_count <= self.job_data.cache_count
+                ) and self.job_data.cache_count != 0:
                     if self.i < len(self.data):
                         return self.read_row()
                     else:
@@ -140,11 +144,23 @@ class JobData():
                     raise StopIteration
 
 
-class Job():
+class Job:
     error_log = QtCore.pyqtSignal(str)
 
-    def __init__(self, outputPath, sourceName, sourceFunction, functionArgs, sourceKeys, append, keyColumn, encoding,
-                 cache, job_update, job_error_log):
+    def __init__(
+        self,
+        outputPath,
+        sourceName,
+        sourceFunction,
+        functionArgs,
+        sourceKeys,
+        append,
+        keyColumn,
+        encoding,
+        cache,
+        job_update,
+        job_error_log,
+    ):
         self.source = eval(f"socialreaper.{sourceName}(**{sourceKeys})")
         self.source.api.log_function = self.log
         self.log_function = job_error_log
@@ -189,9 +205,16 @@ class Job():
     def end_job(self):
         self.state = JobState.SAVING
         self.job_update.emit(self)
-        socialreaper.tools.CSV(self.data.read(), file_name=self.outputPath, flat=False, append=self.append,
-                               key_column=self.keyColumn, encoding=self.encoding, fill_gaps=False,
-                               field_names=sorted(self.data.keys))
+        socialreaper.tools.CSV(
+            self.data.read(),
+            file_name=self.outputPath,
+            flat=False,
+            append=self.append,
+            key_column=self.keyColumn,
+            encoding=self.encoding,
+            fill_gaps=False,
+            field_names=sorted(self.data.keys),
+        )
         self.state = JobState.FINISHED
         self.job_update.emit(self)
         return False
@@ -214,7 +237,7 @@ class Job():
         if not path.exists(dir):
             makedirs(dir)
 
-        with open(f"{dir}/out.pickle", 'wb') as f:
+        with open(f"{dir}/out.pickle", "wb") as f:
             dump(self, f)
 
 
@@ -289,7 +312,14 @@ class Queue(QtCore.QThread):
         try:
             for params in details:
                 self.jobs.append(
-                    Job(*params, self.window.encoding, self.window.cache_enabled, self.job_update, self.job_error_log))
+                    Job(
+                        *params,
+                        self.window.encoding,
+                        self.window.cache_enabled,
+                        self.job_update,
+                        self.job_error_log,
+                    )
+                )
         except Exception as e:
             self.job_error_log.emit(format_exc())
 
@@ -328,7 +358,6 @@ class Queue(QtCore.QThread):
                 self.jobs.pop(0)
                 self.currentJobState = None
                 self.queue_update.emit(self.jobs)
-
 
         else:
             self.state = QueueState.STOPPED

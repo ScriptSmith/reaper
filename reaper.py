@@ -37,12 +37,13 @@ from ui.mainwindow import Ui_MainWindow
 
 
 class Reaper(Ui_MainWindow):
+
     def __init__(self, window, app, splash, show=True):
         super().__init__()
 
         self.version = "v2.5.4"
-        self.source_file = 'sources.xml'
-        self.encoding = 'utf-8'
+        self.source_file = "sources.xml"
+        self.encoding = "utf-8"
         self.cache_enabled = True
 
         self.window = window
@@ -52,14 +53,14 @@ class Reaper(Ui_MainWindow):
         self.splash_msg("Setting up UI")
         self.setupUi(window)
 
-        self.window.setWindowIcon(QIcon('ui/icon.png'))
+        self.window.setWindowIcon(QIcon("ui/icon.png"))
         self.window.setWindowTitle(f"Reaper {self.version}")
 
         self.advanced_mode = False
         self.dark_mode = False
 
         self.splash_msg("Identifying app type")
-        if getattr(sys, 'frozen', False):
+        if getattr(sys, "frozen", False):
             self.bundle_dir = sys._MEIPASS
         else:
             self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
@@ -94,7 +95,9 @@ class Reaper(Ui_MainWindow):
 
         # Create sources page
         self.splash_msg("Creating Source tab")
-        self.source_tabs = SourceTabs(self, self.key_page, self.source_file, self.primaryInputWindow)
+        self.source_tabs = SourceTabs(
+            self, self.key_page, self.source_file, self.primaryInputWindow
+        )
 
         # Create progress page
         self.splash_msg("Creating progress tab")
@@ -120,7 +123,9 @@ class Reaper(Ui_MainWindow):
     def add_actions(self):
         self.actionErrorManager.triggered.connect(self.show_error_manager)
         self.actionAdvanced_mode.toggled.connect(self.enable_advanced_mode)
-        self.actionDark_mode.toggled.connect(lambda x: self.settings_window.set_light_mode(not x))
+        self.actionDark_mode.toggled.connect(
+            lambda x: self.settings_window.set_light_mode(not x)
+        )
         self.actionQuit.triggered.connect(self.quit)
         self.actionHelp.triggered.connect(self.open_website)
         self.actionAbout.triggered.connect(self.open_website)
@@ -158,12 +163,14 @@ class Reaper(Ui_MainWindow):
         filter = "JSON File (*.json)"
         options = QtWidgets.QFileDialog.Options()
 
-        filePath, _ = QtWidgets.QFileDialog.getSaveFileName(caption=title,
-                                                            directory=self.settings_window.get_save_path(),
-                                                            filter=filter,
-                                                            options=options)
+        filePath, _ = QtWidgets.QFileDialog.getSaveFileName(
+            caption=title,
+            directory=self.settings_window.get_save_path(),
+            filter=filter,
+            options=options,
+        )
         if filePath:
-            with open(filePath, 'w') as f:
+            with open(filePath, "w") as f:
                 json.dump(self.key_page.sources, f)
 
     def import_keys(self, _):
@@ -171,12 +178,14 @@ class Reaper(Ui_MainWindow):
         filter = "JSON File (*.json)"
         options = QtWidgets.QFileDialog.Options()
 
-        filePath, _ = QtWidgets.QFileDialog.getOpenFileName(caption=title,
-                                                            directory=self.settings_window.get_save_path(),
-                                                            filter=filter,
-                                                            options=options)
+        filePath, _ = QtWidgets.QFileDialog.getOpenFileName(
+            caption=title,
+            directory=self.settings_window.get_save_path(),
+            filter=filter,
+            options=options,
+        )
         if filePath:
-            with open(filePath, 'r') as f:
+            with open(filePath, "r") as f:
                 sources = json.load(f)
 
                 for i in range(self.key_page.scrollWidget.layout.count()):
@@ -193,7 +202,7 @@ if __name__ == "__main__":
     try:
         app = QtWidgets.QApplication(sys.argv)
 
-        pixmap = QtGui.QPixmap('ui/splash.png')
+        pixmap = QtGui.QPixmap("ui/splash.png")
         splash = QtWidgets.QSplashScreen(pixmap)
         splash.show()
         splash.showMessage("Starting reaper")
@@ -206,6 +215,6 @@ if __name__ == "__main__":
 
         sys.exit(app.exec_())
     except Exception as e:
-        with open(LOG_DIR + '/log.log', 'a') as f:
+        with open(LOG_DIR + "/log.log", "a") as f:
             f.write(str(e))
             f.write(traceback.format_exc())

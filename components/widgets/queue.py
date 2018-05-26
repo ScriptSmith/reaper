@@ -6,6 +6,7 @@ from components.job_queue import JobState
 
 
 class QueueTable(QtWidgets.QTableWidget):
+
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -18,8 +19,19 @@ class QueueTable(QtWidgets.QTableWidget):
         self.setColumnCount(10)
         self.setRowCount(0)
         self.setHorizontalHeaderLabels(
-            ['Source', 'Function', 'Parameters', 'API Keys', 'Path', 'Status', 'Write mode', 'Encoding',
-             'Caching', 'Key column'])
+            [
+                "Source",
+                "Function",
+                "Parameters",
+                "API Keys",
+                "Path",
+                "Status",
+                "Write mode",
+                "Encoding",
+                "Caching",
+                "Key column",
+            ]
+        )
         # self.horizontalHeader().setStretchLastSection(True)
         self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Interactive)
 
@@ -46,10 +58,14 @@ class QueueTable(QtWidgets.QTableWidget):
             outputPath = QtWidgets.QTableWidgetItem(job.outputPath)
             status = QtWidgets.QTableWidgetItem(job.state.value)
             status.setBackground(self.create_brush(job.state))
-            write_mode = QtWidgets.QTableWidgetItem('Append' if job.append else 'Overwrite')
+            write_mode = QtWidgets.QTableWidgetItem(
+                "Append" if job.append else "Overwrite"
+            )
             encoding = QtWidgets.QTableWidgetItem(job.encoding)
-            caching = QtWidgets.QTableWidgetItem('Enabled' if job.cache else 'Disabled')
-            key_column = QtWidgets.QTableWidgetItem('Enabled' if job.keyColumn else 'Disabled')
+            caching = QtWidgets.QTableWidgetItem("Enabled" if job.cache else "Disabled")
+            key_column = QtWidgets.QTableWidgetItem(
+                "Enabled" if job.keyColumn else "Disabled"
+            )
 
             self.setItem(row, 0, sourceName)
             self.setItem(row, 1, sourceFunction)
