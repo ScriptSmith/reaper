@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 from os import sep, path
 
 from components.widgets.nodes import *
+from components.globals import BUNDLE_DIR
 
 
 class NodeTree(QtWidgets.QTreeWidget):
@@ -424,7 +425,7 @@ class SourceTabs:
         item.sourceDescription.setCurrentIndex(item.pageIndex)
 
     def read_sources(self):
-        tree = ET.parse(f"{self.mainWindow.bundle_dir}{sep}{self.sourceFile}")
+        tree = ET.parse(f"{BUNDLE_DIR}{sep}{self.sourceFile}")
         sources_root = tree.getroot()
         source_files = sources_root.findall("source")
 
@@ -434,7 +435,7 @@ class SourceTabs:
             location = source_file.find("location").text
 
             source_tree = ET.parse(
-                f"{self.mainWindow.bundle_dir}{sep}sources/{location}"
+                f"{BUNDLE_DIR}{sep}sources/{location}"
             )
             source_root = source_tree.getroot()
             sources.append(source_root)

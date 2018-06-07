@@ -3,7 +3,9 @@ import json
 from collections import OrderedDict
 from os import getcwd, path, sep
 
+
 from PyQt5 import QtWidgets, QtCore, QtGui
+from components.globals import BUNDLE_DIR
 
 
 class PrimaryInputWindow(QtWidgets.QMainWindow):
@@ -310,13 +312,13 @@ class NodeInputPrimary(NodeInputLine):
         self.data = []
 
         self.readAction = self.addAction(
-            QtGui.QIcon(f"{mainWindow.bundle_dir}{sep}ui/read.png"),
+            QtGui.QIcon(f"{BUNDLE_DIR}{sep}ui/read.png"),
             self.TrailingPosition,
         )
         self.readAction.triggered.connect(self.add_file)
 
         self.clearAction = self.addAction(
-            QtGui.QIcon(f"{mainWindow.bundle_dir}{sep}ui/remove.png"),
+            QtGui.QIcon(f"{BUNDLE_DIR}{sep}ui/remove.png"),
             self.TrailingPosition,
         )
         self.clearAction.triggered.connect(self.clear_file)

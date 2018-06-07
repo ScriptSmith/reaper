@@ -73,33 +73,31 @@ class LicenseWidget(QtWidgets.QWidget):
 
 class LicenseWindow(ScrollWindow):
 
-    def __init__(self, bundle_dir, parent=None):
+    def __init__(self, parent=None):
         super().__init__("Software licenses", "Licenses", parent=parent)
         self.setFixedWidth(400)
 
-        self.bundle_dir = bundle_dir
-
-        with open(f"{self.bundle_dir}{sep}LICENSE.txt", "r") as f:
+        with open(f"{BUNDLE_DIR}{sep}LICENSE.txt", "r") as f:
             reaper = LicenseWidget("Reaper GPL license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}licenses/socialreaper.txt", "r") as f:
+        with open(f"{BUNDLE_DIR}{sep}licenses/socialreaper.txt", "r") as f:
             reaper = LicenseWidget("Social Reaper MIT license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}LICENSE.txt", "r") as f:
+        with open(f"{BUNDLE_DIR}{sep}LICENSE.txt", "r") as f:
             reaper = LicenseWidget("PyQt GPL license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}licenses/requests.txt", "r") as f:
+        with open(f"{BUNDLE_DIR}{sep}licenses/requests.txt", "r") as f:
             reaper = LicenseWidget("Requests Apache license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}licenses/requests-oauthlib.txt", "r") as f:
+        with open(f"{BUNDLE_DIR}{sep}licenses/requests-oauthlib.txt", "r") as f:
             reaper = LicenseWidget("Requests-OAuthLib ISC license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 
-        with open(f"{self.bundle_dir}{sep}licenses/oauthlib.txt", "r") as f:
+        with open(f"{BUNDLE_DIR}{sep}licenses/oauthlib.txt", "r") as f:
             reaper = LicenseWidget("OAuthLib BSD license", f.read(), self)
             self.contents.layout.addWidget(reaper)
 

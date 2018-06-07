@@ -60,10 +60,6 @@ class Reaper(Ui_MainWindow):
         self.dark_mode = False
 
         self.splash_msg("Identifying app type")
-        if getattr(sys, "frozen", False):
-            self.bundle_dir = sys._MEIPASS
-        else:
-            self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
 
         # Add windows and actions
         self.splash_msg("Connecting widgets")
@@ -77,7 +73,7 @@ class Reaper(Ui_MainWindow):
         self.queue.job_error_log.connect(self.error_window.log_error)
         self.error_window.cancelButton.clicked.connect(self.queue.stop_retrying)
 
-        self.splash_msg("Adding iconds")
+        self.splash_msg("Adding icons")
         self.set_icons()
 
         # Create queue table
@@ -135,7 +131,7 @@ class Reaper(Ui_MainWindow):
         self.actionAPI_Keys.triggered.connect(self.export_keys)
 
     def add_windows(self):
-        self.license_window = LicenseWindow(self.bundle_dir, self.window)
+        self.license_window = LicenseWindow(self.window)
         self.actionLicenses.triggered.connect(self.license_window.pop)
 
         self.error_window = ErrorWindow(self.window)
@@ -144,10 +140,10 @@ class Reaper(Ui_MainWindow):
         self.actionSettings.triggered.connect(self.settings_window.show)
 
     def set_icons(self):
-        self.queueUp.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/up.png"))
-        self.queueDown.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/down.png"))
-        self.queueRemove.setIcon(QIcon(f"{self.bundle_dir}{sep}ui/remove.png"))
-        self.window.setWindowIcon(QIcon(f"{self.bundle_dir}{sep}ui/icon.ico"))
+        self.queueUp.setIcon(QIcon(f"{BUNDLE_DIR}{sep}ui/up.png"))
+        self.queueDown.setIcon(QIcon(f"{BUNDLE_DIR}{sep}ui/down.png"))
+        self.queueRemove.setIcon(QIcon(f"{BUNDLE_DIR}{sep}ui/remove.png"))
+        self.window.setWindowIcon(QIcon(f"{BUNDLE_DIR}{sep}ui/icon.ico"))
 
     def show_error_manager(self, _):
         self.error_window.show()
