@@ -79,6 +79,3 @@ class KeyPage(QtWidgets.QWidget):
             return keys
         else:
             return None
-
-    def test(self):
-        print()
