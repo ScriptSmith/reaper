@@ -5,6 +5,28 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from components.job_queue import JobState
 
 
+class QueueWidget(QtWidgets.QWidget):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.layout = QtWidgets.QVBoxLayout()
+        self.setLayout(self.layout)
+
+        self.add_controls()
+        self.add_table()
+
+    def add_controls(self):
+        self.controls = QtWidgets.QWidget(self)
+        self.controls.layout = QtWidgets.QHBoxLayout()
+        self.controls.setLayout(self.controls.layout)
+        self.layout.addWidget(self.controls)
+
+    def add_table(self):
+        self.table = QueueTable(self)
+        self.layout.addWidget(self.table)
+
+
 class QueueTable(QtWidgets.QTableWidget):
 
     def __init__(self, parent=None):
@@ -32,7 +54,6 @@ class QueueTable(QtWidgets.QTableWidget):
                 "Key column",
             ]
         )
-        # self.horizontalHeader().setStretchLastSection(True)
         self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Interactive)
 
     @QtCore.pyqtSlot(list)

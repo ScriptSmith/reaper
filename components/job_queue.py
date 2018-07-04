@@ -241,19 +241,19 @@ class Job:
             dump(self, f)
 
 
-class Queue(QtCore.QThread):
+class QueueThread(QtCore.QThread):
     job_update = QtCore.pyqtSignal(Job)
     queue_update = QtCore.pyqtSignal(list)
     queue_selected = QtCore.pyqtSignal(list)
     job_error = QtCore.pyqtSignal(Job)
     job_error_log = QtCore.pyqtSignal(str)
 
-    def __init__(self, window):
+    def __init__(self, queueWidget):
         super().__init__()
 
         self.state = QueueState.STOPPED
 
-        self.window = window
+        self.window = queueWidget
         self.jobs = []
 
         self.currentJobState = None

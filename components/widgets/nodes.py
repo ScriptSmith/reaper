@@ -3,7 +3,6 @@ import json
 from collections import OrderedDict
 from os import getcwd, path, sep
 
-
 from PyQt5 import QtWidgets, QtCore, QtGui
 from components.globals import BUNDLE_DIR
 

@@ -25,12 +25,12 @@ import qdarkstyle
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QIcon, QDesktopServices
 
-from components.job_queue import Queue
+from components.job_queue import QueueThread
 from components.keys import KeyPage
 from components.sources import SourceTabs
 from components.widgets.nodes import PrimaryInputWindow
 from components.widgets.progress import ProgressWidget
-from components.widgets.queue import QueueTable
+from components.widgets.queue import QueueTable, QueueWidget
 from components.windows import *
 from components.globals import *
 from ui.mainwindow import Ui_MainWindow
@@ -59,8 +59,16 @@ class Reaper(Ui_MainWindow):
         self.advanced_mode = False
         self.dark_mode = False
 
-        self.splash_msg("Identifying app type")
+        #self.build()
 
+        if show:
+            self.splash_msg("Showing window")
+            window.show()
+
+    def splash_msg(self, message):
+        self.splash.showMessage(message)
+
+    def build(self):
         # Add windows and actions
         self.splash_msg("Connecting widgets")
         self.add_windows()
@@ -68,22 +76,18 @@ class Reaper(Ui_MainWindow):
 
         # Create queue page
         self.splash_msg("Creating Queue")
-        self.queue = Queue(self)
-        self.queue.job_error.connect(self.error_window.job_error)
-        self.queue.job_error_log.connect(self.error_window.log_error)
-        self.error_window.cancelButton.clicked.connect(self.queue.stop_retrying)
+        self.queue = QueueWidget(self)
+        self.queueThread = QueueThread(self)
+        self.queueThread.job_error.connect(self.error_window.job_error)
+        self.queueThread.job_error_log.connect(self.error_window.log_error)
+        self.error_window.cancelButton.clicked.connect(self.queueThread.stop_retrying)
 
         self.splash_msg("Adding icons")
         self.set_icons()
 
-        # Create queue table
-        self.splash_msg("Creating job queue")
-        self.queue_table = QueueTable()
-        self.queueLayout.addWidget(self.queue_table)
-
         # Create window for primary key input
         self.splash_msg("Creating input window")
-        self.primaryInputWindow = PrimaryInputWindow(window)
+        self.primaryInputWindow = PrimaryInputWindow(self.window)
 
         # Create api key page
         self.splash_msg("Creating API tab")
@@ -97,15 +101,8 @@ class Reaper(Ui_MainWindow):
 
         # Create progress page
         self.splash_msg("Creating progress tab")
-        self.progress_page = ProgressWidget(self.queue.job_update, self.tabWidget)
+        self.progress_page = ProgressWidget(self.queueThread.job_update, self.tabWidget)
         self.progressLayout.addWidget(self.progress_page)
-
-        if show:
-            self.splash_msg("Showing window")
-            window.show()
-
-    def splash_msg(self, message):
-        self.splash.showMessage(message)
 
     def enable_advanced_mode(self, bool):
         self.advanced_mode = bool
