@@ -22,8 +22,9 @@ import sys
 import traceback
 
 import qdarkstyle
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, QSize
 from PyQt5.QtGui import QIcon, QDesktopServices
+from PyQt5.QtWidgets import QLabel, QTabWidget
 
 from components.job_queue import QueueThread
 from components.keys import KeyTab
@@ -81,8 +82,8 @@ class Reaper(Ui_MainWindow):
         self.splash_msg("Adding tabs")
         self.mainTabs = MainTabs(self)
         self.mainTabs.add_key_tab()
-        self.mainTabs.add_queue_tab()
         self.mainTabs.add_source_tab()
+        self.mainTabs.add_queue_tab()
         # self.mainTabs.add_queue_tab()
 
         #
@@ -218,10 +219,9 @@ class MainTabs(QtWidgets.QTabWidget):
 
     def __init__(self, reaper):
         super().__init__(reaper.window)
+        self.setTabBar(self.HorizontalTabWidget())
 
-        reaper.centralwidget.layout = QtWidgets.QVBoxLayout()
-        reaper.centralwidget.setLayout(reaper.centralwidget.layout)
-        reaper.centralwidget.layout.addWidget(self)
+        reaper.centralLayout.addWidget(self)
 
         self.mainWindow = reaper
         self.primaryInputWindow = reaper.primaryInputWindow
@@ -229,17 +229,40 @@ class MainTabs(QtWidgets.QTabWidget):
         self.sourceTab = None
         self.queueTab = None
 
+        self.setTabPosition(QtWidgets.QTabWidget.West)
+
     def add_key_tab(self):
         self.keyTab = KeyTab(self)
-        self.addTab(self.keyTab, "Keys")
+        self.addTab(self.keyTab, QIcon("ui/key.svg"), "")
+        self.tabBar().setTabToolTip(0, "API Keys")
 
     def add_source_tab(self):
+        self.queueTab = QueueWidget(self)
         self.sourceTab = SourceTab(self)
-        self.addTab(self.sourceTab, "Input")
+        self.addTab(self.sourceTab, QIcon("ui/add.svg"), "")
+        self.tabBar().setTabToolTip(1, "Add jobs")
 
     def add_queue_tab(self):
-        self.queueTab = QueueWidget(self)
-        self.addTab(self.queueTab, "Queue")
+        self.addTab(self.queueTab, QIcon("ui/queue.svg"), "")
+        self.tabBar().setTabToolTip(2, "List jobs")
+
+    class HorizontalTabWidget(QtWidgets.QTabBar):
+        def __init__(self, parent=None):
+            super().__init__(parent)
+
+            self.setStyleSheet("""
+            QTabBar::tab {
+                height:50px;
+                width: 50px;
+                border: none;
+                margin: 0px;
+                padding-top: -15px;
+                padding-bottom: 15px
+            }
+            """)
+
+        # def tabSizeHint(self, p_int):
+        #     return QSize(50, 50)
 
 
 if __name__ == "__main__":

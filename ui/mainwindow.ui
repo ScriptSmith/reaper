@@ -26,7 +26,7 @@
    <property name="statusTip">
     <string/>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_3"/>
+   <layout class="QVBoxLayout" name="centralLayout"/>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
