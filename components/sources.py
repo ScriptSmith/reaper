@@ -2,8 +2,10 @@ import sys
 import xml.etree.ElementTree as ET
 from os import sep, path
 
-from components.widgets.nodes import *
+from PyQt5 import QtWidgets, QtCore, QtGui
 from components.globals import BUNDLE_DIR
+from components.widgets.nodes import PathWidget, CounterSetter, NodeInputPrimary, NodeInputLine, NodeInputList, \
+    NodeInputArgs, CheckboxSetter, ListSetter
 
 
 class NodeTree(QtWidgets.QTreeWidget):
@@ -84,13 +86,13 @@ class NodePageBox(QtWidgets.QGroupBox):
 
 class NodePage(QtWidgets.QWidget):
 
-    def __init__(self, mainWindow, primaryInputWindow, parent=None):
+    def __init__(self, reaper, primaryInputWindow, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
 
-        self.mainWindow = mainWindow
-        self.queue = mainWindow.queue
-        self.keys = mainWindow.key_page
-        self.queue_table = mainWindow.queue_table
+        self.mainWindow = reaper
+        self.queue = reaper.queueThread
+        self.keys = reaper.mainTabs.keyTab
+        self.queue_table = reaper.mainTabs.queueTab.table
         self.primaryInputWindow = primaryInputWindow
 
         # Add layout
@@ -146,6 +148,7 @@ class NodePage(QtWidgets.QWidget):
         inputBox.add_iterator.connect(self.queue.add_jobs)
 
         # Add advanced box
+        from .widgets.nodes import AdvancedBox
         advancedBox = AdvancedBox()
         inputBox.layout.addRow("Show all", advancedBox)
 
@@ -409,13 +412,14 @@ class NodePageInputBox(NodePageBox):
         self.downloadBox.setEnabled(True)
 
 
-class SourceTabs:
+class SourceTab(QtWidgets.QTabWidget):
 
-    def __init__(self, mainWindow, keyPage, sourceFile, primaryInputWindow):
-        self.mainWindow = mainWindow
-        self.keyPage = keyPage
-        self.primaryInputWindow = primaryInputWindow
-        self.sourceFile = sourceFile
+    def __init__(self, mainTabs):
+        super().__init__(mainTabs)
+        self.mainWindow = mainTabs.mainWindow
+        self.keyTab = mainTabs.keyTab
+        self.primaryInputWindow = mainTabs.primaryInputWindow
+        self.sourceFile = "sources.xml"
 
         self.sources = self.read_sources()
         self.add_sources()
@@ -468,7 +472,7 @@ class SourceTabs:
     def create_source_page(self, source):
         sourcePage = QtWidgets.QWidget()
         sourceName = source.find("name").text
-        self.mainWindow.sourcesTabs.addTab(sourcePage, sourceName)
+        self.addTab(sourcePage, sourceName)
         sourcePage.layout = QtWidgets.QHBoxLayout()
         sourcePage.setLayout(sourcePage.layout)
 
@@ -481,7 +485,7 @@ class SourceTabs:
             for key in keys.findall("key")
         ]
 
-        self.keyPage.add_source(sourceName, key_list)
+        self.keyTab.add_source(sourceName, key_list)
 
     def create_nodes(
         self,

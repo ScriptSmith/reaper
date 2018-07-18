@@ -26,8 +26,8 @@ from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QIcon, QDesktopServices
 
 from components.job_queue import QueueThread
-from components.keys import KeyPage
-from components.sources import SourceTabs
+from components.keys import KeyTab
+from components.sources import SourceTab
 from components.widgets.nodes import PrimaryInputWindow
 from components.widgets.progress import ProgressWidget
 from components.widgets.queue import QueueTable, QueueWidget
@@ -59,7 +59,7 @@ class Reaper(Ui_MainWindow):
         self.advanced_mode = False
         self.dark_mode = False
 
-        #self.build()
+        self.build()
 
         if show:
             self.splash_msg("Showing window")
@@ -69,6 +69,27 @@ class Reaper(Ui_MainWindow):
         self.splash.showMessage(message)
 
     def build(self):
+        # Add windows and actions
+        self.splash_msg("Connecting widgets")
+        self.add_windows()
+        self.add_actions()
+
+        # Add queue
+        self.queueThread = QueueThread(self)
+
+        # Add tabs
+        self.splash_msg("Adding tabs")
+        self.mainTabs = MainTabs(self)
+        self.mainTabs.add_key_tab()
+        self.mainTabs.add_queue_tab()
+        self.mainTabs.add_source_tab()
+        # self.mainTabs.add_queue_tab()
+
+        #
+        # self.mainTabs.add_source_tab()
+
+        return
+
         # Add windows and actions
         self.splash_msg("Connecting widgets")
         self.add_windows()
@@ -91,11 +112,11 @@ class Reaper(Ui_MainWindow):
 
         # Create api key page
         self.splash_msg("Creating API tab")
-        self.key_page = KeyPage(self.scrollAreaWidgetContents, DATA_DIR)
+        self.key_page = KeyTab(self.scrollAreaWidgetContents, DATA_DIR)
 
         # Create sources page
         self.splash_msg("Creating Source tab")
-        self.source_tabs = SourceTabs(
+        self.source_tabs = SourceTab(
             self, self.key_page, self.source_file, self.primaryInputWindow
         )
 
@@ -135,6 +156,8 @@ class Reaper(Ui_MainWindow):
 
         self.settings_window = SettingsWindow(self)
         self.actionSettings.triggered.connect(self.settings_window.show)
+
+        self.primaryInputWindow = PrimaryInputWindow(self.window)
 
     def set_icons(self):
         self.queueUp.setIcon(QIcon(f"{BUNDLE_DIR}{sep}ui/up.png"))
@@ -191,6 +214,34 @@ class Reaper(Ui_MainWindow):
         self.app.quit()
 
 
+class MainTabs(QtWidgets.QTabWidget):
+
+    def __init__(self, reaper):
+        super().__init__(reaper.window)
+
+        reaper.centralwidget.layout = QtWidgets.QVBoxLayout()
+        reaper.centralwidget.setLayout(reaper.centralwidget.layout)
+        reaper.centralwidget.layout.addWidget(self)
+
+        self.mainWindow = reaper
+        self.primaryInputWindow = reaper.primaryInputWindow
+        self.keyTab = None
+        self.sourceTab = None
+        self.queueTab = None
+
+    def add_key_tab(self):
+        self.keyTab = KeyTab(self)
+        self.addTab(self.keyTab, "Keys")
+
+    def add_source_tab(self):
+        self.sourceTab = SourceTab(self)
+        self.addTab(self.sourceTab, "Input")
+
+    def add_queue_tab(self):
+        self.queueTab = QueueWidget(self)
+        self.addTab(self.queueTab, "Queue")
+
+
 if __name__ == "__main__":
     try:
         app = QtWidgets.QApplication(sys.argv)
@@ -209,5 +260,7 @@ if __name__ == "__main__":
         sys.exit(app.exec_())
     except Exception as e:
         with open(LOG_DIR + "/log.log", "a") as f:
+            print(str(e))
+            print(traceback.format_exc())
             f.write(str(e))
             f.write(traceback.format_exc())

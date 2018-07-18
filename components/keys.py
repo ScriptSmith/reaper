@@ -1,6 +1,8 @@
 import json
 from os import sep, makedirs, path
 
+from components.globals import DATA_DIR
+
 from PyQt5 import QtWidgets
 
 
@@ -24,19 +26,27 @@ class KeyLine(QtWidgets.QLineEdit):
             self.save()
 
 
-class KeyPage(QtWidgets.QWidget):
+class KeyTab(QtWidgets.QWidget):
 
-    def __init__(self, scrollWidget, data_dir, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent=parent)
 
-        self.scrollWidget = scrollWidget
+        self.layout = QtWidgets.QVBoxLayout()
+        self.setLayout(self.layout)
+
+        self.scrollArea = QtWidgets.QScrollArea(self)
+        self.scrollArea.setWidgetResizable(True)
+
+        self.scrollWidget = QtWidgets.QWidget(self.scrollArea)
         self.scrollWidget.layout = QtWidgets.QVBoxLayout()
         self.scrollWidget.setLayout(self.scrollWidget.layout)
+        self.layout.addWidget(self.scrollWidget)
+        self.layout.addWidget(self.scrollArea)
 
-        self.location = f"{data_dir}{sep}keys.json"
+        self.location = f"{DATA_DIR}{sep}keys.json"
 
-        if not path.exists(data_dir):
-            makedirs(data_dir)
+        if not path.exists(DATA_DIR):
+            makedirs(DATA_DIR)
 
         self.sources = {}
         self.read_keys()

@@ -53,6 +53,16 @@ class ScrollWindow(QtWidgets.QMainWindow):
 
         self.scrollArea.setWidget(self.contents)
 
+    def pop(self):
+        self.show()
+
+class KeyWindow(ScrollWindow):
+
+    def __init__(self, parent=None):
+        title = "API Keys"
+        subtitle = "API Key input"
+        super().__init__(title, subtitle, QtWidgets.QVBoxLayout, parent)
+
 
 class LicenseWidget(QtWidgets.QWidget):
 
@@ -100,9 +110,6 @@ class LicenseWindow(ScrollWindow):
         with open(f"{BUNDLE_DIR}{sep}licenses/oauthlib.txt", "r") as f:
             reaper = LicenseWidget("OAuthLib BSD license", f.read(), self)
             self.contents.layout.addWidget(reaper)
-
-    def pop(self):
-        self.show()
 
 
 class ErrorWindow(QtWidgets.QMainWindow):

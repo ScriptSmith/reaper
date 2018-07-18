@@ -259,7 +259,8 @@ class QueueThread(QtCore.QThread):
         self.currentJobState = None
 
         self.start()
-        self.add_actions()
+        # TODO: Enable adding actions
+        #self.add_actions()
 
     def add_actions(self):
         self.window.queueStart.clicked.connect(self.start_queue)
