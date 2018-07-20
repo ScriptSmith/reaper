@@ -26,6 +26,18 @@ class JobState(Enum):
     SAVING = "saving"
     FINISHED = "finished"
 
+class StopPolicy(Enum):
+    STOP = "Stop queue"
+    CONTINUE = "Continue queue"
+
+class SavePolicy(Enum):
+    DELETE = "Delete progress"
+    SAVE = "Save progress"
+
+class MessagePolicy(Enum):
+    SILENT = "Don't display error messages"
+    LOUD = "Display error messages"
+
 
 class JobData:
 
