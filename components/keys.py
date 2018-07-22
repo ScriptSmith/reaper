@@ -36,6 +36,10 @@ class KeyTab(QtWidgets.QWidget):
 
         self.scrollArea = QtWidgets.QScrollArea(self)
         self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.layout = QtWidgets.QVBoxLayout()
+        self.scrollArea.setLayout(self.scrollArea.layout)
+        self.scrollArea.layout.addWidget(QtWidgets.QPushButton("Hi"))
+
 
         self.scrollWidget = QtWidgets.QWidget(self.scrollArea)
         self.scrollWidget.layout = QtWidgets.QVBoxLayout()

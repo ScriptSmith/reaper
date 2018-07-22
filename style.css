@@ -1,0 +1,30 @@
+QTabBar#mainTabBar {
+    icon-size: 32px;
+    border: none;
+}
+
+QTabBar#mainTabBar::tab {
+    height: 50px;
+    width: 70px;
+    border: none;
+    margin: 0px;
+    padding-bottom: 22px;
+    /*padding-top: -15px;*/
+    /*padding-bottom: 15px*/
+}
+
+QTabBar#mainTabBar::tab:hover {
+    background-color: rgba(66, 112, 129, 0.66);
+}
+
+QWidget#centralwidget {
+    background-color: #3c3f41;
+    margin: 0;
+    padding: 0;
+}
+
+QToolTip {
+    border: 0;
+    background-color: #3c3f41;
+    color: #ffffff;
+}

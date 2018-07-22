@@ -75,6 +75,10 @@ class Reaper(Ui_MainWindow):
         self.add_windows()
         self.add_actions()
 
+        # Set style
+        with open('style.css', 'r') as f:
+            self.app.setStyleSheet(f.read())
+
         # Add queue
         self.queueThread = QueueThread(self)
 
@@ -219,9 +223,11 @@ class MainTabs(QtWidgets.QTabWidget):
 
     def __init__(self, reaper):
         super().__init__(reaper.window)
-        self.setTabBar(self.HorizontalTabWidget())
+        self.setTabBar(self.HorizontalTabWidget(self))
+        self.setObjectName('mainTabs')
 
         reaper.centralLayout.addWidget(self)
+        reaper.centralLayout.setContentsMargins(0, 0, 0, 0)
 
         self.mainWindow = reaper
         self.primaryInputWindow = reaper.primaryInputWindow
@@ -234,35 +240,34 @@ class MainTabs(QtWidgets.QTabWidget):
     def add_key_tab(self):
         self.keyTab = KeyTab(self)
         self.addTab(self.keyTab, QIcon("ui/key.svg"), "")
-        self.tabBar().setTabToolTip(0, "API Keys")
 
     def add_source_tab(self):
         self.queueTab = QueueWidget(self)
         self.sourceTab = SourceTab(self)
         self.addTab(self.sourceTab, QIcon("ui/add.svg"), "")
-        self.tabBar().setTabToolTip(1, "Add jobs")
 
     def add_queue_tab(self):
         self.addTab(self.queueTab, QIcon("ui/queue.svg"), "")
-        self.tabBar().setTabToolTip(2, "List jobs")
 
     class HorizontalTabWidget(QtWidgets.QTabBar):
         def __init__(self, parent=None):
             super().__init__(parent)
+            self.setObjectName('mainTabBar')
+            self.setExpanding(True)
+            self.setMouseTracking(True)
 
-            self.setStyleSheet("""
-            QTabBar::tab {
-                height:50px;
-                width: 50px;
-                border: none;
-                margin: 0px;
-                padding-top: -15px;
-                padding-bottom: 15px
-            }
-            """)
+            self.toolTips = ["API Keys", "Add jobs", "List jobs"]
+            self.curTab = None
 
-        # def tabSizeHint(self, p_int):
-        #     return QSize(50, 50)
+        def mouseMoveEvent(self, QMouseEvent):
+            cursorPos = QMouseEvent.globalPos()
+            tabNo = self.tabAt(self.mapFromGlobal(cursorPos))
+            curTab = self.toolTips[tabNo]
+
+            if not QtWidgets.QToolTip.isVisible() or curTab != self.curTab:
+                toolPos = self.mapToGlobal(self.pos()) + QtCore.QPoint(self.width(), (self.height() / 3 * tabNo) + 12)
+                QtWidgets.QToolTip.showText(toolPos, curTab, self, QtCore.QRect(), 10000)
+                self.curTab = curTab
 
 
 if __name__ == "__main__":
