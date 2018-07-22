@@ -4,4 +4,6 @@ QWidget#centralwidget {
 
 QToolTip {
     background-color: #3c3f41;
+    border: 0;
+    color: #ffffff;
 }

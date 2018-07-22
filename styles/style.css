@@ -19,8 +19,3 @@ QWidget#centralwidget {
     margin: 0;
     padding: 0;
 }
-
-QToolTip {
-    border: 0;
-    color: #ffffff;
-}
