@@ -5,12 +5,10 @@ QTabBar#mainTabBar {
 
 QTabBar#mainTabBar::tab {
     height: 50px;
-    width: 70px;
+    width: 100%;
     border: none;
     margin: 0px;
     padding-bottom: 22px;
-    /*padding-top: -15px;*/
-    /*padding-bottom: 15px*/
 }
 
 QTabBar#mainTabBar::tab:hover {
