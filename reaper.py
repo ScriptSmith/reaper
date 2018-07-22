@@ -76,8 +76,11 @@ class Reaper(Ui_MainWindow):
         self.add_actions()
 
         # Set style
-        with open('style.css', 'r') as f:
+        with open('styles/style.css', 'r') as f:
             self.app.setStyleSheet(f.read())
+        if sys.platform != "win32":
+            with open('styles/mac.css', 'r') as f:
+                self.app.setStyleSheet(self.app.styleSheet() + f.read())
 
         # Add queue
         self.queueThread = QueueThread(self)
