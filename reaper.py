@@ -79,7 +79,7 @@ class Reaper(Ui_MainWindow):
         with open('styles/style.css', 'r') as f:
             self.app.setStyleSheet(f.read())
 
-        platformSheet = 'mac' if sys.platform != "win32" else 'windows'
+        platformSheet = 'mac' if IS_MAC else 'windows'
         with open(f"styles/{platformSheet}.css", 'r') as f:
             self.app.setStyleSheet(self.app.styleSheet() + f.read())
 
@@ -270,6 +270,8 @@ class MainTabs(QtWidgets.QTabWidget):
 
             if not QtWidgets.QToolTip.isVisible() or curTab != self.curTab:
                 toolPos = self.mapToGlobal(self.pos()) + QtCore.QPoint(self.width(), (self.height() / 3 * tabNo) + 12)
+                if IS_MAC:
+                    toolPos += QtCore.QPoint(self.height() / 2)
                 QtWidgets.QToolTip.showText(toolPos, curTab, self, QtCore.QRect(), 10000)
                 self.curTab = curTab
 

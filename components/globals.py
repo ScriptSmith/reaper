@@ -9,6 +9,8 @@ DATA_DIR = appdirs.user_data_dir(APP_NAME, APP_AUTHOR)
 LOG_DIR = appdirs.user_log_dir(APP_NAME, APP_AUTHOR)
 CACHE_DIR = appdirs.user_cache_dir(APP_NAME, APP_AUTHOR)
 
+IS_MAC = sys.platform != "win32"
+
 def _calc_path(path):
     head, tail = os.path.split(path)
     if tail == 'reaper':
