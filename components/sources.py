@@ -61,7 +61,7 @@ class NodeTree(QtWidgets.QTreeWidget):
 
         treeItem.textDescription = textDescription
 
-        treeItem.textContent = "I want to scrape a {} {}".format(
+        treeItem.textContent = "Scrape a {} {}".format(
             self.sourceName, textDescription
         )
 
