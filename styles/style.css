@@ -12,7 +12,11 @@ QTabBar#mainTabBar::tab {
 }
 
 QTabBar#mainTabBar::tab:hover {
-    background-color: rgba(66, 112, 129, 0.66);
+    background-color: rgba(66, 112, 129, 0.5);
+}
+
+QTabBar#mainTabBar::tab:selected {
+    background-color: rgba(66, 112, 129, 1);
 }
 
 QWidget#centralwidget {

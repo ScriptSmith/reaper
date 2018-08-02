@@ -42,7 +42,7 @@ class Reaper(Ui_MainWindow):
     def __init__(self, window, app, splash, show=True):
         super().__init__()
 
-        self.version = "v2.5.4"
+        self.version = "v3.0.0"
         self.source_file = "sources.xml"
         self.encoding = "utf-8"
         self.cache_enabled = True
@@ -77,11 +77,10 @@ class Reaper(Ui_MainWindow):
 
         # Set style
         with open('styles/style.css', 'r') as f:
-            self.app.setStyleSheet(f.read())
-
-        platformSheet = 'mac' if IS_MAC else 'windows'
-        with open(f"styles/{platformSheet}.css", 'r') as f:
-            self.app.setStyleSheet(self.app.styleSheet() + f.read())
+            styleString = f.read()
+            platformSheet = 'mac' if IS_MAC else 'windows'
+            with open(f"styles/{platformSheet}.css", 'r') as f:
+                self.app.setStyleSheet(styleString + f.read())
 
         # Add queue
         self.queueThread = QueueThread(self)
@@ -92,10 +91,6 @@ class Reaper(Ui_MainWindow):
         self.mainTabs.add_key_tab()
         self.mainTabs.add_source_tab()
         self.mainTabs.add_queue_tab()
-        # self.mainTabs.add_queue_tab()
-
-        #
-        # self.mainTabs.add_source_tab()
 
         return
 

@@ -1,3 +1,7 @@
+QTabBar#mainTabBar::tab {
+    margin-right: 1px;
+}
+
 QWidget#centralwidget {
     background-color: #3c3f41;
 }
