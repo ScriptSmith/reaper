@@ -5,7 +5,7 @@
 <h1 align="center">Reaper</h1>
 
 
-[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=Website)](https://reaper.social)
+[![Website](https://img.shields.io/website-up-down-green-red/https/shields.io.svg?label=reaper.social)](https://reaper.social)
 ![Github All Releases](https://img.shields.io/github/downloads/scriptsmith/reaper/total.svg)
 [![GitHub license](https://img.shields.io/github/license/scriptsmith/reaper.svg)](https://github.com/ScriptSmith/reaper/blob/master/LICENSE.txt)
 [![Gitter](https://img.shields.io/gitter/room/socialreaper/socialreaper.svg)](https://gitter.im/socialreaper)
