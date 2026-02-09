@@ -14,6 +14,41 @@ from socialreaper import IterError
 from components.globals import *
 
 
+def _api_error_hint(error):
+    message = str(error).lower()
+    hints = []
+
+    if any(
+        token in message
+        for token in (
+            "unauthorized",
+            "forbidden",
+            "invalid token",
+            "access token",
+            "oauth",
+            "401",
+            "403",
+            "bad authentication data",
+        )
+    ):
+        hints.append(
+            "Credentials appear invalid or expired. Re-check API keys for this source."
+        )
+
+    if any(
+        token in message
+        for token in ("deprecated", "unsupported", "endpoint", "410", "removed")
+    ):
+        hints.append(
+            "The provider endpoint may be deprecated or changed. Verify current API docs."
+        )
+
+    if not hints:
+        return None
+
+    return " ".join(hints)
+
+
 class QueueState(Enum):
     RUNNING = "running"
     STOPPED = "stopped"
@@ -340,6 +375,10 @@ class Queue(QtCore.QThread):
                     job = self.jobs.pop(0)
                     self.job_error.emit(job)
                     job.pickle()
+
+                    hint = _api_error_hint(e)
+                    if hint:
+                        self.job_error_log.emit(hint)
 
                     if not isinstance(e, IterError):
                         self.job_error_log.emit(format_exc())

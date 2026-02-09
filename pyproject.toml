@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reaper"
+version = "2.5.4"
+description = "GUI social media data collection client powered by socialreaper."
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+authors = [{ name = "UQ" }]
+dependencies = [
+  "PyQt5>=5.15.9,<6",
+  "socialreaper @ git+https://github.com/ScriptSmith/socialreaper.git",
+  "appdirs>=1.4.4,<2",
+  "QDarkStyle>=3.2.3,<4",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
